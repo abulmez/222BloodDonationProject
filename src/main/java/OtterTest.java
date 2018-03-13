@@ -1,3 +1,3 @@
 public class OtterTest {
-    int i;
+    int i,c;
 }
