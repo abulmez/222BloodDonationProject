@@ -1,3 +1,5 @@
-class AddDonationsController{
+package viewController;
+
+public class AddDonationsController{
 
 }

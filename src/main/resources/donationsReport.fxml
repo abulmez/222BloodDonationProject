@@ -8,22 +8,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" stylesheets="@donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DonationsReportController">
+<AnchorPane prefHeight="400.0" prefWidth="300.0" stylesheets="@stylesheet/donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsReportController">
 
     <children>
         <ImageView fitHeight="82.0" fitWidth="91.0" layoutX="108.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@form_icon.png" />
+                <Image url="@images/form_icon.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="26.0" fitWidth="34.0" layoutX="46.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@date_icon.png" />
+                <Image url="@images/date_icon.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="46.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@notes_icon.png" />
+                <Image url="@images/notes_icon.png" />
             </image>
         </ImageView>
         <Label id="formular" layoutX="115.0" layoutY="23.0" text="Formular" />

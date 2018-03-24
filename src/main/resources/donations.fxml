@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" stylesheets="@donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DonationsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" stylesheets="@stylesheet/donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsController">
    <children>
       <HBox layoutY="100.0" prefHeight="50.0" prefWidth="922.0">
          <children>
@@ -29,7 +29,7 @@
             </Label>
             <ImageView fitHeight="100.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@headerIcon.png" />
+                  <Image url="@images/header_icon.png" />
                </image>
                <HBox.margin>
                   <Insets right="20.0" />
