@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("donations.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/donations.fxml"));
         primaryStage.setTitle("Doneaza sange! Salveaza o viata!");
         primaryStage.setScene(new Scene(root, 922, 604));
         primaryStage.show();

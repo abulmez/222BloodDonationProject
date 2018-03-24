@@ -40,7 +40,7 @@
       <TableView layoutY="150.0" prefHeight="454.0" prefWidth="922.0">
         <columns>
           <TableColumn prefWidth="184.0" text="Numar donatie" />
-          <TableColumn prefWidth="184.0" text="Numar centru de donare" />
+          <TableColumn prefWidth="184.0" text="Nume utilizator" />
             <TableColumn prefWidth="184.0" text="Id donator" />
             <TableColumn prefWidth="184.0" text="Status proba de sange" />
             <TableColumn prefWidth="184.0" text="Cantitate" />
