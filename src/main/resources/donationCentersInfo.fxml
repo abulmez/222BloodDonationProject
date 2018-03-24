@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationCentersInfoController">
    <children>
-      <TableView layoutX="154.0" layoutY="92.0" prefHeight="431.0" prefWidth="922.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
-        <columns>
-          <TableColumn prefWidth="424.00000381469727" text="Numar Centru de Donatii" />
-          <TableColumn prefWidth="497.0" text="Numarul Adreseri Centrului de Donatii" />
-        </columns>
-      </TableView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" prefHeight="90.0" prefWidth="922.0" text="Informatii Centru de Donatii" textAlignment="CENTER" textFill="#1908ff">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <Button fx:id="viewLocationCenter" layoutX="34.0" layoutY="537.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="411.0" onAction="#showAddressDonationCenter" text="Vizualizare Locatie Centru de Donatii">
+      <Label alignment="CENTER" layoutX="205.0" layoutY="110.0" prefHeight="51.0" prefWidth="152.0" text="Centre de Donatii" textAlignment="CENTER">
          <font>
-            <Font name="System Bold Italic" size="14.0" />
-         </font></Button>
+            <Font name="System Italic" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="424.0" layoutY="123.0" prefHeight="25.0" prefWidth="303.0" />
+      <Label layoutX="35.0" layoutY="283.0" prefHeight="44.0" prefWidth="102.0" text="Numar Bloc" />
+      <Label layoutX="35.0" layoutY="338.0" prefHeight="44.0" prefWidth="102.0" text="Etaj" />
+      <Label layoutX="35.0" layoutY="394.0" prefHeight="44.0" prefWidth="102.0" text="Oras" />
+      <Label layoutX="35.0" layoutY="449.0" prefHeight="44.0" prefWidth="102.0" text="Tara" />
+      <Label layoutX="35.0" layoutY="501.0" prefHeight="44.0" prefWidth="102.0" text="Nume Centru" />
+      <Label layoutX="447.0" layoutY="229.0" prefHeight="44.0" prefWidth="102.0" text="Numar Strada" />
+      <Label layoutX="447.0" layoutY="283.0" prefHeight="44.0" prefWidth="102.0" text="Intrare" />
+      <Label layoutX="447.0" layoutY="338.0" prefHeight="44.0" prefWidth="110.0" text="Numar Apartament" />
+      <Label layoutX="447.0" layoutY="394.0" prefHeight="44.0" prefWidth="102.0" text="Judet" />
+      <Label layoutX="447.0" layoutY="501.0" prefHeight="44.0" prefWidth="102.0" text="Numar telefon" />
+      <Label layoutX="35.0" layoutY="229.0" prefHeight="44.0" prefWidth="102.0" text="Strada" />
+      <TextField layoutX="131.0" layoutY="239.0" />
+      <TextField layoutX="131.0" layoutY="290.0" />
+      <TextField layoutX="131.0" layoutY="348.0" />
+      <TextField layoutX="131.0" layoutY="404.0" />
+      <TextField layoutX="131.0" layoutY="459.0" />
+      <TextField layoutX="131.0" layoutY="511.0" />
+      <TextField layoutX="576.0" layoutY="239.0" />
+      <TextField layoutX="576.0" layoutY="293.0" />
+      <TextField layoutX="576.0" layoutY="348.0" />
+      <TextField layoutX="576.0" layoutY="404.0" />
+      <TextField layoutX="576.0" layoutY="511.0" />
    </children>
 </AnchorPane>
