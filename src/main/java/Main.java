@@ -29,6 +29,7 @@ public class Main extends Application {
         Button bloodRequestsButton = new Button("Cereri sange");
         Button donationsButton = new Button("Donatii");
         Button donationsAppointmentAdminButton = new Button("Programari donatii PCT");
+        Button donationCentersInfoButton = new Button("Informatii centre donatii");
 
 
 
@@ -40,6 +41,8 @@ public class Main extends Application {
         hbox.getChildren().add(bloodRequestsButton);
         hbox.getChildren().add(donationsButton);
         hbox.getChildren().add(donationsAppointmentAdminButton);
+        hbox.getChildren().add(donationCentersInfoButton);
+
         root.getChildren().add(hbox);
 
         userInfoButton.setOnAction(event -> {
@@ -130,6 +133,23 @@ public class Main extends Application {
         donationsAppointmentAdminButton.setOnAction(event -> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DonationsAppointmentsAdminController.class.getResource("/donationsAppointmentsAdmin.fxml"));
+            AnchorPane root16 = null;
+            try {
+                root16 = (AnchorPane) loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(root16);
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        });
+
+        donationCentersInfoButton.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DonationsAppointmentsAdminController.class.getResource("/donationCentersInfo.fxml"));
             AnchorPane root16 = null;
             try {
                 root16 = (AnchorPane) loader.load();
