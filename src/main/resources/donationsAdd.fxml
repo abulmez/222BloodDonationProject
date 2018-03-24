@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" stylesheets="@donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddDonationsController">
+   <children>
+      <ImageView fitHeight="82.0" fitWidth="91.0" layoutX="108.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@form_icon.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="96.0" layoutY="164.0" promptText="Id donatie" />
+      <TextField layoutX="96.0" layoutY="199.0" promptText="Id centru de donare" AnchorPane.topAnchor="199.0" />
+      <TextField layoutX="96.0" layoutY="273.0" promptText="Cantitate" AnchorPane.topAnchor="273.0" />
+      <TextField layoutX="96.0" layoutY="237.0" promptText="Id user" AnchorPane.topAnchor="237.0" />
+      <ImageView fitHeight="26.0" fitWidth="34.0" layoutX="59.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@id_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@hospital_icon.png" />
+         </image>
+      </ImageView>
+      <Label id="formular" layoutX="115.0" layoutY="23.0" text="Formular" />
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@quantity_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@user_icon.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="119.0" layoutY="329.0" mnemonicParsing="false" text="Adauga" />
+   </children>
+</AnchorPane>
