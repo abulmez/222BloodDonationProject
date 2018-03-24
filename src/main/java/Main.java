@@ -140,7 +140,7 @@ public class Main extends Application {
                 e.printStackTrace();
             }
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("");
+            dialogStage.setTitle("Programari Donatii PCT");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             Scene scene = new Scene(root16);
             dialogStage.setScene(scene);
@@ -149,7 +149,7 @@ public class Main extends Application {
 
         donationCentersInfoButton.setOnAction(event -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(DonationsAppointmentsAdminController.class.getResource("/donationCentersInfo.fxml"));
+            loader.setLocation(DonationCentersInfoController.class.getResource("/donationCentersInfo.fxml"));
             AnchorPane root16 = null;
             try {
                 root16 = (AnchorPane) loader.load();
@@ -157,7 +157,7 @@ public class Main extends Application {
                 e.printStackTrace();
             }
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("");
+            dialogStage.setTitle("Informatii Centru de Donatii");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             Scene scene = new Scene(root16);
             dialogStage.setScene(scene);
