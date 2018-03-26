@@ -1,0 +1,51 @@
+.button{
+    -fx-background-color: #400303;
+    -fx-text-fill: white;
+    -fx-animated: true;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-background-color: #400303;
+    -fx-text-fill: white;
+    -fx-animated: true;
+    -fx-font-weight: bolder;
+}
+.menuButton{
+    -fx-background-color: white;
+    -fx-text-fill: #400303;
+}
+.menuButton:hover{
+    -fx-background-color: #400303;
+    -fx-text-fill: white;
+}
+.text-field{
+    -fx-text-inner-color: #740707;
+    -fx-prompt-text-fill: rgba(116, 7, 7, 0.69);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-box-border: transparent;
+
+}
+
+.menuAnchorPane{
+    -fx-background-color: #740707;
+    -fx-border-radius: 15 0 0 15;
+    -fx-background-radius: 15 0 0 15;
+}
+.anchorPane{
+    -fx-background-color: #740707;
+}
+.text-field:focused {
+    -fx-focus-color: transparent;
+}
+.jfx-hamburger StackPane { -fx-background-color: white; }
+
+.menuLabel{
+    -fx-text-fill:#400303 ;
+    -fx-text-alignment: center;
+}
+.loginAnchorPane{
+    -fx-background-color: #740707;
+    -fx-border-radius: 0 15 15 0;
+    -fx-background-radius: 0 15 15 0;
+}
