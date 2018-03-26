@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
+<AnchorPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.LoginController">
    <children>
       <AnchorPane prefHeight="411.0" prefWidth="240.0" styleClass="loginAnchorPane" stylesheets="@loginTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

@@ -1,3 +1,5 @@
+package viewController;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,6 +26,7 @@ public class LoginController {
     }
     @FXML
     void validateAction(MouseEvent event) {
+
         openMenu();
     }
 

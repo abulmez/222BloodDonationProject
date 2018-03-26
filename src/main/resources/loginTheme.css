@@ -13,6 +13,7 @@
 .menuButton{
     -fx-background-color: white;
     -fx-text-fill: #400303;
+    -fx-font-size: 18px;
 }
 .menuButton:hover{
     -fx-background-color: #400303;
@@ -44,6 +45,7 @@
     -fx-text-fill:#400303 ;
     -fx-text-alignment: center;
 }
+
 .loginAnchorPane{
     -fx-background-color: #740707;
     -fx-border-radius: 0 15 15 0;
