@@ -1,0 +1,62 @@
+.root{
+    -fx-background-color: #fdf5e6;
+    -fx-border-width: 3px;
+    -fx-border-color: darkred;
+    -fx-font-weight: bold;
+    -fx-text-fill: darkred;
+
+}
+
+#formular{
+    -fx-text-fill: darkred;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.button:hover {
+    -fx-background-color: darkred;
+    -fx-text-fill:white;
+}
+
+
+.button{
+    -fx-background-color: #fdf5e6;
+    -fx-border-color: darkred;
+    -fx-font-weight: bold;
+    -fx-text-fill: darkred;
+
+}
+
+#adaugaButton{
+    -fx-border-width: 3px 3px 3px 3px;
+}
+
+
+.table-view{
+    -fx-border-color: darkred;
+    -fx-border-width: 0px 3px 3px 3px;
+    -fx-background-color: #fdf5e6;
+    -fx-text-fill: darkred;
+
+}
+
+.combo-box{
+    -fx-border-color: darkred;
+    -fx-border-width: 3px 3px 3px 0px;
+    -fx-background-color: #fdf5e6;
+    -fx-text-fill: darkred;
+}
+
+.combo-box .cell:selected {
+    -fx-text-fill: darkred;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-text-fill: white;
+    -fx-background-color: darkred;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: darkred;
+    -fx-font-weight: bold;
+}
