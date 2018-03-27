@@ -33,7 +33,11 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Label fx:id="failedLoginLabel" alignment="CENTER" layoutX="27.0" layoutY="216.0" prefHeight="18.0" prefWidth="194.0" text="DUIE MRAGNEA" visible="false" />
+            <Label fx:id="failedLoginLabel" alignment="CENTER" layoutX="19.0" layoutY="216.0" prefHeight="22.0" prefWidth="209.0" text="Date de autentificare invalide!" textFill="RED" visible="false">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="411.0" prefWidth="375.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css">

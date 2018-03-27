@@ -17,7 +17,7 @@ public class LoginService {
     private UserType userType;
 
     public boolean handleLogin(String username,String password){
-        String url = "http://localhost:14455";
+        String url = "http://52.143.138.186:14423";
 
         String urlParameters = String.format("username=%s&password=%s",username,password);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
@@ -29,7 +29,7 @@ public class LoginService {
             con.setDoOutput(true);
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/login");
-            con.setConnectTimeout(5000);
+            con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
 
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
