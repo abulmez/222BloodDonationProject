@@ -51,3 +51,71 @@
     -fx-border-radius: 0 15 15 0;
     -fx-background-radius: 0 15 15 0;
 }
+.table-view{
+    -fx-base: WHITE;
+    -fx-control-inner-background: WHITE;
+    -fx-background-color: #a5a5a5;
+    -fx-pref-columns: 10;
+    -fx-text-fill: #252525;
+    -fx-selection-bar: GREY;
+    -fx-selection-bar-non-focused: GREY;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+    -fx-text-fill: #252525;
+}
+
+.table-view .column-header {
+    -fx-background-color:#400303;
+    -fx-text-fill: white;
+}
+.title{
+    -fx-text-fill: #400303;
+}
+
+
+.table-view .column-header-background{
+    -fx-background-color: #393939;
+}
+
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-font-weight:BOLD;
+    -fx-text-fill: #f9ffff;
+}
+
+.table-view .table-column{
+    -fx-alignment:center;
+}
+
+.table-view .table-cell{
+    -fx-font-size:12px;
+}
+.table-row-cell:hover {
+    -fx-background-color: #979491;
+    -fx-text-fill: #1e1e1e;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell{
+    -fx-background-color: white;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+    -fx-padding: 0.0em;
+    -fx-text-fill: #252525;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #c5c4c2;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+    -fx-padding: 0.0em;
+}
+
+
+.table-row-cell:selected {
+    -fx-border-color:#252525; ;
+    -fx-border-width:1.5;
+    -fx-font-weight: bold;
+    -fx-text-fill: #252525;
+}

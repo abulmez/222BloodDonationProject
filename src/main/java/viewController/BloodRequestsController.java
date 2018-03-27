@@ -16,7 +16,7 @@ public class BloodRequestsController {
     @FXML
     public void handleAdauga() {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(FormController.class.getResource("/Form.fxml"));
+        loader.setLocation(FormController.class.getResource("/viewController/Form.fxml"));
         AnchorPane root1 = null;
         try {
             root1 = (AnchorPane) loader.load();

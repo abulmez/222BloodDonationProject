@@ -31,7 +31,7 @@ public class MenuMedic {
         centerManeuPane.getChildren().clear();
         FXMLLoader loader = new FXMLLoader();
         AnchorPane mainPane = null;
-        loader.setLocation(getClass().getResource("/viewController/bloodRequests.fxml"));
+        loader.setLocation(getClass().getResource("/viewController/Form.fxml"));
         try {
             mainPane = loader.load();
 
@@ -46,7 +46,7 @@ public class MenuMedic {
         centerManeuPane.getChildren().clear();
         FXMLLoader loader = new FXMLLoader();
         AnchorPane mainPane = null;
-        loader.setLocation(getClass().getResource("/viewController/donationsHistory.fxml"));
+        loader.setLocation(getClass().getResource("/viewController/bloodRequests.fxml"));
         try {
             mainPane = loader.load();
 

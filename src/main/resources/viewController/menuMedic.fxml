@@ -8,17 +8,18 @@
 
 <AnchorPane prefHeight="604.0" prefWidth="260.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.MenuMedic">
    <children>
-      <JFXButton layoutY="182.0" onMouseClicked="#requestAction" prefHeight="73.0" prefWidth="260.0" ripplerFill="#220000" styleClass="menuButton" text="Cerere sange" textFill="#740707" AnchorPane.bottomAnchor="349.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="182.0">
+      <AnchorPane layoutX="241.0" prefHeight="604.0" prefWidth="19.0" styleClass="anchorPane" />
+      <JFXButton buttonType="RAISED" layoutY="178.0" onMouseClicked="#requestAction" prefHeight="73.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Cerere sange" textFill="#740707" AnchorPane.bottomAnchor="353.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="178.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutY="255.0" onMouseClicked="#visualizeAction" prefHeight="73.0" prefWidth="260.0" ripplerFill="#220000" styleClass="menuButton" text="Vizualizare cereri">
+      <JFXButton buttonType="RAISED" layoutY="255.0" onMouseClicked="#visualizeAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Vizualizare cereri">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutY="479.0" onMouseClicked="#logoutAction" prefHeight="73.0" prefWidth="260.0" ripplerFill="#220000" styleClass="menuButton" text="Log out" textFill="#740707">
+      <JFXButton buttonType="RAISED" layoutY="479.0" onMouseClicked="#logoutAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Log out" textFill="#740707">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

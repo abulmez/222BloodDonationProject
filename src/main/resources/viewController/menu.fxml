@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="604.0" prefWidth="998.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.MenuController">
    <children>
-      <AnchorPane fx:id="centerMenuPane" layoutX="76.0" maxWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: GREY;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="centerMenuPane" layoutX="76.0" maxWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="604.0" direction="BOTTOM" layoutX="76.0" prefHeight="604.0" prefWidth="260.0" />
       <AnchorPane prefHeight="604.0" prefWidth="65.0" styleClass="menuAnchorPane" stylesheets="@../loginTheme.css">
          <children>
