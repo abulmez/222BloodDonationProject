@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * 
  */
-public class User {
+public abstract class User {
 
     /**
      * Default constructor
