@@ -52,9 +52,9 @@
     -fx-background-radius: 0 15 15 0;
 }
 .table-view{
-    -fx-base: WHITE;
-    -fx-control-inner-background: WHITE;
-    -fx-background-color: #a5a5a5;
+    -fx-base: #8c8f8c;
+    -fx-control-inner-background: #8c8f8c;
+    -fx-background-color: #252525;
     -fx-pref-columns: 10;
     -fx-text-fill: #252525;
     -fx-selection-bar: GREY;

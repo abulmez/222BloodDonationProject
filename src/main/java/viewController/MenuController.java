@@ -30,19 +30,19 @@ public class MenuController {
 
     private Stage mainStage;
 
-
+    public void exitAction(){mainStage.close();}
     @FXML
-    void exitAction(MouseEvent event) {
+    public void exitAction(MouseEvent event) {
         mainStage.close();
     }
 
     @FXML
-    void iconAction(MouseEvent event) {
+    public void iconAction(MouseEvent event) {
         mainStage.setIconified(true);
     }
 
     @FXML
-    void openMenu(MouseEvent event) {
+    public void openMenu(MouseEvent event) {
         transition.setRate(transition.getRate()*-1);
         transition.play();
         if(menuDrawer.isShown()){
@@ -75,7 +75,7 @@ public class MenuController {
             e.printStackTrace();
         }
         MenuMedic medicController = loader.getController();
-        medicController.setStage(this.mainStage);
+        medicController.setStage(this);
         medicController.setMainPane(this.centerMenuPane);
         menuDrawer.setSidePane(mainPane);
     }

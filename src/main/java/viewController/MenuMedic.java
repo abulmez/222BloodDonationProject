@@ -8,14 +8,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class MenuMedic {
     private AnchorPane centerManeuPane;
-    private Stage mainStage;
+    private MenuController mainStage;
 
     public void setMainPane(AnchorPane centerMenuPane) {
         this.centerManeuPane=centerMenuPane;
-
+        setPanel(getClass().getResource("/viewController/bloodRequests.fxml"));
     }
     @FXML
     public void initialize(){
@@ -23,15 +24,19 @@ public class MenuMedic {
     }
     @FXML
     void logoutAction(MouseEvent event) {
-        mainStage.close();
+        mainStage.exitAction();
     }
 
     @FXML
     void requestAction(MouseEvent event) {
+        setPanel(getClass().getResource("/viewController/Form.fxml"));
+    }
+
+    private void setPanel(URL resource) {
         centerManeuPane.getChildren().clear();
         FXMLLoader loader = new FXMLLoader();
         AnchorPane mainPane = null;
-        loader.setLocation(getClass().getResource("/viewController/Form.fxml"));
+        loader.setLocation(resource);
         try {
             mainPane = loader.load();
 
@@ -43,20 +48,10 @@ public class MenuMedic {
 
     @FXML
     void visualizeAction(MouseEvent event) {
-        centerManeuPane.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane mainPane = null;
-        loader.setLocation(getClass().getResource("/viewController/bloodRequests.fxml"));
-        try {
-            mainPane = loader.load();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        centerManeuPane.getChildren().add(mainPane);
+        setPanel(getClass().getResource("/viewController/bloodRequests.fxml"));
     }
 
-    public void setStage(Stage stage) {
+    public void setStage(MenuController stage) {
         this.mainStage = stage;
     }
 }
