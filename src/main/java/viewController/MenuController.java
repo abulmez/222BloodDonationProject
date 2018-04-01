@@ -6,12 +6,11 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import viewController.MenuDonator;
 
 import java.io.IOException;
 
@@ -58,7 +57,8 @@ public class MenuController {
 
     @FXML
     private void initialize(){
-        initMenuMedic();
+        initMenuDonator();
+        //initMenuMedic();
         transition = new HamburgerSlideCloseTransition(this.menuButton);
         transition.setRate(-1);
         menuDrawer.setDisable(true);
@@ -78,6 +78,23 @@ public class MenuController {
         medicController.setStage(this);
         medicController.setMainPane(this.centerMenuPane);
         menuDrawer.setSidePane(mainPane);
+    }
+
+    private void initMenuDonator(){
+        FXMLLoader loader = new FXMLLoader();
+        AnchorPane mainPane = null;
+        loader.setLocation(getClass().getResource("/viewController/menuDonator.fxml"));
+        try {
+            mainPane = loader.load();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //MenuDonator menuDonator = loader.getController();
+        //menuDonator.setStage(this);
+        //menuDonator.setMainPane(this.centerMenuPane);
+        menuDrawer.setSidePane(mainPane);
+
     }
 
     public void setMainStage(Stage stage) {

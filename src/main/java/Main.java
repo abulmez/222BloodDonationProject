@@ -23,22 +23,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("login.fxml"));
-        AnchorPane root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        LoginController controller = loader.getController();;
-        controller.setMainStage(primaryStage);
-        makePaneMoveble(root,primaryStage);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        Scene scene = new Scene(root, 624, 375);
-        scene.setFill(Color.TRANSPARENT);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        openLogin(primaryStage);
         /*
         StackPane root = new StackPane();
 
@@ -50,6 +35,27 @@ public class Main extends Application {
         primaryStage.show();
         */
     }
+
+    private void openLogin(Stage primaryStage) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("login.fxml"));
+        AnchorPane root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LoginController controller = loader.getController();
+        ;
+        controller.setMainStage(primaryStage);
+        makePaneMoveble(root,primaryStage);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        Scene scene = new Scene(root, 624, 375);
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     private void makePaneMoveble(AnchorPane rootLayout, Stage window){
         rootLayout.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -171,7 +177,7 @@ public class Main extends Application {
     private void donationAppointment(Button donationAppointmentButton) {
         donationAppointmentButton.setOnAction(event -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(DonationAppointmentController.class.getResource("/donationAppointment.fxml"));
+            loader.setLocation(DonationAppointmentController.class.getResource("/viewController/donationAppointment.fxml"));
             AnchorPane root12 = null;
             try {
                 root12 = (AnchorPane) loader.load();

@@ -10,13 +10,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+import static viewController.Utilitys.*;
+
 public class MenuMedic {
     private AnchorPane centerManeuPane;
     private MenuController mainStage;
 
     public void setMainPane(AnchorPane centerMenuPane) {
         this.centerManeuPane=centerMenuPane;
-        setPanel(getClass().getResource("/viewController/bloodRequests.fxml"));
+        Utilitys.setPanel(getClass().getResource("/viewController/bloodRequests.fxml"),centerManeuPane);
     }
     @FXML
     public void initialize(){
@@ -29,26 +31,13 @@ public class MenuMedic {
 
     @FXML
     void requestAction(MouseEvent event) {
-        setPanel(getClass().getResource("/viewController/Form.fxml"));
+        Utilitys.setPanel(getClass().getResource("/viewController/Form.fxml"),centerManeuPane);
     }
 
-    private void setPanel(URL resource) {
-        centerManeuPane.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane mainPane = null;
-        loader.setLocation(resource);
-        try {
-            mainPane = loader.load();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        centerManeuPane.getChildren().add(mainPane);
-    }
 
     @FXML
     void visualizeAction(MouseEvent event) {
-        setPanel(getClass().getResource("/viewController/bloodRequests.fxml"));
+        Utilitys.setPanel(getClass().getResource("/viewController/bloodRequests.fxml"), centerManeuPane);
     }
 
     public void setStage(MenuController stage) {

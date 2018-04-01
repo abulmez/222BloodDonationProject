@@ -44,12 +44,15 @@ public class LoginController {
     }
     @FXML
     void validateAction(MouseEvent event) {
+        openMenu(); //for test
+        /*
         if(service.handleLogin(usernameTextField.getText(),passwordPswField.getText())) {
             openMenu();
         }
         else{
             failedLoginLabel.setVisible(true);
         }
+        */
     }
 
     private void openMenu() {
