@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsAppointmentsAdminController">
+   <children>
+      <TableView layoutX="5.0" layoutY="88.0" prefHeight="403.0" prefWidth="913.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="88.0">
+        <columns>
+          <TableColumn prefWidth="167.00000762939453" text="Numar Rezervare" />
+          <TableColumn minWidth="0.0" prefWidth="219.0" text="Numar Centru de Donatie" />
+            <TableColumn prefWidth="310.0" text="Data Donarii" />
+            <TableColumn prefWidth="225.0" text="Locuri Disponibile" />
+        </columns>
+      </TableView>
+      <Button layoutY="501.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="344.0" text="Modifica Status Donatie">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font></Button>
+      <ComboBox layoutX="461.0" layoutY="510.0" prefHeight="46.0" prefWidth="280.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="4.0" prefHeight="79.0" prefWidth="922.0" text="Programari Donatii" textAlignment="CENTER" textFill="#b50d0d">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Pagination layoutX="1.0" layoutY="85.0" prefHeight="409.0" prefWidth="922.0" />
+   </children>
+</AnchorPane>
