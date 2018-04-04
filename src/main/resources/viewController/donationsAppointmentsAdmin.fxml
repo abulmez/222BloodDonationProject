@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsAppointmentsAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsAppointmentsAdminController">
    <children>
       <TableView layoutX="5.0" layoutY="88.0" prefHeight="403.0" prefWidth="913.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="88.0">
         <columns>
@@ -24,7 +24,7 @@
             <Font name="System Italic" size="14.0" />
          </font></Button>
       <ComboBox layoutX="461.0" layoutY="510.0" prefHeight="46.0" prefWidth="280.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="4.0" prefHeight="79.0" prefWidth="922.0" text="Programari Donatii" textAlignment="CENTER" textFill="#b50d0d">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="4.0" prefHeight="79.0" prefWidth="922.0" style="-fx-background-color: white;" text="Programari Donatii" textAlignment="CENTER" textFill="#b50d0d">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

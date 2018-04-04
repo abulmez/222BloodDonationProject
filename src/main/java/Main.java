@@ -5,25 +5,21 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import viewController.*;
 
 import java.io.IOException;
 
 public class Main extends Application {
-    private double xOffset = 0;
-    private double yOffset = 0;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-
-        openLogin(primaryStage);
+        LoginCreator loginCreator = new LoginCreator(primaryStage);
+        loginCreator.show();
         /*
         StackPane root = new StackPane();
 
@@ -36,36 +32,6 @@ public class Main extends Application {
         */
     }
 
-    private void openLogin(Stage primaryStage) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("login.fxml"));
-        AnchorPane root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        LoginController controller = loader.getController();
-        ;
-        controller.setMainStage(primaryStage);
-        makePaneMoveble(root,primaryStage);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        Scene scene = new Scene(root, 624, 375);
-        scene.setFill(Color.TRANSPARENT);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    private void makePaneMoveble(AnchorPane rootLayout, Stage window){
-        rootLayout.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        rootLayout.setOnMouseDragged(event -> {
-            window.setX(event.getScreenX() - xOffset);
-            window.setY(event.getScreenY() - yOffset);
-        });
-    }
 
     private void initInitalPanel(StackPane root) {
         Button userInfoButton = new Button("Informatii utilizator");
@@ -101,7 +67,7 @@ public class Main extends Application {
     private void donationsAppointment(Button donationsAppointmentAdminButton) {
         donationsAppointmentAdminButton.setOnAction(event -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(DonationsAppointmentsAdminController.class.getResource("/donationsAppointmentsAdmin.fxml"));
+            loader.setLocation(DonationsAppointmentsAdminController.class.getResource("/viewController/donationsAppointmentsAdmin.fxml"));
             AnchorPane root16 = null;
             try {
                 root16 = (AnchorPane) loader.load();
@@ -120,7 +86,7 @@ public class Main extends Application {
     private void donations(Button donationsButton) {
         donationsButton.setOnAction(event -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(DonationsController.class.getResource("/donations.fxml"));
+            loader.setLocation(DonationsController.class.getResource("/viewController/donations.fxml"));
             AnchorPane root15 = null;
             try {
                 root15 = (AnchorPane) loader.load();
@@ -196,7 +162,7 @@ public class Main extends Application {
     private void userInfo(Button userInfoButton) {
         userInfoButton.setOnAction(event -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(UserInfoController.class.getResource("/userInfo.fxml"));
+            loader.setLocation(UserInfoController.class.getResource("/viewController/userInfo.fxml"));
             AnchorPane root1 = null;
             try {
                 root1 = (AnchorPane) loader.load();

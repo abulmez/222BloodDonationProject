@@ -38,13 +38,18 @@
                   <Font size="15.0" />
                </font>
             </Label>
+            <ImageView fitHeight="31.0" fitWidth="27.0" layoutX="195.0" layoutY="14.0" onMouseClicked="#exitAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitIcon.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="411.0" prefWidth="375.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css">
+      <AnchorPane prefHeight="411.0" prefWidth="384.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css">
          <children>
             <ImageView fitHeight="199.0" fitWidth="350.0" layoutX="11.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/heartWIthWhite.png" />
+                  <Image url="@../images/heartWIthWhite.png" />
                </image>
             </ImageView>
          </children>

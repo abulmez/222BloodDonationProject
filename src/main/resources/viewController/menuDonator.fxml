@@ -6,10 +6,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="604.0" prefWidth="260.0" stylesheets="@../loginTheme.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.MenuDonator">
+<AnchorPane prefHeight="604.0" prefWidth="260.0" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.MenuDonor">
     <children>
         <AnchorPane layoutX="241.0" prefHeight="604.0" prefWidth="19.0" styleClass="anchorPane" />
-        <JFXButton buttonType="RAISED" layoutY="178.0" onMouseClicked="#consultAction" prefHeight="73.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Informații donator" textFill="#740707" AnchorPane.bottomAnchor="353.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="178.0">
+        <JFXButton buttonType="RAISED" layoutY="178.0" onMouseClicked="#infoAction" prefHeight="73.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Informații donator" textFill="#740707" AnchorPane.bottomAnchor="353.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="178.0">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
@@ -36,4 +36,4 @@
             </font>
         </JFXButton>
     </children>
-</fx:root>
+</AnchorPane>

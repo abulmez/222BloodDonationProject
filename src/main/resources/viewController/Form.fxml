@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormController">
+<AnchorPane prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormController">
    <children>
       <Button id="button3" fx:id="button" layoutX="413.0" layoutY="463.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="118.0" text="Adauga" />
       <TextField layoutX="377.0" layoutY="407.0" prefHeight="25.0" prefWidth="192.0" promptText="Cantitate" />

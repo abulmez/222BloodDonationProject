@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.UserType;
 import service.LoginService;
 import viewController.MedicController;
 import viewController.MenuController;
@@ -44,18 +45,17 @@ public class LoginController {
     }
     @FXML
     void validateAction(MouseEvent event) {
-        openMenu(); //for test
-        /*
         if(service.handleLogin(usernameTextField.getText(),passwordPswField.getText())) {
-            openMenu();
+
+            openMenu(service.getUserType());
         }
         else{
             failedLoginLabel.setVisible(true);
         }
-        */
+
     }
 
-    private void openMenu() {
+    private void openMenu(UserType userType) {
         FXMLLoader loader = new FXMLLoader();
         AnchorPane mainPane ;
         loader.setLocation(getClass().getResource("/viewController/menu.fxml"));
@@ -69,6 +69,7 @@ public class LoginController {
             makePaneMoveble(mainPane,stage);
             MenuController mainPanel=loader.getController();
             mainPanel.setMainStage(stage);
+            mainPanel.setUserType(userType);
             stage.show();
             mainStage.close();
 
@@ -88,6 +89,9 @@ public class LoginController {
         });
     }
 
-
+    @FXML
+    public void exitAction(MouseEvent event){
+        mainStage.close();
+    }
 
 }

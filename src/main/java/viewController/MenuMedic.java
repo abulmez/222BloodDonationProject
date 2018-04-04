@@ -1,46 +1,28 @@
 package viewController;
 
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
+public class MenuMedic extends CenterMenu {
 
-import static viewController.Utilitys.*;
+    public void initFirstPanel() {
+        setPanel(getClass().getResource("/viewController/bloodRequests.fxml"),centerManeuPane);
+    }
 
-public class MenuMedic {
-    private AnchorPane centerManeuPane;
-    private MenuController mainStage;
+    @FXML
+    private void requestAction(MouseEvent event) {
+        setPanel(getClass().getResource("/viewController/Form.fxml"),centerManeuPane);
+        mainStage.openMenu();
+    }
 
-    public void setMainPane(AnchorPane centerMenuPane) {
-        this.centerManeuPane=centerMenuPane;
-        Utilitys.setPanel(getClass().getResource("/viewController/bloodRequests.fxml"),centerManeuPane);
+    @FXML
+    private void visualizeAction(MouseEvent event) {
+        setPanel(getClass().getResource("/viewController/bloodRequests.fxml"), centerManeuPane);
+        mainStage.openMenu();
     }
     @FXML
-    public void initialize(){
-
-    }
-    @FXML
-    void logoutAction(MouseEvent event) {
+    private void logoutAction(){
         mainStage.exitAction();
     }
 
-    @FXML
-    void requestAction(MouseEvent event) {
-        Utilitys.setPanel(getClass().getResource("/viewController/Form.fxml"),centerManeuPane);
-    }
-
-
-    @FXML
-    void visualizeAction(MouseEvent event) {
-        Utilitys.setPanel(getClass().getResource("/viewController/bloodRequests.fxml"), centerManeuPane);
-    }
-
-    public void setStage(MenuController stage) {
-        this.mainStage = stage;
-    }
 }

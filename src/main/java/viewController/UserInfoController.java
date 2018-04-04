@@ -18,7 +18,7 @@ public class UserInfoController {
     @FXML
     public void handleBoli(){
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(UserInfoController.class.getResource("/boli.fxml"));
+        loader.setLocation(UserInfoController.class.getResource("/viewController/boli.fxml"));
         AnchorPane root1 = null;
         try {
             root1 = (AnchorPane) loader.load();

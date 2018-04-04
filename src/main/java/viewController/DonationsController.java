@@ -57,7 +57,7 @@ public class DonationsController {
     public void handleAdd(ActionEvent event){
         Stage secondaryStage=new Stage();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/donationsAdd.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/viewController/donationsAdd.fxml"));
             secondaryStage.setTitle("Adauga donatie");
             secondaryStage.setScene(new Scene(root, 300, 400));
             secondaryStage.show();
