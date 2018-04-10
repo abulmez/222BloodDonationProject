@@ -17,7 +17,7 @@ public class LoginService {
     private UserType userType;
 
     public boolean handleLogin(String username,String password){
-        String url = "http://localhost:14423";
+        String url = "http://52.143.138.186:14423";
         //String url = "http://52.143.138.186:14423";
         String urlParameters = String.format("username=%s&password=%s",username,password);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
