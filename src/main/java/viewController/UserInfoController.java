@@ -1,6 +1,6 @@
 package viewController;
 
-import ErrorMessage.ErrorMessage;
+import errorMessage.ErrorMessage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

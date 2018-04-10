@@ -1,4 +1,4 @@
-package ErrorMessage;
+package errorMessage;
 
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;

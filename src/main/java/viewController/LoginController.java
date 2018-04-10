@@ -12,7 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.UserType;
+import org.springframework.context.ApplicationContext;
 import service.LoginService;
+import utils.CommonUtils;
 import viewController.MedicController;
 import viewController.MenuController;
 
@@ -37,7 +39,8 @@ public class LoginController {
     private LoginService service;
 
     public void initialize(){
-        service = new LoginService();
+        ApplicationContext context = CommonUtils.getFactory();
+        service = context.getBean(LoginService.class);
     }
 
     public void setMainStage(Stage stage){

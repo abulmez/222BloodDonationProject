@@ -1,6 +1,7 @@
 package service;
 
 import model.UserType;
+import utils.ServerConnection;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -12,20 +13,21 @@ import java.nio.charset.StandardCharsets;
 
 public class LoginService {
 
-    private static HttpURLConnection con;
+    private HttpURLConnection con;
     private int idU;
     private UserType userType;
+    private ServerConnection serverConnection;
+
+    public LoginService(ServerConnection serverConnection){
+        this.serverConnection = serverConnection;
+    }
 
     public boolean handleLogin(String username,String password){
-        String url = "http://52.143.138.186:14423";
-        //String url = "http://52.143.138.186:14423";
         String urlParameters = String.format("username=%s&password=%s",username,password);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
-
         try {
 
-            URL myurl = new URL(url);
-            con = (HttpURLConnection) myurl.openConnection();
+            con = serverConnection.getServerConnection();
             con.setDoOutput(true);
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/login");
@@ -38,7 +40,7 @@ public class LoginService {
 
 
             int code = con.getResponseCode();
-            if(code == 300){
+            if(code == 200){
                 try (BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()))) {
                     String response = in.readLine();
@@ -49,7 +51,7 @@ public class LoginService {
                 }
                 return true;
             }
-            else if(code == 200){
+            else if(code == 401){
                 return false;
             }
 
