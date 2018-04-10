@@ -73,6 +73,9 @@
 .title{
     -fx-text-fill: #400303;
 }
+.centerDonCombobox{
+    -fx-font-size: 18px;
+}
 
 
 .table-view .column-header-background{

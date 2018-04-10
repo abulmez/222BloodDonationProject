@@ -22,6 +22,11 @@ public class MenuDonor extends CenterMenu{
         setPanel(getClass().getResource("/viewController/donationsHistory.fxml"), centerManeuPane);
         mainStage.openMenu();
     }
+    @FXML
+    void centerAction(){
+        setPanel(getClass().getResource("/viewController/donationCentersInfo.fxml"), centerManeuPane);
+        mainStage.openMenu();
+    }
 
     @FXML
     void logoutAction() {
