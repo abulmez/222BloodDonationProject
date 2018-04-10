@@ -1,5 +1,5 @@
 package model;
 
 public enum UserType {
-    Donor,Medic,TCP
+    Donor,Medic,TCP,Admin
 }
