@@ -5,15 +5,15 @@ import java.util.*;
 /**
  * 
  */
-public class Cerere {
+public class BloodRequest {
 
     /**
      * Default constructor
      */
-    public Cerere() {
+    public BloodRequest() {
     }
 
-    public Cerere(Integer idBD, Integer idH, String neededType, String description, String priority, Integer quantity) {
+    public BloodRequest(Integer idBD, Integer idH, String neededType, String description, String priority, Integer quantity) {
         this.idBD = idBD;
         this.idH = idH;
         NeededType = neededType;

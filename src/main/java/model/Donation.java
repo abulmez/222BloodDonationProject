@@ -5,15 +5,15 @@ import java.util.*;
 /**
  * 
  */
-public class Donatie{
+public class Donation {
 
     /**
      * Default constructor
      */
-    public Donatie() {
+    public Donation() {
     }
 
-    public Donatie(Integer idD, Integer idDC, Integer idU, Float cantitate, String status, String numeUtilizator) {
+    public Donation(Integer idD, Integer idDC, Integer idU, Float cantitate, String status, String numeUtilizator) {
         this.idD = idD;
         this.idDC = idDC;
         this.idU = idU;
