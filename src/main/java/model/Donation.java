@@ -13,13 +13,12 @@ public class Donation {
     public Donation() {
     }
 
-    public Donation(Integer idD, Integer idDC, Integer idU, Float cantitate, String status, String numeUtilizator) {
+    public Donation(Integer idD, Integer idDC, Integer idU, Double quantity, String status) {
         this.idD = idD;
         this.idDC = idDC;
         this.idU = idU;
-        this.cantitate = cantitate;
+        this.cantitate = quantity;
         this.status = status;
-        this.numeUtilizator = numeUtilizator;
     }
 
     /**
@@ -40,7 +39,7 @@ public class Donation {
     /**
      * 
      */
-    private Float cantitate;
+    private Double cantitate;
 
     /**
      * 
@@ -50,7 +49,6 @@ public class Donation {
     /**
      * 
      */
-    private String numeUtilizator;
 
     public Integer getIdD() {
         return idD;
@@ -76,11 +74,11 @@ public class Donation {
         this.idU = idU;
     }
 
-    public Float getCantitate() {
+    public Double getCantitate() {
         return cantitate;
     }
 
-    public void setCantitate(Float cantitate) {
+    public void setCantitate(Double cantitate) {
         this.cantitate = cantitate;
     }
 
@@ -90,13 +88,5 @@ public class Donation {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getNumeUtilizator() {
-        return numeUtilizator;
-    }
-
-    public void setNumeUtilizator(String numeUtilizator) {
-        this.numeUtilizator = numeUtilizator;
     }
 }
