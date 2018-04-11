@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class Donor extends User {
 
-    public Donor(Integer idU, Integer CNP, String name, LocalDate birthday, String mail, Integer phone, Integer idA, String bloodGroup, Float weight) {
-        super(idU, CNP, name, birthday, mail, phone, idA);
+    public Donor(Integer idU, String cnp, String name, LocalDate birthday, String mail, String phone, String bloodGroup, Float weight) {
+        super(idU, cnp, name, birthday, mail, phone);
         this.bloodGroup = bloodGroup;
         this.weight = weight;
     }

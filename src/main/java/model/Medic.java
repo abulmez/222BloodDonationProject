@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class Medic extends User {
 
-    public Medic(Integer idU, Integer CNP, String name, LocalDate birthday, String mail, Integer phone, Integer idA, Integer idH) {
-        super(idU, CNP, name, birthday, mail, phone, idA);
+    public Medic(Integer idU, String cnp, String name, LocalDate birthday, String mail, String phone, Integer idH) {
+        super(idU, cnp, name, birthday, mail, phone);
         this.idH = idH;
     }
 

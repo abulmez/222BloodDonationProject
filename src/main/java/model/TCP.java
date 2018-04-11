@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class TCP extends User {
 
-    public TCP(Integer idU, Integer CNP, String name, LocalDate birthday, String mail, Integer phone, Integer idA, Integer idDC) {
-        super(idU, CNP, name, birthday, mail, phone, idA);
+    public TCP(Integer idU, String cnp, String name, LocalDate birthday, String mail, String phone, Integer idDC) {
+        super(idU, cnp, name, birthday, mail, phone);
         this.idDC = idDC;
     }
 

@@ -8,104 +8,93 @@ import java.util.*;
  */
 public abstract class User {
 
-    User(Integer idU, Integer CNP, String name, LocalDate birthday, String mail, Integer phone, Integer idA) {
-        IdU = idU;
-        this.CNP = CNP;
-        Name = name;
-        Birthday = birthday;
-        Mail = mail;
-        Phone = phone;
-        IdA = idA;
+    public User(Integer idU, String cnp, String name, LocalDate birthday, String mail, String phone) {
+        this.idU = idU;
+        this.cnp = cnp;
+        this.name = name;
+        this.birthday = birthday;
+        this.mail = mail;
+        this.phone = phone;
     }
 
     /**
      * 
      */
-    private Integer IdU;
+    private Integer idU;
 
     /**
      * 
      */
-    private Integer CNP;
+    private String cnp;
 
     /**
      * 
      */
-    private String Name;
+    private String name;
 
     /**
      * 
      */
-    private LocalDate Birthday;
+    private LocalDate birthday;
 
     /**
      * 
      */
-    private String Mail;
+    private String mail;
 
     /**
      * 
      */
-    private Integer Phone;
+    private String phone;
 
     /**
      * 
      */
-    private Integer IdA;
-
     public Integer getIdU() {
-        return IdU;
+        return idU;
     }
 
     public void setIdU(Integer idU) {
-        IdU = idU;
+        this.idU = idU;
     }
 
-    public Integer getCNP() {
-        return CNP;
+    public String getCnp() {
+        return cnp;
     }
 
-    public void setCNP(Integer CNP) {
-        this.CNP = CNP;
+    public void setCnp(String cnp) {
+        this.cnp = cnp;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public LocalDate getBirthday() {
-        return Birthday;
+        return birthday;
     }
 
     public void setBirthday(LocalDate birthday) {
-        Birthday = birthday;
+        this.birthday = birthday;
     }
 
     public String getMail() {
-        return Mail;
+        return mail;
     }
 
     public void setMail(String mail) {
-        Mail = mail;
+        this.mail = mail;
     }
 
-    public Integer getPhone() {
-        return Phone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone(Integer phone) {
-        Phone = phone;
-    }
-
-    public Integer getIdA() {
-        return IdA;
-    }
-
-    public void setIdA(Integer idA) {
-        IdA = idA;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
