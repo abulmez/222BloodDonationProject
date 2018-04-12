@@ -54,7 +54,26 @@ public class LoginController {
         }
 
     }
-
+    @FXML
+    private void registerAction(){
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/viewController/register.fxml"));
+        AnchorPane root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        RegisterController controller = loader.getController();
+        controller.setMainStage(primaryStage);
+        makePaneMoveble(root,primaryStage);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        Scene scene = new Scene(root, 922, 604);
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
     private void openMenu(UserType userType) {
         FXMLLoader loader = new FXMLLoader();
         AnchorPane mainPane ;
