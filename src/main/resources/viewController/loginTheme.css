@@ -1,3 +1,6 @@
+.AnchorPane{
+    -fx-background-color: white;
+}
 .button{
     -fx-background-color: #400303;
     -fx-text-fill: white;
@@ -54,7 +57,7 @@
 .table-view{
     -fx-base: #8c8f8c;
     -fx-control-inner-background: #8c8f8c;
-    -fx-background-color: #252525;
+    -fx-background-color: #8a8a8a;
     -fx-pref-columns: 10;
     -fx-text-fill: #252525;
     -fx-selection-bar: GREY;
@@ -72,6 +75,14 @@
 }
 .title{
     -fx-text-fill: #400303;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.dataText{
+    -fx-text-fill: #400303;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
 }
 .centerDonCombobox{
     -fx-font-size: 18px;
@@ -121,4 +132,33 @@
     -fx-border-width:1.5;
     -fx-font-weight: bold;
     -fx-text-fill: #252525;
+}
+
+
+jfx-combo-box{
+    -jfx-focus-color: #4059A9;
+    -jfx-unfocus-color: #4d4d4d;
+    -fx-prompt-text-fill: #4d4d4d;
+}
+
+.jfx-combo-box,
+.jfx-combo-box:focused,
+.jfx-combo-box:editable,
+.jfx-combo-box:editable:focused{
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.jfx-combo-box .combo-box-button-container{
+    -fx-background-color:TRANSPARENT;
+}
+
+
+.jfx-combo-box > .arrow-button,
+.jfx-combo-box:editable > .arrow-button,
+.jfx-combo-box:editable:focused > .arrow-button{
+    -fx-background-color: TRANSPARENT;
 }
