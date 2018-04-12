@@ -22,7 +22,7 @@ public class MenuMedic extends CenterMenu {
     }
     @FXML
     private void logoutAction(){
-        mainStage.exitAction();
+        exitAction();
     }
 
 }
