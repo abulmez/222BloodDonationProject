@@ -7,25 +7,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsHistoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsHistoryController">
    <children>
-      <Label alignment="CENTER" layoutX="152.0" layoutY="40.0" prefHeight="45.0" prefWidth="590.0" text="Istoric donatii ">
+      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="215.0" styleClass="title" stylesheets="@loginTheme.css" text="Istoric donații ">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <TableView layoutX="42.0" layoutY="102.0" prefHeight="361.0" prefWidth="842.0">
+      <TableView layoutX="14.0" layoutY="86.0" prefHeight="428.0" prefWidth="894.0">
         <columns>
           <TableColumn prefWidth="98.39996719360352" text="Identificator" />
           <TableColumn prefWidth="143.99989318847656" text="Cantitate" />
             <TableColumn prefWidth="101.5999755859375" text="Status" />
-            <TableColumn prefWidth="110.4000244140625" text="Data esalonarii" />
-            <TableColumn prefWidth="109.60003662109375" text="Status sange" />
-            <TableColumn prefWidth="96.79998779296875" text="Tip" />
-            <TableColumn prefWidth="179.20004882812498" text="Valid pana in data de" />
+            <TableColumn prefWidth="112.0" text="Data esalonarii" />
+            <TableColumn prefWidth="145.5999755859375" text="Status sange" />
+            <TableColumn prefWidth="60.800048828125" text="Tip" />
+            <TableColumn prefWidth="230.39998779296877" text="Valid pana in data de" />
         </columns>
       </TableView>
-      <Button layoutX="348.0" layoutY="512.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="226.0" text="Vezi analizele sangelui">
+      <Button layoutX="681.0" layoutY="536.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="226.0" text="Vezi analizele sangelui">
          <font>
             <Font size="16.0" />
          </font>

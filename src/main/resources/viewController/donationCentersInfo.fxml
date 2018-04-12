@@ -14,15 +14,15 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="centerCombobox" focusColor="#871616" layoutX="432.0" layoutY="13.0" prefHeight="30.0" prefWidth="470.0" promptText="Centru de donatii" styleClass="centerDonCombobox" />
+      <JFXComboBox fx:id="centerCombobox" focusColor="#400303" layoutX="432.0" layoutY="13.0" prefHeight="39.0" prefWidth="470.0" promptText="Centru de donatii" styleClass="centerDonCombobox" unFocusColor="#400303" />
       <WebView fx:id="webView" layoutX="17.0" layoutY="70.0" prefHeight="414.0" prefWidth="886.0">
          <effect>
-            <DropShadow color="#d5d5d5" />
+            <DropShadow color="#a7a7a7" />
          </effect>
       </WebView>
       <AnchorPane layoutX="17.0" layoutY="501.0" prefHeight="93.0" prefWidth="886.0" style="-fx-background-color: white;">
          <effect>
-            <DropShadow color="#d5d5d5" />
+            <DropShadow color="#a7a7a7" />
          </effect>
          <children>
             <Label layoutX="7.0" layoutY="7.0" prefHeight="20.0" prefWidth="57.0" text="Adresă : ">

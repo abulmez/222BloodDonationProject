@@ -5,11 +5,11 @@ import javafx.fxml.FXML;
 public class MenuDonor extends CenterMenu{
 
     public void initFirstPanel(){
-        setPanel(getClass().getResource("/viewController/userInfo.fxml"), centerManeuPane);
+        setPanel(getClass().getResource("/viewController/donorInformation.fxml"), centerManeuPane);
     }
     @FXML
     void infoAction() {
-        setPanel(getClass().getResource("/viewController/userInfo.fxml"), centerManeuPane);
+        setPanel(getClass().getResource("/viewController/donorInformation.fxml"), centerManeuPane);
         mainStage.openMenu();
     }
     @FXML
