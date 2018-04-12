@@ -162,3 +162,18 @@ jfx-combo-box{
 .jfx-combo-box:editable:focused > .arrow-button{
     -fx-background-color: TRANSPARENT;
 }
+
+
+.jfx-progress-bar > .track, .jfx-progress-bar > .bar {
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+.jfx-progress-bar > .bar {
+    -fx-background-color: #400303;
+}
+
+
+.jfx-progress-bar > .track {
+    -fx-background-color: #E0E0E0;
+}
