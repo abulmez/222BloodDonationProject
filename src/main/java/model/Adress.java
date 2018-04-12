@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.*;
 
 /**
@@ -29,6 +31,9 @@ public class Adress {
     /**
      * 
      */
+
+
+    @SerializedName("ida")
     private Integer idA;
 
     /**
