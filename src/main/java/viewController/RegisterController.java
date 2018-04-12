@@ -79,16 +79,8 @@ public class RegisterController {
         fieldText.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue.equals("") && oldValue.equals(""))
                 {
-                    if(!(fieldText ==phoneText)) {
-                        progressIndex = progressIndex + 0.125;
-                        progressBar.progressProperty().set(progressIndex);
-                    }
-                    else {
-                        if(newValue.matches("(?:\\(\\d{3}\\)|\\d{3}[-]*)\\d{3}[-]*\\d{4}")){
-                            progressIndex = progressIndex + 0.125;
-                            progressBar.progressProperty().set(progressIndex);
-                        }
-                    }
+                    progressIndex =progressIndex+0.125;
+                    progressBar.progressProperty().set(progressIndex);
                 }
             else {
                     if(newValue.equals("")&& !(oldValue.equals("")))
