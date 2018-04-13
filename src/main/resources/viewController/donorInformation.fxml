@@ -66,7 +66,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/cnp.png" />
+                              <Image url="@/images/cnp.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="data2" layoutX="26.0" prefHeight="20.0" prefWidth="90.0" styleClass="dataText" text="CNP           :" />
@@ -309,7 +309,7 @@
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Button fx:id="applayChanges" layoutX="704.0" layoutY="517.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="203.0" text="Aplică schimbările">
+      <Button fx:id="applayChanges" layoutX="704.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="40.0" prefWidth="203.0" text="Aplică schimbările">
          <font>
             <Font size="18.0" />
          </font>

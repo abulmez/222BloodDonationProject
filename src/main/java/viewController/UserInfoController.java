@@ -9,6 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.BreadCrumbBar;
+import org.springframework.context.ApplicationContext;
+import service.DonorService;
+import service.LoginService;
+import utils.CommonUtils;
 
 import java.io.IOException;
 
@@ -86,9 +90,12 @@ public class UserInfoController {
     @FXML
     private Button applayChanges;
 
+    private DonorService service;
+
     @FXML
     private void initialize(){
-
+        ApplicationContext context = CommonUtils.getFactory();
+        service = context.getBean(DonorService.class);
 
     }
 
@@ -117,4 +124,8 @@ public class UserInfoController {
             ErrorMessage.showErrorMessage(null,"Trebuie sa completati toate campurile");
     }
     */
+    @FXML
+    public void handleAdd(){
+        service.handleAdress(streetText.getText(),nrStreetText.getText(),blockText.getText(),stairText.getText(),floorText.getText(),flatText.getText(),cityText.getText(),countyText.getText(),countryText.getText());
+    }
 }
