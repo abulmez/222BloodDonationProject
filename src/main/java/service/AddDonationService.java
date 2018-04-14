@@ -1,6 +1,6 @@
 package service;
 
-import model.UserType;
+import utils.DonationDTO;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;
@@ -8,29 +8,24 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class LoginService {
-
+public class AddDonationService {
     private HttpURLConnection con;
-    private static int idU;
-    private UserType userType;
     private ServerConnection serverConnection;
 
-    public LoginService(ServerConnection serverConnection){
+    public AddDonationService(ServerConnection serverConnection){
         this.serverConnection = serverConnection;
     }
 
-    public boolean handleLogin(String username,String password){
-        String urlParameters = String.format("username=%s&password=%s",username,password);
+    public String handleAdd(String name,String idU,String status, String quantity){
+        String urlParameters = String.format("name=%s&idu=%s&status=%s&quantity=%s",name,idU,status,quantity);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         try {
-
             con = serverConnection.getServerConnection();
             con.setDoOutput(true);
             con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/login");
+            con.setRequestProperty("Content-Type", "application/addDonation");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
 
@@ -44,15 +39,12 @@ public class LoginService {
                 try (BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()))) {
                     String response = in.readLine();
-                    String[] data = response.split("&");
-                    idU = Integer.parseInt(data[0].split("=")[1]);
-                    userType = UserType.valueOf( data[1].split("=")[1]);
                     in.close();
+                    return response;
                 }
-                return true;
             }
             else if(code == 401){
-                return false;
+                return "HttpCode:401";
             }
 
 
@@ -63,14 +55,7 @@ public class LoginService {
         } finally {
             con.disconnect();
         }
-        return false;
+        return "";
     }
 
-    public static int getIdU() {
-        return idU;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }
 }

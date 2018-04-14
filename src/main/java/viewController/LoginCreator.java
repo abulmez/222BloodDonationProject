@@ -28,7 +28,7 @@ public class LoginCreator{
             e.printStackTrace();
         }
         LoginController controller = loader.getController();
-        ;
+
         controller.setMainStage(primaryStage);
         makePaneMoveble(root,primaryStage);
         primaryStage.initStyle(StageStyle.TRANSPARENT);

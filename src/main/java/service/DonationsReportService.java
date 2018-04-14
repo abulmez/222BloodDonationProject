@@ -1,6 +1,5 @@
 package service;
 
-import model.UserType;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;
@@ -8,17 +7,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class LoginService {
-
+public class DonationsReportService {
     private HttpURLConnection con;
-    private static int idU;
-    private UserType userType;
     private ServerConnection serverConnection;
 
-    public LoginService(ServerConnection serverConnection){
+    public DonationsReportService(ServerConnection serverConnection){
         this.serverConnection = serverConnection;
     }
 
@@ -45,8 +40,6 @@ public class LoginService {
                         new InputStreamReader(con.getInputStream()))) {
                     String response = in.readLine();
                     String[] data = response.split("&");
-                    idU = Integer.parseInt(data[0].split("=")[1]);
-                    userType = UserType.valueOf( data[1].split("=")[1]);
                     in.close();
                 }
                 return true;
@@ -66,11 +59,5 @@ public class LoginService {
         return false;
     }
 
-    public static int getIdU() {
-        return idU;
-    }
 
-    public UserType getUserType() {
-        return userType;
-    }
 }
