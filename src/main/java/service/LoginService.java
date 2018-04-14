@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class LoginService {
 
     private HttpURLConnection con;
-    private int idU;
+    static int idU;
     private UserType userType;
     private ServerConnection serverConnection;
 
@@ -37,7 +37,6 @@ public class LoginService {
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);
             }
-
 
             int code = con.getResponseCode();
             if(code == 200){
@@ -67,7 +66,7 @@ public class LoginService {
         return false;
     }
 
-    public int getIdU() {
+    public static int getIdU() {
         return idU;
     }
 
