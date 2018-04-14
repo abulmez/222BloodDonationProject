@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.*;
 
 /**
@@ -25,31 +27,37 @@ public class BloodRequest {
     /**
      * 
      */
+    @SerializedName("idbd")
     private Integer idBD;
 
     /**
      * 
      */
+    @SerializedName("idh")
     private Integer idH;
 
     /**
      * 
      */
+    @SerializedName("neededtype")
     private String NeededType;
 
     /**
      * 
      */
+    @SerializedName("description")
     private String Description;
 
     /**
      * 
      */
+    @SerializedName("priority")
     private String Priority;
 
     /**
      * 
      */
+    @SerializedName("quantity")
     private Integer Quantity;
 
 

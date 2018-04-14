@@ -30,6 +30,10 @@ public class MenuController {
     private Stage mainStage;
     private UserType userType;
 
+    public Stage getMainStage() {
+        return mainStage;
+    }
+
     public void exitAction(){mainStage.close();}
     @FXML
     public void exitAction(MouseEvent event) {

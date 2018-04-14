@@ -12,4 +12,10 @@
     <bean id="loginService" class="service.LoginService">
         <constructor-arg ref="serverConnection"/>
     </bean>
+
+    <bean id="service" class="service.BloodDemandService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
+   
 </beans>
