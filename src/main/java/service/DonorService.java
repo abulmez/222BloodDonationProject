@@ -76,6 +76,37 @@ public class DonorService {
         }
     }
 
+    public String handleDiseasesChecks(String idU){
+        String urlParameters=String.format("id=%s&c=%s",idU,"ds");
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/diseasesChecks");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+                return response;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
     public String handleDiseases(String transfer) {
         try {
             con = serverConnection.getServerConnection();
