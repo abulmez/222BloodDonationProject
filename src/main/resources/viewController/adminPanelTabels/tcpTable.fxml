@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView prefHeight="426.0" prefWidth="846.0">
+         <columns>
+            <TableColumn prefWidth="80.00003433227539" text="CNP" />
+            <TableColumn prefWidth="158.39999389648438" text="Nume" />
+            <TableColumn prefWidth="79.20002746582031" text="DataNastere" />
+            <TableColumn prefWidth="75.199951171875" text="Mail" />
+            <TableColumn prefWidth="128.0" text="Telefon" />
+            <TableColumn prefWidth="154.4000244140625" text="Username" />
+            <TableColumn prefWidth="61.60003662109375" text="Adresa" />
+            <TableColumn prefWidth="111.19989013671875" text="CentruDonatie" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

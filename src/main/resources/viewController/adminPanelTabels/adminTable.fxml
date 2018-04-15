@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView prefHeight="426.0" prefWidth="846.0">
+         <columns>
+            <TableColumn prefWidth="114.39999085664749" text="CNP" />
+            <TableColumn prefWidth="145.59999084472656" text="Nume" />
+            <TableColumn prefWidth="78.4000244140625" text="DataNastere" />
+            <TableColumn minWidth="0.0" prefWidth="103.99993896484375" text="Mail" />
+            <TableColumn prefWidth="100.0" text="Telefon" />
+            <TableColumn prefWidth="181.5999755859375" text="Username" />
+            <TableColumn prefWidth="124.79998779296875" text="Adresa" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
