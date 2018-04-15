@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.*;
 
 /**
@@ -24,26 +26,31 @@ public class Donation {
     /**
      * 
      */
+    @SerializedName("idd")
     private Integer idD;
 
     /**
      * 
      */
+    @SerializedName("iddc")
     private Integer idDC;
 
     /**
      * 
      */
+    @SerializedName("idu")
     private Integer idU;
 
     /**
      * 
      */
+    @SerializedName("quantity")
     private Double cantitate;
 
     /**
      * 
      */
+    @SerializedName("status")
     private String status;
 
     /**
