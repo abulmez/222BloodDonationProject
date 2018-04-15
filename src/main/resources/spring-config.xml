@@ -12,4 +12,12 @@
     <bean id="loginService" class="service.LoginService">
         <constructor-arg ref="serverConnection"/>
     </bean>
+
+    <bean id="centerInfoService" class="service.CenterInfoService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
+    <bean id="donationAppointmentsAdminService" class="service.DonationAppointmentsAdminService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
 </beans>
