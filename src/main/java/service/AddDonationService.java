@@ -49,8 +49,8 @@ public class AddDonationService {
 
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            return e.getMessage();
 
         } finally {
             con.disconnect();

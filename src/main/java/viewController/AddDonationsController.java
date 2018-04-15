@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import org.springframework.context.ApplicationContext;
 import service.AddDonationService;
 import utils.CommonUtils;
-import utils.DonationDTO;
 
 public class AddDonationsController{
 

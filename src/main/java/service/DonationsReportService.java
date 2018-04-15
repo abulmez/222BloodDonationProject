@@ -1,5 +1,6 @@
 package service;
 
+import model.DonationReport;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;
@@ -17,15 +18,15 @@ public class DonationsReportService {
         this.serverConnection = serverConnection;
     }
 
-    public boolean handleLogin(String username,String password){
-        String urlParameters = String.format("username=%s&password=%s",username,password);
+    public String handleAdd(DonationReport report){
+        String urlParameters = String.format("iddr=%d&dataproba=%s&validitateproba=%s&observatii=%s",report.getIdDR(),report.getDataProba().toString(),
+                report.getValiditateProba().toString(),report.getObservatii());
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         try {
-
             con = serverConnection.getServerConnection();
             con.setDoOutput(true);
             con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/login");
+            con.setRequestProperty("Content-Type", "application/addReport");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
 
@@ -39,24 +40,23 @@ public class DonationsReportService {
                 try (BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()))) {
                     String response = in.readLine();
-                    String[] data = response.split("&");
                     in.close();
+                    return response;
                 }
-                return true;
             }
             else if(code == 401){
-                return false;
+                return "HttpCode:401";
             }
 
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.getMessage();
 
         } finally {
             con.disconnect();
         }
-        return false;
+        return "";
     }
 
 

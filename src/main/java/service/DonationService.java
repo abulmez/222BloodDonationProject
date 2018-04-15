@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -71,6 +72,43 @@ public class DonationService {
     }
 
 
-    public void handleModify() {
+
+    public String handleModify(String status,Integer idD) {
+        String urlParameters = String.format("status=%s&idd=%d",status,idD);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/modifyDonation");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return response;
+                }
+            }
+            else if(code == 401){
+                return "HttpCode:401";
+            }
+
+        } catch (Exception e) {
+            return e.getMessage();
+
+        } finally {
+            con.disconnect();
+        }
+        return "";
+
     }
 }
