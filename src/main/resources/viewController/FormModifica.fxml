@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="548.0" prefWidth="456.0" stylesheets="@../stylesheet/donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormControllerModifica">
+<AnchorPane prefHeight="548.0" prefWidth="456.0" stylesheets="@../Viper.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormControllerModifica">
     <children>
         <Button id="button3" fx:id="button" layoutX="169.0" layoutY="433.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="58.0" prefWidth="118.0" text="Modifica" />
         <TextField fx:id="quantity" layoutX="133.0" layoutY="377.0" prefHeight="25.0" prefWidth="192.0" promptText="Cantitate" />

@@ -138,12 +138,12 @@ class DemandButtonCell extends TableCell<BloodRequest,Boolean>{
                     Parent root = loader.load();
                     dialog.setTitle("Aplicatie");
                     Scene scene=new Scene(root);
-                    scene.getStylesheets().add("donationsCSS.css");
+                    scene.getStylesheets().add("Viper.css");
                     dialog.setScene(scene);
                     dialog.show();
                     FormControllerModifica ctrl= loader.getController();
 
-                    ctrl.setService(DemandButtonCell.this.getTableView().getItems().get(DemandButtonCell.this.getIndex()).getIdBD(),service);
+                    ctrl.setService(DemandButtonCell.this.getTableView().getItems().get(DemandButtonCell.this.getIndex()),service);
                 }catch (Exception e) {
                     System.out.println(e);
                 }}
