@@ -24,9 +24,9 @@ public class BloodDemandService {
     public BloodDemandService(ServerConnection serverConnection){
         this.serverConnection = serverConnection;
     }
-    public String handleAdd(Integer idH,String neededType,
+    public String handleAdd(String neededType,
                              String description,String priority,Integer quantity){
-        String urlParameters=String.format("IdH=%s&NeededType=%s&Description=%s&Priority=%s&Quantity=%s",idH,neededType,description,priority,quantity);;
+        String urlParameters=String.format("IdU=%s&NeededType=%s&Description=%s&Priority=%s&Quantity=%s",LoginService.getIdU(),neededType,description,priority,quantity);;
         byte[] postData=urlParameters.getBytes(StandardCharsets.UTF_8);
         String response="Conexiunea nu s-a realizat";
         try{
@@ -69,9 +69,9 @@ public class BloodDemandService {
         return response;
     }
 
-    public String handleModificare(Integer idBd,Integer idH,String neededType,
+    public String handleModificare(Integer idBd,String neededType,
                                    String description,String priority,Integer quantity){
-        String urlParameters = String.format("IdBd=%s&IdH=%s&NeededType=%s&Description=%s&Priority=%s&Quantity=%s",idBd,idH,neededType,description,priority,quantity);
+        String urlParameters = String.format("IdBd=%s&IdU=%s&NeededType=%s&Description=%s&Priority=%s&Quantity=%s",idBd,LoginService.getIdU(),neededType,description,priority,quantity);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         String response="";
         try {

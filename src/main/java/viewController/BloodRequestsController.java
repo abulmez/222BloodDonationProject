@@ -27,8 +27,6 @@ public class BloodRequestsController {
     @FXML
     private TableColumn<BloodRequest, Integer> colIdBd;
     @FXML
-    private TableColumn<BloodRequest, Integer> colIdH;
-    @FXML
     private TableColumn<BloodRequest, String> colNeededType;
     @FXML
     private TableColumn<BloodRequest,String> colDescription;
@@ -53,7 +51,6 @@ public class BloodRequestsController {
 
     public void initialize(){
         colIdBd.setCellValueFactory(new PropertyValueFactory<>("idBD"));
-        colIdH.setCellValueFactory(new PropertyValueFactory<>("idH"));
         colNeededType.setCellValueFactory(new PropertyValueFactory<>("NeededType"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
         colPriority.setCellValueFactory(new PropertyValueFactory<>("Priority"));
@@ -141,7 +138,7 @@ class DemandButtonCell extends TableCell<BloodRequest,Boolean>{
                     Parent root = loader.load();
                     dialog.setTitle("Aplicatie");
                     Scene scene=new Scene(root);
-                    scene.getStylesheets().add("Viper.css");
+                    scene.getStylesheets().add("donationsCSS.css");
                     dialog.setScene(scene);
                     dialog.show();
                     FormControllerModifica ctrl= loader.getController();

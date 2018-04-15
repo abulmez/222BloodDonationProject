@@ -7,41 +7,35 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="548.0" prefWidth="456.0" stylesheets="@../Viper.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormControllerModifica">
+<AnchorPane prefHeight="548.0" prefWidth="456.0" stylesheets="@../stylesheet/donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormControllerModifica">
     <children>
-        <Button id="button3" fx:id="button" layoutX="169.0" layoutY="457.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="58.0" prefWidth="118.0" text="Modifica" />
-        <TextField fx:id="quantity" layoutX="133.0" layoutY="401.0" prefHeight="25.0" prefWidth="192.0" promptText="Cantitate" />
-        <TextField fx:id="priority" layoutX="133.0" layoutY="354.0" prefHeight="25.0" prefWidth="192.0" promptText="Prioritate" />
-        <TextField fx:id="neededType" layoutX="132.0" layoutY="262.0" prefHeight="25.0" prefWidth="192.0" promptText="Tipul sangelui" />
-        <TextField fx:id="description" layoutX="133.0" layoutY="307.0" prefHeight="25.0" prefWidth="192.0" promptText="Descriere" />
+        <Button id="button3" fx:id="button" layoutX="169.0" layoutY="433.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="58.0" prefWidth="118.0" text="Modifica" />
+        <TextField fx:id="quantity" layoutX="133.0" layoutY="377.0" prefHeight="25.0" prefWidth="192.0" promptText="Cantitate" />
+        <TextField fx:id="priority" layoutX="133.0" layoutY="332.0" prefHeight="25.0" prefWidth="192.0" promptText="Prioritate" />
+        <TextField fx:id="neededType" layoutX="133.0" layoutY="237.0" prefHeight="25.0" prefWidth="192.0" promptText="Tipul sangelui" />
+        <TextField fx:id="description" layoutX="133.0" layoutY="285.0" prefHeight="25.0" prefWidth="192.0" promptText="Descriere" />
         <Label layoutX="203.0" layoutY="54.0" text="Formular" />
         <ImageView fitHeight="93.0" fitWidth="118.0" layoutX="182.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Form.png" />
             </image>
         </ImageView>
-        <TextField fx:id="idH" layoutX="133.0" layoutY="217.0" prefHeight="25.0" prefWidth="192.0" promptText="Id-ul spitalului" />
-        <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="109.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/HospitalId.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="110.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Description.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Priority.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Type.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Quantity.png" />
             </image>

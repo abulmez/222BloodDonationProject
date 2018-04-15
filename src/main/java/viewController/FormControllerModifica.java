@@ -9,8 +9,7 @@ import service.BloodDemandService;
 
 public class FormControllerModifica {
     private Integer idBd;
-    @FXML
-    public TextField idH;
+
     @FXML
     public TextField neededType;
     @FXML
@@ -27,7 +26,7 @@ public class FormControllerModifica {
     }
 
     public void updateButtonHandler(){
-        if(idH.getText().equals("")||neededType.getText().equals("")||description.getText().equals("")||priority.getText().equals("")||quantity.getText().equals("")){
+        if(neededType.getText().equals("")||description.getText().equals("")||priority.getText().equals("")||quantity.getText().equals("")){
 
             showErrorMessage("Completati toate fieldurile");
 
@@ -35,7 +34,7 @@ public class FormControllerModifica {
         }
         else
         {
-            service.handleModificare(idBd,Integer.parseInt(idH.getText()),neededType.getText(),description.getText(),priority.getText(),Integer.parseInt(quantity.getText()));
+            service.handleModificare(idBd,neededType.getText(),description.getText(),priority.getText(),Integer.parseInt(quantity.getText()));
         }
     }
 
