@@ -20,4 +20,14 @@
     <bean id="donationAppointmentsAdminService" class="service.DonationAppointmentsAdminService">
         <constructor-arg ref="serverConnection"/>
     </bean>
+
+    <bean id="donorService" class="service.DonorService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
+    <bean id="service" class="service.BloodDemandService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
+
 </beans>

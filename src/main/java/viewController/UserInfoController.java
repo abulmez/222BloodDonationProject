@@ -1,5 +1,6 @@
 package viewController;
 
+import errorMessage.ErrorMessage;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.BreadCrumbBar;
+import org.springframework.context.ApplicationContext;
+import service.DonorService;
+import service.LoginService;
+import utils.CommonUtils;
 
 import java.io.IOException;
 
@@ -24,7 +29,6 @@ public class UserInfoController {
 
     @FXML
     private Label bloodGroupLabel;
-
 
     @FXML
     private Label cnpLabel;
@@ -86,8 +90,29 @@ public class UserInfoController {
     @FXML
     private Button applayChanges;
 
+    private DonorService service;
+    int id=LoginService.getIdU();
+
     @FXML
     private void initialize(){
+        ApplicationContext context = CommonUtils.getFactory();
+        service = context.getBean(DonorService.class);
+        String response=service.handleFields(Integer.toString(id));
+        String[] data = response.split("&");
+        weightText.setText(data[0].split("=")[1]);
+        phoneText.setText(data[1].split("=")[1]);
+        emailText.setText(data[2].split("=")[1]);
+        if (data[3].split("=")[1].equals("1")){
+            streetText.setText(data[4].split("=")[1]);
+            nrStreetText.setText(data[5].split("=")[1]);
+            blockText.setText(data[6].split("=")[1]);
+            stairText.setText(data[7].split("=")[1]);
+            floorText.setText(data[8].split("=")[1]);
+            flatText.setText(data[9].split("=")[1]);
+            cityText.setText(data[10].split("=")[1]);
+            countyText.setText(data[11].split("=")[1]);
+            countryText.setText(data[12].split("=")[1]);
+        }
 
 
     }
@@ -102,7 +127,9 @@ public class UserInfoController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        DiseaseController diseaseCtr=loader.getController();
         Stage dialogStage = new Stage();
+        diseaseCtr.currentStage(dialogStage);
         dialogStage.setTitle("");
         dialogStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = new Scene(root1);
@@ -117,4 +144,19 @@ public class UserInfoController {
             ErrorMessage.showErrorMessage(null,"Trebuie sa completati toate campurile");
     }
     */
+    @FXML
+    public void handleAdd(){
+
+        if (streetText.getText().equals("") || nrStreetText.getText().equals("") || blockText.getText().equals("") || stairText.getText().equals("") || floorText.getText().equals("") || flatText.getText().equals("") || cityText.getText().equals("") || countyText.getText().equals("") || weightText.getText().equals("") || phoneText.getText().equals("") || emailText.getText().equals(""))
+            ErrorMessage.showErrorMessage(null,"Trebuie sa completati toate campurile");
+        else {
+            service.handleAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), stairText.getText(), floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText(), Integer.toString(id));
+            service.handleUserUpdate(Integer.toString(id), weightText.getText(), phoneText.getText(), emailText.getText());
+            if (supplyTextArea.getText().equals("")){
+            }
+            else {
+                service.handleAdditional(supplyTextArea.getText(), Integer.toString(id));
+            }
+        }
+    }
 }
