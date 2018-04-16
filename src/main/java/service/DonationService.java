@@ -29,6 +29,7 @@ public class DonationService {
     public List<DonationDTO> handlePopulate(){
        // String urlParameters = String.format("username=%s&password=%s",username,password);
         //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<DonationDTO> list=new ArrayList<>();
         try {
             con = serverConnection.getServerConnection();
             con.setDoOutput(true);
@@ -52,11 +53,11 @@ public class DonationService {
                 Gson gson = new Gson();
                 Type collectionType = new TypeToken<Collection<DonationDTO>>(){}.getType();
                 Collection<DonationDTO> donations = gson.fromJson(response.toString(), collectionType);
-                List<DonationDTO> list=new ArrayList<>(donations);
+                list=new ArrayList<>(donations);
                 return list;
             }
             else if(code == 401){
-                return null;
+                return list;
             }
 
 
@@ -68,7 +69,7 @@ public class DonationService {
 
             con.disconnect();
         }
-        return null;
+        return list;
     }
 
 
