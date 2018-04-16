@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.Adress;
 import model.DonationCenter;
+import model.DonationSchedule;
 import model.UserType;
 import utils.ServerConnection;
 
@@ -36,6 +37,7 @@ public class CenterInfoService {
     public List<DonationCenter> getAllDonationCenter(){
         //String urlParameters = String.format("username=%s&password=%s");
         //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<DonationCenter> list=new ArrayList<>();
         try {
 
             con = serverConnection.getServerConnection();
@@ -61,7 +63,7 @@ public class CenterInfoService {
                 Gson gson = new Gson();
                 Type collectionType = new TypeToken<Collection<DonationCenter>>(){}.getType();
                 Collection<DonationCenter> donationCenters = gson.fromJson(response.toString(),collectionType);
-                List<DonationCenter> list = new ArrayList<>(donationCenters);
+                list = new ArrayList<>(donationCenters);
                 System.out.println("-------------------------------------------");
                 System.out.println("Lungimea Donation Center: "+list.size());
                 System.out.println("-------------------------------------------");
@@ -72,7 +74,7 @@ public class CenterInfoService {
                 return list;
             }
             else if(code == 401){
-                return null;
+                return list;
             }
 
         } catch (IOException e) {
@@ -82,7 +84,7 @@ public class CenterInfoService {
 
             con.disconnect();
         }
-        return null;
+        return list;
     }
 
     /*public static int getIdU() {
