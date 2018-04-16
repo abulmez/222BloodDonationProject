@@ -7,10 +7,20 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import model.Adress;
+import model.DonationCenter;
+import org.springframework.context.ApplicationContext;
+import service.CenterInfoService;
+import utils.CommonUtils;
 
 
 import java.io.BufferedReader;
@@ -19,13 +29,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.util.Enumeration;
+import java.util.List;
 
 public class CentersInfoController {
+    private ObservableList<DonationCenter> model=FXCollections.observableArrayList();
 
-
+    ApplicationContext context = CommonUtils.getFactory();
 
     @FXML
-    private JFXComboBox<?> centerCombobox;
+    private JFXComboBox<String> centerCombobox;
 
     @FXML
     private WebView webView;
@@ -37,8 +49,50 @@ public class CentersInfoController {
     private Label phoneLabel;
     private Timeline locationUpdateTimeline=null;
 
+    private CenterInfoService service;
+
     @FXML
     private void initialize() throws IOException, GeoIp2Exception, URISyntaxException {
+        /*ApplicationContext context = CommonUtils.getFactory();
+        service = context.getBean(LoginService.class);*/
+
+        //ApplicationContext context = CommonUtils.getFactory();
+
+        service = context.getBean(CenterInfoService.class);
+        this.model= FXCollections.observableArrayList(service.getAllDonationCenter());
+        ObservableList<String> options =
+                FXCollections.observableArrayList();
+
+        List<DonationCenter> centers=service.getAllDonationCenter();
+        //ObservableList<String> centre=null;
+        for(DonationCenter dc : centers){
+            //centre.add(adr.getCenterName());
+            System.out.println(dc.getCenterName());
+            System.out.println(dc.getPhoneNumber());
+            System.out.println(dc.getIdA());
+            System.out.println(dc.getIdDC());
+            options.add(dc.getCenterName());
+        }
+        //centerCombobox.setItems(centre);
+
+        System.out.println("============");
+        for (String s:options) {
+            System.out.println(s);
+        }
+
+        centerCombobox.setItems(options);
+        centerCombobox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue observable, String oldValue, String newValue) {
+                for (DonationCenter donationCenter:centers){
+                    if(newValue.equals(donationCenter)){
+                        adressLabel.setText(donationCenter.getCenterName());
+                        phoneLabel.setText(donationCenter.getPhoneNumber());
+                    }
+                }
+                
+            }
+        });
 
         initMap();
 

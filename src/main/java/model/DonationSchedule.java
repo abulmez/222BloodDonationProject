@@ -16,11 +16,12 @@ public class DonationSchedule {
     public DonationSchedule() {
     }
 
-    public DonationSchedule(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots) {
+    public DonationSchedule(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots,String status) {
         this.idDS = idDS;
         this.idDC = idDC;
         this.donationDateTime = donationDateTime;
         this.availableSpots = availableSpots;
+        this.status = status;
     }
 
     /**
@@ -46,6 +47,8 @@ public class DonationSchedule {
      */
     @SerializedName("availablespots")
     private Integer availableSpots;
+
+    private String status;
 
 
     public Integer getIdDS() {
@@ -78,5 +81,13 @@ public class DonationSchedule {
 
     public void setAvailableSpots(Integer availableSpots) {
         this.availableSpots = availableSpots;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
