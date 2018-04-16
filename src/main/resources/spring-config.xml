@@ -29,5 +29,9 @@
         <constructor-arg ref="serverConnection"/>
     </bean>
 
+    <bean id="donationService" class="service.DonationService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
    
 </beans>
