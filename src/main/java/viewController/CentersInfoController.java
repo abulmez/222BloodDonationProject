@@ -85,7 +85,9 @@ public class CentersInfoController {
             @Override
             public void changed(ObservableValue observable, String oldValue, String newValue) {
                 for (DonationCenter donationCenter:centers){
-                    if(newValue.equals(donationCenter)){
+                    System.out.println(donationCenter.getCenterName()+" "+newValue);
+                    if(newValue.equals(donationCenter.getCenterName())){
+                        System.out.println(donationCenter.getCenterName()+" "+newValue);
                         adressLabel.setText(donationCenter.getCenterName());
                         phoneLabel.setText(donationCenter.getPhoneNumber());
                     }
