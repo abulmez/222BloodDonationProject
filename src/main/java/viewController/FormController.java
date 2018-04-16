@@ -29,8 +29,6 @@ public class FormController {
         if(idH.getText().equals("")||neededType.getText().equals("")||description.getText().equals("")||priority.getText().equals("")||quantity.getText().equals("")){
 
             showErrorMessage("Completati toate fieldurile");
-
-
         }
         else
         {

@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -24,21 +26,25 @@ public class DonationSchedule {
     /**
      * 
      */
+    @SerializedName("idds")
     private Integer idDS;
 
     /**
      * 
      */
+    @SerializedName("iddc")
     private Integer idDC;
 
     /**
      * 
      */
+    @SerializedName("donationdatetime")
     private LocalDate donationDateTime;
 
     /**
      * 
      */
+    @SerializedName("availablespots")
     private Integer availableSpots;
 
 

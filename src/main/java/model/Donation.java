@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.*;
 
 /**
@@ -17,33 +19,38 @@ public class Donation {
         this.idD = idD;
         this.idDC = idDC;
         this.idU = idU;
-        this.cantitate = quantity;
+        this.quantity = quantity;
         this.status = status;
     }
 
     /**
      * 
      */
+    @SerializedName("idd")
     private Integer idD;
 
     /**
      * 
      */
+    @SerializedName("iddc")
     private Integer idDC;
 
     /**
      * 
      */
+    @SerializedName("idu")
     private Integer idU;
 
     /**
      * 
      */
-    private Double cantitate;
+    @SerializedName("quantity")
+    private Double quantity;
 
     /**
      * 
      */
+    @SerializedName("status")
     private String status;
 
     /**
@@ -74,12 +81,12 @@ public class Donation {
         this.idU = idU;
     }
 
-    public Double getCantitate() {
-        return cantitate;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setCantitate(Double cantitate) {
-        this.cantitate = cantitate;
+    public void setQuantity(Double cantitate) {
+        this.quantity = cantitate;
     }
 
     public String getStatus() {
