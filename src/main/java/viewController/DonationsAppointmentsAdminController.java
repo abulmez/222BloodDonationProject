@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -68,9 +65,57 @@ public class DonationsAppointmentsAdminController {
         //this.service=service;
     }
 
+    /*public void handleFilt(ActionEvent event){
+        try {
+            String tipFilt = statusComboBox.getValue().toString();
+            if (tipFilt == "WAITING") {
+
+            }
+            if (tipFilt == "REFUSED") {
+
+            }
+            if (tipFilt == "ACCEPTED") {
+
+            }
+        }catch(RuntimeException e){
+            showErrorMessage(e.getMessage());
+        }
+    }*/
+
+    static void showErrorMessage(String text){
+        Alert message=new Alert(Alert.AlertType.ERROR);
+        message.setTitle("Mesaj eroare");
+        message.setContentText(text);
+        message.showAndWait();
+    }
+
     @FXML
     public void handleModificaStatus(ActionEvent actionEvent){
-        statusComboBox.setItems(null);
+        DonationSchedule ds = paginationTableView.getSelectionModel().getSelectedItem();
+        try {
+            String tipFilt = statusComboBox.getValue().toString();
+            /*
+            if (tipFilt == "WAITING") {
+                service.handleStatusUpdate(ds.getIdDS().toString(),ds.getIdDC().toString(),tipFilt);
+            }
+            if (tipFilt == "REFUSED") {
+                service.handleStatusUpdate(ds.getIdDS().toString(),ds.getIdDC().toString(),tipFilt);
+            }
+            if (tipFilt == "ACCEPTED") {
+                System.out.println(ds.getIdDS()+" "+ds.getIdDC());
+                service.handleStatusUpdate(ds.getIdDS().toString(),ds.getIdDC().toString(),tipFilt);
+            }
+            */
+            String response= service.handleStatusUpdate(ds.getIdDS(),ds.getIdDC(),tipFilt);
+            if (!response.equals("Success")){
+                Alert alert = new Alert(Alert.AlertType.ERROR,response);
+                alert.show();
+            }
+            this.model=FXCollections.observableArrayList(service.getAllDonationSchedule());
+            paginationTableView.setItems(model);
+        }catch(RuntimeException e){
+            showErrorMessage(e.getMessage());
+        }
     }
 
     @FXML
@@ -88,12 +133,21 @@ public class DonationsAppointmentsAdminController {
                         "ACCEPTED"
                 );
 
+        List<DonationSchedule> centers=service.getAllDonationSchedule();
+        for(DonationSchedule dc : centers){
+            System.out.println(dc.getIdDS());
+            System.out.println(dc.getIdDC());
+            System.out.println(dc.getDonationDateTime());
+            System.out.println(dc.getAvailableSpots());
+            System.out.println(dc.getStatus());
+        }
+
         statusComboBox.setItems(options);
         statusComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if(newValue.equals("WAITING")){
-
+                    //DonationSchedule ds = paginationTableView.getSelectionModel().getSelectedItem();
                 }
                 if(newValue.equals("REFUSED")){
 
@@ -118,6 +172,9 @@ public class DonationsAppointmentsAdminController {
                     @Override
                     public void changed(ObservableValue<? extends DonationSchedule> observable,
                                         DonationSchedule oldValue, DonationSchedule newValue) {
+                        if (newValue!=null){
+                            statusComboBox.setValue(newValue.getStatus());
+                        }
                     }
                 });
 
