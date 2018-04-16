@@ -18,8 +18,8 @@ public class AddDonationService {
         this.serverConnection = serverConnection;
     }
 
-    public String handleAdd(String name,String idU,String status, String quantity){
-        String urlParameters = String.format("name=%s&idu=%s&status=%s&quantity=%s",name,idU,status,quantity);
+    public String handleAdd(String name,String cnp,String status, String quantity){
+        String urlParameters = String.format("name=%s&cnp=%s&status=%s&quantity=%s",name,cnp,status,quantity);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         try {
             con = serverConnection.getServerConnection();

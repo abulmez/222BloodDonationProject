@@ -59,9 +59,6 @@ public class DonationService {
             else if(code == 401){
                 return list;
             }
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
 

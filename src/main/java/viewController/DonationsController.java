@@ -42,7 +42,7 @@ public class DonationsController {
     private TableColumn numeUserColumn;
 
     @FXML
-    private TableColumn donatorColumn;
+    private TableColumn cnpDonatorColumn;
 
     @FXML
     private TableColumn statusColumn;
@@ -59,7 +59,7 @@ public class DonationsController {
 
         nrDonatieColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, Integer>("idD"));
         numeUserColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, String>("name"));
-        donatorColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, Integer>("idU"));
+        cnpDonatorColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, Integer>("cnp"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, String>("status"));
         cantitateColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, Double>("quantity"));
 
@@ -146,7 +146,8 @@ public class DonationsController {
             Parent root = FXMLLoader.load(getClass().getResource("/viewController/donationsAdd.fxml"));
             secondaryStage.setTitle("Adauga donatie");
             secondaryStage.setScene(new Scene(root, 300, 400));
-            secondaryStage.show();
+            secondaryStage.showAndWait();
+            refresh();
         }
         catch (IOException e){
             e.printStackTrace();
