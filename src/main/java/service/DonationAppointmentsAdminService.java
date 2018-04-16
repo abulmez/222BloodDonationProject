@@ -38,6 +38,7 @@ public class DonationAppointmentsAdminService {
     public List<DonationSchedule> getAllDonationSchedule(){
         //String urlParameters = String.format("username=%s&password=%s");
         //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<DonationSchedule> list=new ArrayList<>();
         try {
 
             con = serverConnection.getServerConnection();
@@ -73,14 +74,14 @@ public class DonationAppointmentsAdminService {
                 }).create();
                 Type collectionType = new TypeToken<Collection<DonationSchedule>>(){}.getType();
                 Collection<DonationSchedule> donationSchedules = gson.fromJson(response.toString(),collectionType);
-                List<DonationSchedule> list = new ArrayList<>(donationSchedules);
+                list = new ArrayList<>(donationSchedules);
                 System.out.println("-------------------------------------------");
                 System.out.println("Lungimea Donation Schedule: "+list.size());
                 System.out.println("-------------------------------------------");
                 return list;
             }
             else if(code == 401){
-                return null;
+                return list;
             }
 
         } catch (IOException e) {
@@ -90,7 +91,7 @@ public class DonationAppointmentsAdminService {
 
             con.disconnect();
         }
-        return null;
+        return list;
     }
 
     public String handleStatusUpdate(Integer idDS,Integer idDC,String status){
