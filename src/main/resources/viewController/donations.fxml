@@ -21,7 +21,7 @@
         <columns>
           <TableColumn fx:id="nrDonatieColumn" prefWidth="184.0" text="Numar donatie" />
           <TableColumn fx:id="numeUserColumn" prefWidth="184.0" text="Nume utilizator" />
-            <TableColumn fx:id="donatorColumn" prefWidth="184.0" text="Donator" />
+            <TableColumn fx:id="cnpDonatorColumn" prefWidth="184.0" text="CNP donator" />
             <TableColumn fx:id="statusColumn" prefWidth="184.0" text="Status proba de sange" />
             <TableColumn fx:id="cantitateColumn" prefWidth="184.0" text="Cantitate" />
         </columns>

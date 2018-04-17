@@ -9,14 +9,17 @@ public class DonationDTO {
     private String name;
     @SerializedName("idU")
     private Integer idU;
+    @SerializedName("cnp")
+    private String cnp;
     @SerializedName("status")
     private String status;
     @SerializedName("quantity")
     private Double quantity;
-    public DonationDTO(Integer idD,String name,Integer idU,String status,Double quantity){
+    public DonationDTO(Integer idD,String name,Integer idU,String cnp,String status,Double quantity){
         this.idD=idD;
         this.name=name;
         this.idU=idU;
+        this.cnp=cnp;
         this.status=status;
         this.quantity=quantity;
     }
@@ -31,6 +34,10 @@ public class DonationDTO {
 
     public Integer getIdU() {
         return idU;
+    }
+
+    public String getCnp() {
+        return cnp;
     }
 
     public String getStatus() {

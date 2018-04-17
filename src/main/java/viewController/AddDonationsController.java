@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import service.AddDonationService;
 import utils.CommonUtils;
@@ -14,7 +15,7 @@ public class AddDonationsController{
     private TextField numeUserTextField;
 
     @FXML
-    private TextField idUserTextField;
+    private TextField cnpUserTextField;
 
     @FXML
     private TextField cantitateTextField;
@@ -32,7 +33,7 @@ public class AddDonationsController{
         if (numeUserTextField.getText().isEmpty()){
             errors+="Dati numele donatorului!\n";
         }
-        if (idUserTextField.getText().isEmpty()){
+        if (cnpUserTextField.getText().isEmpty()){
             errors+="Dati id-ul donatorului!\n";
         }
         if(cantitateTextField.getText().isEmpty()){
@@ -40,10 +41,10 @@ public class AddDonationsController{
         }
         if (errors.equals("")){
             String name=numeUserTextField.getText();
-            String idU=idUserTextField.getText();
+            String cnp=cnpUserTextField.getText();
             String status="In curs de validare";
             String quantity=cantitateTextField.getText();
-            String response=service.handleAdd(name,idU,status,quantity);
+            String response=service.handleAdd(name,cnp,status,quantity);
             if (!response.equals("Success")){
                 Alert alert=new Alert(Alert.AlertType.ERROR,response);
                 alert.show();
@@ -53,5 +54,9 @@ public class AddDonationsController{
             Alert alert=new Alert(Alert.AlertType.ERROR,errors);
             alert.show();
         }
+
+        Stage stage = (Stage) numeUserTextField.getScene().getWindow();
+        stage.close();
+
     }
 }
