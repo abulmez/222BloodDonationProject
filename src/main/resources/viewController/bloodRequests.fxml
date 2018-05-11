@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,12 +11,16 @@
    <children>
       <TableView fx:id="tableView" layoutX="10.0" layoutY="77.0" prefHeight="511.0" prefWidth="903.0" style="-fx-background-color: lightgrey;">
         <columns>
-            <TableColumn fx:id="colIdBd" prefWidth="122.0" text="Id Cerere" />
-          <TableColumn fx:id="colNeededType" minWidth="0.0" prefWidth="147.0" text="Tip de sânge" />
-            <TableColumn fx:id="colDescription" prefWidth="238.0" text="Descriere" />
-            <TableColumn fx:id="colPriority" minWidth="0.0" prefWidth="156.0" text="Prioritate" />
-            <TableColumn fx:id="colQuantity" prefWidth="99.0" text="Cantitate" />
-            <TableColumn fx:id="updateColumn" prefWidth="140.0" text="Actiune" />
+            <TableColumn fx:id="colIdBd" prefWidth="60.0" text="Id Cerere" />
+          <TableColumn fx:id="colIdH" minWidth="0.0" prefWidth="62.0" text="Id Spital" />
+          <TableColumn fx:id="colNeededType" minWidth="0.0" prefWidth="103.0" text="Grupa sangvina" />
+            <TableColumn fx:id="colDescription" prefWidth="169.0" text="Nume Pacient" />
+            <TableColumn fx:id="colPriority" minWidth="0.0" prefWidth="74.0" text="Prioritate" />
+            <TableColumn fx:id="colQuantity" prefWidth="106.0" text="Cantitate" />
+            <TableColumn fx:id="colBloodType" minWidth="0.0" prefWidth="87.0" text="Componenta" />
+            <TableColumn fx:id="colDelivered" prefWidth="90.0" text="Livrate" />
+            <TableColumn fx:id="colStatus" prefWidth="79.0" text="Status" />
+            <TableColumn fx:id="updateColumn" prefWidth="72.0" text="Actiune" />
         </columns>
       </TableView>
       <Label layoutX="12.0" layoutY="11.0" prefHeight="30.0" prefWidth="282.0" styleClass="title" text="Cereri de sânge">
@@ -23,5 +28,6 @@
             <Font size="36.0" />
          </font>
       </Label>
+      <ComboBox fx:id="comboFiltrare" layoutX="760.0" layoutY="25.0" prefHeight="31.0" prefWidth="148.0" />
    </children>
 </AnchorPane>

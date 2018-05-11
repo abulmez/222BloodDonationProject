@@ -2,20 +2,14 @@ package model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.*;
-
-/**
- * 
- */
-public class BloodRequest {
-
+public class BloodRequestDTO {
     /**
      * Default constructor
      */
-    public BloodRequest() {
+    public BloodRequestDTO() {
     }
 
-    public BloodRequest(Integer idBD, Integer idH, String neededType, String description, String priority, Double quantity, String bloodType) {
+    public BloodRequestDTO(Integer idBD, Integer idH, String neededType, String description, String priority, Double quantity, String bloodType,Double delivered,String status) {
         this.idBD = idBD;
         this.idH = idH;
         NeededType = neededType;
@@ -23,46 +17,52 @@ public class BloodRequest {
         Priority = priority;
         Quantity = quantity;
         BloodProductType = bloodType;
+        this.Delivered=delivered;
+        this.Status=status;
     }
 
-    /**
-     * 
-     */
+
     @SerializedName("idbd")
     private Integer idBD;
-
-    /**
-     * 
-     */
     @SerializedName("idh")
     private Integer idH;
-
-    /**
-     * 
-     */
     @SerializedName("neededtype")
     private String NeededType;
 
-    /**
-     * 
-     */
     @SerializedName("description")
     private String Description;
 
-    /**
-     * 
-     */
     @SerializedName("priority")
     private String Priority;
 
-    /**
-     * 
-     */
     @SerializedName("quantity")
     private Double Quantity;
 
     @SerializedName("bloodproducttype")
     private String BloodProductType;
+
+    @SerializedName("delivered")
+    private Double Delivered;
+
+    @SerializedName("status")
+    private String Status;
+    public Double getDelivered() {
+        return Delivered;
+    }
+
+    public void setDelivered(Double cantitateLivrata) {
+        Delivered = cantitateLivrata;
+    }
+
+
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
 
 
     public Integer getIdBD() {
