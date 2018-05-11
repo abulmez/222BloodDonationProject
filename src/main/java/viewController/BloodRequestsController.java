@@ -133,8 +133,10 @@ public class BloodRequestsController {
                         public void handle(ActionEvent event) {
                             column.getTableView().getSelectionModel().select(getIndex());
                             BloodRequestDTO cell= tableView.getSelectionModel().getSelectedItem();
-                            service.handleRemove(cell.getIdBD());
+                            String message=service.handleRemove(cell.getIdBD());
+
                             refreshTable();
+                            ErrorMessage.showMessage(editStage, Alert.AlertType.INFORMATION,"Centre",message);
                         }
                     });
 
