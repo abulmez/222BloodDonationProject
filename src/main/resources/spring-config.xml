@@ -33,5 +33,10 @@
         <constructor-arg ref="serverConnection"/>
     </bean>
 
-   
+    <bean id="addDonationService" class="service.AddDonationService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
+
+
 </beans>
