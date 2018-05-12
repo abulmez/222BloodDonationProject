@@ -29,13 +29,14 @@ public class CenterInfoService {
         this.serverConnection = serverConnection;
     }
 
-    public List<Adress> getAllAdress(){
+    /*public List<Adress> getAllAdress(){
         return null;
-    }
+    }*/
 
     public List<DonationCenter> getAllDonationCenter(){
         //String urlParameters = String.format("username=%s&password=%s");
         //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<DonationCenter> list=new ArrayList<>();
         try {
 
             con = serverConnection.getServerConnection();
@@ -61,7 +62,7 @@ public class CenterInfoService {
                 Gson gson = new Gson();
                 Type collectionType = new TypeToken<Collection<DonationCenter>>(){}.getType();
                 Collection<DonationCenter> donationCenters = gson.fromJson(response.toString(),collectionType);
-                List<DonationCenter> list = new ArrayList<>(donationCenters);
+                list = new ArrayList<>(donationCenters);
                 System.out.println("-------------------------------------------");
                 System.out.println("Lungimea Donation Center: "+list.size());
                 System.out.println("-------------------------------------------");
@@ -72,7 +73,7 @@ public class CenterInfoService {
                 return list;
             }
             else if(code == 401){
-                return null;
+                return list;
             }
 
         } catch (IOException e) {
@@ -82,7 +83,58 @@ public class CenterInfoService {
 
             con.disconnect();
         }
-        return null;
+        return list;
+    }
+
+    public List<Adress> getAllAdress(){
+        List<Adress> list=new ArrayList<>();
+        try {
+
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getAdress");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            System.out.println("Aici ajung sigur");
+
+            int code = con.getResponseCode();
+            System.out.println("CODUL: "+code);
+
+            if(code == 200) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<Adress>>(){}.getType();
+                Collection<Adress> adresses = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(adresses);
+                System.out.println("-------------------------------------------");
+                System.out.println("Lungimea Adress: "+list.size());
+                System.out.println("-------------------------------------------");
+                for(Adress dc:list){
+                    System.out.println(dc.getStreet());
+                }
+                System.out.println("-------------------------------------------");
+                return list;
+            }
+            else if(code == 401){
+                return list;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return list;
     }
 
     /*public static int getIdU() {

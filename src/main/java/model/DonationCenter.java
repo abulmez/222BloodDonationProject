@@ -1,9 +1,11 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class DonationCenter {
 
@@ -21,23 +23,27 @@ public class DonationCenter {
     }
 
     /**
-     * 
+     *
      */
+    @SerializedName("iddc")
     private Integer idDC;
 
     /**
-     * 
+     *
      */
+    @SerializedName("ida")
     private Integer idA;
 
     /**
-     * 
+     *
      */
+    @SerializedName("centername")
     private String centerName;
 
     /**
-     * 
+     *
      */
+    @SerializedName("phonenumber")
     private String phoneNumber;
 
     public Integer getIdDC() {

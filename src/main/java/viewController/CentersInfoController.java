@@ -53,10 +53,6 @@ public class CentersInfoController {
 
     @FXML
     private void initialize() throws IOException, GeoIp2Exception, URISyntaxException {
-        /*ApplicationContext context = CommonUtils.getFactory();
-        service = context.getBean(LoginService.class);*/
-
-        //ApplicationContext context = CommonUtils.getFactory();
 
         service = context.getBean(CenterInfoService.class);
         this.model= FXCollections.observableArrayList(service.getAllDonationCenter());
@@ -64,6 +60,9 @@ public class CentersInfoController {
                 FXCollections.observableArrayList();
 
         List<DonationCenter> centers=service.getAllDonationCenter();
+
+        List<Adress> adresses = service.getAllAdress();
+
         //ObservableList<String> centre=null;
         for(DonationCenter dc : centers){
             //centre.add(adr.getCenterName());
@@ -75,6 +74,11 @@ public class CentersInfoController {
         }
         //centerCombobox.setItems(centre);
 
+        for (Adress adress : adresses){
+            System.out.println(adress.toString());
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        }
+
         System.out.println("============");
         for (String s:options) {
             System.out.println(s);
@@ -85,12 +89,19 @@ public class CentersInfoController {
             @Override
             public void changed(ObservableValue observable, String oldValue, String newValue) {
                 for (DonationCenter donationCenter:centers){
-                    if(newValue.equals(donationCenter)){
-                        adressLabel.setText(donationCenter.getCenterName());
+                    System.out.println(donationCenter.getCenterName()+" "+newValue);
+                    if(newValue.equals(donationCenter.getCenterName())){
+                        for (Adress adress : adresses){
+                            if(adress.getIdA() == donationCenter.getIdA()){
+                                adressLabel.setText(adress.toString());
+                            }
+                        }
+                        System.out.println(donationCenter.getCenterName()+" "+newValue);
+                        //adressLabel.setText(donationCenter.getCenterName());
                         phoneLabel.setText(donationCenter.getPhoneNumber());
                     }
                 }
-                
+
             }
         });
 

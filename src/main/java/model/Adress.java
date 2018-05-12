@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class Adress {
 
@@ -15,7 +15,7 @@ public class Adress {
     public Adress() {
     }
 
-    public Adress(Integer idA, String street, Integer streetNumber, Integer blockNumber, Integer entrance, Integer floor, Integer apartmentNumber, String city, String county, String country) {
+    public Adress(Integer idA, String street, Integer streetNumber, Integer blockNumber, String entrance, Integer floor, Integer apartmentNumber, String city, String county, String country) {
         this.idA = idA;
         this.street = street;
         this.streetNumber = streetNumber;
@@ -29,7 +29,7 @@ public class Adress {
     }
 
     /**
-     * 
+     *
      */
 
 
@@ -37,48 +37,57 @@ public class Adress {
     private Integer idA;
 
     /**
-     * 
+     *
      */
+    @SerializedName("street")
     private String street;
 
     /**
-     * 
+     *
      */
+    @SerializedName("streetnumber")
     private Integer streetNumber;
 
     /**
-     * 
+     *
      */
+    @SerializedName("blocknumber")
     private Integer blockNumber;
 
     /**
-     * 
+     *
      */
-    private Integer entrance;
+    @SerializedName("entrance")
+    private String entrance;
 
     /**
-     * 
+     *
      */
+    @SerializedName("floor")
     private Integer floor;
 
     /**
-     * 
+     *
      */
+    @SerializedName("apartmentnumber")
     private Integer apartmentNumber;
 
     /**
-     * 
+     *
      */
+    @SerializedName("city")
     private String city;
 
     /**
-     * 
+     *
      */
+    @SerializedName("county")
     private String county;
 
     /**
-     * 
+     *
      */
+    @SerializedName("country")
     private String country;
 
     public Integer getIdA() {
@@ -113,11 +122,11 @@ public class Adress {
         this.blockNumber = blockNumber;
     }
 
-    public Integer getEntrance() {
+    public String getEntrance() {
         return entrance;
     }
 
-    public void setEntrance(Integer entrance) {
+    public void setEntrance(String entrance) {
         this.entrance = entrance;
     }
 
@@ -159,5 +168,9 @@ public class Adress {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String toString(){
+        return street + " " + streetNumber + " " + blockNumber + " " + entrance + " " +floor + " " + apartmentNumber + " " + city + " " + county + " " + country;
     }
 }
