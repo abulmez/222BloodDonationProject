@@ -1,6 +1,6 @@
 package service;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.Adress;
 import model.DonationCenter;
@@ -9,17 +9,10 @@ import model.UserType;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -94,8 +87,77 @@ public class DonationAppointmentsAdminService {
         return list;
     }
 
-    public String handleStatusUpdate(Integer idDS,Integer idDC,String status){
-        String urlParameters=String.format("idds=%s&iddc=%s&status=%s",idDS.toString(),idDC.toString(),status);
+    public  List<DonationScheduleStatus> getAllDonationStatus(){
+        List<DonationSchedule> donationSchedules = getAllDonationSchedule();
+        List<Reservation> reservations = getAllReservation();
+
+        List<DonationScheduleStatus> bun = new ArrayList<>();
+
+        for(DonationSchedule donationSchedule : donationSchedules){
+            for (Reservation reservation : reservations){
+                if(donationSchedule.getIdDS() == reservation.getIdDS()){
+                    DonationScheduleStatus status = new DonationScheduleStatus(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus());
+                    bun.add(status);
+                }
+            }
+        }
+
+        return bun;
+    }
+
+    public List<Reservation> getAllReservation(){
+        List<Reservation> list=new ArrayList<>();
+        try {
+
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getReservation");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            System.out.println("Aici ajung sigur Reservation");
+
+            int code = con.getResponseCode();
+            System.out.println("CODUL: "+code);
+
+            if(code == 200) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<Reservation>>(){}.getType();
+                Collection<Reservation> reservations = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(reservations);
+                System.out.println("-------------------------------------------");
+                System.out.println("Lungimea Reservation: "+list.size());
+                System.out.println("-------------------------------------------");
+                for(Reservation dc:list){
+                    System.out.println(dc.getStatus());
+                }
+                System.out.println("-------------------------------------------");
+                return list;
+            }
+            else if(code == 401){
+                return list;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return list;
+    }
+
+    public String handleStatusUpdate(Integer idDS,String status){
+        String urlParameters=String.format("idds=%s&status=%s",idDS.toString(),status);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         try {
             con = serverConnection.getServerConnection();
