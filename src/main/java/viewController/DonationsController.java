@@ -119,7 +119,7 @@ public class DonationsController {
                                             if (donation.getStatus().equals("In proces de descompunere")) {
                                                 System.out.println("aici");
                                                 String errors="";
-                                                String response1=service.handleAddBloodProduct(donation.getIdD(), "Globule rosii", LocalDate.now().plusDays(42), donation.getQuantity() / 3);
+                                                String response1=service.handleAddBloodProduct(donation.getIdD(), "GlobuleRosii", LocalDate.now().plusDays(42), donation.getQuantity() / 3);
                                                 String response2=service.handleAddBloodProduct(donation.getIdD(), "Trombocite", LocalDate.now().plusDays(5), donation.getQuantity() / 3);
                                                 String response3=service.handleAddBloodProduct(donation.getIdD(), "Plasma", LocalDate.now().plusYears(1), donation.getQuantity() / 3);
                                                 if (!response1.equals("Success"))
