@@ -1,7 +1,10 @@
 package viewController;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import errorMessage.ErrorMessage;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import model.Donor;
@@ -10,6 +13,7 @@ import service.DonorService;
 import service.LoginService;
 import utils.CommonUtils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +53,19 @@ public class DiseaseController {
         checks.add(check12);
         checks.add(check13);
         checks.add(check14);
+        checks();
 
+    }
+
+    public void checks(){
+        String trans=service.handleDiseasesChecks(Integer.toString(id));
+        Gson gson=new Gson();
+        Type collectionType = new TypeToken<List<Integer>>(){}.getType();
+        List<Integer> list2 = gson.fromJson(trans, collectionType);
+        for (int i:list2){
+            if (i<15)
+                checks.get(i-1).setSelected(true);
+        }
     }
 
     @FXML
@@ -61,5 +77,6 @@ public class DiseaseController {
                 list.add(0);
         String transfer=gson.toJson(list);
         service.handleDiseases(transfer);
+        ErrorMessage.showMessage(null, Alert.AlertType.INFORMATION,"Succes","Datele au fost salvate cu succes");
     }
 }

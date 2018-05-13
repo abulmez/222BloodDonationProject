@@ -1,50 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="548.0" prefWidth="456.0" stylesheets="@../Viper.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormControllerModifica">
+<AnchorPane prefHeight="788.0" prefWidth="635.0" stylesheets="@../Viper.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.FormControllerModifica">
     <children>
-        <Button id="button3" fx:id="button" layoutX="169.0" layoutY="457.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="58.0" prefWidth="118.0" text="Modifica" />
-        <TextField fx:id="quantity" layoutX="133.0" layoutY="401.0" prefHeight="25.0" prefWidth="192.0" promptText="Cantitate" />
-        <TextField fx:id="priority" layoutX="133.0" layoutY="354.0" prefHeight="25.0" prefWidth="192.0" promptText="Prioritate" />
-        <TextField fx:id="neededType" layoutX="132.0" layoutY="262.0" prefHeight="25.0" prefWidth="192.0" promptText="Tipul sangelui" />
-        <TextField fx:id="description" layoutX="133.0" layoutY="307.0" prefHeight="25.0" prefWidth="192.0" promptText="Descriere" />
-        <Label layoutX="203.0" layoutY="54.0" text="Formular" />
-        <ImageView fitHeight="93.0" fitWidth="118.0" layoutX="182.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+        <Button id="button3" fx:id="modifyButton" layoutX="259.0" layoutY="652.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="58.0" prefWidth="118.0" text="Modifica" />
+        <TextField fx:id="quantity" layoutX="222.0" layoutY="499.0" prefHeight="25.0" prefWidth="192.0" promptText="Cantitate" />
+        <TextField fx:id="description" layoutX="222.0" layoutY="583.0" prefHeight="25.0" prefWidth="192.0" promptText="Nume pacient" />
+        <Label layoutX="293.0" layoutY="55.0" text="Formular" />
+        <ImageView fitHeight="93.0" fitWidth="118.0" layoutX="271.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Form.png" />
             </image>
         </ImageView>
-        <TextField fx:id="idH" layoutX="133.0" layoutY="217.0" prefHeight="25.0" prefWidth="192.0" promptText="Id-ul spitalului" />
-        <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="109.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/HospitalId.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="191.0" layoutY="584.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Description.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="191.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Priority.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="191.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Type.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="109.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="191.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/Quantity.png" />
             </image>
         </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="191.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/quantity_icon.png" />
+         </image>
+      </ImageView>
+      <ComboBox fx:id="neededType" layoutX="222.0" layoutY="235.0" prefHeight="23.0" prefWidth="192.0" promptText="Grupa de sange" />
+      <ComboBox fx:id="priority" layoutX="221.0" layoutY="321.0" prefHeight="30.0" prefWidth="192.0" promptText="Prioritate" />
+      <ComboBox fx:id="bloodType" layoutX="223.0" layoutY="405.0" prefHeight="30.0" prefWidth="192.0" promptText="Componenta" />
     </children>
 </AnchorPane>

@@ -1,39 +1,82 @@
 package viewController;
 
+import errorMessage.ErrorMessage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import service.BloodDemandService;
+import service.LoginService;
+
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class FormController {
 
     @FXML
     public TextField idH;
     @FXML
-    public TextField neededType;
+    public ComboBox neededType;
     @FXML
     public TextField description;
     @FXML
-    public TextField priority;
+    public ComboBox priority;
     @FXML
     public TextField quantity;
+    @FXML
+    public ComboBox bloodDemandType;
     private BloodDemandService service;
     private Stage editStage;
     public void setService( BloodDemandService service){
         this.service=service;
+        //blockQuantity();
+        ObservableList<String> listCombo1 = FXCollections.observableArrayList("Mare","Medie","Mica");
+        priority.setItems(listCombo1);
+        priority.setVisibleRowCount(2);
+
+        ObservableList<String> listCombo2 = FXCollections.observableArrayList("Trombocite","Globule rosii","Plasma","Sange");
+        bloodDemandType.setItems(listCombo2);
+        bloodDemandType.setVisibleRowCount(2);
+
+        ObservableList<String> listCombo3 = FXCollections.observableArrayList("O+","O-","AB+","AB-","A-","A+","B-","B+");
+        neededType.setItems(listCombo3);
+        neededType.setVisibleRowCount(2);
     }
 
-    public void addButtonHandler(){
-        if(idH.getText().equals("")||neededType.getText().equals("")||description.getText().equals("")||priority.getText().equals("")||quantity.getText().equals("")){
+//    public void blockQuantity(){
+//        Pattern pattern = Pattern.compile("\\d*|\\d+\\.\\d*");
+//        TextFormatter formatter = new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+//            return pattern.matcher(change.getControlNewText()).matches() ? change : null;
+//        });
+//
+//        quantity.setTextFormatter(formatter);
+//    }
 
-            showErrorMessage("Completati toate fieldurile");
+    public void addButtonHandler(){
+
+
+        if(neededType.getSelectionModel().getSelectedItem()==null||
+                description.getText().equals("")||priority.getSelectionModel().getSelectedItem()==null||quantity.getText().equals("") ||
+                bloodDemandType.getSelectionModel().getSelectedItem()==null){
+
+            showErrorMessage("Completati/selectati toate datele formuralului");
+
+
         }
         else
         {
-            service.handleAdd(Integer.parseInt(idH.getText()),neededType.getText(),description.getText(),priority.getText(),Integer.parseInt(quantity.getText()));
+            try {
+                Double.parseDouble(quantity.getText());
+
+                String mesaj=service.handleAdd(LoginService.getIdU(),neededType.getSelectionModel().getSelectedItem().toString(),description.getText(),
+                    priority.getSelectionModel().getSelectedItem().toString(),Double.parseDouble(quantity.getText()),bloodDemandType.getSelectionModel().getSelectedItem().toString());
+                ErrorMessage.showMessage(editStage, Alert.AlertType.INFORMATION,"Adaugare",mesaj);
+            } catch (NumberFormatException ignore) {
+                showErrorMessage("Introduceti un numar real in cadrul campului 'cantitate'");
+            }
         }
+
     }
 
 

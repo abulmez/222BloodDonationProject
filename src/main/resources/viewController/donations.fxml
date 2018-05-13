@@ -17,13 +17,13 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <TableView layoutX="14.0" layoutY="68.0" prefHeight="388.0" prefWidth="890.0">
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="68.0" prefHeight="388.0" prefWidth="890.0">
         <columns>
-          <TableColumn prefWidth="184.0" text="Numar donatie" />
-          <TableColumn prefWidth="184.0" text="Nume utilizator" />
-            <TableColumn prefWidth="184.0" text="Donator" />
-            <TableColumn prefWidth="184.0" text="Status proba de sange" />
-            <TableColumn prefWidth="184.0" text="Cantitate" />
+          <TableColumn fx:id="nrDonatieColumn" prefWidth="184.0" text="Numar donatie" />
+          <TableColumn fx:id="numeUserColumn" prefWidth="184.0" text="Nume utilizator" />
+            <TableColumn fx:id="cnpDonatorColumn" prefWidth="184.0" text="CNP donator" />
+            <TableColumn fx:id="statusColumn" prefWidth="184.0" text="Status proba de sange" />
+            <TableColumn fx:id="cantitateColumn" prefWidth="184.0" text="Cantitate" />
         </columns>
       </TableView>
       <Button id="adaugaButton" fx:id="addButton" layoutX="446.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="59.0" prefWidth="461.0" text="Adauga" />

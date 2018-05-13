@@ -99,19 +99,26 @@ public class UserInfoController {
         service = context.getBean(DonorService.class);
         String response=service.handleFields(Integer.toString(id));
         String[] data = response.split("&");
-        weightText.setText(data[0].split("=")[1]);
-        phoneText.setText(data[1].split("=")[1]);
-        emailText.setText(data[2].split("=")[1]);
-        if (data[3].split("=")[1].equals("1")){
-            streetText.setText(data[4].split("=")[1]);
-            nrStreetText.setText(data[5].split("=")[1]);
-            blockText.setText(data[6].split("=")[1]);
-            stairText.setText(data[7].split("=")[1]);
-            floorText.setText(data[8].split("=")[1]);
-            flatText.setText(data[9].split("=")[1]);
-            cityText.setText(data[10].split("=")[1]);
-            countyText.setText(data[11].split("=")[1]);
-            countryText.setText(data[12].split("=")[1]);
+        cnpLabel.setText(data[0].split("=")[1]);
+        nameLabel.setText(data[1].split("=")[1]);
+        birtdayLabel.setText(data[2].split("=")[1]);
+        bloodGroupLabel.setText(data[3].split("=")[1]);
+        usernameLabel.setText(data[4].split("=")[1]);
+        weightText.setText(data[5].split("=")[1]);
+        phoneText.setText(data[6].split("=")[1]);
+        emailText.setText(data[7].split("=")[1]);
+        if (data[8].split("=")[1].equals("1")){
+            streetText.setText(data[9].split("=")[1]);
+            nrStreetText.setText(data[10].split("=")[1]);
+            blockText.setText(data[11].split("=")[1]);
+            stairText.setText(data[12].split("=")[1]);
+            floorText.setText(data[13].split("=")[1]);
+            flatText.setText(data[14].split("=")[1]);
+            cityText.setText(data[15].split("=")[1]);
+            countyText.setText(data[16].split("=")[1]);
+            countryText.setText(data[17].split("=")[1]);
+            if(data[18].split("=")[1].equals("2"))
+                supplyTextArea.setText(data[19].split("=")[1]);
         }
 
 
@@ -157,6 +164,7 @@ public class UserInfoController {
             else {
                 service.handleAdditional(supplyTextArea.getText(), Integer.toString(id));
             }
+            ErrorMessage.showMessage(null, Alert.AlertType.INFORMATION,"Succes","Schimbarile au fost efectuate cu succes");
         }
     }
 }
