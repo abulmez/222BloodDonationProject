@@ -39,46 +39,55 @@ public class Adress {
     /**
      * 
      */
+    @SerializedName("street")
     private String street;
 
     /**
      * 
      */
+    @SerializedName("streetnumber")
     private Integer streetNumber;
 
     /**
      * 
      */
+    @SerializedName("blocknumber")
     private Integer blockNumber;
 
     /**
      * 
      */
+    @SerializedName("entrance")
     private Integer entrance;
 
     /**
      * 
      */
+    @SerializedName("floor")
     private Integer floor;
 
     /**
      * 
      */
+    @SerializedName("apartmentnumber")
     private Integer apartmentNumber;
 
     /**
      * 
      */
+    @SerializedName("city")
     private String city;
 
     /**
      * 
      */
+    @SerializedName("county")
     private String county;
 
     /**
      * 
      */
+    @SerializedName("country")
     private String country;
 
     public Integer getIdA() {

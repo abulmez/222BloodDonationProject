@@ -2,6 +2,7 @@ package model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -16,7 +17,7 @@ public class DonationReport {
     public DonationReport() {
     }
 
-    public DonationReport(Integer idDR, LocalDate dataProba, Boolean validitateProba, String observatii) {
+    public DonationReport(Integer idDR, String dataProba, Boolean validitateProba, String observatii) {
         this.idDR = idDR;
         this.dataProba = dataProba;
         this.validitateProba = validitateProba;
@@ -32,18 +33,21 @@ public class DonationReport {
     /**
      * 
      */
+    @SerializedName("samplingdate")
     @SerializedName("dataproba")
-    private LocalDate dataProba;
+    private String dataProba;
 
     /**
      * 
      */
+    @SerializedName("bloodstatus")
     @SerializedName("validitateproba")
     private Boolean validitateProba;
 
     /**
      * 
      */
+    @SerializedName("bloodreport")
     @SerializedName("observatii")
     private String observatii;
 
@@ -55,11 +59,11 @@ public class DonationReport {
         this.idDR = idDR;
     }
 
-    public LocalDate getDataProba() {
+    public String getDataProba() {
         return dataProba;
     }
 
-    public void setDataProba(LocalDate dataProba) {
+    public void setDataProba(String dataProba) {
         this.dataProba = dataProba;
     }
 

@@ -1,11 +1,20 @@
 package service;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import model.Donation;
+import model.DonationReport;
 import utils.ServerConnection;
+import viewController.DonationsReportDetails;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class DonorService {
 
@@ -190,6 +199,89 @@ public class DonorService {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
+    public List<Donation> getAllDonations(Integer idU){
+        String urlParameters=String.format("IdU=%s",idU);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<Donation> list = new ArrayList<>();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/donations");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while((inputLine = in.readLine())!=null)
+                {
+                    response.append(inputLine);
+                }
+
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<Donation>>(){}.getType();
+                Collection<Donation> donations = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(donations);
+                return list;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return list;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
+    public DonationReport getDonationReport(Integer idDR){
+        String urlParameters=String.format("idDR=%s",idDR);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        DonationReport don = new DonationReport();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/donationreport");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                inputLine = in.readLine();
+                response.append(inputLine);
+                in.close();
+                Gson gson = new Gson();
+                Type type = new TypeToken<DonationReport>(){}.getType();
+                DonationReport donationReport= gson.fromJson(response.toString(),type);
+                don = donationReport;
+                return don;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return don;
 
         } finally {
 

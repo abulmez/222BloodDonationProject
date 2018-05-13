@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDatePicker?>
+<!--<?import com.jfoenix.controls.JFXDatePicker?>-->
+
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,32 +12,20 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationAppointmentController">
    <children>
-      <AnchorPane layoutX="622.0" layoutY="24.0" prefHeight="30.0" prefWidth="258.0">
+      <AnchorPane layoutX="461.0" layoutY="90.0" prefHeight="30.0" prefWidth="258.0">
          <children>
             <Label prefHeight="26.0" prefWidth="64.0" text="Data:">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <JFXDatePicker defaultColor="#400303" layoutX="56.0" />
+            <!--<JFXDatePicker defaultColor="#400303" layoutX="56.0" />-->
          </children>
       </AnchorPane>
       <TableView fx:id="tableViewOreDisponibile" layoutX="21.0" layoutY="89.0" prefHeight="422.0" prefWidth="319.0">
         <columns>
           <TableColumn fx:id="tableColumnOreLibere" prefWidth="133.60004043579102" text="Ore libere" />
           <TableColumn fx:id="tableColumnLocuriDisponibile" prefWidth="184.0000030517578" text="Locuri disponibile" />
-        </columns>
-      </TableView>
-      <Label layoutX="373.0" layoutY="89.0" prefHeight="28.0" prefWidth="234.0" text="Lista de donații">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tableViewDonatii" layoutX="373.0" layoutY="124.0" prefHeight="387.0" prefWidth="522.0">
-        <columns>
-          <TableColumn fx:id="tableColumnDonator" prefWidth="120.00006103515625" text="Donator" />
-          <TableColumn fx:id="tableColumnDataProgramareDonator" prefWidth="247.20001220703125" text="Data în care doantorul este programat" />
-            <TableColumn fx:id="tableColumnStatusCerereDonatie" prefWidth="152.79996337890623" text="Status cerere donație" />
         </columns>
       </TableView>
       <Button fx:id="buttonTrimiteCerereDonatie" layoutX="21.0" layoutY="530.0" mnemonicParsing="false" onAction="#onActionButtonTrimiteCerereDonatie" prefHeight="26.0" prefWidth="291.0" text="Trimite cerere donație ">
@@ -47,5 +37,6 @@
             <Font size="19.0" />
          </font></Button>
       <Label layoutX="21.0" layoutY="24.0" styleClass="title" text="Programare donație" />
+      <DatePicker fx:id="datePickerDataDonation" layoutX="519.0" layoutY="90.0" />
    </children>
 </AnchorPane>

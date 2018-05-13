@@ -19,7 +19,7 @@ public class Donation {
         this.idD = idD;
         this.idDC = idDC;
         this.idU = idU;
-        this.cantitate = quantity;
+        this.quantity = quantity;
         this.status = status;
         this.receiverName=receiverName;
     }

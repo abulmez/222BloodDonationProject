@@ -29,6 +29,10 @@
         <constructor-arg ref="serverConnection"/>
     </bean>
 
+    <bean id="donationScheduleService" class ="service.DonationScheduleService">
+        <constructor-arg ref ="serverConnection"/>
+    </bean>
+
     <bean id="donationService" class="service.DonationService">
         <constructor-arg ref="serverConnection"/>
     </bean>
@@ -44,7 +48,4 @@
     <bean id="donationsReportService" class="service.DonationsReportService">
         <constructor-arg ref="serverConnection"/>
     </bean>
-
-
-
 </beans>

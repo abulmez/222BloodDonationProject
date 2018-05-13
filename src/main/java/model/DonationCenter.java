@@ -33,7 +33,6 @@ public class DonationCenter {
      */
     @SerializedName("ida")
     private Integer idA;
-
     /**
      * 
      */
