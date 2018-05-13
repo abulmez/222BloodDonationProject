@@ -37,6 +37,7 @@ public class DonationsReportService {
 
             int code = con.getResponseCode();
             if(code == 200){
+                System.out.println("AICIS LA 200");
                 try (BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()))) {
                     String response = in.readLine();
@@ -44,14 +45,13 @@ public class DonationsReportService {
                     return response;
                 }
             }
-            else if(code == 401){
-                return "HttpCode:401";
+            else if(code == 409){
+                System.out.println("AICIS LA 400");
+
+                return "Http code 409: Conflict";
             }
-
-
-
         } catch (Exception e) {
-            e.getMessage();
+            return e.getMessage();
 
         } finally {
             con.disconnect();
