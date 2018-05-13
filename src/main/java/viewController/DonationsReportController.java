@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 import model.DonationReport;
 import org.springframework.context.ApplicationContext;
 import service.DonationsReportService;
@@ -28,7 +29,6 @@ public class DonationsReportController {
 
     public void initialize(){
         service = context.getBean(DonationsReportService.class);
-
     }
 
     public void initData(String status,Integer id){
@@ -54,12 +54,18 @@ public class DonationsReportController {
             String response=service.handleAdd(report);
             if (!response.equals("Success")){
                 Alert alert=new Alert(Alert.AlertType.ERROR,response);
-                alert.show();
+                alert.showAndWait();
             }
+            else{
+                Alert alert=new Alert(Alert.AlertType.INFORMATION,"Report added succesfully!");
+                alert.showAndWait();
+            }
+            Stage thisStage=(Stage)textArea.getScene().getWindow();
+            thisStage.close();
         }
         else{
             Alert alert=new Alert(Alert.AlertType.ERROR,errors);
-            alert.show();
+            alert.showAndWait();
         }
 
     }

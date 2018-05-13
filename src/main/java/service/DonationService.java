@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -85,8 +86,6 @@ public class DonationService {
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);
             }
-
-
             int code = con.getResponseCode();
             if(code == 200){
                 try (BufferedReader in = new BufferedReader(
@@ -107,6 +106,78 @@ public class DonationService {
             con.disconnect();
         }
         return "";
+    }
 
+    public String handleIsDecomposed(Integer idD){
+        String urlParameters = String.format("idd=%d",idD);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/isDecomposed");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return response;
+                }
+            }
+            else if(code == 404){
+                return "Http code 404: Not found";
+            }
+
+        } catch (Exception e) {
+            return e.getMessage();
+
+        } finally {
+            con.disconnect();
+        }
+        return "";
+
+    }
+
+    public String handleAddBloodProduct(Integer idD, String type, LocalDate date, Double quantity){
+        String urlParameters = String.format("idd=%d&type=%s&date=%s&quantity=%f",idD,type,date.toString(),quantity);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addBloodProduct");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return response;
+                }
+            }
+            else if(code == 422){
+               return "Http code 422: Unprocessable entity.";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+
+        } finally {
+            con.disconnect();
+        }
+        return "";
     }
 }

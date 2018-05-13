@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -20,31 +22,37 @@ public abstract class User {
     /**
      * 
      */
+    @SerializedName("idU")
     private Integer idU;
 
     /**
      * 
      */
+    @SerializedName("cnp")
     private String cnp;
 
     /**
      * 
      */
+    @SerializedName("name")
     private String name;
 
     /**
      * 
      */
+    @SerializedName("birthday")
     private LocalDate birthday;
 
     /**
      * 
      */
+    @SerializedName("mail")
     private String mail;
 
     /**
      * 
      */
+    @SerializedName("phone")
     private String phone;
 
     /**

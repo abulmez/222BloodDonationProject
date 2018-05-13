@@ -15,12 +15,13 @@ public class Donation {
     public Donation() {
     }
 
-    public Donation(Integer idD, Integer idDC, Integer idU, Double quantity, String status) {
+    public Donation(Integer idD, Integer idDC, Integer idU, Double quantity, String status,String receiverName) {
         this.idD = idD;
         this.idDC = idDC;
         this.idU = idU;
         this.cantitate = quantity;
         this.status = status;
+        this.receiverName=receiverName;
     }
 
     /**
@@ -56,6 +57,8 @@ public class Donation {
     /**
      * 
      */
+    @SerializedName("receiverName")
+    private String receiverName;
 
     public Integer getIdD() {
         return idD;
@@ -95,5 +98,13 @@ public class Donation {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
     }
 }
