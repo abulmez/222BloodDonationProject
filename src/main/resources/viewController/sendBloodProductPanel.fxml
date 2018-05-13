@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="713.0" style="-fx-background-color:white" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.SendBloodProductPanelController">
+   <children>
+      <TableView fx:id="bloodRequestsTable" editable="true" layoutX="19.0" layoutY="67.0" prefHeight="341.0" prefWidth="674.0">
+         <columns>
+            <TableColumn fx:id="hospitalNameColumn" prefWidth="112.79999160766602" text="Nume Spital" />
+            <TableColumn fx:id="hospitalInformationColumn" prefWidth="63.20001220703125" text="Info Spital" />
+            <TableColumn fx:id="distanceColumn" prefWidth="79.99998474121094" text="Distanta" />
+            <TableColumn fx:id="priorityColumn" prefWidth="98.4000244140625" text="Prioritate" />
+            <TableColumn fx:id="quantityColumn" prefWidth="56.79998779296875" text="Cantitate" />
+            <TableColumn fx:id="patientNameColumn" prefWidth="183.20001220703125" text="Nume pacient" />
+            <TableColumn fx:id="actionColumn" prefWidth="82.39996337890625" text="Actiune" />
+         </columns>
+      </TableView>
+      <Button layoutX="657.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="26.0" prefWidth="34.0">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="infoLabel" layoutX="19.0" layoutY="20.0" prefHeight="20.0" prefWidth="603.0" text="Trimite 3.5l trombocite catre:" textFill="#590303">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

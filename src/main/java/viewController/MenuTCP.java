@@ -23,6 +23,15 @@ public class MenuTCP extends CenterMenu {
     }
 
     @FXML
+    void inventoryAction(MouseEvent event) {
+        setPanel(getClass().getResource("/viewController/bloodProductsInventory.fxml"),centerManeuPane);
+        mainStage.openMenu();
+    }
+
+
+
+
+    @FXML
     void logoutAction(MouseEvent event) {
         exitAction();
     }

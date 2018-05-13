@@ -35,7 +35,7 @@ public class FormController {
         priority.setItems(listCombo1);
         priority.setVisibleRowCount(2);
 
-        ObservableList<String> listCombo2 = FXCollections.observableArrayList("Trombocite","Globule rosii","Plasma","Sange");
+        ObservableList<String> listCombo2 = FXCollections.observableArrayList("Trombocite","Globule Rosii","Plasma","Sange");
         bloodDemandType.setItems(listCombo2);
         bloodDemandType.setVisibleRowCount(2);
 
