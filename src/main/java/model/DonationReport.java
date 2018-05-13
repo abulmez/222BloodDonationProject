@@ -17,7 +17,7 @@ public class DonationReport {
     public DonationReport() {
     }
 
-    public DonationReport(Integer idDR, String dataProba, Boolean validitateProba, String observatii) {
+    public DonationReport(Integer idDR, LocalDate dataProba, Boolean validitateProba, String observatii) {
         this.idDR = idDR;
         this.dataProba = dataProba;
         this.validitateProba = validitateProba;
@@ -33,22 +33,19 @@ public class DonationReport {
     /**
      * 
      */
-    @SerializedName("samplingdate")
-    @SerializedName("dataproba")
-    private String dataProba;
+    @SerializedName(value = "samplingdate",alternate = {"dataproba"})
+    private LocalDate dataProba;
 
     /**
      * 
      */
-    @SerializedName("bloodstatus")
-    @SerializedName("validitateproba")
+    @SerializedName(value = "bloodstatus",alternate = {"validitateproba"})
     private Boolean validitateProba;
 
     /**
      * 
      */
-    @SerializedName("bloodreport")
-    @SerializedName("observatii")
+    @SerializedName(value = "bloodreport",alternate = {"observatii"})
     private String observatii;
 
     public Integer getIdDR() {
@@ -59,11 +56,11 @@ public class DonationReport {
         this.idDR = idDR;
     }
 
-    public String getDataProba() {
+    public LocalDate getDataProba() {
         return dataProba;
     }
 
-    public void setDataProba(String dataProba) {
+    public void setDataProba(LocalDate dataProba) {
         this.dataProba = dataProba;
     }
 

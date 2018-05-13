@@ -46,7 +46,7 @@ public class Donation {
      * 
      */
     @SerializedName("quantity")
-    private Double cantitate;
+    private Double quantity;
 
     /**
      * 
@@ -84,12 +84,12 @@ public class Donation {
         this.idU = idU;
     }
 
-    public Double getCantitate() {
-        return cantitate;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setCantitate(Double cantitate) {
-        this.cantitate = cantitate;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public String getStatus() {

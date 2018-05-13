@@ -139,7 +139,7 @@ public class DonationsAppointmentsAdminController {
             System.out.println(dc.getIdDC());
             System.out.println(dc.getDonationDateTime());
             System.out.println(dc.getAvailableSpots());
-            System.out.println(dc.getStatus());
+           // System.out.println(dc.getStatus());
         }
 
         statusComboBox.setItems(options);
@@ -173,7 +173,7 @@ public class DonationsAppointmentsAdminController {
                     public void changed(ObservableValue<? extends DonationSchedule> observable,
                                         DonationSchedule oldValue, DonationSchedule newValue) {
                         if (newValue!=null){
-                            statusComboBox.setValue(newValue.getStatus());
+                        //    statusComboBox.setValue(newValue.getStatus());
                         }
                     }
                 });
