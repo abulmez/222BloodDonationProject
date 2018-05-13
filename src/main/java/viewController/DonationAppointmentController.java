@@ -1,15 +1,21 @@
 package viewController;
 
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.DonationSchedule;
 import model.Schedule;
 import org.springframework.context.ApplicationContext;
 import service.DonationScheduleService;
 import utils.CommonUtils;
 
+import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +48,10 @@ public class DonationAppointmentController {
         donationScheduleService = context.getBean(DonationScheduleService.class);
         String response = donationScheduleService.requestForTableHandle(1,1);
         System.out.println("Am primit de la request " + " " + response);
+        Gson gson = new GsonBuilder().registerTypeAdapter(DonationSchedule.class,new CustomDonationScheduleDeserialize()).create();
+        Type collectionType = new TypeToken<ArrayList<DonationSchedule>>(){}.getType();
+        ArrayList<DonationSchedule> donationSchedules = gson.fromJson(response,collectionType);
+        donationSchedules.forEach(donationSchedule -> System.out.println(donationSchedule));
         initTableSchedule();
     }
 
@@ -96,5 +106,19 @@ public class DonationAppointmentController {
         message.showAndWait();
     }
 
+    public class CustomDonationScheduleDeserialize implements JsonDeserializer<DonationSchedule> {
+        @Override
+        public DonationSchedule deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+
+            JsonObject jobject = jsonElement.getAsJsonObject();
+            String text = jobject.get("donationdatetime").getAsString();
+            return new DonationSchedule(
+                    jobject.get("idds").getAsInt(),
+                    jobject.get("iddc").getAsInt(),
+                    Timestamp.from(Instant.parse(text)),
+                    jobject.get("availablespots").getAsInt()
+            );
+        }
+    }
 
 }
