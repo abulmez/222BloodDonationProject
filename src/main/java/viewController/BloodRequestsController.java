@@ -2,8 +2,6 @@ package viewController;
 
 import errorMessage.ErrorMessage;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,10 +20,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.Callback;
-import model.BloodRequest;
 import model.BloodRequestDTO;
-import service.BloodDemandService;
+import service.medicService;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -57,11 +53,11 @@ public class BloodRequestsController {
     private TableColumn<BloodRequestDTO,String> updateColumn;
     @FXML
     private ComboBox comboFiltrare;
-    public BloodDemandService service;
+    public medicService service;
     public Stage editStage;
     @FXML
     private ObservableList<BloodRequestDTO> model;
-    public void setService(BloodDemandService service,Stage stage) {
+    public void setService(medicService service, Stage stage) {
         this.service = service;
         this.editStage=stage;
         //this.service.addObserver(this);
