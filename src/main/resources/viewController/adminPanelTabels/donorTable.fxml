@@ -4,18 +4,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonorTableController">
    <children>
-      <TableView prefHeight="426.0" prefWidth="846.0">
+      <TableView fx:id="table" onMouseClicked="#handle" prefHeight="426.0" prefWidth="846.0">
          <columns>
-            <TableColumn prefWidth="114.39999085664749" text="CNP" />
-            <TableColumn prefWidth="104.0" text="Nume" />
-            <TableColumn prefWidth="82.39997863769531" text="DataNastere" />
-            <TableColumn minWidth="0.0" prefWidth="108.79998779296875" text="Mail" />
-            <TableColumn prefWidth="98.39996337890625" text="Telefon" />
-            <TableColumn prefWidth="88.79998779296875" text="GrupaSange" />
-            <TableColumn prefWidth="66.4000244140625" text="Greutate" />
-            <TableColumn prefWidth="116.0" text="Username" />
+            <TableColumn fx:id="columnCnp" prefWidth="114.39999085664749" text="CNP" />
+            <TableColumn fx:id="columnNume" prefWidth="104.0" text="Nume" />
+            <TableColumn fx:id="columnData" prefWidth="82.39997863769531" text="DataNastere" />
+            <TableColumn fx:id="columnMail" minWidth="0.0" prefWidth="108.79998779296875" text="Mail" />
+            <TableColumn fx:id="columnTelefon" prefWidth="98.39996337890625" text="Telefon" />
+            <TableColumn fx:id="columnSange" prefWidth="88.79998779296875" text="GrupaSange" />
+            <TableColumn fx:id="columnGreutate" prefWidth="66.4000244140625" text="Greutate" />
+            <TableColumn fx:id="columnUsername" prefWidth="116.0" text="Username" />
             <TableColumn prefWidth="69.5999755859375" text="Adresa" />
          </columns>
       </TableView>

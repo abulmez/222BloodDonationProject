@@ -19,7 +19,7 @@ public class Donor extends User {
     /**
      * 
      */
-    @SerializedName("bloodGroup")
+    @SerializedName("bloodgroup")
     private String bloodGroup;
 
     /**

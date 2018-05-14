@@ -11,17 +11,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color:white" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.AdminMainPanelController">
    <children>
-      <AnchorPane layoutX="39.0" layoutY="87.0" />
-      <Label layoutX="39.0" layoutY="22.0" prefHeight="25.0" prefWidth="215.0" styleClass="title" stylesheets="@loginTheme.css" text="Utilizatori">
+      <AnchorPane fx:id="tableAnchor" layoutX="39.0" layoutY="87.0" prefHeight="397.0" prefWidth="858.0" />
+      <Label fx:id="labelName" layoutX="39.0" layoutY="22.0" prefHeight="25.0" prefWidth="215.0" styleClass="title" stylesheets="@loginTheme.css" text="Utilizatori">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="536.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="109.0" text="Adaugare" />
-      <Button alignment="CENTER" layoutX="169.0" layoutY="536.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" text="Stergere" />
-      <Button alignment="CENTER" layoutX="296.0" layoutY="536.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Modificare" />
-      <TextField layoutX="657.0" layoutY="29.0" prefHeight="26.0" prefWidth="179.0" />
-      <ComboBox layoutX="734.0" layoutY="541.0" prefWidth="150.0" />
+      <Button fx:id="addButton" layoutX="39.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="35.0" prefWidth="109.0" text="Adaugare" />
+      <Button layoutX="169.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="35.0" prefWidth="110.0" text="Stergere" />
+      <TextField fx:id="fieldSearch" layoutX="666.0" layoutY="29.0" onKeyReleased="#handleSearch" />
+      <ComboBox fx:id="combo" layoutX="734.0" layoutY="541.0" onAction="#change" prefWidth="150.0" />
       <Label layoutX="629.0" layoutY="536.0" prefHeight="35.0" prefWidth="98.0" text="Tip Utilizator" />
       <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="853.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
