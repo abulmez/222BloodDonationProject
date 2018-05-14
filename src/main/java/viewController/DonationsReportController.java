@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import service.DonationsReportService;
 import utils.CommonUtils;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class DonationsReportController {
@@ -50,7 +51,7 @@ public class DonationsReportController {
                 validitate=false;
             else
                 validitate=true;
-            DonationReport report=new DonationReport(idDR,datePicker.getValue(),validitate,textArea.getText());
+            DonationReport report=new DonationReport(idDR, datePicker.getValue(),validitate,textArea.getText());
             String response=service.handleAdd(report);
             if (!response.equals("Success")){
                 Alert alert=new Alert(Alert.AlertType.ERROR,response);

@@ -1,7 +1,7 @@
 package service;
 
 
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.Donation;
 import model.DonationReport;
@@ -12,7 +12,10 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -271,7 +274,7 @@ public class DonorService {
                 inputLine = in.readLine();
                 response.append(inputLine);
                 in.close();
-                Gson gson = new Gson();
+                Gson gson = new GsonBuilder().registerTypeAdapter(DonationReport.class,new CustomDonationReportDeserialize()).create();
                 Type type = new TypeToken<DonationReport>(){}.getType();
                 DonationReport donationReport= gson.fromJson(response.toString(),type);
                 don = donationReport;
@@ -286,6 +289,23 @@ public class DonorService {
         } finally {
 
             con.disconnect();
+        }
+
+    }
+
+    public class CustomDonationReportDeserialize implements JsonDeserializer<DonationReport> {
+        @Override
+        public DonationReport deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+
+            JsonObject jobject = jsonElement.getAsJsonObject();
+            String[] text = jobject.get("samplingdate").getAsString().split("-");
+            int[] bdayAsInt = Arrays.stream(text).mapToInt(Integer::parseInt).toArray();
+            return new DonationReport(
+                    jobject.get("iddr").getAsInt(),
+                    LocalDate.of(bdayAsInt[0],bdayAsInt[1],bdayAsInt[2]),
+                    jobject.get("bloodstatus").getAsBoolean(),
+                    jobject.get("bloodreport").getAsString()
+            );
         }
     }
 }

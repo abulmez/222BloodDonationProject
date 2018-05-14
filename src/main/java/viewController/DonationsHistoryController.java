@@ -25,6 +25,7 @@ import service.LoginService;
 import utils.CommonUtils;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class DonationsHistoryController {
@@ -77,10 +78,9 @@ public class DonationsHistoryController {
             if(donorService.getDonationReport(don.getIdD()).getIdDR()!=null)
             result  = donorService.getDonationReport(don.getIdD());
             else
-                result  = new DonationReport(1,LocalDate.now(),false,"Nu exista raport de detalii");
+                result  = new DonationReport(1, LocalDate.now(),false,"Nu exista raport de detalii");
 
-
-                        FXMLLoader loader = new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/donationsReportDetails.fxml"));
             AnchorPane root = null;
             try {

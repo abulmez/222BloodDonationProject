@@ -2,8 +2,8 @@ package model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.*;
 
 /**
  * 
@@ -32,19 +32,19 @@ public class DonationReport {
     /**
      * 
      */
-    @SerializedName("dataproba")
+    @SerializedName("samplingdate")
     private LocalDate dataProba;
 
     /**
      * 
      */
-    @SerializedName("validitateproba")
+    @SerializedName("bloodstatus")
     private Boolean validitateProba;
 
     /**
      * 
      */
-    @SerializedName("observatii")
+    @SerializedName("bloodreport")
     private String observatii;
 
     public Integer getIdDR() {
