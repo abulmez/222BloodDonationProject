@@ -6,11 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import service.BloodDemandService;
+import service.medicService;
 import service.LoginService;
-
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 public class FormController {
 
@@ -26,9 +23,9 @@ public class FormController {
     public TextField quantity;
     @FXML
     public ComboBox bloodDemandType;
-    private BloodDemandService service;
+    private medicService service;
     private Stage editStage;
-    public void setService( BloodDemandService service){
+    public void setService( medicService service){
         this.service=service;
         //blockQuantity();
         ObservableList<String> listCombo1 = FXCollections.observableArrayList("Mare","Medie","Mica");

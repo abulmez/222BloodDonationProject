@@ -17,12 +17,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BloodDemandService {
+public class medicService {
 
     private HttpURLConnection con;
     private ServerConnection serverConnection;
 
-    public BloodDemandService(ServerConnection serverConnection){
+    public medicService(ServerConnection serverConnection){
         this.serverConnection = serverConnection;
     }
     public String handleAdd(Integer idU,String neededType,
