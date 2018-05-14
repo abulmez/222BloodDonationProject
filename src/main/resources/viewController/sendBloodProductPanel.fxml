@@ -17,8 +17,8 @@
             <TableColumn fx:id="hospitalInformationColumn" prefWidth="63.20001220703125" text="Info Spital" />
             <TableColumn fx:id="distanceColumn" prefWidth="79.99998474121094" text="Distanta" />
             <TableColumn fx:id="priorityColumn" prefWidth="98.4000244140625" text="Prioritate" />
-            <TableColumn fx:id="quantityColumn" prefWidth="56.79998779296875" text="Cantitate" />
-            <TableColumn fx:id="patientNameColumn" prefWidth="183.20001220703125" text="Nume pacient" />
+            <TableColumn fx:id="quantityColumn" prefWidth="79.99993896484375" text="Cantitate(ml)" />
+            <TableColumn fx:id="patientNameColumn" prefWidth="160.80010986328125" text="Nume pacient" />
             <TableColumn fx:id="actionColumn" prefWidth="82.39996337890625" text="Actiune" />
          </columns>
       </TableView>

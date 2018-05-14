@@ -20,11 +20,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import model.BloodProduct;
+import model.DTO.BloodProductShipmentAddressDTO;
 import model.DTO.BloodRequestHospitalDTO;
 import model.DTO.DonationReceiverNameBloodGroupDTO;
 import service.TCPService;
@@ -33,6 +35,7 @@ import utils.googleMaps.Geocoding;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class SendBloodProductPanelController {
 
@@ -73,6 +76,7 @@ public class SendBloodProductPanelController {
     private String donationCenterAdress;
     private LatLng donationCenterCoords;
     private Stage currentInfoWindow;
+    private BloodProductsInventoryController mainWindowsController;
 
 
     public void initialize(){
@@ -142,7 +146,70 @@ public class SendBloodProductPanelController {
                 sendButton.getStyleClass().add("button");
                 sendButton.setGraphic(new ImageView("./images/send.png"));
                 sendButton.setTooltip(new Tooltip("Trimite"));
-                sendButton.setOnAction(t -> {handleExit();});
+                sendButton.setOnAction(t -> {
+                    Alert confirmation=new Alert(Alert.AlertType.CONFIRMATION);
+                    confirmation.setHeaderText("Confirmare");
+                    confirmation.setContentText("Sunteti sigur ca doriti sa trimiteti produsul?");
+                    Optional<ButtonType> result = confirmation.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        Boolean sent = false;
+                        Boolean ok = false;
+                        column.getTableView().getSelectionModel().select(getIndex());
+                        BloodRequestHospitalDTO bloodRequestHospitalDTO= (BloodRequestHospitalDTO)bloodRequestsTable.getSelectionModel().getSelectedItem();
+                        Integer bpID = currentBloodProduct.getIdBP();
+                        if(currentBloodProduct.getQuantity()>bloodRequestHospitalDTO.getQuantity() && Math.abs(currentBloodProduct.getQuantity()-bloodRequestHospitalDTO.getQuantity())>50.0){
+                            ButtonType yesButton = new ButtonType("Da", ButtonBar.ButtonData.YES);
+                            ButtonType noButton = new ButtonType("Nu", ButtonBar.ButtonData.NO);
+                            Alert splitAlert=new Alert(Alert.AlertType.CONFIRMATION,"Cantitatea din inventar este mai mare decat cantitatea ceruta. Doriti sa trimiteti cantitatea intreaga?",yesButton,noButton);
+                            splitAlert.setHeaderText("Decizie");
+                            splitAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                            Optional<ButtonType> toSplit = splitAlert.showAndWait();
+                            if(toSplit.get() == yesButton){
+                                Integer newIdBP = service.splitBloodProduct(currentBloodProduct.getIdBP(),bloodRequestHospitalDTO.getQuantity());
+                                ok = service.sendBloodProduct(newIdBP,bloodRequestHospitalDTO.getIdBD());
+                                bpID = newIdBP;
+                                sent = true;
+                            }
+                            else{
+                                ok = service.sendBloodProduct(currentBloodProduct.getIdBP(),bloodRequestHospitalDTO.getIdBD());
+                            }
+                        }
+                        else{
+                            ok = service.sendBloodProduct(currentBloodProduct.getIdBP(),bloodRequestHospitalDTO.getIdBD());
+                        }
+                        if (ok) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Succes");
+                            alert.setContentText("Produsul a fost trimis cu succes!");
+                            alert.showAndWait();
+                            sent = true;
+
+                        } else {
+                            Alert error = new Alert(Alert.AlertType.ERROR);
+                            error.setHeaderText("Esec");
+                            error.setContentText("Eroare la trimiterea produsului. Reincercati mai tarziu!");
+                            error.showAndWait();
+                        }
+                        if (sent){
+                            String[] splitAddress = bloodRequestHospitalDTO.getHospitalAdress().split(" ");
+                            String number = splitAddress[splitAddress.length-3];
+                            String city =  splitAddress[splitAddress.length-2];
+                            String country = splitAddress[splitAddress.length-1];
+                            StringBuilder street = new StringBuilder();
+                            for(int i=0;i<splitAddress.length-3;i++)
+                                street.append(splitAddress[i]).append(" ");
+                            ArrayList<BloodProductShipmentAddressDTO> bloodProductShipmentAddressDTOs = mainWindowsController.getBloodProductShipmentAddressDTOs();
+                            bloodProductShipmentAddressDTOs.add(new BloodProductShipmentAddressDTO(bpID,street.toString(),Integer.parseInt(number),city,country,bloodRequestHospitalDTO.getHospitalName(),bloodRequestHospitalDTO.getHospitalPhone()));
+                            mainWindowsController.setBloodProductShipmentAddressDTOs(bloodProductShipmentAddressDTOs);
+                            mainWindowsController.setAllBloodProducts(mainWindowsController.getService().getAllBloodProducts());
+                            mainWindowsController.loadDataInTable(mainWindowsController.getAllBloodProducts());
+                        }
+                        handleExit();
+                    }
+
+
+
+                });
                 if (item != null) {
                     setGraphic(sendButton);
                 }
@@ -163,11 +230,12 @@ public class SendBloodProductPanelController {
         stage.close();
     }
 
-    public void setService(TCPService service, Stage dialogStage, BloodProduct selectedBloodProduct, String bloodGroup) {
+    public void setService(TCPService service, Stage dialogStage, BloodProduct selectedBloodProduct, String bloodGroup, BloodProductsInventoryController controller) {
         this.service = service;
         this.stage = dialogStage;
         this.currentBloodProduct = selectedBloodProduct;
         this.bloodGroup = bloodGroup;
+        this.mainWindowsController = controller;
         infoLabel.setText("Trimite "+selectedBloodProduct.getQuantity()+"ml "+selectedBloodProduct.getProductType().toString().toLowerCase()+" catre:");
         ArrayList<BloodRequestHospitalDTO> requests = service.getAllBloodRequestsAndHospitalInfoForProductTypeAndGroup(currentBloodProduct.getProductType(),bloodGroup);
         donationCenterAdress = service.getDonationCenterAddress(selectedBloodProduct.getIdD());

@@ -138,7 +138,7 @@ public class DonationsController {
                                                 }
                                             } else {
                                                 System.out.println("aici");
-                                                String response1=service.handleAddBloodProduct(donation.getIdD(), "Proba de sange", LocalDate.now().plusDays(42), donation.getQuantity());
+                                                String response1=service.handleAddBloodProduct(donation.getIdD(), "Sange", LocalDate.now().plusDays(42), donation.getQuantity());
                                                 if(!response1.equals("Success")){
                                                     Alert alert1 = new Alert(Alert.AlertType.ERROR, response1);
                                                     alert1.showAndWait();
