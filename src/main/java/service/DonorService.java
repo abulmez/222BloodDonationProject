@@ -1,6 +1,10 @@
 package service;
 
 
+import com.google.gson.Gson;
+import model.Donor;
+import model.User;
+import model.UserLoginData;
 import utils.ServerConnection;
 
 import java.io.*;
@@ -193,6 +197,32 @@ public class DonorService {
 
         } finally {
 
+            con.disconnect();
+        }
+    }
+
+    public int createLogin(UserLoginData loginData, Donor donor) {
+        Gson gSon = new Gson();
+        int code = 401;
+        String loginString = gSon.toJson(loginData, UserLoginData.class);
+        String donorString = gSon.toJson(donor,Donor.class);
+        String urlParameters = loginString+"%1%1%"+donorString;
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/register");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            code = con.getResponseCode();
+            return code;
+        } catch (IOException e) {
+            return 401;
+        } finally {
             con.disconnect();
         }
     }

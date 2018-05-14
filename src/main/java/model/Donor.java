@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class Donor extends User {
 
-    public Donor(Integer idU, String cnp, String name, LocalDate birthday, String mail, String phone, String bloodGroup, Float weight) {
+    public Donor(Integer idU, String cnp, String name, LocalDate birthday, String mail, String phone, String bloodGroup, Double weight) {
         super(idU, cnp, name, birthday, mail, phone);
         this.bloodGroup = bloodGroup;
         this.weight = weight;
@@ -22,7 +22,7 @@ public class Donor extends User {
     /**
      * 
      */
-    private Float weight;
+    private Double weight;
 
 
     public String getBloodGroup() {
@@ -33,11 +33,11 @@ public class Donor extends User {
         this.bloodGroup = bloodGroup;
     }
 
-    public Float getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Float weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 }

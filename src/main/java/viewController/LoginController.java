@@ -1,11 +1,14 @@
 package viewController;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -37,52 +40,76 @@ public class LoginController {
     private double yOffset=0;
     private Stage mainStage;
     private LoginService service;
-
     public void initialize(){
         ApplicationContext context = CommonUtils.getFactory();
         service = context.getBean(LoginService.class);
+
     }
 
-    public void setMainStage(Stage stage){
+    public void setMainStage(Stage stage)
+    {
         this.mainStage=stage;
+        initEnterKey();
     }
-    @FXML
-    void validateAction(MouseEvent event) {
-        if(service.handleLogin(usernameTextField.getText(),passwordPswField.getText())) {
 
-            openMenu(service.getUserType());
-        }
-        else{
+
+    @FXML
+    void validateAction() {
+        if(!usernameTextField.getText().equals("") && !passwordPswField.getText().equals("") )
+            if(service.handleLogin(usernameTextField.getText(),passwordPswField.getText())) {
+                openMenu(service.getUserType());
+            }
+            else{
+                failedLoginLabel.setVisible(true);
+            }
+        else {
+            failedLoginLabel.setText("Date de logare inexistente!");
             failedLoginLabel.setVisible(true);
         }
-
     }
     @FXML
     private void registerAction(){
+
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/viewController/register.fxml"));
         AnchorPane root = null;
         try {
             root = loader.load();
+            System.out.print(loader.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
         RegisterController controller = loader.getController();
-        controller.setMainStage(primaryStage);
         makePaneMoveble(root,primaryStage);
+        controller.setMainStage(primaryStage);
+
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(root, 922, 604);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    private void initEnterKey() {
+        passwordPswField.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent ke)
+            {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                    validateAction();
+                }
+            }
+        });
+    }
+
     private void openMenu(UserType userType) {
         FXMLLoader loader = new FXMLLoader();
         AnchorPane mainPane ;
         loader.setLocation(getClass().getResource("/viewController/menu.fxml"));
         try {
-
             mainPane = loader.load();
             Scene scene=new Scene(mainPane,1023,604);
             scene.setFill(Color.TRANSPARENT);
@@ -94,7 +121,6 @@ public class LoginController {
             mainPanel.setUserType(userType);
             stage.show();
             mainStage.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

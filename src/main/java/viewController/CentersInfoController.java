@@ -7,19 +7,20 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 import model.Adress;
 import model.DonationCenter;
 import org.springframework.context.ApplicationContext;
 import service.CenterInfoService;
+import service.DonorService;
 import utils.CommonUtils;
 
 
@@ -32,72 +33,55 @@ import java.util.Enumeration;
 import java.util.List;
 
 public class CentersInfoController {
-    private ObservableList<DonationCenter> model=FXCollections.observableArrayList();
 
-    ApplicationContext context = CommonUtils.getFactory();
+
 
     @FXML
-    private JFXComboBox<String> centerCombobox;
+    private JFXComboBox<DonationCenter> centerCombobox;
 
     @FXML
     private WebView webView;
 
     @FXML
-    private Label adressLabel;
+    private TextArea adressLabel;
 
     @FXML
-    private Label phoneLabel;
+    private TextArea phoneLabel;
     private Timeline locationUpdateTimeline=null;
-
-    private CenterInfoService service;
-
+    private CenterInfoService centerInfoService;
+    private WebEngine webEngine;
+    private List<Adress>adresses;
     @FXML
     private void initialize() throws IOException, GeoIp2Exception, URISyntaxException {
-        /*ApplicationContext context = CommonUtils.getFactory();
-        service = context.getBean(LoginService.class);*/
-
-        //ApplicationContext context = CommonUtils.getFactory();
-
-        service = context.getBean(CenterInfoService.class);
-        this.model= FXCollections.observableArrayList(service.getAllDonationCenter());
-        ObservableList<String> options =
-                FXCollections.observableArrayList();
-
-        List<DonationCenter> centers=service.getAllDonationCenter();
-        //ObservableList<String> centre=null;
-        for(DonationCenter dc : centers){
-            //centre.add(adr.getCenterName());
-            System.out.println(dc.getCenterName());
-            System.out.println(dc.getPhoneNumber());
-            System.out.println(dc.getIdA());
-            System.out.println(dc.getIdDC());
-            options.add(dc.getCenterName());
-        }
-        //centerCombobox.setItems(centre);
-
-        System.out.println("============");
-        for (String s:options) {
-            System.out.println(s);
-        }
-
-        centerCombobox.setItems(options);
-        centerCombobox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue observable, String oldValue, String newValue) {
-                for (DonationCenter donationCenter:centers){
-                    System.out.println(donationCenter.getCenterName()+" "+newValue);
-                    if(newValue.equals(donationCenter.getCenterName())){
-                        System.out.println(donationCenter.getCenterName()+" "+newValue);
-                        adressLabel.setText(donationCenter.getCenterName());
-                        phoneLabel.setText(donationCenter.getPhoneNumber());
-                    }
-                }
-                
-            }
-        });
-
         initMap();
+        ApplicationContext context = CommonUtils.getFactory();
+        centerInfoService = context.getBean(CenterInfoService.class);
+        adresses=centerInfoService.getAllAdressForCenters();
+        initComboBox();
+        adressLabel.setEditable(false);
+        phoneLabel.setEditable(false);
+    }
 
+    private void addComboBoxListener() {
+        centerCombobox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            Integer idAddress=newValue.getIdA();
+            Adress addressFinal = null;
+            for (Adress adress:adresses) {
+                if(adress.getIdA().equals(idAddress))
+                    addressFinal=adress;
+            }
+            setClientLocation(webEngine,addressFinal.toStringSmall());
+            adressLabel.setText("Adresă : "+addressFinal.getFullAdress());
+            phoneLabel.setText("Telefon : "+newValue.getPhoneNumber());
+        });
+    }
+
+    private void initComboBox() {
+        for (DonationCenter centerInfoService:centerInfoService.getAllDonationCenter()) {
+            System.out.print(centerInfoService.getCenterName());
+            centerCombobox.getItems().add(centerInfoService);
+        }
+        addComboBoxListener();
     }
 
     private String getClientCity() throws IOException, GeoIp2Exception {
@@ -115,27 +99,27 @@ public class CentersInfoController {
         return response.getCity().getName();
     }
     private void initMap() throws IOException, GeoIp2Exception {
-        WebEngine webEngine = webView.getEngine();
+        webEngine = webView.getEngine();
 
         webEngine.setJavaScriptEnabled(true);
 
         URL url = getClass().getResource("/viewController/googlemaps.html");
         if (url != null)
             webEngine.load(url.toExternalForm());
-        setClientLocation(webEngine);
+    }
+    @FXML
+    private void doSth(){
+
+        List<Adress> adressList=centerInfoService.getAllAdressForCenters();
+        adressList.forEach(x->{System.out.println(x.toString());});
     }
 
-    private void setClientLocation(WebEngine webEngine) throws IOException, GeoIp2Exception {
-        String cityName = getClientCity();
-
-
+    private void setClientLocation(WebEngine webEngine,String address) {
         if (locationUpdateTimeline!=null) locationUpdateTimeline.stop();
         locationUpdateTimeline = new Timeline();
         locationUpdateTimeline.getKeyFrames().add(
-                new KeyFrame(new javafx.util.Duration(400),
-                        actionEvent -> {
-                            webEngine.executeScript("document.goToLocation(\"" + cityName + "\")");
-                        })
+                new KeyFrame(new javafx.util.Duration(2900),
+                        actionEvent -> webEngine.executeScript("geocodeAddress(\"" + "'"+address+"'"+"\")"))
         );
         locationUpdateTimeline.play();
     }

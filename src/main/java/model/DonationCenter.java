@@ -21,6 +21,10 @@ public class DonationCenter {
         this.centerName = centerName;
         this.phoneNumber = phoneNumber;
     }
+    @Override
+    public String toString(){
+        return centerName;
+    }
 
     /**
      * 

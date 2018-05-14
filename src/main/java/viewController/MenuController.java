@@ -30,10 +30,6 @@ public class MenuController {
     private Stage mainStage;
     private UserType userType;
 
-    public Stage getMainStage() {
-        return mainStage;
-    }
-
     public void exitAction(){mainStage.close();}
     @FXML
     public void exitAction(MouseEvent event) {
@@ -122,26 +118,6 @@ public class MenuController {
         menuDrawer.setSidePane(mainPane);
 
     }
-
-    private void initMenuAdmin(){
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane mainPane = null;
-        loader.setLocation(getClass().getResource("/viewController/menuAdmin.fxml"));
-        try {
-            mainPane = loader.load();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        MenuAdmin menuAdmin = loader.getController();
-        menuAdmin.setStage(this);
-        menuAdmin.setMainPane(this.centerMenuPane);
-        menuAdmin.initFirstPanel();
-        menuDrawer.setSidePane(mainPane);
-    }
-
-
     public void setMainStage(Stage stage) {
         this.mainStage=stage;
     }
@@ -154,7 +130,5 @@ public class MenuController {
             initMenuMedic();
         if(userType==UserType.TCP)
             initMenuPct();
-        if(userType==UserType.Admin)
-            initMenuAdmin();
     }
 }

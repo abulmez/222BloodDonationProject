@@ -14,25 +14,26 @@
             <Image url="@../images/form_icon.png" />
          </image>
       </ImageView>
-      <TextField fx:id="numeUserTextField" layoutX="96.0" layoutY="174.0" promptText="Nume utilizator" AnchorPane.topAnchor="174.0" />
-      <TextField fx:id="cnpUserTextField" layoutX="96.0" layoutY="211.0" promptText="CNP utilizator" AnchorPane.topAnchor="211.0" />
-      <TextField fx:id="cantitateTextField" layoutX="96.0" layoutY="250.0" promptText="Cantitate" AnchorPane.topAnchor="250.0" />
+      <TextField layoutX="96.0" layoutY="164.0" promptText="Id donatie" />
+      <TextField layoutX="96.0" layoutY="199.0" promptText="Nume utilizator" AnchorPane.topAnchor="199.0" />
+      <TextField layoutX="96.0" layoutY="273.0" promptText="Cantitate" AnchorPane.topAnchor="273.0" />
+      <TextField layoutX="96.0" layoutY="237.0" promptText="Id utilizator" AnchorPane.topAnchor="237.0" />
+      <ImageView fitHeight="26.0" fitWidth="34.0" layoutX="59.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/id_icon.png" />
+         </image>
+      </ImageView>
       <Label id="formular" layoutX="115.0" layoutY="23.0" text="Formular" />
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/quantity_icon.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user_icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="119.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleAdd" text="Adauga" />
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/username_icon.png" />
-         </image>
-      </ImageView>
+      <Button layoutX="119.0" layoutY="329.0" mnemonicParsing="false" text="Adauga" />
    </children>
 </AnchorPane>

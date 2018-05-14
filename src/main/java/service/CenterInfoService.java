@@ -30,8 +30,42 @@ public class CenterInfoService {
         this.serverConnection = serverConnection;
     }
 
-    public List<Adress> getAllAdress(){
-        return null;
+    public List<Adress> getAllAdressForCenters(){
+        List<Adress> list=new ArrayList<>();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getDonationCenterAddresses");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            int code = con.getResponseCode();
+            if(code == 200) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<Adress>>(){}.getType();
+                Collection<Adress> donationCenters = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(donationCenters);
+                return list;
+            }
+            else if(code == 401){
+                return list;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return list;
     }
 
     public List<DonationCenter> getAllDonationCenter(){

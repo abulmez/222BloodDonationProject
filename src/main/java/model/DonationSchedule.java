@@ -1,7 +1,5 @@
 package model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -16,40 +14,32 @@ public class DonationSchedule {
     public DonationSchedule() {
     }
 
-    public DonationSchedule(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots,String status) {
+    public DonationSchedule(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots) {
         this.idDS = idDS;
         this.idDC = idDC;
         this.donationDateTime = donationDateTime;
         this.availableSpots = availableSpots;
-        this.status = status;
     }
 
     /**
      * 
      */
-    @SerializedName("idds")
     private Integer idDS;
 
     /**
      * 
      */
-    @SerializedName("iddc")
     private Integer idDC;
 
     /**
      * 
      */
-    @SerializedName("donationdatetime")
     private LocalDate donationDateTime;
 
     /**
      * 
      */
-    @SerializedName("availablespots")
     private Integer availableSpots;
-
-    @SerializedName("status")
-    private String status;
 
 
     public Integer getIdDS() {
@@ -82,13 +72,5 @@ public class DonationSchedule {
 
     public void setAvailableSpots(Integer availableSpots) {
         this.availableSpots = availableSpots;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

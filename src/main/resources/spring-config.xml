@@ -12,31 +12,10 @@
     <bean id="loginService" class="service.LoginService">
         <constructor-arg ref="serverConnection"/>
     </bean>
-
-    <bean id="centerInfoService" class="service.CenterInfoService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
-    <bean id="donationAppointmentsAdminService" class="service.DonationAppointmentsAdminService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
     <bean id="donorService" class="service.DonorService">
         <constructor-arg ref="serverConnection"/>
     </bean>
-
-    <bean id="service" class="service.BloodDemandService">
+    <bean id="centerInfoService" class="service.CenterInfoService">
         <constructor-arg ref="serverConnection"/>
     </bean>
-
-    <bean id="donationService" class="service.DonationService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
-    <bean id="addDonationService" class="service.AddDonationService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
-
-
 </beans>

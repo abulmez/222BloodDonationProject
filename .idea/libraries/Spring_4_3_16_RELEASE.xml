@@ -1,6 +1,5 @@
 <component name="libraryTable">
-  <library name="Spring-4.3.16.RELEASE" type="spring">
-    <properties version="4.3.16.RELEASE" />
+  <library name="Spring-4.3.16.RELEASE">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/spring-instrument-4.3.16.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-instrument-tomcat-4.3.16.RELEASE.jar!/" />
@@ -22,9 +21,6 @@
       <root url="jar://$PROJECT_DIR$/lib/spring-core-4.3.16.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.ideaLibSources/spring-beans-4.3.16.RELEASE-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.ideaLibSources/spring-context-4.3.16.RELEASE-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

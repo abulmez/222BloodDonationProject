@@ -2,8 +2,7 @@ package service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import model.Donation;
-import model.UserType;
+import model.*;
 import utils.DonationDTO;
 import utils.ServerConnection;
 
@@ -109,4 +108,7 @@ public class DonationService {
         return "";
 
     }
+
+
+
 }

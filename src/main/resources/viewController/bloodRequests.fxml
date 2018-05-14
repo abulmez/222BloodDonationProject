@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,18 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.BloodRequestsController">
    <children>
-      <TableView fx:id="tableView" layoutX="10.0" layoutY="77.0" prefHeight="511.0" prefWidth="903.0" style="-fx-background-color: lightgrey;">
+      <TableView layoutX="10.0" layoutY="77.0" prefHeight="511.0" prefWidth="903.0" style="-fx-background-color: lightgrey;">
         <columns>
-            <TableColumn fx:id="colIdBd" prefWidth="60.0" text="Id Cerere" />
-          <TableColumn fx:id="colIdH" minWidth="0.0" prefWidth="62.0" text="Id Spital" />
-          <TableColumn fx:id="colNeededType" minWidth="0.0" prefWidth="103.0" text="Grupa sangvina" />
-            <TableColumn fx:id="colDescription" prefWidth="169.0" text="Nume Pacient" />
-            <TableColumn fx:id="colPriority" minWidth="0.0" prefWidth="74.0" text="Prioritate" />
-            <TableColumn fx:id="colQuantity" prefWidth="106.0" text="Cantitate" />
-            <TableColumn fx:id="colBloodType" minWidth="0.0" prefWidth="87.0" text="Componenta" />
-            <TableColumn fx:id="colDelivered" prefWidth="90.0" text="Livrate" />
-            <TableColumn fx:id="colStatus" prefWidth="79.0" text="Status" />
-            <TableColumn fx:id="updateColumn" prefWidth="72.0" text="Actiune" />
+          <TableColumn prefWidth="149.99996948242188" text="Spital" />
+          <TableColumn minWidth="0.0" prefWidth="152.0" text="Tip de sânge" />
+            <TableColumn prefWidth="351.0" text="Descriere" />
+            <TableColumn minWidth="0.0" prefWidth="108.7999267578125" text="Prioritate" />
+            <TableColumn prefWidth="154.4000244140625" text="Cantitate" />
         </columns>
       </TableView>
       <Label layoutX="12.0" layoutY="11.0" prefHeight="30.0" prefWidth="282.0" styleClass="title" text="Cereri de sânge">
@@ -28,6 +22,5 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboFiltrare" layoutX="760.0" layoutY="25.0" prefHeight="31.0" prefWidth="148.0" />
    </children>
 </AnchorPane>
