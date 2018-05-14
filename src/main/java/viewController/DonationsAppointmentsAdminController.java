@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -87,12 +84,7 @@ public class DonationsAppointmentsAdminController {
         }
     }*/
 
-    static void showErrorMessage(String text){
-        Alert message=new Alert(Alert.AlertType.ERROR);
-        message.setTitle("Mesaj eroare");
-        message.setContentText(text);
-        message.showAndWait();
-    }
+
 
     @FXML
     public void handleModificaStatus(ActionEvent actionEvent){

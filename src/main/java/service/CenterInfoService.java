@@ -30,9 +30,6 @@ public class CenterInfoService {
         this.serverConnection = serverConnection;
     }
 
-    public List<Adress> getAllAdress(){
-        return null;
-    }
 
     public List<DonationCenter> getAllDonationCenter(){
         //String urlParameters = String.format("username=%s&password=%s");
