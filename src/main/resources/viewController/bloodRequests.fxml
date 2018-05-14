@@ -28,6 +28,6 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboFiltrare" layoutX="760.0" layoutY="25.0" prefHeight="31.0" prefWidth="148.0" promptText="Filtrare" />
+      <ComboBox fx:id="comboFiltrare" layoutX="760.0" layoutY="25.0" prefHeight="31.0" prefWidth="148.0" />
    </children>
 </AnchorPane>

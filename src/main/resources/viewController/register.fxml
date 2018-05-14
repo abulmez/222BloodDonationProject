@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXProgressBar?>
@@ -20,7 +21,7 @@
    <children>
       <Label layoutX="41.0" layoutY="20.0" prefHeight="46.0" prefWidth="170.0" styleClass="title" stylesheets="@loginTheme.css" text="Înregistrare" />
       <JFXProgressBar fx:id="progressBar" focusTraversable="false" layoutX="41.0" layoutY="533.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="520.0" progress="1.0" secondaryProgress="0.0" />
-      <ImageView fitHeight="35.0" fitWidth="68.0" layoutX="855.0" layoutY="20.0" onMouseExited="#closeAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="35.0" fitWidth="68.0" layoutX="855.0" layoutY="20.0" onMouseClicked="#closeAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/redExitIcon.png" />
          </image>
@@ -144,11 +145,11 @@
                   <DropShadow />
                </effect>
             </GridPane>
-            <GridPane style="-fx-background-color: white;" GridPane.rowIndex="6">
+            <GridPane alignment="CENTER" style="-fx-background-color: white;" GridPane.rowIndex="6">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.1999847412109" minWidth="10.0" prefWidth="260.5999481201172" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="383.7999877929688" minWidth="10.0" prefWidth="280.60005187988276" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="426.2000122070313" minWidth="10.0" prefWidth="299.4" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -156,7 +157,7 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <JFXDatePicker fx:id="birtdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" prefHeight="6.0" prefWidth="360.0" promptText="Ziua de naștere" showWeekNumbers="true" style="-fx-background-color: white;" viewOrder="7.0" />
+                        <JFXDatePicker fx:id="birthdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="256.0" promptText="Ziua de naștere" showWeekNumbers="true" style="-fx-background-color: white;" viewOrder="7.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
@@ -166,7 +167,17 @@
                               <Image url="@../images/weight.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="weightText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Greutate ( kg )" viewOrder="8.0" />
+                        <JFXTextField fx:id="weightText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="258.0" promptText="Greutate ( kg )" viewOrder="8.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="93.0" prefWidth="351.0" GridPane.columnIndex="1">
+                     <children>
+                        <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/bloodGroup.png" />
+                           </image>
+                        </ImageView>
+                        <JFXComboBox fx:id="bloodText" focusColor="#400303" labelFloat="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="3.0" prefWidth="214.0" promptText="Grupa de sânge" styleClass="text-field" visibleRowCount="5" />
                      </children>
                   </HBox>
                </children>
@@ -176,7 +187,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="633.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#registerAction" prefHeight="35.0" prefWidth="259.0" text="Înregistreaza-mă">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="650.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#registerAction" prefHeight="35.0" prefWidth="240.0" text="Înregistreaza-mă">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

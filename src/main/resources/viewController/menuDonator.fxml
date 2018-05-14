@@ -20,10 +20,10 @@
             </font>
         </JFXButton>
         <JFXButton buttonType="RAISED" layoutY="479.0" onMouseClicked="#logoutAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Log out" textFill="#740707">
-        <font>
-            <Font name="System Bold" size="24.0" />
-        </font>
-    </JFXButton>
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </JFXButton>
         <Line endX="100.0" layoutX="129.0" layoutY="110.0" startX="-100.0" stroke="#740707" />
         <Label contentDisplay="CENTER" layoutX="29.0" layoutY="59.0" prefHeight="34.0" prefWidth="202.0" styleClass="menuLabel" text="Username">
             <font>

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.*;
 
 /**
- *
+ * 
  */
 public class Adress {
 
@@ -28,8 +28,28 @@ public class Adress {
         this.country = country;
     }
 
+    public String toStringSmall(){
+        return this.country+", "+city+", "+this.county+", "+this.street+", "+this.streetNumber;
+    }
+    private boolean verifyField(Object object){
+        if(object!=null&&!object.equals(""))
+            return true;
+        return false;
+    }
+    public String getFullAdress(){
+        String string= ""+country+", " + city+", "+county+", "+"strada:"+street+", ";
+        if(verifyField(streetNumber)) string+="nr. stradă: "+streetNumber+", ";
+        if(verifyField(blockNumber)) string+="nr. bloc: "+blockNumber+", ";
+        if(verifyField(entrance)) string+="intrare: "+entrance+", ";
+        if(verifyField(floor)) string+="etaj: "+floor+", ";
+        if(verifyField(apartmentNumber)) string+="apartament: "+apartmentNumber+", ";
+
+
+        return string;
+    }
+
     /**
-     *
+     * 
      */
 
 
@@ -37,19 +57,19 @@ public class Adress {
     private Integer idA;
 
     /**
-     *
+     * 
      */
     @SerializedName("street")
     private String street;
 
     /**
-     *
+     * 
      */
     @SerializedName("streetnumber")
     private Integer streetNumber;
 
     /**
-     *
+     * 
      */
     @SerializedName("blocknumber")
     private Integer blockNumber;
@@ -61,31 +81,31 @@ public class Adress {
     private String entrance;
 
     /**
-     *
+     * 
      */
     @SerializedName("floor")
     private Integer floor;
 
     /**
-     *
+     * 
      */
     @SerializedName("apartmentnumber")
     private Integer apartmentNumber;
 
     /**
-     *
+     * 
      */
     @SerializedName("city")
     private String city;
 
     /**
-     *
+     * 
      */
     @SerializedName("county")
     private String county;
 
     /**
-     *
+     * 
      */
     @SerializedName("country")
     private String country;
