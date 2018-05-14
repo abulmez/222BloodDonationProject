@@ -9,11 +9,11 @@ public class UserPacient {
     public UserPacient() {
     }
 
-    public UserPacient(Integer idU, String CNP, String name, LocalDate birthday, String mail, String phone, String bloodGroup, Double weight, Integer idA, Integer idDC, Integer idH) {
+    public UserPacient(Integer idU, String CNP, String name, /*LocalDate birthday,*/ String mail, String phone, String bloodGroup, Double weight, Integer idA, Integer idDC, Integer idH) {
         this.idU = idU;
         this.CNP = CNP;
         this.name = name;
-        this.birthday = birthday;
+        //this.birthday = birthday;
         this.mail = mail;
         this.phone = phone;
         this.bloodGroup = bloodGroup;
@@ -46,8 +46,8 @@ public class UserPacient {
     /**
      *
      */
-    @SerializedName("birthday")
-    private LocalDate birthday;
+    /*@SerializedName("birthday")
+    private LocalDate birthday;*/
 
     /**
      *
@@ -112,13 +112,13 @@ public class UserPacient {
         this.name = name;
     }
 
-    public LocalDate getBirthday() {
+    /*public LocalDate getBirthday() {
         return birthday;
     }
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
-    }
+    }*/
 
     public String getMail() {
         return mail;

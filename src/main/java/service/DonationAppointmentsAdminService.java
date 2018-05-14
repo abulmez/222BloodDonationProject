@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class DonationAppointmentsAdminService {
@@ -115,16 +116,17 @@ public class DonationAppointmentsAdminService {
                 }
                 System.out.println(response);
                 in.close();
-                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+                Gson gson = new Gson();
+                /*Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
                     @Override
-                    public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                    public Date deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
                         String date=json.toString();
                         String newdate=date.replaceAll("\\\"","").replaceAll("[a-zA-Z]"," ");
                         System.out.println(newdate);
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
-                        return LocalDate.parse(newdate,formatter);
+                        return Date.parse(newdate,formatter);
                     }
-                }).create();
+                }).create();*/
                 Type collectionType = new TypeToken<Collection<UserPacient>>(){}.getType();
                 Collection<UserPacient> userPacients = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(userPacients);
