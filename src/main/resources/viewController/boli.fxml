@@ -6,28 +6,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DiseaseController">
    <children>
-      <CheckBox layoutX="65.0" layoutY="129.0" mnemonicParsing="false" text="Hepatită" />
-      <CheckBox layoutX="64.0" layoutY="175.0" mnemonicParsing="false" text="Epilepsie" />
-      <CheckBox layoutX="177.0" layoutY="129.0" mnemonicParsing="false" text="TBC" />
-      <CheckBox layoutX="300.0" layoutY="129.0" mnemonicParsing="false" text="Sifilis" />
-      <CheckBox layoutX="422.0" layoutY="129.0" mnemonicParsing="false" text="Malarie" />
-      <CheckBox layoutX="177.0" layoutY="227.0" mnemonicParsing="false" text="Boli psihice" />
-      <CheckBox layoutX="300.0" layoutY="175.0" mnemonicParsing="false" text="Bruceloză" />
-      <CheckBox layoutX="177.0" layoutY="175.0" mnemonicParsing="false" text="Diabet zaharat" />
-      <CheckBox layoutX="422.0" layoutY="175.0" mnemonicParsing="false" text="Ulcer" />
-      <CheckBox layoutX="64.0" layoutY="227.0" mnemonicParsing="false" text="Boli de inimă" />
-      <CheckBox layoutX="422.0" layoutY="227.0" mnemonicParsing="false" text="Boli de piele" />
-      <CheckBox layoutX="300.0" layoutY="227.0" mnemonicParsing="false" text="Boli neurologice" />
-      <CheckBox layoutX="177.0" layoutY="274.0" mnemonicParsing="false" text="Miopie forte peste (-) 6 dioptrii" />
-      <CheckBox layoutX="64.0" layoutY="274.0" mnemonicParsing="false" text="Cancer" />
+      <CheckBox fx:id="check1" layoutX="65.0" layoutY="129.0" mnemonicParsing="false" text="Hepatită" />
+      <CheckBox fx:id="check5" layoutX="64.0" layoutY="175.0" mnemonicParsing="false" text="Epilepsie" />
+      <CheckBox fx:id="check2" layoutX="177.0" layoutY="129.0" mnemonicParsing="false" text="TBC" />
+      <CheckBox fx:id="check3" layoutX="300.0" layoutY="129.0" mnemonicParsing="false" text="Sifilis" />
+      <CheckBox fx:id="check4" layoutX="422.0" layoutY="129.0" mnemonicParsing="false" text="Malarie" />
+      <CheckBox fx:id="check10" layoutX="177.0" layoutY="227.0" mnemonicParsing="false" text="Boli psihice" />
+      <CheckBox fx:id="check7" layoutX="300.0" layoutY="175.0" mnemonicParsing="false" text="Bruceloză" />
+      <CheckBox fx:id="check6" layoutX="177.0" layoutY="175.0" mnemonicParsing="false" text="Diabet zaharat" />
+      <CheckBox fx:id="check8" layoutX="422.0" layoutY="175.0" mnemonicParsing="false" text="Ulcer" />
+      <CheckBox fx:id="check9" layoutX="64.0" layoutY="227.0" mnemonicParsing="false" text="Boli de inimă" />
+      <CheckBox fx:id="check12" layoutX="422.0" layoutY="227.0" mnemonicParsing="false" text="Boli de piele" />
+      <CheckBox fx:id="check11" layoutX="300.0" layoutY="227.0" mnemonicParsing="false" text="Boli neurologice" />
+      <CheckBox fx:id="check14" layoutX="177.0" layoutY="274.0" mnemonicParsing="false" text="Miopie forte peste (-) 6 dioptrii" />
+      <CheckBox fx:id="check13" layoutX="64.0" layoutY="274.0" mnemonicParsing="false" text="Cancer" />
       <Label layoutX="116.0" layoutY="55.0" text="Selectați bolile pe care le-ați avut sau le aveți" textFill="RED">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="260.0" layoutY="328.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="81.0" text="Trimite" />
+      <Button layoutX="260.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleSend" prefHeight="41.0" prefWidth="81.0" text="Trimite" />
    </children>
 </AnchorPane>
