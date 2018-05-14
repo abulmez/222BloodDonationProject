@@ -18,7 +18,7 @@ public class DonationsReportService {
         this.serverConnection = serverConnection;
     }
 
-    public String handleAdd(DonationReport report){
+    public String handleAddDonationReport(DonationReport report){
         String urlParameters = String.format("iddr=%d&dataproba=%s&validitateproba=%s&observatii=%s",report.getIdDR(),report.getDataProba().toString(),
                 report.getValiditateProba().toString(),report.getObservatii());
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);

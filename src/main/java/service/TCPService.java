@@ -1,13 +1,16 @@
 package service;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.BloodProduct;
 import model.DTO.BloodProductShipmentAddressDTO;
 import model.DTO.BloodRequestHospitalDTO;
 import model.DTO.DonationReceiverNameBloodGroupDTO;
+import model.DonationReport;
+import model.Donor;
 import model.ProductType;
+import utils.DonationDTO;
+import utils.IdentifierDTO;
 import utils.ServerConnection;
 import utils.customDeserializer.CustomBloodProductDeserializer;
 
@@ -19,7 +22,11 @@ import java.lang.reflect.GenericSignatureFormatError;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class TCPService {
 
@@ -246,6 +253,252 @@ public class TCPService {
         return false;
     }
 
+    /**
+     * Adding donations goes here
+     */
+
+    public String handleAddDonation(String cnp,String status, String quantity,String receiver){
+        String urlParameters = String.format("idu=%s&cnp=%s&status=%s&quantity=%s&receiver=%s",LoginService.getIdU(),cnp,status,quantity,receiver);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addDonation");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return response;
+                }
+            }
+            else if(code == 401){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return "HttpCode:401 "+response;
+                }
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        } finally {
+            con.disconnect();
+        }
+        return "";
+    }
+
+    public List<Donor> handleGetDonors(){
+        List<Donor> list=new ArrayList<>();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getDonors");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            int code = con.getResponseCode();
+            if(code == 200){
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                System.out.println(response);
+                in.close();
+                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+                    @Override
+                    public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                        String date=json.toString();
+                        String newdate=date.replaceAll("\\\"","").replaceAll("[a-zA-Z]"," ");
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        return LocalDate.parse(newdate,formatter);
+                    }
+                }).create();
+                Type collectionType = new TypeToken<Collection<Donor>>(){}.getType();
+                Collection<Donor> donors = gson.fromJson(response.toString(), collectionType);
+                list=new ArrayList<>(donors);
+                return list;
+            }
+            else if(code == 401){
+                return list;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+        return list;
+    }
+
+    public List<IdentifierDTO> getNamesCNP(List<Donor> donors){
+        List<IdentifierDTO> identifiers=new ArrayList<>();
+        for(Donor donor:donors){
+            identifiers.add(new IdentifierDTO(donor.getCnp(),donor.getName()));
+        }
+        return identifiers;
+    }
+
+    public List<DonationDTO> handleGetDonations(){
+        List<DonationDTO> list=new ArrayList<>();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getDonations");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                System.out.println(response);
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<DonationDTO>>(){}.getType();
+                Collection<DonationDTO> donations = gson.fromJson(response.toString(), collectionType);
+                list=new ArrayList<>(donations);
+                return list;
+            }
+            else if(code == 401){
+                return list;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+        return list;
+    }
+
+    public String handleModifyDonation(String status,Integer idD) {
+        String urlParameters = String.format("status=%s&idd=%d",status,idD);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/modifyDonation");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return response;
+                }
+            }
+            else if(code == 401){
+                return "HttpCode:401";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+
+        } finally {
+            con.disconnect();
+        }
+        return "";
+    }
+
+    public String handleAddBloodProduct(Integer idD, String type, LocalDate date, Double quantity){
+        String urlParameters = String.format("idd=%d&type=%s&date=%s&quantity=%f",idD,type,date.toString(),quantity);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addBloodProduct");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return response;
+                }
+            }
+            else if(code == 422){
+                return "Http code 422: Unprocessed entity.";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+
+        } finally {
+            con.disconnect();
+        }
+        return "";
+    }
+
+    public String handleAddDonationReport(DonationReport report){
+        String urlParameters = String.format("iddr=%d&dataproba=%s&validitateproba=%s&observatii=%s",report.getIdDR(),report.getDataProba().toString(),
+                report.getValiditateProba().toString(),report.getObservatii());
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addReport");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                System.out.println("AICIS LA 200");
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    in.close();
+                    return response;
+                }
+            }
+            else if(code == 409){
+                System.out.println("AICIS LA 400");
+
+                return "Http code 409: Conflict";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+
+        } finally {
+            con.disconnect();
+        }
+        return "";
+    }
+
     public Boolean sendBloodProduct(Integer idBP, Integer idBD) {
         try {
             String urlParameters = String.format("IdBP=%s&IdBD=%s", idBP,idBD);
@@ -394,4 +647,6 @@ public class TCPService {
         }
         return newIdBP;
     }
+
+
 }

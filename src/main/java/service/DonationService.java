@@ -28,7 +28,7 @@ public class DonationService {
         this.serverConnection = serverConnection;
     }
 
-    public List<DonationDTO> handlePopulate(){
+    public List<DonationDTO> handleGetDonations(){
        // String urlParameters = String.format("username=%s&password=%s",username,password);
         //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         List<DonationDTO> list=new ArrayList<>();
@@ -73,7 +73,7 @@ public class DonationService {
 
 
 
-    public String handleModify(String status,Integer idD) {
+    public String handleModifyDonation(String status,Integer idD) {
         String urlParameters = String.format("status=%s&idd=%d",status,idD);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         try {
@@ -171,7 +171,7 @@ public class DonationService {
                 }
             }
             else if(code == 422){
-               return "Http code 422: Unprocessable entity.";
+               return "Http code 422: Unprocessed entity.";
             }
         } catch (Exception e) {
             return e.getMessage();
