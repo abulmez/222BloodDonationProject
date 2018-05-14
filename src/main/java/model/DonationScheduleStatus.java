@@ -8,12 +8,13 @@ public class DonationScheduleStatus {
     public DonationScheduleStatus() {
     }
 
-    public DonationScheduleStatus(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots, String status) {
+    public DonationScheduleStatus(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots, String status,String name) {
         this.idDS = idDS;
         this.idDC = idDC;
         this.donationDateTime = donationDateTime;
         this.availableSpots = availableSpots;
         this.status = status;
+        this.name = name;
     }
 
     /**
@@ -42,6 +43,9 @@ public class DonationScheduleStatus {
 
     @SerializedName("status")
     private String status;
+
+    @SerializedName("name")
+    private String name;
 
 
     public Integer getIdDS() {
@@ -82,5 +86,13 @@ public class DonationScheduleStatus {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

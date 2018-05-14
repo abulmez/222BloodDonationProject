@@ -171,6 +171,6 @@ public class Adress {
     }
 
     public String toString(){
-        return street + " " + streetNumber + " " + blockNumber + " " + entrance + " " +floor + " " + apartmentNumber + " " + city + " " + county + " " + country;
+        return street + " " + streetNumber + ", " + "Nr Bloc " + blockNumber + ", " + "Intrare "+ entrance + ", " + "Etaj " +floor + ", " + "Nr Ap " + apartmentNumber + ", "+ "Oras " + city + ", " + "Judet " + county + ", " + "Tara " + country;
     }
 }

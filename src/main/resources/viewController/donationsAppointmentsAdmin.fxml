@@ -13,10 +13,9 @@
       <TableView fx:id="paginationTableView" layoutX="20.0" layoutY="69.0" prefHeight="422.0" prefWidth="884.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="69.0">
         <columns>
           <TableColumn fx:id="NumarRezervare" prefWidth="157.0" text="Numar Rezervare" />
-          <TableColumn fx:id="NumarCentruDonatie" minWidth="0.0" prefWidth="167.0" text="Numar Centru de Donatie" />
-            <TableColumn fx:id="DataDonarii" prefWidth="204.0" text="Data Donarii" />
-            <TableColumn fx:id="LocuriDisponibile" prefWidth="123.0" text="Locuri Disponibile" />
-            <TableColumn fx:id="Status" prefWidth="232.0" text="Status" />
+          <TableColumn fx:id="NumePacient" minWidth="0.0" prefWidth="273.0" text="Nume Pacient" />
+            <TableColumn fx:id="DataDonarii" prefWidth="243.0" text="Data Donarii" />
+            <TableColumn fx:id="Status" prefWidth="210.0" text="Status" />
         </columns>
       </TableView>
       <Button layoutX="18.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleModificaStatus" prefHeight="66.0" prefWidth="344.0" text="Modifică status donație">

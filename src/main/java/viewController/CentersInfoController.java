@@ -75,6 +75,14 @@ public class CentersInfoController {
         //centerCombobox.setItems(centre);
 
         for (Adress adress : adresses){
+            if(adress.getApartmentNumber()==null)
+                adress.setApartmentNumber(0);
+            if (adress.getBlockNumber()==null)
+                adress.setBlockNumber(0);
+            if (adress.getEntrance()==null)
+                adress.setEntrance("-");
+            if(adress.getFloor()==null)
+                adress.setFloor(0);
             System.out.println(adress.toString());
             System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
