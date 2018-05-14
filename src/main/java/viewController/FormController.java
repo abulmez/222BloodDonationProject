@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import service.MeedicService;
+import service.MedicService;
 import service.LoginService;
 
 public class FormController {
@@ -23,9 +23,9 @@ public class FormController {
     public TextField quantity;
     @FXML
     public ComboBox bloodDemandType;
-    private MeedicService service;
+    private MedicService service;
     private Stage editStage;
-    public void setService( MeedicService service){
+    public void setService( MedicService service){
         this.service=service;
         //blockQuantity();
         ObservableList<String> listCombo1 = FXCollections.observableArrayList("Mare","Medie","Mica");
