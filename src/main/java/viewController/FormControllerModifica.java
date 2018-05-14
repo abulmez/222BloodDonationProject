@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import service.MedicService;
+import service.MeedicService;
 import service.LoginService;
 
 public class FormControllerModifica {
@@ -23,11 +23,11 @@ public class FormControllerModifica {
     public TextField quantity;
     @FXML
     public ComboBox bloodType;
-    private MedicService service;
+    private MeedicService service;
     private Stage editStage;
     @FXML
     public Button modifyButton;
-    public void setService(Integer id, MedicService service, String needTyp, String desc, String prior, Double quan, String BT){
+    public void setService(Integer id, MeedicService service, String needTyp, String desc, String prior, Double quan, String BT){
         this.idBd=id;
         this.service=service;
 

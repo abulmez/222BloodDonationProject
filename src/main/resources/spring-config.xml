@@ -41,7 +41,7 @@
         <constructor-arg ref="serverConnection"/>
     </bean>
 
-    <bean id="medicService" class="service.MedicService">
+    <bean id="medicService" class="service.MeedicService">
         <constructor-arg ref="serverConnection"/>
     </bean>
 

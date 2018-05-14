@@ -21,7 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.BloodRequestDTO;
-import service.MedicService;
+import service.MeedicService;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -53,11 +53,11 @@ public class BloodRequestsController {
     private TableColumn<BloodRequestDTO,String> updateColumn;
     @FXML
     private ComboBox comboFiltrare;
-    public MedicService service;
+    public MeedicService service;
     public Stage editStage;
     @FXML
     private ObservableList<BloodRequestDTO> model;
-    public void setService(MedicService service, Stage stage) {
+    public void setService(MeedicService service, Stage stage) {
         this.service = service;
         this.editStage=stage;
         //this.service.addObserver(this);
