@@ -25,15 +25,7 @@
         <constructor-arg ref="serverConnection"/>
     </bean>
 
-    <bean id="service" class="service.medicService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
     <bean id="donationService" class="service.DonationService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
-    <bean id="centerInfoService" class="service.CenterInfoService">
         <constructor-arg ref="serverConnection"/>
     </bean>
 
@@ -48,6 +40,12 @@
     <bean id="donationsReportService" class="service.DonationsReportService">
         <constructor-arg ref="serverConnection"/>
     </bean>
+
+    <bean id="medicService" class="service.MedicService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
+
 
 
 

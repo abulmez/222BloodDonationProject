@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.context.ApplicationContext;
-import service.medicService;
+import service.MedicService;
 import utils.CommonUtils;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class MenuMedic extends CenterMenu {
         FXMLLoader loader = new FXMLLoader();
         ApplicationContext context= CommonUtils.getFactory();
 
-        medicService service=context.getBean(medicService.class);
+        MedicService service=context.getBean(MedicService.class);
         AnchorPane mainPane = null;
         loader.setLocation(resource);
         try {
@@ -43,7 +43,7 @@ public class MenuMedic extends CenterMenu {
         FXMLLoader loader = new FXMLLoader();
         ApplicationContext context= CommonUtils.getFactory();
 
-        medicService service=context.getBean(medicService.class);
+        MedicService service=context.getBean(MedicService.class);
         AnchorPane mainPane = null;
         loader.setLocation(resource);
         try {

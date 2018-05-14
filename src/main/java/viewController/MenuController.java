@@ -27,7 +27,7 @@ public class MenuController {
     @FXML
     private JFXHamburger menuButton;
 
-    private Stage mainStage;
+    public Stage mainStage;
     private UserType userType;
 
     public void exitAction(){mainStage.close();}
@@ -120,6 +120,10 @@ public class MenuController {
     }
     public void setMainStage(Stage stage) {
         this.mainStage=stage;
+    }
+
+    public Stage getMainStage() {
+        return mainStage;
     }
 
     public void setUserType(UserType userType) {

@@ -282,7 +282,7 @@ public class RegisterController {
             String username = usernameText.getText();
             String password = passwordText.getText();
             UserLoginData loginData = new UserLoginData(username,password, UserType.Donor);
-            Donor donor = new Donor(-1,cnp,name,birthday,email,phone,bloodGroup,weight);
+            Donor donor = new Donor(-1,cnp,name,birthday,email,phone,bloodGroup,Float.parseFloat(weight.toString()));
             int result = service.createLogin(loginData,donor);
             String resultString;
             if (result==409)
