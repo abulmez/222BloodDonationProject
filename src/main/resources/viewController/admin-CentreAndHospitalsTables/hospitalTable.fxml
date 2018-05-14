@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.HospitalTableAdmin">
+    <children>
+        <TableView fx:id="table" prefHeight="400.0" prefWidth="800.0">
+            <columns>
+                <TableColumn fx:id="idHcolumn" prefWidth="144.0" text="IdH" />
+                <TableColumn fx:id="idAcolumn" prefWidth="170.39996337890625" text="IdA" />
+                <TableColumn fx:id="donationHospitalcolumn" prefWidth="302.40008544921875" text="Numele spitalului" />
+                <TableColumn fx:id="phoneHospitalcolumn" prefWidth="183.20001220703125" text="Telefon" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
