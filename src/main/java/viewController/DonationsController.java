@@ -17,6 +17,7 @@ import model.Donor;
 import org.springframework.context.ApplicationContext;
 import service.DonationService;
 import service.DonationsReportService;
+import service.TCPService;
 import utils.CommonUtils;
 import utils.DonationDTO;
 
@@ -26,7 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class DonationsController {
-    private DonationService service;
+    private TCPService service;
     private ObservableList<DonationDTO> model;
 
     @FXML
@@ -70,8 +71,8 @@ public class DonationsController {
 
 
     public void  initialize() {
-        service = context.getBean(DonationService.class);
-        this.model = FXCollections.observableArrayList(service.handlePopulate());
+        service = context.getBean(TCPService.class);
+        this.model = FXCollections.observableArrayList(service.handleGetDonations());
 
         nrDonatieColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, Integer>("idD"));
         numeUserColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, String>("name"));
@@ -105,7 +106,7 @@ public class DonationsController {
                     } else {
                         //String status=modifyComboBox.getValue().toString();
                         if (!newValue.equals(donation.getStatus())) {
-                            String response = service.handleModify(newValue, donation.getIdD());
+                            String response = service.handleModifyDonation(newValue, donation.getIdD());
                             if (!response.equals("Success")) {
                                 Alert alert = new Alert(Alert.AlertType.ERROR, response);
                                 alert.showAndWait();
@@ -184,7 +185,7 @@ public class DonationsController {
     }
 
     public void refresh(){
-        this.model=FXCollections.observableArrayList(service.handlePopulate());
+        this.model=FXCollections.observableArrayList(service.handleGetDonations());
         Collections.reverse(model);
         tableView.setItems(model);
     }

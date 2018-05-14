@@ -28,8 +28,8 @@ public class AddDonationService {
         this.serverConnection = serverConnection;
     }
 
-    public String handleAdd(String name,String cnp,String status, String quantity,String receiver){
-        String urlParameters = String.format("name=%s&cnp=%s&status=%s&quantity=%s&receiver=%s",name,cnp,status,quantity,receiver);
+    public String handleAddDonation(String cnp,String status, String quantity,String receiver){
+        String urlParameters = String.format("idu=%s&cnp=%s&status=%s&quantity=%s&receiver=%s",LoginService.getIdU(),cnp,status,quantity,receiver);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         try {
             con = serverConnection.getServerConnection();
@@ -42,8 +42,6 @@ public class AddDonationService {
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);
             }
-
-
             int code = con.getResponseCode();
             if(code == 200){
                 try (BufferedReader in = new BufferedReader(
