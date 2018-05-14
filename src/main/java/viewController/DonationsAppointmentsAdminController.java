@@ -139,7 +139,6 @@ public class DonationsAppointmentsAdminController {
             System.out.println(dc.getIdDC());
             System.out.println(dc.getDonationDateTime());
             System.out.println(dc.getAvailableSpots());
-            System.out.println(dc.getStatus());
         }
 
         statusComboBox.setItems(options);
@@ -163,20 +162,23 @@ public class DonationsAppointmentsAdminController {
         NumarCentruDonatie.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("idDC"));
         LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("availableSpots"));
         DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationSchedule,DateCell>("donationDateTime"));
-        Status.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String>("status"));
 
-        paginationTableView.setItems(model);
 
-        paginationTableView.getSelectionModel().selectedItemProperty().
-                addListener(new ChangeListener<DonationSchedule>() {
-                    @Override
-                    public void changed(ObservableValue<? extends DonationSchedule> observable,
-                                        DonationSchedule oldValue, DonationSchedule newValue) {
-                        if (newValue!=null){
-                            statusComboBox.setValue(newValue.getStatus());
-                        }
-                    }
-                });
+
+//        Status.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String>("status"));
+//
+//        paginationTableView.setItems(model);
+//
+//        paginationTableView.getSelectionModel().selectedItemProperty().
+//                addListener(new ChangeListener<DonationSchedule>() {
+//                    @Override
+//                    public void changed(ObservableValue<? extends DonationSchedule> observable,
+//                                        DonationSchedule oldValue, DonationSchedule newValue) {
+//                        if (newValue!=null){
+//                            statusComboBox.setValue(newValue.getStatus());
+//                        }
+//                    }
+//                });
 
 
         //paginationTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showStudenti(newValue));

@@ -22,8 +22,6 @@ import java.util.List;
 public class CenterInfoService {
 
     private HttpURLConnection con;
-    private static int idU;
-    private UserType userType;
     private ServerConnection serverConnection;
 
     public CenterInfoService(ServerConnection serverConnection){
@@ -67,10 +65,11 @@ public class CenterInfoService {
                 System.out.println("-------------------------------------------");
                 System.out.println("Lungimea Donation Center: "+list.size());
                 System.out.println("-------------------------------------------");
-                for(DonationCenter dc:list){
-                    System.out.println(dc.getIdDC());
-                }
+//                for(DonationCenter dc:list){
+//                    System.out.println(dc.getIdDC().toString() + dc.getIdA().toString() + dc.getCenterName() + dc.getPhoneNumber());
+//                }
                 System.out.println("-------------------------------------------");
+                System.out.println(list);
                 return list;
             }
             else if(code == 401){

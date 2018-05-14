@@ -45,6 +45,7 @@ public class DonationSchedule {
     @SerializedName("availablespots")
     private Integer availableSpots;
 
+//    private String status;
 
     public Integer getIdDS() {
         return idDS;
@@ -77,6 +78,14 @@ public class DonationSchedule {
     public void setAvailableSpots(Integer availableSpots) {
         this.availableSpots = availableSpots;
     }
+
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
 
     @Override
     public String toString() {

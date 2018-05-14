@@ -73,6 +73,16 @@ public class DonationCenter {
         return phoneNumber;
     }
 
+    @Override
+    public String toString() {
+        return "DonationCenter{" +
+                "idDC=" + idDC +
+                ", idA=" + idA +
+                ", centerName='" + centerName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
