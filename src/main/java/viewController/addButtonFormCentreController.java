@@ -1,26 +1,26 @@
 package viewController;
 
-import errorMessage.ErrorMessage;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import model.DonationCenter;
 import org.springframework.context.ApplicationContext;
 import service.CenterInfoService;
-import service.LoginService;
+import utils.AbstractTableController;
 import utils.CommonUtils;
 import utils.ServerConnection;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
+
 
 public class addButtonFormCentreController {
     ApplicationContext context = CommonUtils.getFactory();
     ServerConnection serverConnection;
     CenterInfoService centerInfoService;
+
     @FXML
     TextField nameCentre;
 

@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import service.CenterInfoService;
+import service.HospitalService;
 import utils.CommonUtils;
 import utils.TableType;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 public class DonationsCentreAndHospitalsController {
     ApplicationContext context = CommonUtils.getFactory();
     CenterInfoService serviceCentre;
+    HospitalService hospitalTableService;
     @FXML
     AnchorPane tableAnchorPane;
 
@@ -36,11 +38,12 @@ public class DonationsCentreAndHospitalsController {
     @FXML
     public void initialize(){
         serviceCentre = context.getBean(CenterInfoService.class);
+        hospitalTableService = context.getBean(HospitalService.class);
         currentTable = TableType.Centru;
-        serviceCentre.getAllDonationCenter();
         initDropDownList();
         displayTableCentre();
     }
+
 
     public void displayTableCentre() {
 
@@ -63,9 +66,6 @@ public class DonationsCentreAndHospitalsController {
         }catch(IOException e){e.printStackTrace();}
     }
 
-    public void loadItemsInTableCentre(){
-
-    }
 
     public void initDropDownList(){
         dropdownlistType.getItems().add(TableType.Centru.toString());
@@ -93,6 +93,7 @@ public class DonationsCentreAndHospitalsController {
         {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/viewController/admin-CentreAndHospitalsTables/addButtonFormCentre.fxml"));
+
                 AnchorPane root1 = null;
                 try {
                     root1 = (AnchorPane) loader.load();
@@ -121,6 +122,17 @@ public class DonationsCentreAndHospitalsController {
             dialogStage.setScene(scene);
             dialogStage.show();
 
+        }
+    }
+
+    public void handleDelete(){
+        if(currentTable == TableType.Centru){
+           System.out.println(CentreTableAdmin.donation);
+           serviceCentre.deleteCentre(CentreTableAdmin.donation.getIdDC());
+        }
+        else if(currentTable==TableType.Spital){
+            System.out.println(HospitalTableAdmin.hospital);
+            hospitalTableService.deleteHospital(HospitalTableAdmin.hospital.getIdH());
         }
     }
 }

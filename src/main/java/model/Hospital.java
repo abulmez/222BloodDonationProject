@@ -65,4 +65,13 @@ public class Hospital {
         return phoneNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "idH=" + idH +
+                ", idA=" + idA +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="330.0" prefWidth="400.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="330.0" prefWidth="400.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.addButtonFromHospitalController">
     <children>
-        <TextField layoutX="168.0" layoutY="93.0" />
-        <TextField layoutX="168.0" layoutY="150.0" />
-        <Button layoutX="141.0" layoutY="231.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" text="Adauga" />
+        <TextField fx:id="nameCentre" layoutX="168.0" layoutY="93.0" />
+        <TextField fx:id="phoneCentre" layoutX="168.0" layoutY="150.0" />
+        <Button fx:id="addButton" layoutX="141.0" layoutY="231.0" mnemonicParsing="false" onAction="#addHandle" prefHeight="26.0" prefWidth="117.0" text="Adauga" />
         <Label layoutX="61.0" layoutY="97.0" text="Nume Spital" />
         <Label layoutX="63.0" layoutY="154.0" text="Telefon" />
+        <TextField fx:id="idACentre" layoutX="168.0" layoutY="44.0" />
+        <Label layoutX="63.0" layoutY="52.0" text="IdA" />
     </children>
 </AnchorPane>

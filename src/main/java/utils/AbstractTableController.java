@@ -31,6 +31,11 @@ public class AbstractTableController <E> {
         table.setItems(model);
     }
 
+    public void reloadList(Collection<? extends E> entityList){
+        table.setItems(null);
+        loadData(entityList);
+    }
+
     public E getSelectedEntity(){
         return selectedEntity;
     }

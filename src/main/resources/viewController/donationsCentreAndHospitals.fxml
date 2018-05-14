@@ -19,7 +19,7 @@
             </font>
         </Label>
         <Button fx:id="buttonAdd" layoutX="39.0" layoutY="536.0" mnemonicParsing="false" onAction="#buttonAddHandle" prefHeight="35.0" prefWidth="109.0" text="Adaugare" />
-        <Button fx:id="buttonDelete" layoutX="169.0" layoutY="536.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" text="Stergere" />
+        <Button fx:id="buttonDelete" layoutX="169.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="35.0" prefWidth="110.0" text="Stergere" />
         <TextField layoutX="666.0" layoutY="29.0" />
         <ComboBox fx:id="dropdownlistType" layoutX="734.0" layoutY="541.0" prefWidth="150.0" />
         <Label layoutX="629.0" layoutY="536.0" prefHeight="35.0" prefWidth="98.0" text="Tip Utilizator" />
