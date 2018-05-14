@@ -1,5 +1,8 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -20,31 +23,37 @@ public abstract class User {
     /**
      * 
      */
+    @SerializedName("idu")
     private Integer idU;
 
     /**
      * 
      */
+    @SerializedName("cnp")
     private String cnp;
 
     /**
      * 
      */
+    @SerializedName("name")
     private String name;
 
     /**
      * 
      */
+    @SerializedName("birthday")
     private LocalDate birthday;
 
     /**
      * 
      */
+    @SerializedName("mail")
     private String mail;
 
     /**
      * 
      */
+    @SerializedName("phone")
     private String phone;
 
     /**
@@ -77,6 +86,8 @@ public abstract class User {
     public LocalDate getBirthday() {
         return birthday;
     }
+
+
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;

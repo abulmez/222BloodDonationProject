@@ -33,5 +33,9 @@
         <constructor-arg ref="serverConnection"/>
     </bean>
 
+    <bean id="adminService" class="service.AdminService">
+        <constructor-arg ref="serverConnection"/>
+    </bean>
+
    
 </beans>

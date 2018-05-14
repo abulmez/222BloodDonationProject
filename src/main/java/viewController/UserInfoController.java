@@ -98,6 +98,7 @@ public class UserInfoController {
         ApplicationContext context = CommonUtils.getFactory();
         service = context.getBean(DonorService.class);
         String response=service.handleFields(Integer.toString(id));
+        System.out.println(2);
         String[] data = response.split("&");
         cnpLabel.setText(data[0].split("=")[1]);
         nameLabel.setText(data[1].split("=")[1]);
