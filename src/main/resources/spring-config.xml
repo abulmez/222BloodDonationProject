@@ -25,14 +25,6 @@
         <constructor-arg ref="serverConnection"/>
     </bean>
 
-    <bean id="donationService" class="service.DonationService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
-    <bean id="addDonationService" class="service.AddDonationService">
-        <constructor-arg ref="serverConnection"/>
-    </bean>
-
     <bean id="tcpService" class="service.TCPService">
         <constructor-arg ref="serverConnection"/>
     </bean>

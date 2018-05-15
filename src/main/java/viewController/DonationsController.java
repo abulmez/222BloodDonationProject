@@ -12,18 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Donation;
-import model.Donor;
 import org.springframework.context.ApplicationContext;
-import service.DonationService;
-import service.DonationsReportService;
 import service.TCPService;
 import utils.CommonUtils;
 import utils.DonationDTO;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
 
 public class DonationsController {

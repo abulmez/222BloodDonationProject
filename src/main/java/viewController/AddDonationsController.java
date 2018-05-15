@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.context.ApplicationContext;
-import service.AddDonationService;
 import service.TCPService;
 import utils.CommonUtils;
 import utils.IdentifierDTO;
