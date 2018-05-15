@@ -205,9 +205,10 @@ public class BloodRequestsController {
     private void loadDataHandler() {
 
         List<BloodRequestDTO> list = service.findAllDemands();
+        if(list!=null){
         List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
         Collections.reverse(shallowCopy);
-        if(list!=null){
+
 
         model = FXCollections.observableArrayList(shallowCopy);
         tableView.setItems(model);}
