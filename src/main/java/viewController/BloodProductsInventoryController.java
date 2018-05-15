@@ -117,7 +117,7 @@ public class BloodProductsInventoryController {
                 protected void updateItem(String item, boolean empty) {
                     column.getTableView().getSelectionModel().select(getIndex());
                     BloodProduct selectedBloodProduct= (BloodProduct)bloodProductsTable.getSelectionModel().getSelectedItem();
-                    if(bloodProductShipmentAddressDTOs.contains(new BloodProductShipmentAddressDTO(selectedBloodProduct.getIdBP(),null,null,null,null,null,null))){
+                    if(selectedBloodProduct!=null && bloodProductShipmentAddressDTOs.contains(new BloodProductShipmentAddressDTO(selectedBloodProduct.getIdBP(),null,null,null,null,null,null))){
                         Integer index = bloodProductShipmentAddressDTOs.indexOf(new BloodProductShipmentAddressDTO(selectedBloodProduct.getIdBP(),null,null,null,null,null,null));
                         BloodProductShipmentAddressDTO bloodProductShipmentAddressDTO= bloodProductShipmentAddressDTOs.get(index);
                         final Button infoButton = new Button("");

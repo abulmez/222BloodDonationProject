@@ -1,15 +1,20 @@
 package service;
 
 
-import com.google.gson.Gson;
-import model.Donor;
-import model.User;
-import model.UserLoginData;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import model.*;
 import utils.ServerConnection;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public class DonorService {
 
@@ -226,4 +231,105 @@ public class DonorService {
             con.disconnect();
         }
     }
+
+    public List<Donation> getAllDonations(Integer idU){
+        String urlParameters=String.format("IdU=%s",idU);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<Donation> list = new ArrayList<>();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/donations");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while((inputLine = in.readLine())!=null)
+                {
+                    response.append(inputLine);
+                }
+
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<Donation>>(){}.getType();
+                Collection<Donation> donations = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(donations);
+                return list;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return list;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
+    public DonationReport getDonationReport(Integer idDR){
+        String urlParameters=String.format("idDR=%s",idDR);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        DonationReport don = new DonationReport();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/donationreport");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                inputLine = in.readLine();
+                response.append(inputLine);
+                in.close();
+                Gson gson = new GsonBuilder().registerTypeAdapter(DonationReport.class,new CustomDonationReportDeserialize()).create();
+                Type type = new TypeToken<DonationReport>(){}.getType();
+                DonationReport donationReport= gson.fromJson(response.toString(),type);
+                don = donationReport;
+                return don;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return don;
+
+        } finally {
+
+            con.disconnect();
+        }
+
+    }
+
+    public class CustomDonationReportDeserialize implements JsonDeserializer<DonationReport> {
+        @Override
+        public DonationReport deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+
+            JsonObject jobject = jsonElement.getAsJsonObject();
+            String[] text = jobject.get("samplingdate").getAsString().split("-");
+            int[] bdayAsInt = Arrays.stream(text).mapToInt(Integer::parseInt).toArray();
+            return new DonationReport(
+                    jobject.get("iddr").getAsInt(),
+                    LocalDate.of(bdayAsInt[0],bdayAsInt[1],bdayAsInt[2]),
+                    jobject.get("bloodstatus").getAsBoolean(),
+                    jobject.get("bloodreport").getAsString()
+            );
+        }
+    }
+
 }

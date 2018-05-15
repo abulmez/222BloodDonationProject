@@ -17,6 +17,12 @@ public class MenuAdmin extends CenterMenu {
     }
 
     @FXML
+    public void placesAction() {
+        setPanel(getClass().getResource("/viewController/donationsCentreAndHospitals.fxml"),centerManeuPane);
+        mainStage.openMenu();
+    }
+
+    @FXML
     void logoutAction() {
         exitAction();
     }

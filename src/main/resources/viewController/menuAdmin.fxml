@@ -10,7 +10,12 @@
             style="-fx-background-color:white">
    <children>
       <AnchorPane layoutX="241.0" prefHeight="604.0" prefWidth="19.0" styleClass="anchorPane" />
-      <JFXButton buttonType="RAISED" layoutY="178.0" onMouseClicked="#usersAction" prefHeight="73.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Utilizatori" textFill="#740707" AnchorPane.bottomAnchor="353.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="178.0">
+      <JFXButton buttonType="RAISED" layoutY="178.0" onMouseClicked="#usersAction" prefHeight="73.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Utilizatori" textFill="#740707">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutY="255.0" onMouseClicked="#placesAction" prefHeight="73.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Centre si spitale" textFill="#740707">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

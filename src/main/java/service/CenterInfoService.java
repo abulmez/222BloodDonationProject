@@ -179,4 +179,113 @@ public class CenterInfoService {
     public UserType getUserType() {
         return userType;
     }*/
+
+    public int deleteCentre(Integer idDC){
+        String urlParameters=String.format("IdDC=%s",idDC);
+        byte[] postData=urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="Conexiunea nu s-a realizat";
+        try{
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/deleteCentre");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 1;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return 0;
+    }
+
+    public int updateCentre(Integer idDC,Integer idA,String phoneNumber,String centerName){
+        String urlParameters=String.format("IdDC=%s&IdA=%s&CentreName=%s&CentrePhone=%s",idDC,idA,centerName,phoneNumber);
+        byte[] postData=urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="Conexiunea nu s-a realizat";
+        try{
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/updateCentre");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 1;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return 0;
+    }
+
+    public int addCenter(Integer idA,String phoneNumber,String centerName){
+        String urlParameters=String.format("IdA=%s&CentreName=%s&CentrePhone=%s",idA,centerName,phoneNumber);
+        byte[] postData=urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="Conexiunea nu s-a realizat";
+        try{
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addCentre");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 1;
+                }
+            }
+            else if(code == 401){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 0;
+                }
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return 0;
+    }
 }
