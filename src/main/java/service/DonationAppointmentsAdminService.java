@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class DonationAppointmentsAdminService {
@@ -88,17 +89,86 @@ public class DonationAppointmentsAdminService {
         return list;
     }
 
+    public List<UserPacient> getAllUserPacient(){
+        //String urlParameters = String.format("username=%s&password=%s");
+        //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<UserPacient> list=new ArrayList<>();
+        try {
+
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getUserPacient");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            System.out.println("Aici ajung sigur");
+
+            int code = con.getResponseCode();
+            System.out.println("CODUL: "+code);
+
+            if(code == 200) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                System.out.println(response);
+                in.close();
+                Gson gson = new Gson();
+                /*Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+                    @Override
+                    public Date deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                        String date=json.toString();
+                        String newdate=date.replaceAll("\\\"","").replaceAll("[a-zA-Z]"," ");
+                        System.out.println(newdate);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+                        return Date.parse(newdate,formatter);
+                    }
+                }).create();*/
+                Type collectionType = new TypeToken<Collection<UserPacient>>(){}.getType();
+                Collection<UserPacient> userPacients = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(userPacients);
+                System.out.println("-------------------------------------------");
+                System.out.println("Lungimea UserPacient Schedule: "+list.size());
+                System.out.println("-------------------------------------------");
+                return list;
+            }
+            else if(code == 401){
+                return list;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return list;
+    }
+
     public  List<DonationScheduleStatus> getAllDonationStatus(){
         List<DonationSchedule> donationSchedules = getAllDonationSchedule();
         List<Reservation> reservations = getAllReservation();
+        List<UserPacient> userPacients = getAllUserPacient();
 
         List<DonationScheduleStatus> bun = new ArrayList<>();
 
         for(DonationSchedule donationSchedule : donationSchedules){
             for (Reservation reservation : reservations){
                 if(donationSchedule.getIdDS() == reservation.getIdDS()){
-                    DonationScheduleStatus status = new DonationScheduleStatus(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus());
-                    bun.add(status);
+
+                    for(UserPacient userPacient : userPacients){
+                        if(donationSchedule.getIdDC() == userPacient.getIdDC()){
+                            DonationScheduleStatus status = new DonationScheduleStatus(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),userPacient.getName());
+                            bun.add(status);
+                        }
+                    }
+
+                    /*DonationScheduleStatus status = new DonationScheduleStatus(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),"");
+                    bun.add(status);*/
                 }
             }
         }

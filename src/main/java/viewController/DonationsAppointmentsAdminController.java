@@ -43,48 +43,19 @@ public class DonationsAppointmentsAdminController {
     private TableView<DonationScheduleStatus> paginationTableView;
 
     @FXML
-    private TableColumn<DonationScheduleStatus,Integer> NumarRezervare,NumarCentruDonatie,LocuriDisponibile;
+    private TableColumn<DonationScheduleStatus,Integer> NumarRezervare;
 
     @FXML
     private TableColumn<DonationScheduleStatus,String> Status;
+
+    @FXML
+    private TableColumn<DonationScheduleStatus,String> NumePacient;
 
     @FXML
     private TableColumn<DonationScheduleStatus,DateCell> DataDonarii;
 
     @FXML
     private JFXComboBox<String> statusComboBox;
-
-    /*public List<TableSetterGetter> getTableData(){
-        List<TableSetterGetter> data =new ArrayList<>();
-
-        return data;
-    }*/
-
-    /*public void setServices(DonationAppointmentsAdminService service) {
-        this.service = service;
-        service.getAllDonationSchedule().forEach(x->model.add(x));
-        paginationTableView.setItems(model);
-        //this.service=service;
-    }*/
-
-    /*public void handleFilt(ActionEvent event){
-        try {
-            String tipFilt = statusComboBox.getValue().toString();
-            if (tipFilt == "WAITING") {
-
-            }
-            if (tipFilt == "REFUSED") {
-
-            }
-            if (tipFilt == "ACCEPTED") {
-
-            }
-        }catch(RuntimeException e){
-            showErrorMessage(e.getMessage());
-        }
-    }*/
-
-
 
     @FXML
     public void handleModificaStatus(ActionEvent actionEvent){
@@ -134,14 +105,6 @@ public class DonationsAppointmentsAdminController {
         }
         List<DonationScheduleStatus> bun = new ArrayList<>();
 
-        /*for(DonationSchedule donationSchedule : centers){
-            for (Reservation reservation : reservations){
-                if(donationSchedule.getIdDS() == reservation.getIdDS()){
-                    DonationScheduleStatus status = new DonationScheduleStatus(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus());
-                    bun.add(status);
-                }
-            }
-        }*/
         bun = service.getAllDonationStatus();
         this.model=FXCollections.observableArrayList(bun);
 
@@ -163,8 +126,8 @@ public class DonationsAppointmentsAdminController {
 
 
         NumarRezervare.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,Integer>("idDS"));
-        NumarCentruDonatie.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,Integer>("idDC"));
-        LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,Integer>("availableSpots"));
+        NumePacient.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,String>("name"));
+        //LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,Integer>("availableSpots"));
         DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,DateCell>("donationDateTime"));
         Status.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,String>("status"));
 
@@ -180,64 +143,6 @@ public class DonationsAppointmentsAdminController {
                         }
                     }
                 });
-
-        /*int count=0;
-        service = context.getBean(DonationAppointmentsAdminService.class);
-        //System.out.println(service.getAllDonationSchedule().size());
-        this.model=FXCollections.observableArrayList(service.getAllDonationSchedule());
-        //service.getAllDonationSchedule().forEach(x->model.add(x));
-        //paginationTableView.setItems(model);
-        ObservableList<String> options =
-                FXCollections.observableArrayList(
-                        "WAITING",
-                        "REFUSED",
-                        "ACCEPTED"
-                );
-
-        List<DonationSchedule> centers=service.getAllDonationSchedule();
-        for(DonationSchedule dc : centers){
-            System.out.println(dc.getIdDS());
-            System.out.println(dc.getIdDC());
-            System.out.println(dc.getDonationDateTime());
-            System.out.println(dc.getAvailableSpots());
-            System.out.println(dc.getStatus());
-        }
-
-        statusComboBox.setItems(options);
-        statusComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.equals("WAITING")){
-
-                }
-                if(newValue.equals("REFUSED")){
-
-                }
-                if(newValue.equals("ACCEPTED")){
-
-                }
-            }
-        });
-
-
-        NumarRezervare.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("idDS"));
-        NumarCentruDonatie.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("idDC"));
-        LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("availableSpots"));
-        DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationSchedule,DateCell>("donationDateTime"));
-        Status.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String>("status"));
-
-        paginationTableView.setItems(model);
-
-        paginationTableView.getSelectionModel().selectedItemProperty().
-                addListener(new ChangeListener<DonationSchedule>() {
-                    @Override
-                    public void changed(ObservableValue<? extends DonationSchedule> observable,
-                                        DonationSchedule oldValue, DonationSchedule newValue) {
-                        if (newValue!=null){
-                            statusComboBox.setValue(newValue.getStatus());
-                        }
-                    }
-                });*/
 
     }
 
