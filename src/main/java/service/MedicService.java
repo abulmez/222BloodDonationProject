@@ -2,9 +2,7 @@ package service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import model.BloodRequest;
-import model.BloodRequestDTO;
-import model.UserType;
+import model.DTO.BloodRequestDTO;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;

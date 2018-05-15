@@ -1,14 +1,14 @@
-package model;
+package model.DTO;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDate;
 
-public class DonationScheduleStatus {
-    public DonationScheduleStatus() {
+public class DonationScheduleStatusDTO {
+    public DonationScheduleStatusDTO() {
     }
 
-    public DonationScheduleStatus(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots, String status,String name) {
+    public DonationScheduleStatusDTO(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots, String status, String name) {
         this.idDS = idDS;
         this.idDC = idDC;
         this.donationDateTime = donationDateTime;

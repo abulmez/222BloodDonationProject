@@ -7,59 +7,48 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import model.DonationCenter;
 import model.DonationSchedule;
-import model.DonationScheduleStatus;
+import model.DTO.DonationScheduleStatusDTO;
 import model.Reservation;
 import org.springframework.context.ApplicationContext;
-import service.CenterInfoService;
 import service.DonationAppointmentsAdminService;
 import utils.CommonUtils;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DonationsAppointmentsAdminController {
     public DonationsAppointmentsAdminController(){}
 
-    private ObservableList<DonationScheduleStatus> model=FXCollections.observableArrayList();
+    private ObservableList<DonationScheduleStatusDTO> model=FXCollections.observableArrayList();
 
     ApplicationContext context = CommonUtils.getFactory();
 
     private DonationAppointmentsAdminService service;
 
     @FXML
-    private TableView<DonationScheduleStatus> paginationTableView;
+    private TableView<DonationScheduleStatusDTO> paginationTableView;
 
     @FXML
-    private TableColumn<DonationScheduleStatus,Integer> NumarRezervare;
+    private TableColumn<DonationScheduleStatusDTO,Integer> NumarRezervare;
 
     @FXML
-    private TableColumn<DonationScheduleStatus,String> Status;
+    private TableColumn<DonationScheduleStatusDTO,String> Status;
 
     @FXML
-    private TableColumn<DonationScheduleStatus,String> NumePacient;
+    private TableColumn<DonationScheduleStatusDTO,String> NumePacient;
 
     @FXML
-    private TableColumn<DonationScheduleStatus,DateCell> DataDonarii;
+    private TableColumn<DonationScheduleStatusDTO,DateCell> DataDonarii;
 
     @FXML
     private JFXComboBox<String> statusComboBox;
 
     @FXML
     public void handleModificaStatus(ActionEvent actionEvent){
-        DonationScheduleStatus ds = paginationTableView.getSelectionModel().getSelectedItem();
+        DonationScheduleStatusDTO ds = paginationTableView.getSelectionModel().getSelectedItem();
         try {
             String tipFilt = statusComboBox.getValue().toString();
 
@@ -103,7 +92,7 @@ public class DonationsAppointmentsAdminController {
         for (Reservation res : reservations){
             System.out.println(res.getStatus());
         }
-        List<DonationScheduleStatus> bun = new ArrayList<>();
+        List<DonationScheduleStatusDTO> bun = new ArrayList<>();
 
         bun = service.getAllDonationStatus();
         this.model=FXCollections.observableArrayList(bun);
@@ -125,19 +114,19 @@ public class DonationsAppointmentsAdminController {
         });
 
 
-        NumarRezervare.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,Integer>("idDS"));
-        NumePacient.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,String>("name"));
-        //LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,Integer>("availableSpots"));
-        DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,DateCell>("donationDateTime"));
-        Status.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatus,String>("status"));
+        NumarRezervare.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,Integer>("idDS"));
+        NumePacient.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,String>("name"));
+        //LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,Integer>("availableSpots"));
+        DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,DateCell>("donationDateTime"));
+        Status.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,String>("status"));
 
         paginationTableView.setItems(model);
 
         paginationTableView.getSelectionModel().selectedItemProperty().
-                addListener(new ChangeListener<DonationScheduleStatus>() {
+                addListener(new ChangeListener<DonationScheduleStatusDTO>() {
                     @Override
-                    public void changed(ObservableValue<? extends DonationScheduleStatus> observable,
-                                        DonationScheduleStatus oldValue, DonationScheduleStatus newValue) {
+                    public void changed(ObservableValue<? extends DonationScheduleStatusDTO> observable,
+                                        DonationScheduleStatusDTO oldValue, DonationScheduleStatusDTO newValue) {
                         if (newValue!=null){
                             statusComboBox.setValue(newValue.getStatus());
                         }

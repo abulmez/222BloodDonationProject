@@ -3,6 +3,7 @@ package service;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
+import model.DTO.DonationScheduleStatusDTO;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;
@@ -16,7 +17,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 public class DonationAppointmentsAdminService {
@@ -149,12 +149,12 @@ public class DonationAppointmentsAdminService {
         return list;
     }
 
-    public  List<DonationScheduleStatus> getAllDonationStatus(){
+    public  List<DonationScheduleStatusDTO> getAllDonationStatus(){
         List<DonationSchedule> donationSchedules = getAllDonationSchedule();
         List<Reservation> reservations = getAllReservation();
         List<UserPacient> userPacients = getAllUserPacient();
 
-        List<DonationScheduleStatus> bun = new ArrayList<>();
+        List<DonationScheduleStatusDTO> bun = new ArrayList<>();
 
         for(DonationSchedule donationSchedule : donationSchedules){
             for (Reservation reservation : reservations){
@@ -162,12 +162,12 @@ public class DonationAppointmentsAdminService {
 
                     for(UserPacient userPacient : userPacients){
                         if(donationSchedule.getIdDC() == userPacient.getIdDC()){
-                            DonationScheduleStatus status = new DonationScheduleStatus(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),userPacient.getName());
+                            DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),userPacient.getName());
                             bun.add(status);
                         }
                     }
 
-                    /*DonationScheduleStatus status = new DonationScheduleStatus(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),"");
+                    /*DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),"");
                     bun.add(status);*/
                 }
             }
