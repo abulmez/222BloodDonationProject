@@ -59,7 +59,7 @@ public class DonationsHistoryController {
     public void initTable(ObservableList<Donation> modelDonations){
 
         tableColumnIdU.setCellValueFactory(new PropertyValueFactory<Donation,String>("IdD"));
-        tableColumnQuantity.setCellValueFactory(new PropertyValueFactory<Donation,String>("Quantity"));
+        tableColumnQuantity.setCellValueFactory(new PropertyValueFactory<Donation,String>("Cantitate"));
         tableColumnStatus.setCellValueFactory(new PropertyValueFactory<Donation,String>("Status"));
         tableViewDonations.setItems(modelDonations);
         tableViewDonations.setOnMouseClicked((MouseEvent event) -> {

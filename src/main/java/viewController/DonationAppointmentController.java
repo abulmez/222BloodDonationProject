@@ -49,9 +49,9 @@ public class DonationAppointmentController {
         donationScheduleService = context.getBean(DonationScheduleService.class);
         String response = donationScheduleService.requestForTableHandle(1,1);
         System.out.println("Am primit de la request " + " " + response);
-        Gson gson = new GsonBuilder().registerTypeAdapter(DonationSchedule.class,new CustomDonationScheduleDeserialize()).create();
-        Type collectionType = new TypeToken<ArrayList<DonationSchedule>>(){}.getType();
-        ArrayList<DonationSchedule> donationSchedules = gson.fromJson(response,collectionType);
+        Gson gson = new GsonBuilder().registerTypeAdapter(DonationScheduleRares.class,new CustomDonationScheduleDeserialize()).create();
+        Type collectionType = new TypeToken<ArrayList<DonationScheduleRares>>(){}.getType();
+        ArrayList<DonationScheduleRares> donationSchedules = gson.fromJson(response,collectionType);
         donationSchedules.forEach(donationSchedule -> System.out.println(donationSchedule));
         initTableSchedule();
     }
