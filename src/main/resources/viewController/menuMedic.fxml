@@ -25,11 +25,12 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutY="332.0" onMouseClicked="#viewCenters" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Centers" textFill="#740707">
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutY="332.0" onMouseClicked="#viewCenters" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Inventar centre">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </JFXButton>
+
       <Line endX="100.0" layoutX="129.0" layoutY="110.0" startX="-100.0" stroke="#740707" />
       <ImageView fitHeight="60.0" fitWidth="210.0" layoutX="15.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>
