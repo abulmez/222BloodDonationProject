@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.BloodProduct;
+import model.DTO.AdressDTO;
 import model.DTO.BloodRequestDTO;
 import model.DTO.DonationCenterDTO;
 import model.DTO.DonationReceiverNameBloodGroupDTO;
@@ -52,6 +53,7 @@ public class DonationCentersMedic {
     private TableColumn<DonationCenterDTO, String> colDistance;
     @FXML
     private TableView<DonationCenterDTO> tableView;
+    private List<AdressDTO> listAdresses;
     public MedicService service;
     public TCPService serviceTCP;
     public Stage editStage;
@@ -73,6 +75,21 @@ public class DonationCentersMedic {
         colDonatedFor.setCellValueFactory(new PropertyValueFactory<DonationCenterDTO,String>("receivername"));
         colBloodGroup.setCellValueFactory(new PropertyValueFactory<DonationCenterDTO,String>("bloodGroup"));
         String adress=service1.handleAdress();
+        listAdresses=new ArrayList<>();
+        Integer ok=0;
+        List<DonationCenterDTO> donations=service1.getAllProductsFromCenters();
+        for(DonationCenterDTO donationDTO:donations){
+
+            for(AdressDTO adressDTO:listAdresses){
+                if(adressDTO.getAdress().equals(donationDTO.getAdress())){
+                    ok=1;
+                }
+            }
+
+            if(ok==0){
+                listAdresses.add(new AdressDTO(donationDTO.getAdress(),Geocoding.getDistance(adress,donationDTO.getAdress())/1000));
+            }
+        }
 
         colValidUntil.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DonationCenterDTO, String>, ObservableValue<String>>() {
             @Override
@@ -86,8 +103,13 @@ public class DonationCentersMedic {
         colDistance.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DonationCenterDTO, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<DonationCenterDTO, String> param) {
-                Double distanta=Geocoding.getDistance(adress,param.getValue().getAdress())/1000;
-                return new SimpleStringProperty(distanta.toString()+"km");
+                Double distance=0.0;
+                for(AdressDTO adressDTO: listAdresses){
+                    if(param.getValue().getAdress().equals(adressDTO.getAdress())){
+                        distance=adressDTO.getDistance();
+                    }
+                }
+                return new SimpleStringProperty(distance.toString()+"km");
             }
         });
     }
@@ -95,11 +117,12 @@ public class DonationCentersMedic {
     private void loadDataHandler() {
 
         List<DonationCenterDTO> list = service.getAllProductsFromCenters();
-        String adress=service.handleAdress();
         List<DonationCenterDTO> list2=new ArrayList<>();
-        for(DonationCenterDTO d: list){
-            if(Geocoding.getDistance(adress,d.getAdress())/1000<10){
-                list2.add(d);
+        for(DonationCenterDTO d: list) {
+            for (AdressDTO adressDTO : listAdresses) {
+                if (adressDTO.getAdress().equals(d.getAdress()) && adressDTO.getDistance()<10) {
+                    list2.add(d);
+                }
             }
         }
 
