@@ -30,6 +30,7 @@ import model.Admin;
 import model.Donor;
 import org.springframework.context.ApplicationContext;
 import service.AdminService;
+import service.LoginService;
 import utils.CommonUtils;
 import utils.CustomAdminDeserializer;
 import utils.CustomDonorDeserializer;
@@ -57,6 +58,7 @@ public class AdminTableController extends AbstractTableController<Admin> {
     private ObservableList<Admin> obs;
     private ArrayList<String> users;
     private Admin a;
+    private int id= LoginService.getIdU();
 
     public void setCtr(AdminMainPanelController ctr){
         this.ctr=ctr;
@@ -268,8 +270,12 @@ public class AdminTableController extends AbstractTableController<Admin> {
     @Override
     public void delete(){
         try {
-            service.deleteUser("Admin", a.getCnp());
-            ErrorMessage.showMessage(null, Alert.AlertType.INFORMATION,"Succes","Adminul a fost sters cu succes");
+            if (service.checkAdminId(a.getCnp(), Integer.toString(id)).equals("no"))
+                ErrorMessage.showErrorMessage(null,"Nu va puteti sterge pe dumneavoastra!");
+            else {
+                service.deleteUser("Admin", a.getCnp());
+                ErrorMessage.showMessage(null, Alert.AlertType.INFORMATION, "Succes", "Adminul a fost sters cu succes");
+            }
         }catch (Exception e){
             ErrorMessage.showErrorMessage(null,"Trebuie sa selectati un admin!");
         }

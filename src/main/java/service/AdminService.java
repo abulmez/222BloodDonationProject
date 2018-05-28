@@ -400,6 +400,37 @@ public class AdminService {
         }
     }
 
+    public String checkAdminId(String cnp,String id){
+        String urlParameters=String.format("id=%s&c=%s",cnp,id);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/checkAdminId");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+                return response;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
     public String updateUsername(String cnp,String username){
         String urlParameters=String.format("id=%s&c=%s",username,cnp);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
