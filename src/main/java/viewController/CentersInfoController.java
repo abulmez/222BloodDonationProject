@@ -67,7 +67,12 @@ public class CentersInfoController {
             }
             if(addressFinal!=null) {
                 setClientLocation(webEngine, addressFinal.toStringSmall());
-                addressLabel.setText("Adresă : " + addressFinal.getFullAdress());
+                String address=addressFinal.getFullAdress();
+                if (address != null && address.length() > 0 && address.charAt(address.length() - 1) == ',') {
+                    System.out.println("Multa magiex");
+                    address = address.substring(0, address.length() - 1);
+                }
+                addressLabel.setText("Adresă : " + address);
                 phoneLabel.setText("Telefon : " + newValue.getPhoneNumber());
             }
         });

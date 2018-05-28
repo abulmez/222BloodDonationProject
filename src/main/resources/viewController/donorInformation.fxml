@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.UserInfoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.UserInfoController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="272.0" styleClass="title" text="Informații donator" />
+      <Label layoutX="13.0" prefHeight="30.0" prefWidth="272.0" styleClass="title" text="Informații donator" />
       <AnchorPane layoutX="13.0" layoutY="60.0" prefHeight="93.0" prefWidth="894.0" style="-fx-background-color: white;">
          <effect>
             <DropShadow color="#9c9a9a" />
@@ -123,7 +123,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="weightText" layoutX="88.0" prefHeight="30.0" prefWidth="326.0" promptText="weight" style="-fx-border-color: #400303;" />
+                  <TextField fx:id="weightText" alignment="CENTER" layoutX="88.0" prefHeight="28.0" prefWidth="326.0" promptText="weight" styleClass="textfieldOnWhite" />
                   <Label layoutX="431.0" layoutY="1.0" prefHeight="22.0" prefWidth="82.0" text="kg" textFill="#400303">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -154,7 +154,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="phoneText" layoutX="88.0" prefHeight="30.0" prefWidth="326.0" promptText="phone" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="phoneText" alignment="CENTER" layoutX="88.0" prefHeight="28.0" prefWidth="326.0" promptText="phone" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane GridPane.columnIndex="1">
@@ -164,7 +164,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="emailText" layoutX="73.0" prefHeight="30.0" prefWidth="382.0" promptText="e-mail" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="emailText" alignment="CENTER" layoutX="73.0" prefHeight="30.0" prefWidth="382.0" promptText="e-mail" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                </children>
@@ -196,7 +196,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="countryText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="195.0" promptText="țara" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="countryText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="195.0" promptText="țara" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="35.0" prefWidth="267.0" GridPane.columnIndex="1">
@@ -206,7 +206,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="countyText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="195.0" promptText="județ" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="countyText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="195.0" promptText="județ" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="35.0" prefWidth="267.0" GridPane.columnIndex="2">
@@ -216,7 +216,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cityText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="195.0" promptText="oraș" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="cityText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="195.0" promptText="oraș" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="586.0" layoutY="9.0" prefHeight="35.0" prefWidth="267.0" GridPane.rowIndex="1">
@@ -226,7 +226,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="streetText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="483.0" promptText="stradă" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="streetText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="483.0" promptText="stradă" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="586.0" layoutY="9.0" prefHeight="35.0" prefWidth="267.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -236,7 +236,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nrStreetText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="195.0" promptText="nr. stradă" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="nrStreetText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="195.0" promptText="nr. stradă" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="35.0" prefWidth="267.0" GridPane.rowIndex="2">
@@ -246,7 +246,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="blockText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="195.0" promptText="nr. bloc" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="blockText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="195.0" promptText="nr. bloc" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="35.0" prefWidth="267.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -256,7 +256,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="stairText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="195.0" promptText="scară" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="stairText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="195.0" promptText="scară" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="35.0" prefWidth="267.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
@@ -266,7 +266,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="floorText" layoutX="88.0" layoutY="5.0" prefHeight="22.0" prefWidth="195.0" promptText="etaj" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="floorText" alignment="CENTER" layoutX="88.0" layoutY="5.0" prefHeight="28.0" prefWidth="195.0" promptText="etaj" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="35.0" prefWidth="267.0" GridPane.rowIndex="3">
@@ -276,7 +276,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="flatText" layoutX="121.0" layoutY="5.0" prefHeight="22.0" prefWidth="162.0" promptText="apartament" style="-fx-border-color: #400303;" />
+                        <TextField fx:id="flatText" alignment="CENTER" layoutX="121.0" layoutY="5.0" prefHeight="28.0" prefWidth="162.0" promptText="apartament" styleClass="textfieldOnWhite" />
                      </children>
                   </AnchorPane>
                </children>
@@ -297,21 +297,21 @@
                   </Label>
                </children>
             </AnchorPane>
-            <Button fx:id="diseaseButton" contentDisplay="CENTER" layoutX="690.0" layoutY="3.0" mnemonicParsing="false" onMouseClicked="#handleDiseases" prefHeight="20.0" prefWidth="195.0" text=" Boli">
+            <Button fx:id="diseaseButton" alignment="CENTER" contentDisplay="CENTER" layoutX="678.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#handleDiseases" prefHeight="32.0" prefWidth="200.0" text=" Boli">
                <font>
-                  <Font size="18.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <TextArea fx:id="supplyTextArea" layoutX="14.0" layoutY="488.0" prefHeight="102.0" prefWidth="671.0" promptText="  În această casetă vă rugăm să menționați eventuale informații suplimentare legate de starea de sănătate" style="-fx-border-color: #400303;">
+      <TextArea fx:id="supplyTextArea" layoutX="23.0" layoutY="488.0" prefHeight="102.0" prefWidth="621.0" promptText="  În această casetă vă rugăm să menționați eventuale informații suplimentare legate de starea de sănătate" style="-fx-border-color: #400303;">
          <font>
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Button fx:id="applayChanges" layoutX="704.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="40.0" prefWidth="203.0" text="Aplică schimbările">
+      <Button fx:id="applayChanges" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" graphicTextGap="0.0" layoutX="679.0" layoutY="508.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="46.0" prefWidth="224.0" text="Aplică schimbările">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font>
       </Button>
    </children>
