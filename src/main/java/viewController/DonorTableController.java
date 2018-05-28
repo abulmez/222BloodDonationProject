@@ -4,17 +4,23 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import errorMessage.ErrorMessage;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import javafx.util.converter.FloatStringConverter;
@@ -38,16 +44,21 @@ public class DonorTableController extends AbstractTableController<Donor> {
     @FXML
     private TableColumn<Donor,LocalDate> columnData;
     @FXML
-    private TableColumn<Donor,String> columnUsername;
+    private TableColumn<Donor,String> columnUsername,columnAddress;
     @FXML
     private TableView<Donor> table;
 
+    private AdminMainPanelController ctr;
     private AdminService service;
     private ObservableList<Donor> obs;
     private ArrayList<String> users;
     private Donor d;
     private String cnp="";
     private String u="";
+
+    public void setCtr(AdminMainPanelController ctr){
+        this.ctr=ctr;
+    }
 
     @Override
     public void delete(){
@@ -87,6 +98,7 @@ public class DonorTableController extends AbstractTableController<Donor> {
         columnTelefon.setCellValueFactory(new PropertyValueFactory<>("phone"));
         columnSange.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
         columnGreutate.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        columnAddress.setCellValueFactory(cellData->new ReadOnlyStringWrapper(cellData.getValue().getCnp()));
         table.setEditable(true);
         String response=service.getUsers("Donor");
         System.out.println(response);
@@ -100,7 +112,62 @@ public class DonorTableController extends AbstractTableController<Donor> {
         Gson gson2=new Gson();
         Type collectionType2 = new TypeToken<ArrayList<String>>(){}.getType();
         users= gson2.fromJson(resp, collectionType2);
-        //cnp="";
+
+        columnAddress.setCellFactory(column -> {
+            return new TableCell<Donor, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    final Button button = new Button("");
+                    super.updateItem(item,empty);
+                    button.getStyleClass().add("button");
+                    button.setGraphic(new ImageView("./images/View.png"));
+                    button.setTooltip(new Tooltip("Vizualizeaza/Modifica adresa"));
+
+                    button.setOnAction(new EventHandler<ActionEvent>(){
+                        public void handle(ActionEvent t){
+                            final Stage dialog = new Stage();
+                                    /*dialog.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                                        public void handle(WindowEvent we) {
+                                            refreshTable();
+                                        }
+                                    });*/
+                            //dialog.initOwner(editStage);
+                            dialog.initModality(Modality.APPLICATION_MODAL);
+
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("/viewController/adminPanelTabels/address.fxml"));
+                            try {
+                                Parent root = loader.load();
+                                dialog.setTitle("Adresa");
+                                Scene scene=new Scene(root);
+                                scene.getStylesheets().add("stylesheet/donationsCSS.css");
+                                dialog.setScene(scene);
+                                dialog.show();
+                                AddressController ctrl=loader.getController();
+                                ctrl.setCnp(item);
+                                        /*
+                                        FormControllerModifica ctrl= loader.getController();
+                                        column.getTableView().getSelectionModel().select(getIndex());
+                                        BloodRequestDTO cell= tableView.getSelectionModel().getSelectedItem();
+                                        ctrl.setService(cell.getIdBD(),service,cell.getNeededType(),cell.getDescription(),cell.getPriority(),cell.getQuantity(),cell.getBloodProductType());
+                                        */
+                            }catch (Exception e) {
+                                System.out.println(e);
+                            }}
+                    });
+
+                    if(item!=null)
+                        setGraphic(button);
+                    else
+                    {
+                        setGraphic(null);
+                    }
+                }
+            };
+        });
+
+
+
         columnUsername.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Donor, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Donor, String> param) {
@@ -120,6 +187,14 @@ public class DonorTableController extends AbstractTableController<Donor> {
 
             }
         });
+        columnUsername.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnUsername.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Donor, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Donor, String> event) {
+                service.updateUsername(d.getCnp(),event.getNewValue());
+                ctr.change();
+            }
+        });
 
         columnCnp.setCellFactory(TextFieldTableCell.forTableColumn());
         columnCnp.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Donor, String>>() {
@@ -131,6 +206,15 @@ public class DonorTableController extends AbstractTableController<Donor> {
                 ).setCnp(event.getNewValue());
                 Donor donor=obs.get(event.getTablePosition().getRow());
                 System.out.println(donor.getCnp());
+                if(service.checkCnp(donor.getCnp()).equals("no")) {
+                    ErrorMessage.showErrorMessage(null, "Acest CNP exista deja");
+                    ((Donor) event.getTableView().getItems().get(
+                            event.getTablePosition().getRow())
+                    ).setCnp(oldCnp);
+                    table.setItems(obs);
+                    table.refresh();
+                }
+                else
                 service.updateDonor(oldCnp,donor.getCnp(),donor.getName(),donor.getBirthday().toString(),donor.getMail(),donor.getPhone(),donor.getBloodGroup(),donor.getWeight().toString());
             }
         });
@@ -231,8 +315,6 @@ public class DonorTableController extends AbstractTableController<Donor> {
 
     }
 
-    public void setCtr(AdminMainPanelController ctr){
-        //this.ctr=ctr;
-    }
+
 
 }

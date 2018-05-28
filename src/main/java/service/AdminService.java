@@ -191,6 +191,37 @@ public class AdminService {
         }
     }
 
+    public String getAddress(String cnp) {
+        String urlParameters=String.format("id=%s&c=%s",cnp,"ds");
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/address");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+                return response;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
     public String updateTCPCenter(String cnp,String center){
         String urlParameters=String.format("id=%s&c=%s",cnp,center);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
@@ -334,6 +365,125 @@ public class AdminService {
 
         } finally {
 
+            con.disconnect();
+        }
+    }
+
+    public String checkCnp(String cnp){
+        String urlParameters=String.format("id=%s&c=%s",cnp,"ds");
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/checkCnp");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+                return response;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
+    public String updateUsername(String cnp,String username){
+        String urlParameters=String.format("id=%s&c=%s",username,cnp);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/updateUsername");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+                return response;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
+
+    public void updateAdress(String street, String streetNr, String blockNr, String entrance, String floor, String apartNr, String city, String county, String country, String idA) {
+        String urlParameters = String.format("sreet=%s&streetNr=%s&blockNr=%s&entrance=%s&floor=%s&apartNr=%s&city=%s&county=%s&country=%s&idU=%s", street, streetNr, blockNr, entrance, floor, apartNr, city, county, country, idA);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/updateAddress");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+    }
+
+    public void addAdress(String street, String streetNr, String blockNr, String entrance, String floor, String apartNr, String city, String county, String country, String cnp) {
+        String urlParameters = String.format("sreet=%s&streetNr=%s&blockNr=%s&entrance=%s&floor=%s&apartNr=%s&city=%s&county=%s&country=%s&idU=%s", street, streetNr, blockNr, entrance, floor, apartNr, city, county, country, cnp);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addAddress");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
             con.disconnect();
         }
     }

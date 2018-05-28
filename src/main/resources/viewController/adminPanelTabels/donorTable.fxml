@@ -16,7 +16,7 @@
             <TableColumn fx:id="columnSange" prefWidth="88.79998779296875" text="GrupaSange" />
             <TableColumn fx:id="columnGreutate" prefWidth="66.4000244140625" text="Greutate" />
             <TableColumn fx:id="columnUsername" prefWidth="116.0" text="Username" />
-            <TableColumn prefWidth="69.5999755859375" text="Adresa" />
+            <TableColumn fx:id="columnAddress" prefWidth="69.5999755859375" text="Adresa" />
          </columns>
       </TableView>
    </children>

@@ -4,19 +4,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import errorMessage.ErrorMessage;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,7 +47,7 @@ public class MedicTableController extends AbstractTableController<Medic> {
     @FXML
     private TableColumn<Medic,Integer> columnSpital;
     @FXML
-    private TableColumn<Medic,String> columnUsername;
+    private TableColumn<Medic,String> columnUsername,columnAddress;
     @FXML
     private TableView<Medic> table;
 
@@ -76,6 +78,7 @@ public class MedicTableController extends AbstractTableController<Medic> {
         columnMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         columnTelefon.setCellValueFactory(new PropertyValueFactory<>("phone"));
         columnSpital.setCellValueFactory(new PropertyValueFactory<>("idH"));
+        columnAddress.setCellValueFactory(cellData->new ReadOnlyStringWrapper(cellData.getValue().getCnp()));
         table.setEditable(true);
         String response = service.getUsers("Medic");
         System.out.println(response);
@@ -89,6 +92,60 @@ public class MedicTableController extends AbstractTableController<Medic> {
         Type collectionType2 = new TypeToken<ArrayList<String>>(){}.getType();
         users= gson2.fromJson(resp, collectionType2);
         //users.add(0,"s");
+
+        columnAddress.setCellFactory(column -> {
+            return new TableCell<Medic, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    final Button button = new Button("");
+                    super.updateItem(item,empty);
+                    button.getStyleClass().add("button");
+                    button.setGraphic(new ImageView("./images/View.png"));
+                    button.setTooltip(new Tooltip("Vizualizeaza/Modifica adresa"));
+
+                    button.setOnAction(new EventHandler<ActionEvent>(){
+                        public void handle(ActionEvent t){
+                            final Stage dialog = new Stage();
+                                    /*dialog.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                                        public void handle(WindowEvent we) {
+                                            refreshTable();
+                                        }
+                                    });*/
+                            //dialog.initOwner(editStage);
+                            dialog.initModality(Modality.APPLICATION_MODAL);
+
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("/viewController/adminPanelTabels/address.fxml"));
+                            try {
+                                Parent root = loader.load();
+                                dialog.setTitle("Adresa");
+                                Scene scene=new Scene(root);
+                                scene.getStylesheets().add("stylesheet/donationsCSS.css");
+                                dialog.setScene(scene);
+                                dialog.show();
+                                AddressController ctrl=loader.getController();
+                                ctrl.setCnp(item);
+                                        /*
+                                        FormControllerModifica ctrl= loader.getController();
+                                        column.getTableView().getSelectionModel().select(getIndex());
+                                        BloodRequestDTO cell= tableView.getSelectionModel().getSelectedItem();
+                                        ctrl.setService(cell.getIdBD(),service,cell.getNeededType(),cell.getDescription(),cell.getPriority(),cell.getQuantity(),cell.getBloodProductType());
+                                        */
+                            }catch (Exception e) {
+                                System.out.println(e);
+                            }}
+                    });
+
+                    if(item!=null)
+                        setGraphic(button);
+                    else
+                    {
+                        setGraphic(null);
+                    }
+                }
+            };
+        });
+
         columnUsername.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Medic, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Medic, String> param) {
@@ -108,6 +165,15 @@ public class MedicTableController extends AbstractTableController<Medic> {
             }
         });
 
+        columnUsername.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnUsername.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Medic, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Medic, String> event) {
+                service.updateUsername(m.getCnp(),event.getNewValue());
+                ctr.change();
+            }
+        });
+
         columnCnp.setCellFactory(TextFieldTableCell.forTableColumn());
         columnCnp.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Medic, String>>() {
             @Override
@@ -117,7 +183,15 @@ public class MedicTableController extends AbstractTableController<Medic> {
                         event.getTablePosition().getRow())
                 ).setCnp(event.getNewValue());
                 Medic medic=obs.get(event.getTablePosition().getRow());
-                System.out.println(medic.getCnp());
+                if(service.checkCnp(medic.getCnp()).equals("no")) {
+                    ErrorMessage.showErrorMessage(null, "Acest CNP exista deja");
+                    ((Medic) event.getTableView().getItems().get(
+                            event.getTablePosition().getRow())
+                    ).setCnp(oldCnp);
+                    table.setItems(obs);
+                    table.refresh();
+                }
+                else
                 service.updateAdmin(oldCnp,medic.getCnp(),medic.getName(),medic.getBirthday().toString(),medic.getMail(),medic.getPhone());
             }
         });

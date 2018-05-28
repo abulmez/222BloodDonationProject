@@ -4,22 +4,26 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import errorMessage.ErrorMessage;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.converter.LocalDateStringConverter;
 import model.Admin;
@@ -39,7 +43,7 @@ import java.util.Date;
 
 public class AdminTableController extends AbstractTableController<Admin> {
     @FXML
-    private TableColumn<Admin,String> columnCnp,columnNume,columnMail,columnTelefon;
+    private TableColumn<Admin,String> columnCnp,columnNume,columnMail,columnTelefon,columnAddress;
     @FXML
     private TableColumn<Admin,LocalDate> columnData;
 
@@ -79,6 +83,7 @@ public class AdminTableController extends AbstractTableController<Admin> {
         columnData.setCellValueFactory(new PropertyValueFactory<>("birthday"));
         columnMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         columnTelefon.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        columnAddress.setCellValueFactory(cellData->new ReadOnlyStringWrapper(cellData.getValue().getCnp()));
         String response=service.getUsers("Admin");
         System.out.println(response);
         Gson gson=new GsonBuilder().registerTypeAdapter(Admin.class,new CustomAdminDeserializer()).create();
@@ -91,6 +96,59 @@ public class AdminTableController extends AbstractTableController<Admin> {
         Type collectionType2 = new TypeToken<ArrayList<String>>(){}.getType();
         users= gson2.fromJson(resp, collectionType2);
         //users.add(0,"s");
+
+        columnAddress.setCellFactory(column -> {
+                    return new TableCell<Admin, String>() {
+                        @Override
+                        protected void updateItem(String item, boolean empty) {
+                            final Button button = new Button("");
+                            super.updateItem(item,empty);
+                            button.getStyleClass().add("button");
+                            button.setGraphic(new ImageView("./images/View.png"));
+                            button.setTooltip(new Tooltip("Vizualizeaza/Modifica adresa"));
+
+                            button.setOnAction(new EventHandler<ActionEvent>(){
+                                public void handle(ActionEvent t){
+                                    final Stage dialog = new Stage();
+                                    /*dialog.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                                        public void handle(WindowEvent we) {
+                                            refreshTable();
+                                        }
+                                    });*/
+                                    //dialog.initOwner(editStage);
+                                    dialog.initModality(Modality.APPLICATION_MODAL);
+
+                                    FXMLLoader loader = new FXMLLoader();
+                                    loader.setLocation(getClass().getResource("/viewController/adminPanelTabels/address.fxml"));
+                                    try {
+                                        Parent root = loader.load();
+                                        dialog.setTitle("Adresa");
+                                        Scene scene=new Scene(root);
+                                        scene.getStylesheets().add("stylesheet/donationsCSS.css");
+                                        dialog.setScene(scene);
+                                        dialog.show();
+                                        AddressController ctrl=loader.getController();
+                                        ctrl.setCnp(item);
+                                        /*
+                                        FormControllerModifica ctrl= loader.getController();
+                                        column.getTableView().getSelectionModel().select(getIndex());
+                                        BloodRequestDTO cell= tableView.getSelectionModel().getSelectedItem();
+                                        ctrl.setService(cell.getIdBD(),service,cell.getNeededType(),cell.getDescription(),cell.getPriority(),cell.getQuantity(),cell.getBloodProductType());
+                                        */
+                                    }catch (Exception e) {
+                                        System.out.println(e);
+                                    }}
+                            });
+
+                            if(item!=null)
+                                setGraphic(button);
+                            else
+                            {
+                                setGraphic(null);
+                            }
+                        }
+                    };
+                });
 
         columnUsername.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Admin, String>, ObservableValue<String>>() {
             @Override
@@ -111,6 +169,13 @@ public class AdminTableController extends AbstractTableController<Admin> {
             }
         });
         columnUsername.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnUsername.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Admin, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Admin, String> event) {
+                service.updateUsername(a.getCnp(),event.getNewValue());
+                ctr.change();
+            }
+        });
 
         columnCnp.setCellFactory(TextFieldTableCell.forTableColumn());
         columnCnp.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Admin, String>>() {
@@ -122,7 +187,16 @@ public class AdminTableController extends AbstractTableController<Admin> {
                 ).setCnp(event.getNewValue());
                 Admin ad=obs.get(event.getTablePosition().getRow());
                 System.out.println(a.getCnp());
-                service.updateAdmin(oldCnp,ad.getCnp(),ad.getName(),ad.getBirthday().toString(),ad.getMail(),ad.getPhone());
+                if(service.checkCnp(ad.getCnp()).equals("no")) {
+                    ErrorMessage.showErrorMessage(null, "Acest CNP exista deja");
+                    ((Admin) event.getTableView().getItems().get(
+                            event.getTablePosition().getRow())
+                    ).setCnp(oldCnp);
+                    table.setItems(obs);
+                    table.refresh();
+                }
+                else
+                    service.updateAdmin(oldCnp,ad.getCnp(),ad.getName(),ad.getBirthday().toString(),ad.getMail(),ad.getPhone());
             }
         });
 
@@ -205,8 +279,8 @@ public class AdminTableController extends AbstractTableController<Admin> {
 
     @FXML
     public void handleGet(){
+        //if (!table.getSelectionModel().getSelectedItem().equals(null))
         a=table.getSelectionModel().getSelectedItem();
-        System.out.println(a.getIdU());
     }
 
     @Override
