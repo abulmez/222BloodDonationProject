@@ -87,7 +87,7 @@
                               <Image url="@../images/name.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="nameText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Nume complet" viewOrder="5.0" />
+                        <JFXTextField fx:id="nameText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Nume complet" viewOrder="5.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
@@ -97,7 +97,7 @@
                               <Image url="@../images/cnp.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="cnpText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Cod numeric peronal(CNP)" viewOrder="6.0" />
+                        <JFXTextField fx:id="cnpText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Cod numeric peronal(CNP)" viewOrder="6.0" />
                      </children>
                   </HBox>
                </children>
@@ -122,7 +122,7 @@
                               <Image url="@../images/phone.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="phoneText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Telefon" viewOrder="3.0" />
+                        <JFXTextField fx:id="phoneText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Telefon" viewOrder="3.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
@@ -132,7 +132,7 @@
                               <Image url="@../images/email.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="emailText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Email" viewOrder="4.0" />
+                        <JFXTextField fx:id="emailText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Email" viewOrder="4.0" />
                      </children>
                   </HBox>
                </children>
@@ -152,7 +152,7 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <JFXDatePicker fx:id="birthdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="256.0" promptText="Ziua de naștere" showWeekNumbers="true" style="-fx-background-color: white;" viewOrder="7.0" />
+                        <JFXDatePicker fx:id="birthdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" overLay="true" prefHeight="30.0" prefWidth="256.0" promptText="Ziua de naștere" showWeekNumbers="true" style="-fx-background-color: white;" viewOrder="7.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
@@ -162,7 +162,7 @@
                               <Image url="@../images/weight.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="weightText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="258.0" promptText="Greutate ( kg )" viewOrder="8.0" />
+                        <JFXTextField fx:id="weightText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="258.0" promptText="Greutate ( kg )" viewOrder="8.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="93.0" prefWidth="351.0" GridPane.columnIndex="1">

@@ -53,7 +53,48 @@ public class DonorService {
             con.disconnect();
         }
     }
+    public List<String> getAllDonorsEmailsForBloodType(String bloodType){
+        String urlParameters=String.format("BloodType=%s",bloodType);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        List<String> list = new ArrayList<>();
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/emailsForBloodType");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while((inputLine = in.readLine())!=null)
+                {
+                    response.append(inputLine);
+                }
 
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<String>>(){}.getType();
+                Collection<String> emails = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(emails);
+                return list;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return list;
+
+        } finally {
+
+            con.disconnect();
+        }
+    }
     public String handleUserUpdate(String idU,String weight,String phone,String mail){
         String urlParameters=String.format("idU=%s&weight=%s&phone=%s&mail=%s",idU,weight,phone,mail);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
