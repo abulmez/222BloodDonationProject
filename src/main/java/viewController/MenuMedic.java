@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.context.ApplicationContext;
 import service.MedicService;
+import service.TCPService;
 import utils.CommonUtils;
 
 import java.io.IOException;
@@ -56,6 +57,24 @@ public class MenuMedic extends CenterMenu {
         ctrl.setService(service);
         centerManeuPane.getChildren().add(mainPane);
     }
+    public void setPan2(URL resource, AnchorPane centerManeuPane) {
+        centerManeuPane.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader();
+        ApplicationContext context= CommonUtils.getFactory();
+
+        MedicService service=context.getBean(MedicService.class);
+        AnchorPane mainPane = null;
+        loader.setLocation(resource);
+        try {
+            mainPane = loader.load();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        DonationCentersMedic ctrl=loader.getController();
+        ctrl.setService(service,mainStage.getMainStage());
+        centerManeuPane.getChildren().add(mainPane);
+    }
 
     @FXML
     private void requestAction(MouseEvent event) {
@@ -66,6 +85,11 @@ public class MenuMedic extends CenterMenu {
     @FXML
     private void visualizeAction(MouseEvent event) {
         setPan(getClass().getResource("/viewController/bloodRequests.fxml"), centerManeuPane);
+        mainStage.openMenu();
+    }
+    @FXML
+    private void viewCenters(MouseEvent event) {
+        setPan2(getClass().getResource("/viewController/donationCentersMedic.fxml"), centerManeuPane);
         mainStage.openMenu();
     }
     @FXML

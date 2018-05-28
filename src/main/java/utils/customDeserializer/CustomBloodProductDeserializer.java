@@ -23,6 +23,5 @@ public class CustomBloodProductDeserializer implements JsonDeserializer<BloodPro
                 ProductType.valueOf(jobject.get("producttype").getAsString()),
                 LocalDate.of(bdayAsInt[0],bdayAsInt[1],bdayAsInt[2]),
                 jobject.get("quantity").getAsDouble());
-
     }
 }
