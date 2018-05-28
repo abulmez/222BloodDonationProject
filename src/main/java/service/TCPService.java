@@ -350,6 +350,8 @@ public class TCPService {
     }
 
     public List<DonationDTO> handleGetDonations(){
+        String urlParameters = String.format("idu=%d",LoginService.getIdU());
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         List<DonationDTO> list=new ArrayList<>();
         try {
             con = serverConnection.getServerConnection();
@@ -359,22 +361,28 @@ public class TCPService {
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
 
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
             int code = con.getResponseCode();
             if(code == 200){
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(con.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String inputLine;
+                    StringBuffer response = new StringBuffer();
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    System.out.println(response);
+                    in.close();
+                    Gson gson = new Gson();
+                    Type collectionType = new TypeToken<Collection<DonationDTO>>() {
+                    }.getType();
+                    Collection<DonationDTO> donations = gson.fromJson(response.toString(), collectionType);
+                    list = new ArrayList<>(donations);
+                    return list;
                 }
-                System.out.println(response);
-                in.close();
-                Gson gson = new Gson();
-                Type collectionType = new TypeToken<Collection<DonationDTO>>(){}.getType();
-                Collection<DonationDTO> donations = gson.fromJson(response.toString(), collectionType);
-                list=new ArrayList<>(donations);
-                return list;
             }
             else if(code == 401){
                 return list;
@@ -386,6 +394,54 @@ public class TCPService {
         }
         return list;
     }
+
+    public Donor handleGetDonorFromDonation(Integer idD){
+        String urlParameters = String.format("idd=%d",idD);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        Donor donor=null;
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getDonorFromDonation");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String response = in.readLine();
+                    System.out.println(response);
+                    in.close();
+                    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+                        @Override
+                        public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                            String date=json.toString();
+                            String newdate=date.replaceAll("\\\"","").replaceAll("[a-zA-Z]"," ");
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            return LocalDate.parse(newdate,formatter);
+                        }
+                    }).create();
+                    donor=gson.fromJson(response,Donor.class);
+                    return donor;
+                }
+            }
+            else if(code == 401){
+                return donor;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+        return donor;
+    }
+
 
     public String handleModifyDonation(String status,Integer idD) {
         String urlParameters = String.format("status=%s&idd=%d",status,idD);

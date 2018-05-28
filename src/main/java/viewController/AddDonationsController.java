@@ -39,6 +39,7 @@ public class AddDonationsController{
                 (AutoCompletionBinding.AutoCompletionEvent<IdentifierDTO> autoCompletionEvent) -> {
                     IdentifierDTO identifier=autoCompletionEvent.getCompletion();
                     cnpUserTextField.setText(identifier.getCnp());
+                    numeUserTextField.setText(identifier.getName());
                 });
 
     }
