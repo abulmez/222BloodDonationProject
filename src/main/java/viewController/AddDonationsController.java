@@ -10,7 +10,7 @@ import org.controlsfx.control.textfield.TextFields;
 import org.springframework.context.ApplicationContext;
 import service.TCPService;
 import utils.CommonUtils;
-import model.DTO.IdentifierDTO;
+import model.dto.IdentifierDTO;
 
 import java.util.List;
 

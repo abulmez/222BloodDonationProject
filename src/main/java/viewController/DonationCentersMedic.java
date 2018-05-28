@@ -10,14 +10,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.BloodProduct;
-import model.DTO.AdressDTO;
-import model.DTO.BloodRequestDTO;
-import model.DTO.DonationCenterDTO;
-import model.DTO.DonationReceiverNameBloodGroupDTO;
-import model.DonationCenter;
+import model.dto.AdressDTO;
+import model.dto.DonationCenterDTO;
+import model.dto.DonationReceiverNameBloodGroupDTO;
 import model.ProductType;
-import service.LoginService;
 import service.MedicService;
 import service.TCPService;
 import utils.CommonUtils;
@@ -26,7 +22,6 @@ import utils.googleMaps.Geocoding;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DonationCentersMedic {

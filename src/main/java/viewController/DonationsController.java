@@ -17,7 +17,7 @@ import javafx.stage.WindowEvent;
 import org.springframework.context.ApplicationContext;
 import service.TCPService;
 import utils.CommonUtils;
-import model.DTO.DonationDTO;
+import model.dto.DonationDTO;
 
 import java.io.IOException;
 import java.time.LocalDate;

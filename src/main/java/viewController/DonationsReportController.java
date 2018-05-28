@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import utils.MailSender;
 import service.TCPService;
 import utils.CommonUtils;
-import model.DTO.DonationDTO;
+import model.dto.DonationDTO;
 
 public class DonationsReportController {
 

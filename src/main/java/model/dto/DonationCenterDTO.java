@@ -1,8 +1,6 @@
-package model.DTO;
+package model.dto;
 import com.google.gson.annotations.SerializedName;
-import model.ProductType;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class DonationCenterDTO {

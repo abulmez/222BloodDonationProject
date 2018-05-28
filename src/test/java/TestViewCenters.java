@@ -1,8 +1,6 @@
 import junit.framework.TestCase;
-import model.BloodRequest;
-import model.DTO.BloodRequestDTO;
+import model.dto.BloodRequestDTO;
 import service.MedicService;
-import service.TCPService;
 import utils.CommonUtils;
 
 import java.util.List;

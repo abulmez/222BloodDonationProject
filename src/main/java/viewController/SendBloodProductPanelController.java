@@ -1,13 +1,10 @@
 package viewController;
 
-import com.google.maps.GeoApiContext;
 import com.google.maps.model.LatLng;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,23 +16,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import model.BloodProduct;
-import model.DTO.BloodProductShipmentAddressDTO;
-import model.DTO.BloodRequestHospitalDTO;
-import model.DTO.DonationReceiverNameBloodGroupDTO;
+import model.dto.BloodProductShipmentAddressDTO;
+import model.dto.BloodRequestHospitalDTO;
 import service.TCPService;
 import utils.googleMaps.Geocoding;
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SendBloodProductPanelController {
 
@@ -80,6 +77,7 @@ public class SendBloodProductPanelController {
 
 
     public void initialize(){
+
         hospitalNameColumn.setCellValueFactory(new PropertyValueFactory<>("hospitalName"));
         priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -216,10 +214,10 @@ public class SendBloodProductPanelController {
             }
         });
 
-
     }
 
-    private void loadDataInTable(ArrayList<BloodRequestHospitalDTO> requests){
+    private void loadDataInTable(List<BloodRequestHospitalDTO> requests){
+        requests = requests.stream().sorted(Comparator.comparing(BloodRequestHospitalDTO::getPriority)).collect(Collectors.toList());
         model = FXCollections.observableArrayList( requests);
         bloodRequestsTable.setItems(model);
         bloodRequestsTable.refresh();

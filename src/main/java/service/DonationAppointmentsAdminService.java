@@ -3,7 +3,7 @@ package service;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
-import model.DTO.DonationScheduleStatusDTO;
+import model.dto.DonationScheduleStatusDTO;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;

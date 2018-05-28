@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.DonationSchedule;
-import model.DTO.DonationScheduleStatusDTO;
+import model.dto.DonationScheduleStatusDTO;
 import model.Reservation;
 import org.springframework.context.ApplicationContext;
 import service.DonationAppointmentsAdminService;

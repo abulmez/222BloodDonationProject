@@ -20,7 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import model.DTO.BloodRequestDTO;
+import model.dto.BloodRequestDTO;
 import service.MedicService;
 
 import java.io.IOException;
