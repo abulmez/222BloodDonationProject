@@ -12,6 +12,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.UserType;
@@ -23,6 +25,7 @@ import viewController.MenuController;
 
 
 import java.io.IOException;
+import java.net.URL;
 
 public class LoginController {
 
@@ -33,8 +36,12 @@ public class LoginController {
     PasswordField passwordPswField;
 
     @FXML
+    WebView webLogin;
+
+    @FXML
     Label failedLoginLabel;
 
+    private WebEngine webEngine;
     private Stage stage = new Stage();
     private double xOffset=0;
     private double yOffset=0;
@@ -43,7 +50,11 @@ public class LoginController {
     public void initialize(){
         ApplicationContext context = CommonUtils.getFactory();
         service = context.getBean(LoginService.class);
-
+        webEngine = webLogin.getEngine();
+        URL  url = getClass().getResource("/viewController/loginPage.html");
+        if(url!=null){
+            webEngine.load(url.toExternalForm());
+        }
     }
 
     public void setMainStage(Stage stage)
@@ -92,15 +103,10 @@ public class LoginController {
     }
 
     private void initEnterKey() {
-        passwordPswField.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
-            @Override
-            public void handle(KeyEvent ke)
+        passwordPswField.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER))
             {
-                if (ke.getCode().equals(KeyCode.ENTER))
-                {
-                    validateAction();
-                }
+                validateAction();
             }
         });
     }

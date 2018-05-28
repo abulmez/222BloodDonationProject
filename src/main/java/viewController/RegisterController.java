@@ -81,7 +81,7 @@ public class RegisterController {
 
     private void initBloodCombo() {
         ObservableList<String> options =
-                FXCollections.observableArrayList("0", "A", "B", "AB");
+                FXCollections.observableArrayList("0", "A", "B", "AB","0+", "A+", "B+", "AB+","0-", "A-", "B-", "AB-");
         bloodText.setItems(options);
     }
 

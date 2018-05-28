@@ -19,13 +19,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.RegisterController">
    <children>
-      <Label layoutX="41.0" layoutY="20.0" prefHeight="46.0" prefWidth="170.0" styleClass="title" stylesheets="@loginTheme.css" text="Înregistrare" />
+      <Label layoutX="14.0" layoutY="21.0" prefHeight="46.0" prefWidth="170.0" styleClass="title" stylesheets="@loginTheme.css" text="Înregistrare" />
       <JFXProgressBar fx:id="progressBar" focusTraversable="false" layoutX="41.0" layoutY="533.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="520.0" progress="1.0" secondaryProgress="0.0" />
-      <ImageView fitHeight="35.0" fitWidth="68.0" layoutX="855.0" layoutY="20.0" onMouseClicked="#closeAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/redExitIcon.png" />
-         </image>
-      </ImageView>
       <GridPane hgap="1.0" layoutX="41.0" layoutY="76.0" prefHeight="418.0" prefWidth="852.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.5999755859375" minWidth="10.0" percentWidth="100.0" prefWidth="460.0" />
@@ -92,7 +87,7 @@
                               <Image url="@../images/name.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="nameText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Nume complet" viewOrder="5.0" />
+                        <JFXTextField fx:id="nameText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Nume complet" viewOrder="5.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
@@ -102,7 +97,7 @@
                               <Image url="@../images/cnp.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="cnpText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Cod numeric peronal(CNP)" viewOrder="6.0" />
+                        <JFXTextField fx:id="cnpText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Cod numeric peronal(CNP)" viewOrder="6.0" />
                      </children>
                   </HBox>
                </children>
@@ -127,7 +122,7 @@
                               <Image url="@../images/phone.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="phoneText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Telefon" viewOrder="3.0" />
+                        <JFXTextField fx:id="phoneText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Telefon" viewOrder="3.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
@@ -137,7 +132,7 @@
                               <Image url="@../images/email.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="emailText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="330.0" promptText="Email" viewOrder="4.0" />
+                        <JFXTextField fx:id="emailText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="330.0" promptText="Email" viewOrder="4.0" />
                      </children>
                   </HBox>
                </children>
@@ -157,7 +152,7 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <JFXDatePicker fx:id="birthdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="256.0" promptText="Ziua de naștere" showWeekNumbers="true" style="-fx-background-color: white;" viewOrder="7.0" />
+                        <JFXDatePicker fx:id="birthdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" overLay="true" prefHeight="30.0" prefWidth="256.0" promptText="Ziua de naștere" showWeekNumbers="true" style="-fx-background-color: white;" viewOrder="7.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
@@ -167,7 +162,7 @@
                               <Image url="@../images/weight.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="weightText" alignment="CENTER_RIGHT" focusColor="#400303" prefHeight="30.0" prefWidth="258.0" promptText="Greutate ( kg )" viewOrder="8.0" />
+                        <JFXTextField fx:id="weightText" alignment="CENTER_RIGHT" focusColor="#400303" labelFloat="true" prefHeight="30.0" prefWidth="258.0" promptText="Greutate ( kg )" viewOrder="8.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="93.0" prefWidth="351.0" GridPane.columnIndex="1">
@@ -192,10 +187,15 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="warningLabel" layoutX="368.0" layoutY="26.0" prefHeight="35.0" prefWidth="402.0" textFill="#aa1515">
+      <Label fx:id="warningLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="187.0" layoutY="26.0" prefHeight="35.0" prefWidth="685.0" textFill="#aa1515">
          <font>
-            <Font name="System Bold Italic" size="18.0" />
+            <Font name="System Bold Italic" size="15.0" />
          </font>
       </Label>
+      <ImageView fitHeight="35.0" fitWidth="68.0" layoutX="873.0" layoutY="9.0" onMouseClicked="#closeAction" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+         <image>
+            <Image url="@../images/redExitIcon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

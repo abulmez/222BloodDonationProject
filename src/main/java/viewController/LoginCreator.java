@@ -31,7 +31,7 @@ public class LoginCreator{
         controller.setMainStage(primaryStage);
         makePaneMoveble(root,primaryStage);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        Scene scene = new Scene(root, 624, 375);
+        Scene scene = new Scene(root, 877, 557);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scene);
 
