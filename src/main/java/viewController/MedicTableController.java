@@ -25,14 +25,11 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
-import model.Admin;
-import model.Donor;
 import model.Medic;
 import org.springframework.context.ApplicationContext;
 import service.AdminService;
 import utils.CommonUtils;
-import utils.CustomAdminDeserializer;
-import utils.CustomMedicDeserializer;
+import utils.customDeserializer.CustomMedicDeserializer;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

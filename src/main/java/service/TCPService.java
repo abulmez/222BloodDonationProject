@@ -9,8 +9,8 @@ import model.DTO.DonationReceiverNameBloodGroupDTO;
 import model.DonationReport;
 import model.Donor;
 import model.ProductType;
-import utils.DonationDTO;
-import utils.IdentifierDTO;
+import model.DTO.DonationDTO;
+import model.DTO.IdentifierDTO;
 import utils.ServerConnection;
 import utils.customDeserializer.CustomBloodProductDeserializer;
 
@@ -18,7 +18,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.GenericSignatureFormatError;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;

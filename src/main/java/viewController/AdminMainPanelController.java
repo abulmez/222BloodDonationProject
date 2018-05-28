@@ -1,27 +1,15 @@
 package viewController;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import errorMessage.ErrorMessage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import model.Donor;
 import org.springframework.context.ApplicationContext;
 import service.AdminService;
-import service.DonorService;
 import utils.CommonUtils;
-import utils.CustomDonorDeserializer;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdminMainPanelController {
     @FXML

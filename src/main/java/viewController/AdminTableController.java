@@ -20,27 +20,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.converter.LocalDateStringConverter;
 import model.Admin;
-import model.Donor;
 import org.springframework.context.ApplicationContext;
 import service.AdminService;
 import service.LoginService;
 import utils.CommonUtils;
-import utils.CustomAdminDeserializer;
-import utils.CustomDonorDeserializer;
+import utils.customDeserializer.CustomAdminDeserializer;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 public class AdminTableController extends AbstractTableController<Admin> {
     @FXML

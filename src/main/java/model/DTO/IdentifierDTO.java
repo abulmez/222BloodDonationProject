@@ -1,4 +1,4 @@
-package utils;
+package model.DTO;
 
 public class IdentifierDTO {
     private String cnp;

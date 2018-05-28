@@ -1,4 +1,4 @@
-package utils;
+package utils.customDeserializer;
 
 import com.google.gson.*;
 import model.Admin;

@@ -22,15 +22,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
-import model.Admin;
 import model.Donor;
 import org.springframework.context.ApplicationContext;
 import service.AdminService;
 import utils.CommonUtils;
-import utils.CustomDonorDeserializer;
+import utils.customDeserializer.CustomDonorDeserializer;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
