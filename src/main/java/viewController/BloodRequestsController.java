@@ -246,6 +246,10 @@ public class BloodRequestsController {
                 model = FXCollections.observableArrayList(shallowCopy);
                 tableView.setItems(model);
             }
+            else
+            {
+                tableView.setItems(null);
+            }
         }
 
         else if(comboFiltrare.getSelectionModel().getSelectedItem().equals("Cereri plasate/initiate")){
@@ -257,6 +261,10 @@ public class BloodRequestsController {
                 model = FXCollections.observableArrayList(shallowCopy);
                 tableView.setItems(model);
             }
+            else
+            {
+                tableView.setItems(null);
+            }
     }
         else{
             List<BloodRequestDTO> list = service.findAllDemands();
@@ -265,6 +273,9 @@ public class BloodRequestsController {
                 Collections.reverse(shallowCopy);
                 model = FXCollections.observableArrayList(shallowCopy);
                 tableView.setItems(model);
+            }
+            else{
+                tableView.setItems(null);
             }
         }
     }

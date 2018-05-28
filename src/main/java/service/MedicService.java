@@ -1,9 +1,13 @@
 package service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import model.BloodProduct;
 import model.DTO.BloodRequestDTO;
+import model.DTO.DonationCenterDTO;
 import utils.ServerConnection;
+import utils.customDeserializer.CustomBloodProductDeserializer;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -179,7 +183,61 @@ public class MedicService {
         }
         return "Eroare la IO";
     }
+    public String handleAdress(){
+        String urlParameters = String.format("IdU=%s",Integer.toString(LoginService.getIdU()));
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="";
+        try {
 
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getAdresaSpital");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+
+                }
+                return response;
+            }
+            else if(code == 404){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+
+                }
+                return response;
+            }
+            else{
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+
+                }
+                return response;
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return "Eroare la IO";
+    }
 
     public List<BloodRequestDTO> handleFiltrarePlasate(){
         String urlParameters = Integer.toString(LoginService.getIdU());
@@ -370,10 +428,6 @@ public class MedicService {
                     Type collectionType= new TypeToken<ArrayList<BloodRequestDTO>>(){}.getType();
                     list=g.fromJson(in.readLine(),collectionType);
                     Integer i=0;
-//                    for(BloodRequestDTO br:list){
-//                        System.out.println("Valoarea: "+ br.getIdBD()+ " IdH: "+br.getIdH()+" Descriere: "+br.getDescription()+" Prioritate: "+br.getPriority()+
-//                        " Cantitate: "+br.getQuantity()+" Tip: "+br.getNeededType()+" Delivered: "+br.getDelivered()+" Status: "+br.getStatus() + " BloodType: "+br.getBloodProductType());
-//                    }
                     return list;
                 }
 
@@ -393,6 +447,48 @@ public class MedicService {
         }
         return null;
 
+    }
+
+    public ArrayList<DonationCenterDTO> getAllProductsFromCenters(){
+        ArrayList<DonationCenterDTO> centers = new ArrayList<>();
+        try {
+            String urlParameters = String.format("IdU=%s", LoginService.getIdU());
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/productsFromCenters");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+
+            if(code == 200){
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                //System.out.println(response + " ------------------AIIIIIIIIIIIIIIIIIIICIIIIIIIIIIIIIIIIIIIIIIIIIII");
+                Gson gson = new Gson();
+                Type collectionType= new TypeToken<ArrayList<DonationCenterDTO>>(){}.getType();
+                centers = gson.fromJson(in.readLine(),collectionType);
+                return centers;
+
+            }
+            else if(code == 404){
+                return centers;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return centers;
     }
 
 
