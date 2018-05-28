@@ -21,7 +21,7 @@
                 <TableColumn fx:id="colDonatedFor" minWidth="0.0" prefWidth="134.0" text="Donat pentru" />
             </columns>
         </TableView>
-        <Label layoutX="12.0" layoutY="11.0" prefHeight="30.0" prefWidth="282.0" styleClass="title" text="Centre de donare">
+        <Label layoutX="12.0" layoutY="11.0" prefHeight="45.0" prefWidth="440.0" styleClass="title" text="Produse sanguine disponibile">
             <font>
                 <Font size="36.0" />
             </font>
