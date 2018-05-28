@@ -2,6 +2,7 @@ package viewController;
 
 import errorMessage.ErrorMessage;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 
 public class AddAdminController {
     @FXML
-    TextField fieldNume,fieldCnp,fieldData,fieldMail,fieldTelefon,fieldUser,fieldParola;
+    TextField fieldNume,fieldCnp,fieldData,fieldMail,fieldTelefon,fieldUser,fieldParola,fieldStrada,fieldNr,fieldBloc,fieldScara,fieldEtaj,fieldOras,fieldJudet,fieldTara,fieldApart;
 
     AdminService service;
     Stage stage;
@@ -61,6 +62,10 @@ public class AddAdminController {
         String numeText="";
         String userText="";
         boolean go=true;
+        String nrText="";
+        String blocText="";
+        String etajText="";
+        String apartText="";
 
         //String[] bday = data.split("-");
         //int[] bdayAsInt = Arrays.stream(bday).mapToInt(Integer::parseInt).toArray();
@@ -91,11 +96,44 @@ public class AddAdminController {
         if (user.equals("")){
             userText="\n Username-ul nu poate fi vid";
         }
-        if (!go)
-            ErrorMessage.showErrorMessage(null,numeText+cnpText+dataText+mailText+telefonText+userText+passText);
+        try {
+            Integer.parseInt(fieldNr.getText());
+        } catch (Exception e){
+            nrText="\n Campul nr. strada trebuie sa fie un numar";
+            go=false;
+        }
+
+        try{
+            Integer.parseInt(fieldBloc.getText());
+        } catch (Exception e){
+            blocText="\n Campul nr. bloc trebuie sa fie un numar";
+            go=false;
+        }
+
+        try{
+            Integer.parseInt(fieldEtaj.getText());
+        } catch (Exception e){
+            etajText="\n Campul etaj trebuie sa fie un numar";
+            go=false;
+        }
+
+        try{
+            Integer.parseInt(fieldApart.getText());
+        } catch (Exception e){
+            apartText="\n Campul apartament trebuie sa fie un numar";
+            go=false;
+        }
+        if (fieldStrada.getText().equals("") || fieldNr.getText().equals("") || fieldBloc.getText().equals("") || fieldScara.getText().equals("") || fieldEtaj.equals("") || fieldApart.equals("") || fieldOras.equals("") || fieldJudet.equals("") || fieldTara.equals(""))
+            ErrorMessage.showErrorMessage(null,"Campurile adresei nu pot fi vide");
+        else if (!go)
+            ErrorMessage.showErrorMessage(null,numeText+cnpText+dataText+mailText+telefonText+userText+passText+nrText+blocText+etajText+apartText);
+        else if(service.checkCnp(cnp).equals("no"))
+            ErrorMessage.showErrorMessage(null,"Acest CNP exista deja");
         else {
             service.addAdmin(cnp, name, data, mail, telefon, user, pass, "Admin");
+            service.addAdress(fieldStrada.getText(),fieldNr.getText(),fieldBloc.getText(),fieldScara.getText(),fieldEtaj.getText(),fieldApart.getText(),fieldOras.getText(),fieldJudet.getText(),fieldTara.getText(),cnp);
             ctr.change();
+            ErrorMessage.showMessage(null, Alert.AlertType.INFORMATION,"Succes","Adminul a fost adaugat cu succes");
         }
     }
 }

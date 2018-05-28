@@ -92,6 +92,7 @@ public class UserInfoController {
 
     private DonorService service;
     int id=LoginService.getIdU();
+    String scaraText;
 
     @FXML
     private void initialize(){
@@ -112,7 +113,9 @@ public class UserInfoController {
             streetText.setText(data[9].split("=")[1]);
             nrStreetText.setText(data[10].split("=")[1]);
             blockText.setText(data[11].split("=")[1]);
-            stairText.setText(data[12].split("=")[1]);
+            if (!(data[12].split("=")[1].equals("null"))) {
+                stairText.setText(data[12].split("=")[1]);
+            }
             floorText.setText(data[13].split("=")[1]);
             flatText.setText(data[14].split("=")[1]);
             cityText.setText(data[15].split("=")[1]);
@@ -155,10 +158,14 @@ public class UserInfoController {
     @FXML
     public void handleAdd(){
 
-        if (streetText.getText().equals("") || nrStreetText.getText().equals("") || blockText.getText().equals("") || stairText.getText().equals("") || floorText.getText().equals("") || flatText.getText().equals("") || cityText.getText().equals("") || countyText.getText().equals("") || weightText.getText().equals("") || phoneText.getText().equals("") || emailText.getText().equals(""))
+        if (stairText.getText().equals(""))
+            scaraText="NUL";
+        else
+            scaraText=stairText.getText();
+        if (streetText.getText().equals("") || nrStreetText.getText().equals("") || blockText.getText().equals("") || floorText.getText().equals("") || flatText.getText().equals("") || cityText.getText().equals("") || countyText.getText().equals("") || weightText.getText().equals("") || phoneText.getText().equals("") || emailText.getText().equals(""))
             ErrorMessage.showErrorMessage(null,"Trebuie sa completati toate campurile");
         else {
-            service.handleAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), stairText.getText(), floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText(), Integer.toString(id));
+            service.handleAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), scaraText, floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText(), Integer.toString(id));
             service.handleUserUpdate(Integer.toString(id), weightText.getText(), phoneText.getText(), emailText.getText());
             if (supplyTextArea.getText().equals("")){
             }

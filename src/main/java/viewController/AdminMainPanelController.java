@@ -83,6 +83,7 @@ public class AdminMainPanelController {
                 tableAnchor.getChildren().setAll(newPane);
                 ctr= loader.getController();
                 addButton.setDisable(true);
+                ctr.setCtr(this);
 
 
             }catch (IOException e) {

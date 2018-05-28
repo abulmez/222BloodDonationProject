@@ -6,27 +6,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.AddAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.AddAdminController">
    <children>
       <TextField fx:id="fieldNume" layoutX="209.0" layoutY="111.0" />
       <TextField fx:id="fieldCnp" layoutX="18.0" layoutY="189.0" />
       <TextField fx:id="fieldTelefon" layoutX="17.0" layoutY="280.0" />
       <TextField fx:id="fieldMail" layoutX="397.0" layoutY="188.0" />
       <TextField fx:id="fieldParola" layoutX="397.0" layoutY="280.0" />
-      <TextField fx:id="fieldData" layoutX="209.0" layoutY="189.0" />
+      <TextField fx:id="fieldData" layoutX="209.0" layoutY="189.0" promptText="yyyy-mm-dd" />
       <TextField fx:id="fieldUser" layoutX="210.0" layoutY="280.0" />
-      <Label layoutX="292.0" layoutY="87.0" text="Nume" />
-      <Label layoutX="105.0" layoutY="161.0" text="CNP" />
-      <Label layoutX="273.0" layoutY="161.0" text="DataNașterii" />
-      <Label layoutX="482.0" layoutY="161.0" text="E-mail" />
-      <Label layoutX="96.0" layoutY="247.0" text="Telefon" />
-      <Label layoutX="280.0" layoutY="247.0" text="Username" />
-      <Label layoutX="483.0" layoutY="247.0" text="Parolă" />
-      <Button layoutX="268.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="34.0" prefWidth="83.0" text="Adaugă" />
-      <Label layoutX="220.0" layoutY="25.0" prefHeight="47.0" prefWidth="197.0" text="Adăugare admin" textFill="#831111">
+      <Label layoutX="284.0" layoutY="88.0" text="Nume" />
+      <Label layoutX="88.0" layoutY="161.0" text="CNP" />
+      <Label layoutX="265.0" layoutY="161.0" text="DataNașterii" />
+      <Label layoutX="465.0" layoutY="161.0" text="E-mail" />
+      <Label layoutX="85.0" layoutY="247.0" text="Telefon" />
+      <Label layoutX="271.0" layoutY="247.0" text="Username" />
+      <Label layoutX="465.0" layoutY="247.0" text="Parolă" />
+      <Button layoutX="266.0" layoutY="552.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="34.0" prefWidth="83.0" text="Adaugă" />
+      <Label layoutX="209.0" layoutY="25.0" prefHeight="47.0" prefWidth="197.0" text="Adăugare admin" textFill="#831111">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
+      <Label layoutX="278.0" layoutY="327.0" text="Adresă" textFill="#720b0b">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldStrada" layoutX="58.0" layoutY="385.0" prefHeight="22.0" prefWidth="320.0" />
+      <TextField fx:id="fieldNr" layoutX="400.0" layoutY="385.0" prefHeight="22.0" prefWidth="83.0" />
+      <TextField fx:id="fieldBloc" layoutX="63.0" layoutY="447.0" prefHeight="22.0" prefWidth="83.0" />
+      <TextField fx:id="fieldScara" layoutX="180.0" layoutY="446.0" prefHeight="22.0" prefWidth="75.0" />
+      <TextField fx:id="fieldEtaj" layoutX="291.0" layoutY="447.0" prefHeight="22.0" prefWidth="66.0" />
+      <TextField fx:id="fieldApart" layoutX="397.0" layoutY="447.0" prefHeight="22.0" prefWidth="127.0" />
+      <TextField fx:id="fieldOras" layoutX="62.0" layoutY="504.0" prefHeight="22.0" prefWidth="137.0" />
+      <TextField fx:id="fieldJudet" layoutX="239.0" layoutY="504.0" prefHeight="22.0" prefWidth="127.0" />
+      <TextField fx:id="fieldTara" layoutX="398.0" layoutY="504.0" prefHeight="22.0" prefWidth="146.0" />
+      <Label layoutX="89.0" layoutY="368.0" text="Stradă" />
+      <Label layoutX="415.0" layoutY="368.0" text="Nr. stradă" />
+      <Label layoutX="75.0" layoutY="428.0" text="Nr. bloc" />
+      <Label layoutX="192.0" layoutY="428.0" text="Scară" />
+      <Label layoutX="303.0" layoutY="428.0" text="Etaj" />
+      <Label layoutX="410.0" layoutY="428.0" text="Apartament" />
+      <Label layoutX="75.0" layoutY="484.0" text="Oraș" />
+      <Label layoutX="253.0" layoutY="484.0" text="Județ" />
+      <Label layoutX="418.0" layoutY="484.0" text="Țară" />
    </children>
 </AnchorPane>
