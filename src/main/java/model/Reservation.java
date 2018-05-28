@@ -37,6 +37,15 @@ public class Reservation {
         this.idU = idU;
     }
 
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "idDS=" + idDS +
+                ", idU=" + idU +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }

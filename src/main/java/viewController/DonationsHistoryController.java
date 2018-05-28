@@ -53,6 +53,7 @@ public class DonationsHistoryController {
         ApplicationContext context = CommonUtils.getFactory();
         donorService = context.getBean(DonorService.class);
         modelDonations= FXCollections.observableArrayList(donorService.getAllDonations(LoginService.getIdU()));
+        System.out.println(modelDonations);
         initTable(modelDonations);
     }
 
@@ -81,7 +82,7 @@ public class DonationsHistoryController {
                 result  = new DonationReport(1, LocalDate.now(),false,"Nu exista raport de detalii");
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/donationsReportDetails.fxml"));
+            loader.setLocation(getClass().getResource("/viewController/donationsReportDetails.fxml"));
             AnchorPane root = null;
             try {
                 root = loader.load();

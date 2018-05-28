@@ -1,5 +1,7 @@
 package viewController;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -7,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
+import model.Adress;
 import model.DonationCenter;
 import model.Hospital;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +19,10 @@ import service.HospitalService;
 import utils.AbstractTableController;
 import utils.CommonUtils;
 
+import java.util.List;
+
 public class HospitalTableAdmin extends AbstractTableController<Hospital> {
+    CenterInfoService serviceAddresses;
     HospitalService service;
     private ObservableList<Hospital> obs;
     ApplicationContext context = CommonUtils.getFactory();
@@ -36,9 +43,25 @@ public class HospitalTableAdmin extends AbstractTableController<Hospital> {
     public void initialize(){
         table.setEditable(true);
         service = context.getBean(HospitalService.class);
+        serviceAddresses = context.getBean(CenterInfoService.class);
         this.obs= FXCollections.observableArrayList(service.getAllHospitals());
         idHcolumn.setCellValueFactory(new PropertyValueFactory<Hospital,String>("IdH"));
-        idAcolumn.setCellValueFactory(new PropertyValueFactory<Hospital,String>("IdA"));
+        List<Adress> adressList = serviceAddresses.getAllAdress();
+
+//        idAcolumn.setCellValueFactory(new PropertyValueFactory<Hospital,String>("IdA"));
+
+        idAcolumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Hospital,String>,ObservableValue<String>>(){
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Hospital,String> p){
+                Adress aux = new Adress();
+                for (Adress adress : adressList) {
+                    if(adress.getIdA().equals(p.getValue().getIdA()))
+                        aux = adress;
+                }
+                return new SimpleStringProperty(aux.getFullAdress());
+            }
+        });
+
         donationHospitalcolumn.setCellValueFactory(new PropertyValueFactory<Hospital,String>("HospitalName"));
         phoneHospitalcolumn.setCellValueFactory(new PropertyValueFactory<Hospital,String>("PhoneNumber"));
 

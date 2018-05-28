@@ -8,10 +8,10 @@
     <children>
         <TableView fx:id="table" onMouseClicked="#handleGet" prefHeight="400.0" prefWidth="800.0">
             <columns>
-                <TableColumn fx:id="idHcolumn" prefWidth="144.0" text="IdH" />
-                <TableColumn fx:id="idAcolumn" prefWidth="170.39996337890625" text="IdA" />
-                <TableColumn fx:id="donationHospitalcolumn" prefWidth="302.40008544921875" text="Numele spitalului" />
-                <TableColumn fx:id="phoneHospitalcolumn" prefWidth="183.20001220703125" text="Telefon" />
+                <TableColumn fx:id="idHcolumn" prefWidth="65.5999755859375" text="IdH" />
+                <TableColumn fx:id="idAcolumn" prefWidth="476.8000183105469" text="Adress" />
+                <TableColumn fx:id="donationHospitalcolumn" prefWidth="136.79998779296875" text="Numele spitalului" />
+                <TableColumn fx:id="phoneHospitalcolumn" prefWidth="124.00006103515625" text="Telefon" />
             </columns>
         </TableView>
     </children>

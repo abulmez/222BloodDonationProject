@@ -37,12 +37,12 @@ public class Adress {
         return false;
     }
     public String getFullAdress(){
-        String string= ""+country+", " + city+", "+county+", "+"strada:"+street+", ";
-        if(verifyField(streetNumber)) string+="nr. stradă: "+streetNumber+", ";
-        if(verifyField(blockNumber)) string+="nr. bloc: "+blockNumber+", ";
-        if(verifyField(entrance)) string+="intrare: "+entrance+", ";
-        if(verifyField(floor)) string+="etaj: "+floor+", ";
-        if(verifyField(apartmentNumber)) string+="apartament: "+apartmentNumber+", ";
+        String string= ""+country+", " + city+", "+county+", "+","+street+", ";
+        if(verifyField(streetNumber)) string+="nr."+streetNumber+", ";
+        if(verifyField(blockNumber)) string+="nr.bloc:"+blockNumber+", ";
+        if(verifyField(entrance)) string+="intrare:"+entrance+", ";
+        if(verifyField(floor)) string+="et.:"+floor+", ";
+        if(verifyField(apartmentNumber)) string+="ap.:"+apartmentNumber+", ";
 
 
         return string;

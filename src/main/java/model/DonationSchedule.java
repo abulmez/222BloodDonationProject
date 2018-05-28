@@ -3,6 +3,7 @@ package model;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -22,6 +23,16 @@ public class DonationSchedule {
         this.donationDateTime = donationDateTime;
         this.availableSpots = availableSpots;
         //this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "DonationSchedule{" +
+                "idDS=" + idDS +
+                ", idDC=" + idDC +
+                ", donationDateTime=" + donationDateTime +
+                ", availableSpots=" + availableSpots +
+                '}';
     }
 
     /**
@@ -72,6 +83,7 @@ public class DonationSchedule {
         return donationDateTime;
     }
 
+
     public void setDonationDateTime(LocalDate donationDateTime) {
         this.donationDateTime = donationDateTime;
     }
@@ -84,10 +96,4 @@ public class DonationSchedule {
         this.availableSpots = availableSpots;
     }
 
-    /*public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }*/
 }

@@ -131,10 +131,7 @@ public class CenterInfoService {
             con.setRequestProperty("Content-Type", "application/getAdress");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-            System.out.println("Aici ajung sigur");
-
             int code = con.getResponseCode();
-            System.out.println("CODUL: "+code);
 
             if(code == 200) {
                 BufferedReader in = new BufferedReader(
@@ -288,4 +285,33 @@ public class CenterInfoService {
         }
         return 0;
     }
+
+    public void addAdress(String street, String streetNr, String blockNr, String entrance, String floor, String apartNr, String city, String county, String country) {
+        String urlParameters = String.format("sreet=%s&streetNr=%s&blockNr=%s&entrance=%s&floor=%s&apartNr=%s&city=%s&county=%s&country=%s", street, streetNr, blockNr, entrance, floor, apartNr, city, county, country);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addAdress");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+    }
+
 }
