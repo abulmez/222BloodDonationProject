@@ -77,6 +77,7 @@ public class DonationsController {
     public void  initialize() {
         service = context.getBean(TCPService.class);
         this.model = FXCollections.observableArrayList(service.handleGetDonations());
+        Collections.reverse(model);
 
         nrDonatieColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, Integer>("idD"));
         numeUserColumn.setCellValueFactory(new PropertyValueFactory<DonationDTO, String>("name"));
@@ -229,8 +230,8 @@ public class DonationsController {
             root = loader.load();
             secondaryStage.setTitle("Adauga raport");
             DonationsReportController ctrl = loader.getController();
-            ctrl.initData(newValue, donation.getIdD());
-            secondaryStage.setScene(new Scene(root, 300, 400));
+            ctrl.initData(newValue, donation);
+            secondaryStage.setScene(new Scene(root, 300, 450));
             secondaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {

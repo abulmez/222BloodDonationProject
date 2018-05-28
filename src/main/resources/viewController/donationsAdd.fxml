@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <TextField fx:id="numeUserTextField" layoutX="96.0" layoutY="174.0" promptText="Nume donator" AnchorPane.topAnchor="174.0" />
-      <TextField fx:id="cnpUserTextField" layoutX="96.0" layoutY="211.0" promptText="CNP utilizator" AnchorPane.topAnchor="211.0" />
+      <TextField fx:id="cnpUserTextField" disable="true" layoutX="96.0" layoutY="211.0" promptText="CNP utilizator" AnchorPane.topAnchor="211.0" />
       <TextField fx:id="cantitateTextField" layoutX="96.0" layoutY="250.0" promptText="Cantitate in mililitri" AnchorPane.topAnchor="250.0" />
       <Label id="formular" layoutX="115.0" layoutY="23.0" text="Formular" />
       <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="59.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
