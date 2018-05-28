@@ -13,6 +13,7 @@ public class CustomBloodProductDeserializer implements JsonDeserializer<BloodPro
     public BloodProduct deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonObject jobject = jsonElement.getAsJsonObject();
 
+        //System.out.println(jobject.get("validuntil").getAsString());
         String[] bday = jobject.get("validuntil").getAsString().split("T")[0].split("-");
         int[] bdayAsInt = Arrays.stream(bday).mapToInt(Integer::parseInt).toArray();
 
