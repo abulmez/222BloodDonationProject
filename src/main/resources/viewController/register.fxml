@@ -152,7 +152,7 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <JFXDatePicker fx:id="birthdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" overLay="true" prefHeight="30.0" prefWidth="256.0" promptText="Ziua de naștere" showWeekNumbers="true" style="-fx-background-color: white;" viewOrder="7.0" />
+                        <JFXDatePicker fx:id="birthdayText" defaultColor="#400303" nodeOrientation="RIGHT_TO_LEFT" prefHeight="22.0" prefWidth="227.0" promptText="Ziua de naștere" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="2">
