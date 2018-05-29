@@ -7,14 +7,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public abstract class CenterMenu{
+public abstract class CenterMenuController {
     public AnchorPane centerManeuPane;
     public MenuController mainStage;
 
     public void exitAction(){
         mainStage.exitAction();
-        LoginCreator loginCreator = new LoginCreator(new Stage());
-        loginCreator.show();
+        LoginCreatorController loginCreatorController = new LoginCreatorController(new Stage());
+        loginCreatorController.show();
     }
     public void setStage(MenuController stage) {
         this.mainStage = stage;

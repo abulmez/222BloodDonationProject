@@ -16,7 +16,7 @@ import utils.ServerConnection;
 import java.io.IOException;
 
 
-public class addButtonFormCentreController {
+public class AddButtonFormCentreController {
     ApplicationContext context = CommonUtils.getFactory();
     ServerConnection serverConnection;
     CenterInfoService centerInfoService;

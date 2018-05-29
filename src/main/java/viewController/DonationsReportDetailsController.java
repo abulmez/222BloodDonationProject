@@ -9,7 +9,7 @@ import model.DonationReport;
 
 import java.time.LocalDate;
 
-public class DonationsReportDetails {
+public class DonationsReportDetailsController {
     private DonationReport donationReport;
     @FXML
     Button buttonClose;

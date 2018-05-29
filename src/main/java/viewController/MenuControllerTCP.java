@@ -3,9 +3,8 @@ package viewController;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 
-public class MenuTCP extends CenterMenu {
+public class MenuControllerTCP extends CenterMenuController {
     public void initFirstPanel() {
         setPanel(getClass().getResource("/viewController/donations.fxml"),centerManeuPane);
     }

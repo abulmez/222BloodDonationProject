@@ -1,11 +1,11 @@
-package viewController;
+package model.dto;
 
 import java.util.Date;
 
-public class TableSetterGetter {
+public class TableSetterGetterDTO {
 
 
-    public TableSetterGetter(int numarRezervare, int numarCentruDonatie, int locuriDisponibile, Date dataDonarii) {
+    public TableSetterGetterDTO(int numarRezervare, int numarCentruDonatie, int locuriDisponibile, Date dataDonarii) {
         NumarRezervare = numarRezervare;
         NumarCentruDonatie = numarCentruDonatie;
         LocuriDisponibile = locuriDisponibile;

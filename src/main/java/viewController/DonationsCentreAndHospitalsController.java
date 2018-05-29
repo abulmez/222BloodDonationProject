@@ -127,12 +127,12 @@ public class DonationsCentreAndHospitalsController {
 
     public void handleDelete(){
         if(currentTable == TableType.Centru){
-           System.out.println(CentreTableAdmin.donation);
-           serviceCentre.deleteCentre(CentreTableAdmin.donation.getIdDC());
+           System.out.println(CentreTableAdminController.donation);
+           serviceCentre.deleteCentre(CentreTableAdminController.donation.getIdDC());
         }
         else if(currentTable==TableType.Spital){
-            System.out.println(HospitalTableAdmin.hospital);
-            hospitalTableService.deleteHospital(HospitalTableAdmin.hospital.getIdH());
+            System.out.println(HospitalTableAdminController.hospital);
+            hospitalTableService.deleteHospital(HospitalTableAdminController.hospital.getIdH());
         }
     }
 }

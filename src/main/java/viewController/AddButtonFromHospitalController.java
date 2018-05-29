@@ -8,7 +8,7 @@ import service.HospitalService;
 import utils.CommonUtils;
 import utils.ServerConnection;
 
-public class addButtonFromHospitalController {
+public class AddButtonFromHospitalController {
 
     ApplicationContext context = CommonUtils.getFactory();
     ServerConnection serverConnection;

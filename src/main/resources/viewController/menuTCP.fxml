@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="604.0" prefWidth="260.0" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.MenuTCP">
+<AnchorPane prefHeight="604.0" prefWidth="260.0" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.MenuControllerTCP">
     <children>
         <AnchorPane layoutX="241.0" prefHeight="604.0" prefWidth="19.0" styleClass="anchorPane" />
         <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="176.0" onMouseClicked="#visualizeAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Vizualizare donatii">

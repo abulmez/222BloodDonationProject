@@ -13,7 +13,7 @@ import service.CenterInfoService;
 import utils.AbstractTableController;
 import utils.CommonUtils;
 
-public class CentreTableAdmin extends AbstractTableController<DonationCenter> {
+public class CentreTableAdminController extends AbstractTableController<DonationCenter> {
 
     CenterInfoService service;
     public static DonationCenter donation;

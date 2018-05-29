@@ -2,7 +2,7 @@ package viewController;
 
 import javafx.fxml.FXML;
 
-public class MenuDonor extends CenterMenu{
+public class MenuControllerDonor extends CenterMenuController {
 
     public void initFirstPanel(){
         setPanel(getClass().getResource("/viewController/donorInformation.fxml"), centerManeuPane);

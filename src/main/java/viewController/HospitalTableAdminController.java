@@ -15,7 +15,7 @@ import service.HospitalService;
 import utils.AbstractTableController;
 import utils.CommonUtils;
 
-public class HospitalTableAdmin extends AbstractTableController<Hospital> {
+public class HospitalTableAdminController extends AbstractTableController<Hospital> {
     HospitalService service;
     private ObservableList<Hospital> obs;
     ApplicationContext context = CommonUtils.getFactory();

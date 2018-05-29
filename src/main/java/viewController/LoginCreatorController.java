@@ -9,11 +9,11 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class LoginCreator{
+public class LoginCreatorController {
     private double xOffset = 0;
     private double yOffset = 0;
     private Stage primaryStage;
-    public LoginCreator(Stage primaryStage){
+    public LoginCreatorController(Stage primaryStage){
         this.primaryStage=primaryStage;
         openLogin(primaryStage);
     }

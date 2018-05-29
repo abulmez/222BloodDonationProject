@@ -1,9 +1,8 @@
 package viewController;
 
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
 
-public class MenuAdmin extends CenterMenu {
+public class MenuControllerAdmin extends CenterMenuController {
 
 
     public void initFirstPanel(){

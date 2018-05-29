@@ -6,13 +6,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.context.ApplicationContext;
 import service.MedicService;
-import service.TCPService;
 import utils.CommonUtils;
 
 import java.io.IOException;
 import java.net.URL;
 
-public class MenuMedic extends CenterMenu {
+public class MenuControllerMedic extends CenterMenuController {
 
     public void initFirstPanel() {
 
@@ -71,7 +70,7 @@ public class MenuMedic extends CenterMenu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DonationCentersMedic ctrl=loader.getController();
+        DonationCentersMedicController ctrl=loader.getController();
         ctrl.setService(service,mainStage.getMainStage());
         centerManeuPane.getChildren().add(mainPane);
     }

@@ -24,7 +24,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DonationCentersMedic {
+public class DonationCentersMedicController {
     @FXML
     private ObservableList<DonationCenterDTO> model;
     @FXML
