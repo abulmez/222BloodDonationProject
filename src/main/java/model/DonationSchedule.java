@@ -96,6 +96,36 @@ public class DonationSchedule {
 //        this.status = status;
 //    }
 
+    public String getOra(){
+        String ora ="";
+        String timestampOra = donationDateTime.toString();
+        String[] prepare = timestampOra.split(" ");
+        String[] prepareHour = prepare[1].split(":");
+        ora = prepareHour[0];
+        ora+=":";
+        ora+= prepareHour[1];
+        return ora;
+    }
+    public Integer getAn(){
+        String timestamp = donationDateTime.toString();
+        String[] prepare =timestamp.split(" ");
+        String an = prepare[0].split("-")[0];
+        return Integer.parseInt(an);
+    }
+    public Integer getLuna(){
+        String timestamp = donationDateTime.toString();
+        String[] prepare =timestamp.split(" ");
+        String luna = prepare[0].split("-")[1];
+        return Integer.parseInt(luna);
+    }
+    public Integer getZi(){
+        String timestamp = donationDateTime.toString();
+        String[] prepare =timestamp.split(" ");
+        String zi = prepare[0].split("-")[2];
+        return Integer.parseInt(zi);
+    }
+
+
     @Override
     public String toString() {
         return "DonationSchedule{" +

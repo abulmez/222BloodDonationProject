@@ -10,6 +10,8 @@ import service.HospitalService;
 import utils.CommonUtils;
 import utils.ServerConnection;
 
+import java.util.List;
+
 public class AddButtonFromHospitalController {
 
     ApplicationContext context = CommonUtils.getFactory();

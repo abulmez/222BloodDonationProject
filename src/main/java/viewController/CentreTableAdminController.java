@@ -17,6 +17,8 @@ import service.CenterInfoService;
 import utils.AbstractTableController;
 import utils.CommonUtils;
 
+import java.util.List;
+
 public class CentreTableAdminController extends AbstractTableController<DonationCenter> {
 
     CenterInfoService service;

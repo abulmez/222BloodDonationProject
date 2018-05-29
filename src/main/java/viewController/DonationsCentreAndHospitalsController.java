@@ -109,7 +109,7 @@ public class DonationsCentreAndHospitalsController {
         else{
             System.out.println(currentTable.toString());
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/viewController/admin-CentreAndHospitalsTables/addButtonFormHospital.fxml"));
+            loader.setLocation(getClass().getResource("/viewController/admin-CentreAndHospitalsTables/addButtonFormCentre.fxml"));
             AnchorPane root1 = null;
             try {
                 root1 = (AnchorPane) loader.load();

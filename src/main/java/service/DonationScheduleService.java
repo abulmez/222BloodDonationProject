@@ -3,7 +3,6 @@ package service;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.DonationSchedule;
-import model.DonationScheduleRares;
 import model.Reservation;
 import utils.ServerConnection;
 
@@ -65,8 +64,8 @@ public class DonationScheduleService {
             return IdDs;
         }
     }
-    public List<DonationScheduleRares> getAllDonationSchedule(){
-        List<DonationScheduleRares> list=new ArrayList<>();
+    public List<DonationSchedule> getAllDonationSchedule(){
+        List<DonationSchedule> list=new ArrayList<>();
         try {
 
             con = serverConnection.getServerConnection();
@@ -103,8 +102,8 @@ public class DonationScheduleService {
                     }
                 }).create();
 
-                Type collectionType = new TypeToken<Collection<DonationScheduleRares>>(){}.getType();
-                Collection<DonationScheduleRares> donationSchedules = gson.fromJson(response.toString(),collectionType);
+                Type collectionType = new TypeToken<Collection<DonationSchedule>>(){}.getType();
+                Collection<DonationSchedule> donationSchedules = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(donationSchedules);
                 System.out.println("-------------------------------------------");
                 System.out.println("Lungimea Donation Schedule: "+list.size());

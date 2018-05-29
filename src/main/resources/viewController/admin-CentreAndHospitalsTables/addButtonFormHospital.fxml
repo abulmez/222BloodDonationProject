@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="374.0" prefWidth="795.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.addButtonFromHospitalController">
+<AnchorPane prefHeight="374.0" prefWidth="795.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.AddButtonFromHospitalController">
     <children>
         <TextField fx:id="nameCentre" layoutX="179.0" layoutY="92.0" />
         <TextField fx:id="phoneCentre" layoutX="179.0" layoutY="148.0" />

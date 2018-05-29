@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import model.DonationSchedule;
-import model.DonationScheduleRares;
 import model.Reservation;
 import model.Schedule;
 import org.springframework.context.ApplicationContext;
@@ -29,18 +28,18 @@ import java.util.List;
 public class DonationAppointmentController {
     Boolean exist = false;
     Integer howMuchAccepted =0;
-    DonationScheduleRares selected = new DonationScheduleRares();
+    DonationSchedule selected = new DonationSchedule();
     @FXML
     DatePicker datePickerDataDonation;
 
     @FXML
-    TableView<DonationScheduleRares> tableViewOreDisponibile;
+    TableView<DonationSchedule> tableViewOreDisponibile;
 
     @FXML
-    TableColumn<DonationScheduleRares,String> tableColumnOreLibere;
+    TableColumn<DonationSchedule,String> tableColumnOreLibere;
 
     @FXML
-    TableColumn<DonationScheduleRares,String> tableColumnLocuriDisponibile;
+    TableColumn<DonationSchedule,String> tableColumnLocuriDisponibile;
 
     @FXML
     Button buttonTrimiteCerereDonatie;
@@ -55,7 +54,7 @@ public class DonationAppointmentController {
     Label statusRezervareText;
 
     private DonationScheduleService donationScheduleService;
-    private ObservableList<DonationScheduleRares> modelSchedule = FXCollections.observableArrayList();
+    private ObservableList<DonationSchedule> modelSchedule = FXCollections.observableArrayList();
     public void initThings(){
         buttonTrimiteCerereDonatie.setDisable(true);
         statusRezervare.setDisable(true);
@@ -90,23 +89,23 @@ public class DonationAppointmentController {
     }
 
     void initTableSchedule(LocalDate localDate){
-        tableColumnOreLibere.setCellValueFactory(new PropertyValueFactory<DonationScheduleRares,String>("Ora"));
-        tableColumnLocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleRares,String >("AvailableSpots"));
+        tableColumnOreLibere.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String>("Ora"));
+        tableColumnLocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String >("AvailableSpots"));
         setModel(initList(localDate));
     }
-    public List<DonationScheduleRares> initList(LocalDate localDate){
+    public List<DonationSchedule> initList(LocalDate localDate){
         System.out.println(localDate.getYear());
         System.out.println(localDate.getMonthValue());
         System.out.println(localDate.getDayOfMonth());
         //                System.out.println(localDate);
-        List<DonationScheduleRares> fromRequest = donationScheduleService.getAllDonationSchedule();
-        List<DonationScheduleRares> auxList = new ArrayList<>();
-        for (DonationScheduleRares donationScheduleRares : fromRequest) {
+        List<DonationSchedule> fromRequest = donationScheduleService.getAllDonationSchedule();
+        List<DonationSchedule> auxList = new ArrayList<>();
+        for (DonationSchedule donationScheduleRares : fromRequest) {
             if (donationScheduleRares.getAn() == localDate.getYear())
             {
                 if(donationScheduleRares.getLuna() == localDate.getMonthValue())
                     if(donationScheduleRares.getZi() == localDate.getDayOfMonth()){
-                    DonationScheduleRares aux = donationScheduleRares;
+                    DonationSchedule aux = donationScheduleRares;
                     aux.setAvailableSpots(donationScheduleService.settingAvailableSpots(aux.getIdDS()));
                     auxList.add(aux);
                     }
@@ -116,11 +115,11 @@ public class DonationAppointmentController {
         System.out.println(auxList);
         return auxList;
     }
-    public void setModel(List<DonationScheduleRares> list)
+    public void setModel(List<DonationSchedule> list)
     {
-        Collections.sort(list,new Comparator<DonationScheduleRares>(){
+        Collections.sort(list,new Comparator<DonationSchedule>(){
             @Override
-            public int compare(DonationScheduleRares r1,DonationScheduleRares r2)
+            public int compare(DonationSchedule r1,DonationSchedule r2)
             {
                 return r1.getOra().compareTo(r2.getOra());
             }
@@ -144,7 +143,7 @@ public class DonationAppointmentController {
             });
         }
     }
-    public void update(List<DonationScheduleRares> list){
+    public void update(List<DonationSchedule> list){
         setModel(list);
     }
 
