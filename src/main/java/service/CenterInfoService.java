@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.Adress;
 import model.DonationCenter;
-import model.DonationSchedule;
+
 import model.UserType;
 import utils.ServerConnection;
 

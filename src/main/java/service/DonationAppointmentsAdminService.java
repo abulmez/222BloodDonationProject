@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
 import model.dto.DonationScheduleStatusDTO;
+import model.dto.UserPacientDTO;
 import utils.ServerConnection;
 
 import java.io.BufferedReader;
@@ -89,10 +90,10 @@ public class DonationAppointmentsAdminService {
         return list;
     }
 
-    public List<UserPacient> getAllUserPacient(){
+    public List<UserPacientDTO> getAllUserPacient(){
         //String urlParameters = String.format("username=%s&password=%s");
         //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
-        List<UserPacient> list=new ArrayList<>();
+        List<UserPacientDTO> list=new ArrayList<>();
         try {
 
             con = serverConnection.getServerConnection();
@@ -127,11 +128,11 @@ public class DonationAppointmentsAdminService {
                         return Date.parse(newdate,formatter);
                     }
                 }).create();*/
-                Type collectionType = new TypeToken<Collection<UserPacient>>(){}.getType();
-                Collection<UserPacient> userPacients = gson.fromJson(response.toString(),collectionType);
-                list = new ArrayList<>(userPacients);
+                Type collectionType = new TypeToken<Collection<UserPacientDTO>>(){}.getType();
+                Collection<UserPacientDTO> userPacientDTOS = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(userPacientDTOS);
                 System.out.println("-------------------------------------------");
-                System.out.println("Lungimea UserPacient Schedule: "+list.size());
+                System.out.println("Lungimea UserPacientDTO Schedule: "+list.size());
                 System.out.println("-------------------------------------------");
                 return list;
             }
@@ -152,7 +153,7 @@ public class DonationAppointmentsAdminService {
     public  List<DonationScheduleStatusDTO> getAllDonationStatus(){
         List<DonationSchedule> donationSchedules = getAllDonationSchedule();
         List<Reservation> reservations = getAllReservation();
-        List<UserPacient> userPacients = getAllUserPacient();
+        List<UserPacientDTO> userPacientDTOS = getAllUserPacient();
 
         List<DonationScheduleStatusDTO> bun = new ArrayList<>();
 
@@ -160,9 +161,9 @@ public class DonationAppointmentsAdminService {
             for (Reservation reservation : reservations){
                 if(donationSchedule.getIdDS() == reservation.getIdDS()){
 
-                    for(UserPacient userPacient : userPacients){
-                        if(donationSchedule.getIdDC() == userPacient.getIdDC()){
-                            DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),userPacient.getName());
+                    for(UserPacientDTO userPacientDTO : userPacientDTOS){
+                        if(donationSchedule.getIdDC() == userPacientDTO.getIdDC()){
+                            DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(null),donationSchedule.getAvailableSpots(),reservation.getStatus(), userPacientDTO.getName());
                             bun.add(status);
                         }
                     }

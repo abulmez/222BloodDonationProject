@@ -7,8 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import model.DonationSchedule;
-import model.DonationScheduleRares;
 import model.Schedule;
 import org.springframework.context.ApplicationContext;
 import service.DonationScheduleService;
@@ -49,9 +49,9 @@ public class DonationAppointmentController {
         donationScheduleService = context.getBean(DonationScheduleService.class);
         String response = donationScheduleService.requestForTableHandle(1,1);
         System.out.println("Am primit de la request " + " " + response);
-        Gson gson = new GsonBuilder().registerTypeAdapter(DonationScheduleRares.class,new CustomDonationScheduleDeserialize()).create();
-        Type collectionType = new TypeToken<ArrayList<DonationScheduleRares>>(){}.getType();
-        ArrayList<DonationScheduleRares> donationSchedules = gson.fromJson(response,collectionType);
+        Gson gson = new GsonBuilder().registerTypeAdapter(DonationSchedule.class,new CustomDonationScheduleDeserialize()).create();
+        Type collectionType = new TypeToken<ArrayList<DonationSchedule>>(){}.getType();
+        ArrayList<DonationSchedule> donationSchedules = gson.fromJson(response,collectionType);
         donationSchedules.forEach(donationSchedule -> System.out.println(donationSchedule));
         initTableSchedule();
     }
@@ -107,13 +107,13 @@ public class DonationAppointmentController {
         message.showAndWait();
     }
 
-    public class CustomDonationScheduleDeserialize implements JsonDeserializer<DonationScheduleRares> {
+    public class CustomDonationScheduleDeserialize implements JsonDeserializer<DonationSchedule> {
         @Override
-        public DonationScheduleRares deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        public DonationSchedule deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
 
             JsonObject jobject = jsonElement.getAsJsonObject();
             String text = jobject.get("donationdatetime").getAsString();
-            return new DonationScheduleRares(
+            return new DonationSchedule(
                     jobject.get("idds").getAsInt(),
                     jobject.get("iddc").getAsInt(),
                     Timestamp.from(Instant.parse(text)),

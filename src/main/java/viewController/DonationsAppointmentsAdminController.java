@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import model.DonationSchedule;
 import model.dto.DonationScheduleStatusDTO;
 import model.Reservation;
@@ -102,7 +103,7 @@ public class DonationsAppointmentsAdminController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if(newValue.equals("WAITING")){
-                    //DonationSchedule ds = paginationTableView.getSelectionModel().getSelectedItem();
+
                 }
                 if(newValue.equals("REFUSED")){
 

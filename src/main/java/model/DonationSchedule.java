@@ -2,8 +2,8 @@ package model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.*;
 
 /**
  *
@@ -16,12 +16,11 @@ public class DonationSchedule {
     public DonationSchedule() {
     }
 
-    public DonationSchedule(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots) {
+    public DonationSchedule(Integer idDS, Integer idDC, Timestamp donationDateTime, Integer availableSpots) {
         this.idDS = idDS;
         this.idDC = idDC;
         this.donationDateTime = donationDateTime;
         this.availableSpots = availableSpots;
-        //this.status = status;
     }
 
     /**
@@ -40,7 +39,7 @@ public class DonationSchedule {
      *
      */
     @SerializedName("donationdatetime")
-    private LocalDate donationDateTime;
+    private Timestamp donationDateTime;
 
     /**
      *
@@ -48,9 +47,7 @@ public class DonationSchedule {
     @SerializedName("availablespots")
     private Integer availableSpots;
 
-    /*@SerializedName("status")
-    private String status;*/
-
+//    private String status;
 
     public Integer getIdDS() {
         return idDS;
@@ -68,11 +65,15 @@ public class DonationSchedule {
         this.idDC = idDC;
     }
 
-    public LocalDate getDonationDateTime() {
+    public Timestamp getDonationDateTime() {
         return donationDateTime;
     }
 
-    public void setDonationDateTime(LocalDate donationDateTime) {
+    public LocalDate getDonationDateTime(String a) {
+        return donationDateTime.toLocalDateTime().toLocalDate();
+    }
+
+    public void setDonationDateTime(Timestamp donationDateTime) {
         this.donationDateTime = donationDateTime;
     }
 
@@ -84,10 +85,21 @@ public class DonationSchedule {
         this.availableSpots = availableSpots;
     }
 
-    /*public String getStatus() {
-        return status;
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
+
+    @Override
+    public String toString() {
+        return "DonationSchedule{" +
+                "idDS=" + idDS +
+                ", idDC=" + idDC +
+                ", donationDateTime=" + donationDateTime +
+                ", availableSpots=" + availableSpots +
+                '}';
     }
-    public void setStatus(String status) {
-        this.status = status;
-    }*/
 }

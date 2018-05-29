@@ -1,15 +1,15 @@
-package model;
+package model.dto;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UserPacient {
-    public UserPacient() {
+public class UserPacientDTO {
+    public UserPacientDTO() {
     }
 
-    public UserPacient(Integer idU, String CNP, String name, /*LocalDate birthday,*/ String mail, String phone, String bloodGroup, Double weight, Integer idA, Integer idDC, Integer idH) {
+    public UserPacientDTO(Integer idU, String CNP, String name, /*LocalDate birthday,*/ String mail, String phone, String bloodGroup, Double weight, Integer idA, Integer idDC, Integer idH) {
         this.idU = idU;
         this.CNP = CNP;
         this.name = name;
