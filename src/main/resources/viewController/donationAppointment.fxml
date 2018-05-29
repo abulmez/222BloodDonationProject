@@ -38,5 +38,15 @@
             </font></Button>
         <Label layoutX="21.0" layoutY="24.0" styleClass="title" text="Programare donație" />
         <DatePicker fx:id="datePickerDataDonation" layoutX="519.0" layoutY="90.0" />
+      <Label fx:id="statusRezervare" layoutX="491.0" layoutY="430.0" text="STATUS REZERVARE:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="statusRezervareText" layoutX="683.0" layoutY="430.0" prefHeight="27.0" prefWidth="184.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

@@ -27,32 +27,37 @@ public class Donation {
     /**
      * 
      */
+    @SerializedName("idd")
     private Integer idD;
 
     /**
      * 
      */
+    @SerializedName("iddc")
     private Integer idDC;
 
     /**
      * 
      */
+    @SerializedName("idu")
     private Integer idU;
 
     /**
      * 
      */
+    @SerializedName("quantity")
     private Double cantitate;
 
     /**
      * 
      */
+    @SerializedName("status")
     private String status;
 
     /**
      * 
      */
-    @SerializedName("receiverName")
+    @SerializedName("receivername")
     private String receiverName;
 
     public Integer getIdD() {
@@ -97,6 +102,18 @@ public class Donation {
 
     public String getReceiverName() {
         return receiverName;
+    }
+
+    @Override
+    public String toString() {
+        return "Donation{" +
+                "idD=" + idD +
+                ", idDC=" + idDC +
+                ", idU=" + idU +
+                ", cantitate=" + cantitate +
+                ", status='" + status + '\'' +
+                ", receiverName='" + receiverName + '\'' +
+                '}';
     }
 
     public void setReceiverName(String receiverName) {

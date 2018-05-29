@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  *
@@ -21,6 +23,7 @@ public class DonationSchedule {
         this.idDC = idDC;
         this.donationDateTime = donationDateTime;
         this.availableSpots = availableSpots;
+        //this.status = status;
     }
 
     /**

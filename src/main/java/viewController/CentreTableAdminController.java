@@ -1,5 +1,7 @@
 package viewController;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -7,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
+import model.Adress;
 import model.DonationCenter;
 import org.springframework.context.ApplicationContext;
 import service.CenterInfoService;
@@ -37,9 +41,24 @@ public class CentreTableAdminController extends AbstractTableController<Donation
     public void initialize(){
         table.setEditable(true);
         service = context.getBean(CenterInfoService.class);
+        List<Adress> adressList = service.getAllAdress();
+
         this.obs = FXCollections.observableArrayList(service.getAllDonationCenter());
         idDCcolumn.setCellValueFactory(new PropertyValueFactory<DonationCenter,String>("IdDC"));
-        idAcolumn.setCellValueFactory(new PropertyValueFactory<DonationCenter,String>("IdA"));
+
+//        idAcolumn.setCellValueFactory(new PropertyValueFactory<DonationCenter,String>("IdA"));
+        idAcolumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DonationCenter,String>,ObservableValue<String>>(){
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<DonationCenter,String> p){
+                Adress aux = new Adress();
+                for (Adress adress : adressList) {
+                    if(adress.getIdA() == p.getValue().getIdA())
+                        aux = adress;
+                }
+                return new SimpleStringProperty(aux.getFullAdress());
+            }
+        });
+
         donationCentercolumn.setCellValueFactory(new PropertyValueFactory<DonationCenter,String>("CenterName"));
         phoneCentercolumn.setCellValueFactory(new PropertyValueFactory<DonationCenter,String>("PhoneNumber"));
 

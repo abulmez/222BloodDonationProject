@@ -9,9 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import model.DonationSchedule;
+import model.DonationScheduleRares;
+import model.Reservation;
 import model.Schedule;
 import org.springframework.context.ApplicationContext;
 import service.DonationScheduleService;
+import service.LoginService;
 import utils.CommonUtils;
 
 import java.lang.reflect.Type;
@@ -19,20 +22,25 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DonationAppointmentController {
+    Boolean exist = false;
+    Integer howMuchAccepted =0;
+    DonationScheduleRares selected = new DonationScheduleRares();
     @FXML
     DatePicker datePickerDataDonation;
 
     @FXML
-    TableView<Schedule> tableViewOreDisponibile;
+    TableView<DonationScheduleRares> tableViewOreDisponibile;
 
     @FXML
-    TableColumn<Schedule,String> tableColumnOreLibere;
+    TableColumn<DonationScheduleRares,String> tableColumnOreLibere;
 
     @FXML
-    TableColumn<Schedule,String> tableColumnLocuriDisponibile;
+    TableColumn<DonationScheduleRares,String> tableColumnLocuriDisponibile;
 
     @FXML
     Button buttonTrimiteCerereDonatie;
@@ -40,64 +48,134 @@ public class DonationAppointmentController {
     @FXML
     Button buttonAnulareCerereDonatie;
 
+    @FXML
+    Label statusRezervare;
+
+    @FXML
+    Label statusRezervareText;
+
     private DonationScheduleService donationScheduleService;
-    private ObservableList<Schedule> modelSchedule = FXCollections.observableArrayList();
+    private ObservableList<DonationScheduleRares> modelSchedule = FXCollections.observableArrayList();
+    public void initThings(){
+        buttonTrimiteCerereDonatie.setDisable(true);
+        statusRezervare.setDisable(true);
+        statusRezervareText.setDisable(true);
+    }
     @FXML
     public void initialize(){
-        datePickerDataDonation.setValue(LocalDate.now());
         ApplicationContext context = CommonUtils.getFactory();
         donationScheduleService = context.getBean(DonationScheduleService.class);
-        String response = donationScheduleService.requestForTableHandle(1,1);
-        System.out.println("Am primit de la request " + " " + response);
-        Gson gson = new GsonBuilder().registerTypeAdapter(DonationSchedule.class,new CustomDonationScheduleDeserialize()).create();
-        Type collectionType = new TypeToken<ArrayList<DonationSchedule>>(){}.getType();
-        ArrayList<DonationSchedule> donationSchedules = gson.fromJson(response,collectionType);
-        donationSchedules.forEach(donationSchedule -> System.out.println(donationSchedule));
-        initTableSchedule();
+        List<Reservation> reservations = donationScheduleService.getAllReservation();
+        initThings();
+
+        for (Reservation reservation : reservations) {
+            if(reservation.getIdU() == LoginService.getIdU())
+            {
+                if(reservation.getStatus().equals("ACCEPTED"))
+                    howMuchAccepted++;
+                statusRezervare.setDisable(false);
+                statusRezervareText.setDisable(false);
+                statusRezervareText.setText(reservation.getStatus());
+                exist=true;
+            }
+        }
+        datePickerDataDonation.setValue(LocalDate.now());
+        datePickerDataDonation.valueProperty().addListener((ov,oldValue,newValue)->{
+            buttonTrimiteCerereDonatie.setDisable(true);
+            initTableSchedule(newValue);
+        });
+
+
+        initTableSchedule(LocalDate.now());
     }
 
-    void initTableSchedule(){
-        tableColumnOreLibere.setCellValueFactory(new PropertyValueFactory<Schedule,String>("Ora"));
-        tableColumnLocuriDisponibile.setCellValueFactory(new PropertyValueFactory<Schedule,String >("Availablespots"));
-        setModel(initList());
+    void initTableSchedule(LocalDate localDate){
+        tableColumnOreLibere.setCellValueFactory(new PropertyValueFactory<DonationScheduleRares,String>("Ora"));
+        tableColumnLocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleRares,String >("AvailableSpots"));
+        setModel(initList(localDate));
     }
-    public List<Schedule> initList(){
-        int availableSpots =4;
-        List<Schedule> init = new ArrayList<>();
-        init.add(new Schedule("08:00",availableSpots));
-        init.add(new Schedule("09:00",availableSpots));
-        init.add(new Schedule("10:00",availableSpots));
-        init.add(new Schedule("11:00",availableSpots));
-        init.add(new Schedule("12:00",availableSpots));
-        init.add(new Schedule("13:00",availableSpots));
-        init.add(new Schedule("14:00",availableSpots));
-        init.add(new Schedule("15:00",availableSpots));
-        init.add(new Schedule("16:00",availableSpots));
-        init.add(new Schedule("17:00",availableSpots));
-        init.add(new Schedule("18:00",availableSpots));
-        init.add(new Schedule("19:00",availableSpots));
-        init.add(new Schedule("20:00",availableSpots));
-        init.add(new Schedule("21:00",availableSpots));
-        init.add(new Schedule("22:00",availableSpots));
-        return init;
+    public List<DonationScheduleRares> initList(LocalDate localDate){
+        System.out.println(localDate.getYear());
+        System.out.println(localDate.getMonthValue());
+        System.out.println(localDate.getDayOfMonth());
+        //                System.out.println(localDate);
+        List<DonationScheduleRares> fromRequest = donationScheduleService.getAllDonationSchedule();
+        List<DonationScheduleRares> auxList = new ArrayList<>();
+        for (DonationScheduleRares donationScheduleRares : fromRequest) {
+            if (donationScheduleRares.getAn() == localDate.getYear())
+            {
+                if(donationScheduleRares.getLuna() == localDate.getMonthValue())
+                    if(donationScheduleRares.getZi() == localDate.getDayOfMonth()){
+                    DonationScheduleRares aux = donationScheduleRares;
+                    aux.setAvailableSpots(donationScheduleService.settingAvailableSpots(aux.getIdDS()));
+                    auxList.add(aux);
+                    }
+
+            }
+        }
+        System.out.println(auxList);
+        return auxList;
     }
-    public void setModel(List<Schedule> list)
+    public void setModel(List<DonationScheduleRares> list)
     {
-        this.modelSchedule.setAll(list);
-        tableViewOreDisponibile.setItems(this.modelSchedule);
+        Collections.sort(list,new Comparator<DonationScheduleRares>(){
+            @Override
+            public int compare(DonationScheduleRares r1,DonationScheduleRares r2)
+            {
+                return r1.getOra().compareTo(r2.getOra());
+            }
+        });
+        if(list.isEmpty())
+        {
+            this.modelSchedule.setAll();
+            tableViewOreDisponibile.setItems(this.modelSchedule);
+            tableViewOreDisponibile.getSelectionModel().selectedIndexProperty().addListener((obs,old,newS)->{
+                if(exist==false)
+                buttonTrimiteCerereDonatie.setDisable(false);
+            });
+        }
+        else{
+            this.modelSchedule.setAll(list);
+            tableViewOreDisponibile.setItems(this.modelSchedule);
+            tableViewOreDisponibile.getSelectionModel().selectedIndexProperty().addListener((obs,old,newS)->{
+                if(exist==false)
+                buttonTrimiteCerereDonatie.setDisable(false);
+                selected = tableViewOreDisponibile.getSelectionModel().getSelectedItem();
+            });
+        }
     }
-    public void update(List<Schedule> list){
+    public void update(List<DonationScheduleRares> list){
         setModel(list);
     }
 
     @FXML
     public void onActionButtonTrimiteCerereDonatie(){
-        showMessage(Alert.AlertType.CONFIRMATION,"Merge btonul de trimite cerere ","Salutare");
+        if(howMuchAccepted<3)
+        {
+            String response = donationScheduleService.addReservation(selected.getIdDS(),LoginService.getIdU());
+            if(response.equals("Success"))
+                statusRezervareText.setText("ATTEMPTING");
+            showMessage(Alert.AlertType.CONFIRMATION,response,response);
+        }
+        else{
+            showMessage(Alert.AlertType.WARNING,"Sunt deja 3 rezervari acceptate","3 rezervari acceptate");
+        }
+
+
     }
 
     @FXML
     public void onActionButtonAnulareCerereDonatie(){
-        showMessage(Alert.AlertType.CONFIRMATION,"Merge butonul de anulare cerere ","Salutare");
+        Integer id = donationScheduleService.deleteReservation(LoginService.getIdU());
+        if(id==1)
+        {
+            showMessage(Alert.AlertType.CONFIRMATION,"Succes","Succes");
+            statusRezervareText.setText("");
+            statusRezervare.setDisable(true);
+        }
+        else{
+            showMessage(Alert.AlertType.WARNING,"A avut loc o eroare","A avut loc o eroare");
+        }
     }
 
     private void showMessage(Alert.AlertType type, String header, String text){

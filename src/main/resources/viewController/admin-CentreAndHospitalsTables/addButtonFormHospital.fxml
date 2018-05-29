@@ -4,15 +4,86 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="330.0" prefWidth="400.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.AddButtonFromHospitalController">
+<AnchorPane prefHeight="374.0" prefWidth="795.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.addButtonFromHospitalController">
     <children>
-        <TextField fx:id="nameCentre" layoutX="168.0" layoutY="93.0" />
-        <TextField fx:id="phoneCentre" layoutX="168.0" layoutY="150.0" />
-        <Button fx:id="addButton" layoutX="141.0" layoutY="231.0" mnemonicParsing="false" onAction="#addHandle" prefHeight="26.0" prefWidth="117.0" text="Adauga" />
-        <Label layoutX="61.0" layoutY="97.0" text="Nume Spital" />
-        <Label layoutX="63.0" layoutY="154.0" text="Telefon" />
-        <TextField fx:id="idACentre" layoutX="168.0" layoutY="44.0" />
-        <Label layoutX="63.0" layoutY="52.0" text="IdA" />
+        <TextField fx:id="nameCentre" layoutX="179.0" layoutY="92.0" />
+        <TextField fx:id="phoneCentre" layoutX="179.0" layoutY="148.0" />
+        <Button fx:id="addButton" layoutX="134.0" layoutY="261.0" mnemonicParsing="false" onAction="#addHandle" prefHeight="26.0" prefWidth="117.0" text="Adauga" />
+        <Label layoutX="61.0" layoutY="97.0" text="Nume Spital">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+        <Label layoutX="61.0" layoutY="154.0" text="Telefon">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+
+        <AnchorPane prefHeight="35.0" prefWidth="267.0" />
+        <AnchorPane layoutX="401.0" layoutY="239.0" prefHeight="35.0" prefWidth="267.0">
+            <children>
+                <Label layoutX="51.0" layoutY="-1.0" prefHeight="30.0" prefWidth="82.0" text="Oraș" textFill="#400303">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="393.0" layoutY="17.0" prefHeight="35.0" prefWidth="94.0" />
+        <AnchorPane layoutX="494.0" layoutY="86.0" prefHeight="35.0" prefWidth="267.0">
+            <children>
+                <Label layoutX="-40.0" layoutY="-1.0" prefHeight="30.0" prefWidth="104.0" text="Apartament" textFill="#400303">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="flatText" layoutX="84.0" layoutY="2.0" prefHeight="24.0" prefWidth="188.0" promptText="apartament" style="-fx-border-color: #400303;" />
+            </children>
+        </AnchorPane>
+        <Label layoutX="453.0" layoutY="47.0" prefHeight="30.0" prefWidth="82.0" text="Nr. Stradă" textFill="#400303">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="nrStreetText" layoutX="541.0" layoutY="50.0" prefHeight="24.0" prefWidth="226.0" promptText="nr. stradă" style="-fx-border-color: #400303;" />
+        <TextField fx:id="streetText" layoutX="512.0" layoutY="11.0" prefHeight="24.0" prefWidth="254.0" promptText="stradă" style="-fx-border-color: #400303;" />
+        <Label layoutX="453.0" layoutY="8.0" prefHeight="30.0" prefWidth="82.0" text="Stradă" textFill="#400303">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="floorText" layoutX="511.0" layoutY="120.0" prefHeight="24.0" prefWidth="254.0" promptText="etaj" style="-fx-border-color: #400303;" />
+        <Label layoutX="453.0" layoutY="117.0" prefHeight="30.0" prefWidth="82.0" text="Etaj" textFill="#400303">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="stairText" layoutX="510.0" layoutY="157.0" prefHeight="24.0" prefWidth="254.0" promptText="scară" style="-fx-border-color: #400303;" />
+        <Label layoutX="453.0" layoutY="159.0" prefHeight="30.0" prefWidth="82.0" text="Scară" textFill="#400303">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="453.0" layoutY="197.0" prefHeight="30.0" prefWidth="82.0" text="Nr. Bloc" textFill="#400303">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="blockText" layoutX="549.0" layoutY="200.0" prefHeight="24.0" prefWidth="214.0" promptText="nr. bloc" style="-fx-border-color: #400303;" />
+        <TextField fx:id="cityText" layoutX="510.0" layoutY="245.0" prefHeight="24.0" prefWidth="254.0" promptText="oraș" style="-fx-border-color: #400303;" />
+        <TextField fx:id="countyText" layoutX="508.0" layoutY="285.0" prefHeight="24.0" prefWidth="254.0" promptText="județ" style="-fx-border-color: #400303;" />
+        <Label layoutX="453.0" layoutY="281.0" prefHeight="30.0" prefWidth="82.0" text="Județ" textFill="#400303">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="countryText" layoutX="508.0" layoutY="326.0" prefHeight="24.0" prefWidth="254.0" promptText="țara" style="-fx-border-color: #400303;" />
+        <Label layoutX="453.0" layoutY="323.0" prefHeight="30.0" prefWidth="82.0" text="Țara" textFill="#400303">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+
     </children>
 </AnchorPane>
