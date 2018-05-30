@@ -67,6 +67,7 @@ public class LoginController {
                 openMenu(service.getUserType());
             }
             else{
+                failedLoginLabel.setText("Date de autentificare incorecte!");
                 failedLoginLabel.setVisible(true);
             }
         else {

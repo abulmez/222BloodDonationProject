@@ -40,9 +40,9 @@
                   <Image url="@../images/exitIcon.png" />
                </image>
             </ImageView>
-            <Label fx:id="failedLoginLabel" layoutX="6.0" layoutY="95.0" prefHeight="19.0" prefWidth="218.0" textFill="WHITE">
+            <Label fx:id="failedLoginLabel" alignment="CENTER" layoutX="6.0" layoutY="87.0" prefHeight="27.0" prefWidth="218.0" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="12.0" />
                </font></Label>
          </children>
       </AnchorPane>
