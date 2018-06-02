@@ -19,7 +19,7 @@
             <TableColumn fx:id="Status" prefWidth="209.0" text="Status" />
         </columns>
       </TableView>
-      <Button layoutX="18.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleModificaStatus" prefHeight="66.0" prefWidth="344.0" text="Modifică status donație">
+      <Button layoutX="18.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleModificaStatus" prefHeight="66.0" prefWidth="344.0" text="Modifică status programare">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
