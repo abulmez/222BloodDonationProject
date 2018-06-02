@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
 import model.dto.DonationScheduleStatusDTO;
+import model.dto.UserIllnessDto;
 import model.dto.UserPacientDTO;
 import utils.ServerConnection;
 
@@ -74,6 +75,9 @@ public class DonationAppointmentsAdminService {
                 System.out.println("-------------------------------------------");
                 System.out.println("Lungimea Donation Schedule: "+list.size());
                 System.out.println("-------------------------------------------");
+                /*for(DonationSchedule ds : list){
+                    System.out.println(ds.getIdDS());
+                }*/
                 return list;
             }
             else if(code == 401){
@@ -88,6 +92,95 @@ public class DonationAppointmentsAdminService {
             con.disconnect();
         }
         return list;
+    }
+
+    public List<Illness> getIllnessPacient(int idU){
+        ArrayList<Illness> bloodRequests = new ArrayList<>();
+        try {
+            String urlParameters = String.format("IdU=%s", String.valueOf(idU));
+            System.out.println(urlParameters);
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getIllness");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+                System.out.println(postData.toString());
+            }
+
+            int code = con.getResponseCode();
+
+            if(code == 200){
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<ArrayList<Illness>>(){}.getType();
+                bloodRequests = gson.fromJson(response.toString(), collectionType);
+                System.out.println(bloodRequests.size()+"-------------------------------------------");
+                return bloodRequests;
+
+            }
+            else if(code == 404){
+                return bloodRequests;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return bloodRequests;
+    }
+
+    public UserIllnessDto getUserIllness(DonationScheduleStatusDTO donationScheduleStatusDTO){
+        List<Illness> illnesses = getIllnessPacient(donationScheduleStatusDTO.getIdU());
+
+        List<Illness> last = new ArrayList<>();
+        UserIllnessDto userIllnessDto ;
+
+        for(Illness b : illnesses){
+            if(b.getName().equals("Suplimentar")){
+                last.add(b);
+            }
+        }
+        System.out.println("BOLILE");
+        System.out.println(last.size());
+
+        UserPacientDTO userPacientDTO = new UserPacientDTO();
+        List<UserPacientDTO> userPacientDTOS = getAllUserPacient();
+        for(UserPacientDTO u : userPacientDTOS){
+            if (u.getIdU()==donationScheduleStatusDTO.getIdU()){
+                userPacientDTO = u;
+            }
+        }
+
+        String boli = "";
+        if(last.isEmpty()){
+            boli = "Este sanatos";
+        }
+        else {
+            for (Illness a : last) {
+                boli += a.getDescription() + "\n";
+            }
+        }
+
+        userIllnessDto = new UserIllnessDto(
+                donationScheduleStatusDTO.getIdU(),userPacientDTO.getCNP(),userPacientDTO.getBloodGroup(),
+                donationScheduleStatusDTO.getName(),"Suplimentar",boli
+        );
+
+        return userIllnessDto;
     }
 
     public List<UserPacientDTO> getAllUserPacient(){
@@ -155,6 +248,17 @@ public class DonationAppointmentsAdminService {
         List<Reservation> reservations = getAllReservation();
         List<UserPacientDTO> userPacientDTOS = getAllUserPacient();
 
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        for(DonationSchedule ds : donationSchedules){
+            System.out.println(ds.getIdDS());
+        }
+        for(Reservation r : reservations){
+            System.out.println(r.getIdU());
+        }
+        for(UserPacientDTO u : userPacientDTOS){
+            System.out.println(u.getName()+u.getIdU());
+        }
+
         List<DonationScheduleStatusDTO> bun = new ArrayList<>();
 
         for(DonationSchedule donationSchedule : donationSchedules){
@@ -162,8 +266,8 @@ public class DonationAppointmentsAdminService {
                 if(donationSchedule.getIdDS() == reservation.getIdDS()){
 
                     for(UserPacientDTO userPacientDTO : userPacientDTOS){
-                        if(donationSchedule.getIdDC() == userPacientDTO.getIdDC()){
-                            DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(null),donationSchedule.getAvailableSpots(),reservation.getStatus(), userPacientDTO.getName());
+                        if(reservation.getIdU() == userPacientDTO.getIdU()){
+                            DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(null),donationSchedule.getAvailableSpots(),reservation.getStatus(), userPacientDTO.getName(),userPacientDTO.getIdU());
                             bun.add(status);
                         }
                     }
@@ -172,6 +276,11 @@ public class DonationAppointmentsAdminService {
                     bun.add(status);*/
                 }
             }
+        }
+
+        System.out.println("***************************");
+        for(DonationScheduleStatusDTO ds : bun){
+            System.out.println(ds.getIdU());
         }
 
         return bun;
@@ -209,7 +318,7 @@ public class DonationAppointmentsAdminService {
                 System.out.println("Lungimea Reservation: "+list.size());
                 System.out.println("-------------------------------------------");
                 for(Reservation dc:list){
-                    System.out.println(dc.getStatus());
+                    System.out.println(dc.getIdU());
                 }
                 System.out.println("-------------------------------------------");
                 return list;

@@ -57,4 +57,9 @@ public class Illness {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "" + this.name + "\n" + this.description;
+    }
 }

@@ -1,22 +1,38 @@
 package viewController;
 
 import com.jfoenix.controls.JFXComboBox;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.DonationSchedule;
+import model.Illness;
 import model.dto.DonationScheduleStatusDTO;
 import model.Reservation;
+import model.dto.UserIllnessDto;
 import org.springframework.context.ApplicationContext;
 import service.DonationAppointmentsAdminService;
 import utils.CommonUtils;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +61,12 @@ public class DonationsAppointmentsAdminController {
     private TableColumn<DonationScheduleStatusDTO,DateCell> DataDonarii;
 
     @FXML
+    TableColumn<DonationScheduleStatusDTO, String> actionColumn;
+
+    @FXML
     private JFXComboBox<String> statusComboBox;
+
+    private Stage currentInfoWindow;
 
     @FXML
     public void handleModificaStatus(ActionEvent actionEvent){
@@ -120,6 +141,70 @@ public class DonationsAppointmentsAdminController {
         //LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,Integer>("availableSpots"));
         DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,DateCell>("donationDateTime"));
         Status.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,String>("status"));
+        actionColumn.setCellValueFactory(cellData->new ReadOnlyStringWrapper(cellData.getValue().getIdDS().toString()));
+        actionColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                final Button infoButton = new Button("");
+                super.updateItem(item, empty);
+                infoButton.getStyleClass().add("button");
+                //System.out.println("UUUUUUUUUUUUUUUUUUUUUUUUU");
+                infoButton.setGraphic(new ImageView("./images/info.png"));
+                //System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYY");
+                infoButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        /*FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/viewController/smallDonationScheduleInfoWindow.fxml"));*/
+                       // AnchorPane root = null;
+                        try {
+                            //System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                            //--AnchorPane root = FXMLLoader.load(DonationsController.class.getResource("/viewController/boli.fxml"));
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(DonationsAppointmentsAdminController.class.getResource("/viewController/smallDonationScheduleInfoWindow.fxml"));
+                            AnchorPane root = (AnchorPane) loader.load();
+                            Stage dialogStage = new Stage();
+                            dialogStage.setTitle("");
+                            dialogStage.initModality(Modality.WINDOW_MODAL);
+                            Scene scene = new Scene(root);
+                            dialogStage.setScene(scene);
+                            column.getTableView().getSelectionModel().select(getIndex());
+                            DonationScheduleStatusDTO donationScheduleStatusDTO= (DonationScheduleStatusDTO)paginationTableView.getSelectionModel().getSelectedItem();
+                            dialogStage.initStyle(StageStyle.TRANSPARENT);
+                            //System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+
+                            List<Illness> illnessArrayList = service.getIllnessPacient(donationScheduleStatusDTO.getIdU());
+                            System.out.println("ARE ILLNESS");
+                            System.out.println(illnessArrayList.size());
+                            UserIllnessDto userIllnessDto = service.getUserIllness(donationScheduleStatusDTO);
+                            //Illness illness = illnessArrayList.get(0);
+                            //System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
+                            SmallDonationScheduleInfoWindow smallDonationScheduleInfoWindow = loader.getController();
+                            smallDonationScheduleInfoWindow.setEntity(userIllnessDto);
+                            Point mouse = java.awt.MouseInfo.getPointerInfo().getLocation();
+                            dialogStage.setX(mouse.x);
+                            dialogStage.setY(mouse.y);
+
+                            currentInfoWindow = dialogStage;
+
+                            dialogStage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                infoButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        currentInfoWindow.close();
+                    }
+                });
+                if (item != null) {
+                    setGraphic(infoButton);
+                }
+            }
+        });
 
         paginationTableView.setItems(model);
 

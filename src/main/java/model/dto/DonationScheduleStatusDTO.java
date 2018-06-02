@@ -8,13 +8,14 @@ public class DonationScheduleStatusDTO {
     public DonationScheduleStatusDTO() {
     }
 
-    public DonationScheduleStatusDTO(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots, String status, String name) {
+    public DonationScheduleStatusDTO(Integer idDS, Integer idDC, LocalDate donationDateTime, Integer availableSpots, String status, String name,Integer idU) {
         this.idDS = idDS;
         this.idDC = idDC;
         this.donationDateTime = donationDateTime;
         this.availableSpots = availableSpots;
         this.status = status;
         this.name = name;
+        this.idU = idU;
     }
 
     /**
@@ -22,6 +23,9 @@ public class DonationScheduleStatusDTO {
      */
     @SerializedName("idds")
     private Integer idDS;
+
+    @SerializedName("idu")
+    private Integer idU;
 
     /**
      *
@@ -94,5 +98,13 @@ public class DonationScheduleStatusDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getIdU() {
+        return idU;
+    }
+
+    public void setIdU(Integer idU) {
+        this.idU = idU;
     }
 }
