@@ -12,23 +12,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationAppointmentController">
     <children>
-        <AnchorPane layoutX="461.0" layoutY="90.0" prefHeight="30.0" prefWidth="258.0">
+        <AnchorPane layoutX="644.0" layoutY="54.0" prefHeight="30.0" prefWidth="258.0">
             <children>
-                <Label prefHeight="26.0" prefWidth="64.0" text="Data:">
+                <Label layoutX="6.0" layoutY="-2.0" prefHeight="26.0" prefWidth="64.0" text="Data:">
                     <font>
                         <Font size="19.0" />
                     </font>
                 </Label>
+              <DatePicker fx:id="datePickerDataDonation" layoutX="63.0" layoutY="3.0" />
                 <!--<JFXDatePicker defaultColor="#400303" layoutX="56.0" />-->
             </children>
         </AnchorPane>
-        <TableView fx:id="tableViewOreDisponibile" layoutX="21.0" layoutY="89.0" prefHeight="422.0" prefWidth="319.0">
+        <TableView fx:id="tableViewOreDisponibile" layoutX="21.0" layoutY="89.0" prefHeight="422.0" prefWidth="670.0">
             <columns>
-                <TableColumn fx:id="tableColumnOreLibere" prefWidth="133.60004043579102" text="Ore libere" />
-                <TableColumn fx:id="tableColumnLocuriDisponibile" prefWidth="184.0000030517578" text="Locuri disponibile" />
+                <TableColumn fx:id="tableColumnOreLibere" prefWidth="60.80002212524414" text="Ore libere" />
+                <TableColumn fx:id="tableColumnLocuriDisponibile" prefWidth="58.39996337890625" text="Nr. locuri" />
+            <TableColumn fx:id="tableColumnAdresa" prefWidth="552.0000152587891" text="Adresa centrelor de donatie" />
             </columns>
         </TableView>
-        <Button fx:id="buttonTrimiteCerereDonatie" layoutX="21.0" layoutY="530.0" mnemonicParsing="false" onAction="#onActionButtonTrimiteCerereDonatie" prefHeight="26.0" prefWidth="291.0" text="Trimite cerere donație ">
+        <Button fx:id="buttonTrimiteCerereDonatie" layoutX="104.0" layoutY="530.0" mnemonicParsing="false" onAction="#onActionButtonTrimiteCerereDonatie" prefHeight="26.0" prefWidth="291.0" text="Trimite cerere donație ">
             <font>
                 <Font size="19.0" />
             </font></Button>
@@ -37,15 +39,24 @@
                 <Font size="19.0" />
             </font></Button>
         <Label layoutX="21.0" layoutY="24.0" styleClass="title" text="Programare donație" />
-        <DatePicker fx:id="datePickerDataDonation" layoutX="519.0" layoutY="90.0" />
-      <Label fx:id="statusRezervare" layoutX="491.0" layoutY="430.0" text="STATUS REZERVARE:">
+      <Label fx:id="statusRezervare" layoutX="711.0" layoutY="447.0" text="STATUS CERERE:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="statusRezervareText" layoutX="683.0" layoutY="430.0" prefHeight="27.0" prefWidth="184.0">
+      <Label fx:id="statusRezervareText" layoutX="740.0" layoutY="483.0" prefHeight="27.0" prefWidth="184.0">
          <font>
             <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="BOTTOM" layoutX="706.0" layoutY="89.0" prefHeight="152.0" prefWidth="201.0" text="Prin apasarea butonului de &quot;Trimitere cerere donatie&quot; admit faptul ca nu o sa consum bauturi alcoolice sau grasimi cu cel putin 48 de ore inaintea donarii , sa nu sufar de : hipertensiune , boli de inima , boli renale , boli psihice , boli hepatice , boli endocrine." textFill="#f01818" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelError" layoutX="710.0" layoutY="261.0" prefHeight="174.0" prefWidth="201.0" text="Nu poti sa trimiti cerere deoarece :" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
     </children>

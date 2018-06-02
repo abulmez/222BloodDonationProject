@@ -37,10 +37,10 @@ public class HospitalService {
             con.setRequestProperty("Content-Type", "application/getAllHospitalsHandler");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-            System.out.println("Aici ajung sigur");
+//            System.out.println("Aici ajung sigur");
 
             int code = con.getResponseCode();
-            System.out.println("CODUL: "+code);
+//            System.out.println("CODUL: "+code);
 
             if(code == 200) {
                 BufferedReader in = new BufferedReader(
@@ -50,15 +50,15 @@ public class HospitalService {
                 while ((inputLine = in.readLine()) != null){
                     response.append(inputLine);
                 }
-                System.out.println(response);
+//                System.out.println(response);
                 in.close();
                 Gson gson = new Gson();
                 Type collectionType = new TypeToken<Collection<Hospital>>(){}.getType();
                 Collection<Hospital> hospitals  = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(hospitals);
-                System.out.println("-------------------------------------------");
-                System.out.println("Lungimea  Hospital: "+list.size());
-                System.out.println("-------------------------------------------");
+//                System.out.println("-------------------------------------------");
+//                System.out.println("Lungimea  Hospital: "+list.size());
+//                System.out.println("-------------------------------------------");
                 return list;
             }
             else if(code == 401){
