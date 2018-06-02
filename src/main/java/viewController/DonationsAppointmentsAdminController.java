@@ -29,6 +29,7 @@ import model.Reservation;
 import model.dto.UserIllnessDto;
 import org.springframework.context.ApplicationContext;
 import service.DonationAppointmentsAdminService;
+import service.TCPService;
 import utils.CommonUtils;
 
 import java.awt.*;
@@ -43,7 +44,7 @@ public class DonationsAppointmentsAdminController {
 
     ApplicationContext context = CommonUtils.getFactory();
 
-    private DonationAppointmentsAdminService service;
+    private TCPService service;
 
     @FXML
     private TableView<DonationScheduleStatusDTO> paginationTableView;
@@ -90,7 +91,8 @@ public class DonationsAppointmentsAdminController {
     @FXML
     public void initialize(){
         int count=0;
-        service = context.getBean(DonationAppointmentsAdminService.class);
+        service = context.getBean(TCPService.class);
+        service = context.getBean(TCPService.class);
         //System.out.println(service.getAllDonationSchedule().size());
         //this.model=FXCollections.observableArrayList(service.getAllDonationSchedule());
 

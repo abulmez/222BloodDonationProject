@@ -487,6 +487,185 @@ public class DonorService {
 
     }
 
+    public List<Adress> getAllAdress(){
+        List<Adress> list=new ArrayList<>();
+        try {
+
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/getAdress");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000);
+            int code = con.getResponseCode();
+
+            if(code == 200) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = in.readLine()) != null){
+                    response.append(inputLine);
+                }
+                in.close();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<Adress>>(){}.getType();
+                Collection<Adress> adresses = gson.fromJson(response.toString(),collectionType);
+                list = new ArrayList<>(adresses);
+
+                return list;
+            }
+            else if(code == 401){
+                return list;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return list;
+    }
+
+    public int deleteCentre(Integer idDC){
+        String urlParameters=String.format("IdDC=%s",idDC);
+        byte[] postData=urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="Conexiunea nu s-a realizat";
+        try{
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/deleteCentre");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 1;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return 0;
+    }
+
+    public int updateCentre(Integer idDC,Integer idA,String phoneNumber,String centerName){
+        String urlParameters=String.format("IdDC=%s&IdA=%s&CentreName=%s&CentrePhone=%s",idDC,idA,centerName,phoneNumber);
+        byte[] postData=urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="Conexiunea nu s-a realizat";
+        try{
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/updateCentre");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 1;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return 0;
+    }
+
+    public int addCenter(Integer idA,String phoneNumber,String centerName){
+        String urlParameters=String.format("IdA=%s&CentreName=%s&CentrePhone=%s",idA,centerName,phoneNumber);
+        byte[] postData=urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="Conexiunea nu s-a realizat";
+        try{
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addCentre");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(5000000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            if(code == 200){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 1;
+                }
+            }
+            else if(code == 401){
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    response = in.readLine();
+                    return 0;
+                }
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return 0;
+    }
+
+    public void addAdress(String street, String streetNr, String blockNr, String entrance, String floor, String apartNr, String city, String county, String country) {
+        String urlParameters = String.format("sreet=%s&streetNr=%s&blockNr=%s&entrance=%s&floor=%s&apartNr=%s&city=%s&county=%s&country=%s", street, streetNr, blockNr, entrance, floor, apartNr, city, county, country);
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/addAdress");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            int code = con.getResponseCode();
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+                String response = in.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+    }
+
 
 
 }

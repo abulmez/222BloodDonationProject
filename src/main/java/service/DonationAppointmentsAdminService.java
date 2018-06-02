@@ -33,8 +33,6 @@ public class DonationAppointmentsAdminService {
     }
 
     public List<DonationSchedule> getAllDonationSchedule(){
-        //String urlParameters = String.format("username=%s&password=%s");
-        //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         List<DonationSchedule> list=new ArrayList<>();
         try {
 
@@ -44,10 +42,8 @@ public class DonationAppointmentsAdminService {
             con.setRequestProperty("Content-Type", "application/getDonationSchedule");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-            System.out.println("Aici ajung sigur");
 
             int code = con.getResponseCode();
-            System.out.println("CODUL: "+code);
 
             if(code == 200) {
                 BufferedReader in = new BufferedReader(
@@ -57,14 +53,14 @@ public class DonationAppointmentsAdminService {
                 while ((inputLine = in.readLine()) != null){
                     response.append(inputLine);
                 }
-                System.out.println(response);
+
                 in.close();
                 Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
                     @Override
                     public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
                         String date=json.toString();
                         String newdate=date.replaceAll("\\\"","").replaceAll("[a-zA-Z]"," ");
-                        System.out.println(newdate);
+
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ");
                         return LocalDate.parse(newdate,formatter);
                     }
@@ -72,12 +68,7 @@ public class DonationAppointmentsAdminService {
                 Type collectionType = new TypeToken<Collection<DonationSchedule>>(){}.getType();
                 Collection<DonationSchedule> donationSchedules = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(donationSchedules);
-                System.out.println("-------------------------------------------");
-                System.out.println("Lungimea Donation Schedule: "+list.size());
-                System.out.println("-------------------------------------------");
-                /*for(DonationSchedule ds : list){
-                    System.out.println(ds.getIdDS());
-                }*/
+
                 return list;
             }
             else if(code == 401){
@@ -98,7 +89,7 @@ public class DonationAppointmentsAdminService {
         ArrayList<Illness> bloodRequests = new ArrayList<>();
         try {
             String urlParameters = String.format("IdU=%s", String.valueOf(idU));
-            System.out.println(urlParameters);
+
             byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
             con = serverConnection.getServerConnection();
             con.setDoOutput(true);
@@ -108,7 +99,6 @@ public class DonationAppointmentsAdminService {
             con.setReadTimeout(50000);
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);
-                System.out.println(postData.toString());
             }
 
             int code = con.getResponseCode();
@@ -154,8 +144,6 @@ public class DonationAppointmentsAdminService {
                 last.add(b);
             }
         }
-        System.out.println("BOLILE");
-        System.out.println(last.size());
 
         UserPacientDTO userPacientDTO = new UserPacientDTO();
         List<UserPacientDTO> userPacientDTOS = getAllUserPacient();
@@ -184,8 +172,6 @@ public class DonationAppointmentsAdminService {
     }
 
     public List<UserPacientDTO> getAllUserPacient(){
-        //String urlParameters = String.format("username=%s&password=%s");
-        //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         List<UserPacientDTO> list=new ArrayList<>();
         try {
 
@@ -195,10 +181,8 @@ public class DonationAppointmentsAdminService {
             con.setRequestProperty("Content-Type", "application/getUserPacient");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-            System.out.println("Aici ajung sigur");
 
             int code = con.getResponseCode();
-            System.out.println("CODUL: "+code);
 
             if(code == 200) {
                 BufferedReader in = new BufferedReader(
@@ -208,25 +192,13 @@ public class DonationAppointmentsAdminService {
                 while ((inputLine = in.readLine()) != null){
                     response.append(inputLine);
                 }
-                System.out.println(response);
                 in.close();
                 Gson gson = new Gson();
-                /*Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-                    @Override
-                    public Date deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                        String date=json.toString();
-                        String newdate=date.replaceAll("\\\"","").replaceAll("[a-zA-Z]"," ");
-                        System.out.println(newdate);
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
-                        return Date.parse(newdate,formatter);
-                    }
-                }).create();*/
+
                 Type collectionType = new TypeToken<Collection<UserPacientDTO>>(){}.getType();
                 Collection<UserPacientDTO> userPacientDTOS = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(userPacientDTOS);
-                System.out.println("-------------------------------------------");
-                System.out.println("Lungimea UserPacientDTO Schedule: "+list.size());
-                System.out.println("-------------------------------------------");
+
                 return list;
             }
             else if(code == 401){
@@ -248,16 +220,6 @@ public class DonationAppointmentsAdminService {
         List<Reservation> reservations = getAllReservation();
         List<UserPacientDTO> userPacientDTOS = getAllUserPacient();
 
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        for(DonationSchedule ds : donationSchedules){
-            System.out.println(ds.getIdDS());
-        }
-        for(Reservation r : reservations){
-            System.out.println(r.getIdU());
-        }
-        for(UserPacientDTO u : userPacientDTOS){
-            System.out.println(u.getName()+u.getIdU());
-        }
 
         List<DonationScheduleStatusDTO> bun = new ArrayList<>();
 
@@ -272,15 +234,8 @@ public class DonationAppointmentsAdminService {
                         }
                     }
 
-                    /*DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(),donationSchedule.getAvailableSpots(),reservation.getStatus(),"");
-                    bun.add(status);*/
                 }
             }
-        }
-
-        System.out.println("***************************");
-        for(DonationScheduleStatusDTO ds : bun){
-            System.out.println(ds.getIdU());
         }
 
         return bun;

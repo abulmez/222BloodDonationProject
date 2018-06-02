@@ -74,10 +74,8 @@ public class DonationScheduleService {
             con.setRequestProperty("Content-Type", "application/getDonationSchedule");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-            System.out.println("Aici ajung sigur");
 
             int code = con.getResponseCode();
-            System.out.println("CODUL: "+code);
 
             if(code == 200) {
                 BufferedReader in = new BufferedReader(
@@ -87,7 +85,7 @@ public class DonationScheduleService {
                 while ((inputLine = in.readLine()) != null){
                     response.append(inputLine);
                 }
-                System.out.println(response);
+
                 in.close();
                 Gson gson = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonDeserializer<Timestamp>() {
                     @Override
@@ -105,9 +103,7 @@ public class DonationScheduleService {
                 Type collectionType = new TypeToken<Collection<DonationSchedule>>(){}.getType();
                 Collection<DonationSchedule> donationSchedules = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(donationSchedules);
-                System.out.println("-------------------------------------------");
-                System.out.println("Lungimea Donation Schedule: "+list.size());
-                System.out.println("-------------------------------------------");
+
                 return list;
             }
             else if(code == 401){
@@ -133,10 +129,8 @@ public class DonationScheduleService {
             con.setRequestProperty("Content-Type", "application/getReservation");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-            System.out.println("Aici ajung sigur Reservation");
 
             int code = con.getResponseCode();
-            System.out.println("CODUL: "+code);
 
             if(code == 200) {
                 BufferedReader in = new BufferedReader(
@@ -151,13 +145,7 @@ public class DonationScheduleService {
                 Type collectionType = new TypeToken<Collection<Reservation>>(){}.getType();
                 Collection<Reservation> reservations = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(reservations);
-                System.out.println("-------------------------------------------");
-                System.out.println("Lungimea Reservation: "+list.size());
-                System.out.println("-------------------------------------------");
-                for(Reservation dc:list){
-                    System.out.println(dc.getStatus());
-                }
-                System.out.println("-------------------------------------------");
+
                 return list;
             }
             else if(code == 401){

@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import model.Illness;
 import model.dto.UserIllnessDto;
 
@@ -16,7 +18,10 @@ public class SmallDonationScheduleInfoWindow {
     private ListView listView;
 
     @FXML
-    private Label numeLabel,cnpLabel,sangeLabel,dataNasteriiLabel,boalaLabel;
+    private TextField numeText,cnpText,sangeText,boalaText2;
+
+    @FXML
+    private TextArea boalaText;
 
    /* private List<Illness> list;
 
@@ -29,11 +34,11 @@ public class SmallDonationScheduleInfoWindow {
     }
 
     public void setEntity(UserIllnessDto entity){
-        this.numeLabel.setText(entity.getNameUser());
-        this.cnpLabel.setText(entity.getCnp());
-        this.sangeLabel.setText(entity.getBloodGroup());
+        this.numeText.setText(entity.getNameUser());
+        this.cnpText.setText(entity.getCnp());
+        this.sangeText.setText(entity.getBloodGroup());
         //this.dataNasteriiLabel.setText(entity.getNameIllness());
-        this.boalaLabel.setText(entity.getDescription());
+        this.boalaText.setText(entity.getDescription());
 
         /*this.list = list;
         this.model = FXCollections.observableArrayList(this.list);

@@ -69,8 +69,6 @@ public class CenterInfoService {
     }
 
     public List<DonationCenter> getAllDonationCenter(){
-        //String urlParameters = String.format("username=%s&password=%s");
-        //byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         List<DonationCenter> list=new ArrayList<>();
         try {
 
@@ -80,10 +78,8 @@ public class CenterInfoService {
             con.setRequestProperty("Content-Type", "application/getDonationCenter");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-            System.out.println("Aici ajung sigur");
 
             int code = con.getResponseCode();
-            System.out.println("CODUL: "+code);
 
             if(code == 200) {
                 BufferedReader in = new BufferedReader(
@@ -98,13 +94,7 @@ public class CenterInfoService {
                 Type collectionType = new TypeToken<Collection<DonationCenter>>(){}.getType();
                 Collection<DonationCenter> donationCenters = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(donationCenters);
-                System.out.println("-------------------------------------------");
-                System.out.println("Lungimea Donation Center: "+list.size());
-                System.out.println("-------------------------------------------");
-                for(DonationCenter dc:list){
-                    System.out.println(dc.getIdDC());
-                }
-                System.out.println("-------------------------------------------");
+
                 return list;
             }
             else if(code == 401){
@@ -146,13 +136,7 @@ public class CenterInfoService {
                 Type collectionType = new TypeToken<Collection<Adress>>(){}.getType();
                 Collection<Adress> adresses = gson.fromJson(response.toString(),collectionType);
                 list = new ArrayList<>(adresses);
-                System.out.println("-------------------------------------------");
-                System.out.println("Lungimea Adress: "+list.size());
-                System.out.println("-------------------------------------------");
-                for(Adress dc:list){
-                    System.out.println(dc.getStreet());
-                }
-                System.out.println("-------------------------------------------");
+
                 return list;
             }
             else if(code == 401){
@@ -168,14 +152,6 @@ public class CenterInfoService {
         }
         return list;
     }
-
-    /*public static int getIdU() {
-        return idU;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }*/
 
     public int deleteCentre(Integer idDC){
         String urlParameters=String.format("IdDC=%s",idDC);
