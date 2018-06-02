@@ -313,7 +313,7 @@ public class TCPService {
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
-                System.out.println(response);
+//                System.out.println(response);
                 in.close();
                 Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
                     @Override
@@ -373,7 +373,7 @@ public class TCPService {
                     while ((inputLine = in.readLine()) != null) {
                         response.append(inputLine);
                     }
-                    System.out.println(response);
+//                    System.out.println(response);
                     in.close();
                     Gson gson = new Gson();
                     Type collectionType = new TypeToken<Collection<DonationDTO>>() {
@@ -415,7 +415,7 @@ public class TCPService {
                 try (BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()))) {
                     String response = in.readLine();
-                    System.out.println(response);
+//                    System.out.println(response);
                     in.close();
                     Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
                         @Override
@@ -532,7 +532,7 @@ public class TCPService {
 
             int code = con.getResponseCode();
             if(code == 200){
-                System.out.println("AICIS LA 200");
+//                System.out.println("AICIS LA 200");
                 try (BufferedReader in = new BufferedReader(
                         new InputStreamReader(con.getInputStream()))) {
                     String response = in.readLine();
@@ -541,7 +541,7 @@ public class TCPService {
                 }
             }
             else if(code == 409){
-                System.out.println("AICIS LA 400");
+//                System.out.println("AICIS LA 400");
 
                 return "Http code 409: Conflict";
             }

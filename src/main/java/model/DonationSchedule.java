@@ -52,6 +52,8 @@ public class DonationSchedule {
 
 //    private String status;
 
+    private String adresa;
+
     public Integer getIdDS() {
         return idDS;
     }
@@ -125,6 +127,13 @@ public class DonationSchedule {
         return Integer.parseInt(zi);
     }
 
+    public String getAdresa(){
+        return adresa;
+    }
+
+    public void setAdresa(String adresa){
+        this.adresa=adresa;
+    }
 
     @Override
     public String toString() {

@@ -78,4 +78,14 @@ public class DonationReport {
     public void setObservatii(String observatii) {
         this.observatii = observatii;
     }
+
+    @Override
+    public String toString() {
+        return "DonationReport{" +
+                "idDR=" + idDR +
+                ", dataProba=" + dataProba +
+                ", validitateProba=" + validitateProba +
+                ", observatii='" + observatii + '\'' +
+                '}';
+    }
 }
