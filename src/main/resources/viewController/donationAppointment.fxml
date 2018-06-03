@@ -30,11 +30,11 @@
             <TableColumn fx:id="tableColumnAdresa" prefWidth="552.0000152587891" text="Adresa centrelor de donatie" />
             </columns>
         </TableView>
-        <Button fx:id="buttonTrimiteCerereDonatie" layoutX="104.0" layoutY="530.0" mnemonicParsing="false" onAction="#onActionButtonTrimiteCerereDonatie" prefHeight="26.0" prefWidth="291.0" text="Trimite cerere donație ">
+        <Button fx:id="buttonTrimiteCerereDonatie" layoutX="104.0" layoutY="530.0" mnemonicParsing="false" onAction="#onActionButtonTrimiteCerereDonatie" prefHeight="26.0" prefWidth="291.0" text="Programare donare">
             <font>
                 <Font size="19.0" />
             </font></Button>
-        <Button fx:id="buttonAnulareCerereDonatie" layoutX="603.0" layoutY="530.0" mnemonicParsing="false" onAction="#onActionButtonAnulareCerereDonatie" prefHeight="26.0" prefWidth="291.0" text="Anulare cerere donație">
+        <Button fx:id="buttonAnulareCerereDonatie" layoutX="603.0" layoutY="530.0" mnemonicParsing="false" onAction="#onActionButtonAnulareCerereDonatie" prefHeight="26.0" prefWidth="291.0" text="Anulare programare">
             <font>
                 <Font size="19.0" />
             </font></Button>
@@ -49,7 +49,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label contentDisplay="BOTTOM" layoutX="706.0" layoutY="89.0" prefHeight="152.0" prefWidth="201.0" text="Prin apasarea butonului de &quot;Trimitere cerere donatie&quot; admit faptul ca nu o sa consum bauturi alcoolice sau grasimi cu cel putin 48 de ore inaintea donarii , sa nu sufar de : hipertensiune , boli de inima , boli renale , boli psihice , boli hepatice , boli endocrine." textFill="#f01818" wrapText="true">
+      <Label contentDisplay="BOTTOM" layoutX="706.0" layoutY="89.0" prefHeight="152.0" prefWidth="201.0" text="Prin apasarea butonului de &quot;Trimitere cerere donatie&quot; admit faptul ca nu o sa consum bauturi alcoolice sau grasimi cu cel putin 48 de ore inaintea donarii , ca nu sufar de : hipertensiune , boli de inima , boli renale , boli psihice , boli hepatice , boli endocrine." textFill="#f01818" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
