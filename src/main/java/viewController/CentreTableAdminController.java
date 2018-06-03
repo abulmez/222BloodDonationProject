@@ -18,12 +18,16 @@ import utils.AbstractTableController;
 import utils.CommonUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CentreTableAdminController extends AbstractTableController<DonationCenter> {
 
     AdminService service;
     public static DonationCenter donation;
     ApplicationContext context = CommonUtils.getFactory();
+    List<Adress> adressList;
+
+
 
     @FXML
     private TableColumn<DonationCenter,String> idDCcolumn;
@@ -41,11 +45,21 @@ public class CentreTableAdminController extends AbstractTableController<Donation
     private ObservableList<DonationCenter> obs;
     @FXML
     public void initialize(){
-        table.setEditable(true);
-        service = context.getBean(AdminService.class);
-        List<Adress> adressList = service.getAllAdress();
 
-        this.obs = FXCollections.observableArrayList(service.getAllDonationCenter());
+        service = context.getBean(AdminService.class);
+
+        adressList = service.getAllAdress();
+
+         this.obs = FXCollections.observableArrayList(service.getAllDonationCenter());
+
+        initTable();
+
+        super.loadData(obs);
+    }
+
+    public void initTable(){
+        table.setEditable(true);
+
         idDCcolumn.setCellValueFactory(new PropertyValueFactory<DonationCenter,String>("IdDC"));
 
 //        idAcolumn.setCellValueFactory(new PropertyValueFactory<DonationCenter,String>("IdA"));
@@ -54,7 +68,7 @@ public class CentreTableAdminController extends AbstractTableController<Donation
             public ObservableValue<String> call(TableColumn.CellDataFeatures<DonationCenter,String> p){
                 Adress aux = new Adress();
                 for (Adress adress : adressList) {
-                    if(adress.getIdA() == p.getValue().getIdA())
+                    if(Objects.equals(adress.getIdA(), p.getValue().getIdA()))
                         aux = adress;
                 }
                 return new SimpleStringProperty(aux.getFullAdress());
@@ -91,9 +105,11 @@ public class CentreTableAdminController extends AbstractTableController<Donation
                 System.out.println(a);
             }
         });
+    }
 
 
-
+    public void reloadTable(){
+        this.obs = FXCollections.observableArrayList(service.getAllDonationCenter());
         super.loadData(obs);
     }
 

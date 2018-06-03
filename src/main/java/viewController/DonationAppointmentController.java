@@ -73,14 +73,14 @@ public class DonationAppointmentController {
         System.out.println(daysBetween/7 + " Weeks");
         nrOfWeeksLastDonationReport = daysBetween/7;
         if(sexUser.equals("M")) {
-            if (nrOfWeeksLastDonationReport < 6){
+            if (nrOfWeeksLastDonationReport < 6 && nrOfWeeksLastDonationReport !=0){
                 lastDonationReportIsOk = false;
                 labelText = labelText + " - ati donat in urma cu " + nrOfWeeksLastDonationReport +" saptamani , mai puteti dona in " + (6-nrOfWeeksLastDonationReport) + " saptamani\n";
                 labelError.setText(labelText);
             }
         }
         else {
-            if(nrOfWeeksLastDonationReport < 8){
+            if(nrOfWeeksLastDonationReport < 8 && nrOfWeeksLastDonationReport !=0){
                 lastDonationReportIsOk = false;
                 labelText = labelText + " - ati donat in urma cu " + nrOfWeeksLastDonationReport +" saptamani , mai puteti dona in " + (8-nrOfWeeksLastDonationReport) + " satamani \n";
                 labelError.setText(labelText);
@@ -122,7 +122,7 @@ public class DonationAppointmentController {
 
     }
 
-    public void initThings(){
+    private void initThings(){
         buttonTrimiteCerereDonatie.setDisable(true);
         buttonAnulareCerereDonatie.setDisable(true);
         statusRezervare.setDisable(true);
@@ -130,6 +130,7 @@ public class DonationAppointmentController {
     }
     @FXML
     public void initialize(){
+        initThings();
         setVariablesAndUtilities();
         char[] cnp = currentUser.getCnp().toCharArray();
         if(cnp[0]=='1')
@@ -140,8 +141,6 @@ public class DonationAppointmentController {
         Calculate nr of weeks between now and last donation report
          */
         nrOfWeeks(lastDonationReport.getDataProba());
-
-        initThings();
 
         datePickerDataDonation.setValue(LocalDate.now());
         datePickerDataDonation.valueProperty().addListener((ov,oldValue,newValue)->{
@@ -165,19 +164,23 @@ public class DonationAppointmentController {
             labelText = labelText += " - nu respecti criteriile de sanatate \n";
             labelError.setText(labelText);
         }
-        if(sizeOfSuffersOf==0 && howMuchDonationReports ==0 && alreadyExist == false)
+        if(sizeOfSuffersOf==0 && howMuchDonationReports ==0 && !alreadyExist)
         {
             labelError.setText("");
         }
     }
 
-    void initTableSchedule(LocalDate localDate){
+    private void initTableSchedule(LocalDate localDate){
+
+        tableViewOreDisponibile.setPlaceholder(new Label("Pentru aceasta zi , nu este disponibil un orar"));
+
         tableColumnOreLibere.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String>("Ora"));
         tableColumnLocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String >("AvailableSpots"));
         tableColumnAdresa.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String>("Adresa"));
         setModel(initList(localDate));
     }
-    public List<DonationSchedule> initList(LocalDate localDate){
+
+    private List<DonationSchedule> initList(LocalDate localDate){
         List<DonationSchedule> fromRequest = donorService.getAllDonationSchedule();
         List<DonationSchedule> auxList = new ArrayList<>();
         for (DonationSchedule donationScheduleRares : fromRequest) {
@@ -210,13 +213,13 @@ public class DonationAppointmentController {
             this.modelSchedule.setAll();
             tableViewOreDisponibile.setItems(this.modelSchedule);
             tableViewOreDisponibile.getSelectionModel().selectedIndexProperty().addListener((obs,old,newS)->{
-                if(alreadyExist==false)
+                if(!alreadyExist)
                 buttonTrimiteCerereDonatie.setDisable(false);
                 if(howMuchDonationReports >2)
                     buttonTrimiteCerereDonatie.setDisable(true);
                 if(sizeOfSuffersOf!=0)
                     buttonTrimiteCerereDonatie.setDisable(true);
-                if(lastDonationReportIsOk == false)
+                if(!lastDonationReportIsOk)
                     buttonTrimiteCerereDonatie.setDisable(true);
             });
         }
@@ -224,14 +227,14 @@ public class DonationAppointmentController {
             this.modelSchedule.setAll(list);
             tableViewOreDisponibile.setItems(this.modelSchedule);
             tableViewOreDisponibile.getSelectionModel().selectedIndexProperty().addListener((obs,old,newS)->{
-                if(alreadyExist==false)
+                if(!alreadyExist)
                 buttonTrimiteCerereDonatie.setDisable(false);
                 if(howMuchDonationReports >2)
                     buttonTrimiteCerereDonatie.setDisable(true);
                 if(sizeOfSuffersOf!=0)
                     buttonTrimiteCerereDonatie.setDisable(true);
                 selected = tableViewOreDisponibile.getSelectionModel().getSelectedItem();
-                if(lastDonationReportIsOk == false)
+                if(!lastDonationReportIsOk)
                     buttonTrimiteCerereDonatie.setDisable(true);
             });
         }
@@ -247,7 +250,9 @@ public class DonationAppointmentController {
             String response = donorService.addReservation(selected.getIdDS(),LoginService.getIdU());
             if(response.equals("Success")) {
                 statusRezervareText.setText("ATTEMPTING");
-            buttonAnulareCerereDonatie.setDisable(false);
+                 buttonAnulareCerereDonatie.setDisable(false);
+                 buttonTrimiteCerereDonatie.setDisable(true);
+                setModel(initList(datePickerDataDonation.getValue()));
             }
             showMessage(Alert.AlertType.CONFIRMATION,response,response);
         }
@@ -266,6 +271,8 @@ public class DonationAppointmentController {
             showMessage(Alert.AlertType.CONFIRMATION,"Succes","Succes");
             statusRezervareText.setText("");
             statusRezervare.setDisable(true);
+            setModel(initList(datePickerDataDonation.getValue()));
+            buttonAnulareCerereDonatie.setDisable(true);
         }
         else{
             showMessage(Alert.AlertType.WARNING,"A avut loc o eroare","A avut loc o eroare");
