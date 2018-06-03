@@ -16,7 +16,7 @@ public class AddButtonFormCentreController {
     ApplicationContext context = CommonUtils.getFactory();
     ServerConnection serverConnection;
     AdminService adminService;
-
+    DonationsCentreAndHospitalsController ctrl;
     @FXML
     private TextField countryText;
 
@@ -58,7 +58,9 @@ public class AddButtonFormCentreController {
         serverConnection = context.getBean(ServerConnection.class);
         adminService = new AdminService(serverConnection);
     }
-
+    public void setCtrl(DonationsCentreAndHospitalsController ctrl){
+        this.ctrl = ctrl;
+    }
     public void addHandle(){
         adminService.addAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), stairText.getText(), floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText());
             String phoneNumber = phoneCentre.getText();
@@ -78,6 +80,7 @@ public class AddButtonFormCentreController {
             else{
                 nameCentre.setText("");
                 phoneCentre.setText("");
+                ctrl.displayTableCentre();
             }
     }
 }

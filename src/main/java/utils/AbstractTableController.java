@@ -26,6 +26,7 @@ public class AbstractTableController <E> {
     }
 
     public void loadData(Collection<? extends E> entityList){
+        table.setItems(null);
         this.model = FXCollections.observableArrayList(new ArrayList<E>(entityList));
         table.setItems(model);
     }

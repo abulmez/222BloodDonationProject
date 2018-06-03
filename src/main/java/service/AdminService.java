@@ -231,6 +231,7 @@ public class AdminService {
         }
     }
 
+
     public String updateTCPCenter(String cnp,String center){
         String urlParameters=String.format("id=%s&c=%s",cnp,center);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
@@ -777,6 +778,7 @@ public class AdminService {
             }
 
             int code = con.getResponseCode();
+
             try (BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()))) {
                 String response = in.readLine();

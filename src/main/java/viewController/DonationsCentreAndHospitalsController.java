@@ -15,6 +15,7 @@ import utils.CommonUtils;
 import utils.TableType;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class DonationsCentreAndHospitalsController {
     ApplicationContext context = CommonUtils.getFactory();
@@ -71,7 +72,7 @@ public class DonationsCentreAndHospitalsController {
 
         dropdownlistType.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
-                if(t1 == TableType.Spital.toString())
+                if(Objects.equals(t1, TableType.Spital.toString()))
                 {
                     currentTable = TableType.Spital;
                     displayTableHospital();
@@ -94,6 +95,8 @@ public class DonationsCentreAndHospitalsController {
                 AnchorPane root1 = null;
                 try {
                     root1 = (AnchorPane) loader.load();
+                    AddButtonFormCentreController a = (AddButtonFormCentreController)loader.getController();
+                    a.setCtrl(this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -106,10 +109,12 @@ public class DonationsCentreAndHospitalsController {
         else{
             System.out.println(currentTable.toString());
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/viewController/admin-CentreAndHospitalsTables/addButtonFormCentre.fxml"));
+            loader.setLocation(getClass().getResource("/viewController/admin-CentreAndHospitalsTables/addButtonFormHospital.fxml"));
             AnchorPane root1 = null;
             try {
                 root1 = (AnchorPane) loader.load();
+                AddButtonFromHospitalController a = (AddButtonFromHospitalController)loader.getController();
+                a.setCtrl(this);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -126,10 +131,12 @@ public class DonationsCentreAndHospitalsController {
         if(currentTable == TableType.Centru){
            System.out.println(CentreTableAdminController.donation);
            adminService.deleteCentre(CentreTableAdminController.donation.getIdDC());
+           displayTableCentre();
         }
         else if(currentTable==TableType.Spital){
             System.out.println(HospitalTableAdminController.hospital);
             adminService.deleteHospital(HospitalTableAdminController.hospital.getIdH());
+            displayTableHospital();
         }
     }
 }
