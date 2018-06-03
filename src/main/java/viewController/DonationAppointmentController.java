@@ -151,7 +151,13 @@ public class DonationAppointmentController {
             buttonTrimiteCerereDonatie.setDisable(true);
             initTableSchedule(newValue);
         });
-
+        datePickerDataDonation.setDayCellFactory(picker->new DateCell(){
+            public void updateItem(LocalDate date ,boolean empty){
+                super.updateItem(date,empty);
+                LocalDate today = LocalDate.now();
+                setDisable(empty || date.compareTo(today) < 0);
+            }
+        });
 
         initTableSchedule(LocalDate.now());
 

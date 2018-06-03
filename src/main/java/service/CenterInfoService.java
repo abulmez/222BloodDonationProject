@@ -169,13 +169,6 @@ public class CenterInfoService {
         return list;
     }
 
-    /*public static int getIdU() {
-        return idU;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }*/
 
     public int deleteCentre(Integer idDC){
         String urlParameters=String.format("IdDC=%s",idDC);
