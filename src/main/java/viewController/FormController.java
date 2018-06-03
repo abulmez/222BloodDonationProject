@@ -53,12 +53,11 @@ public class FormController {
     public void addButtonHandler(){
 
 
-            showErrorMessage("Completati toate fieldurile");
         if(neededType.getSelectionModel().getSelectedItem()==null||
                 description.getText().equals("")||priority.getSelectionModel().getSelectedItem()==null||quantity.getText().equals("") ||
                 bloodDemandType.getSelectionModel().getSelectedItem()==null){
 
-            showErrorMessage("Completati/selectati toate datele formuralului");
+            showErrorMessage("Completati/selectati toate datele formularului");
 
 
         }
