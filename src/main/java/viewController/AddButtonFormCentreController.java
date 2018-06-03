@@ -1,27 +1,21 @@
 package viewController;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.Adress;
-import model.DonationCenter;
 import org.springframework.context.ApplicationContext;
-import service.CenterInfoService;
-import utils.AbstractTableController;
+import service.AdminService;
 import utils.CommonUtils;
 import utils.ServerConnection;
 
-import java.io.IOException;
 import java.util.List;
 
 
 public class AddButtonFormCentreController {
     ApplicationContext context = CommonUtils.getFactory();
     ServerConnection serverConnection;
-    CenterInfoService centerInfoService;
+    AdminService adminService;
 
     @FXML
     private TextField countryText;
@@ -62,14 +56,14 @@ public class AddButtonFormCentreController {
     @FXML
     public void initialize(){
         serverConnection = context.getBean(ServerConnection.class);
-        centerInfoService = new CenterInfoService(serverConnection);
+        adminService = new AdminService(serverConnection);
     }
 
     public void addHandle(){
-            centerInfoService.addAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), stairText.getText(), floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText());
+        adminService.addAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), stairText.getText(), floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText());
             String phoneNumber = phoneCentre.getText();
             String centerName = nameCentre.getText();
-            List<Adress> adressList = centerInfoService.getAllAdress();
+            List<Adress> adressList = adminService.getAllAdress();
             Adress a = new Adress(0,streetText.getText(),Integer.parseInt(nrStreetText.getText()),Integer.parseInt(blockText.getText()),stairText.getText(),Integer.parseInt(floorText.getText()),Integer.parseInt(flatText.getText()),cityText.getText(),countyText.getText(),countryText.getText());
             Integer idA = 1;
             for (Adress adress : adressList) {
@@ -77,7 +71,7 @@ public class AddButtonFormCentreController {
                     idA=adress.getIdA();
                 System.out.println(idA);
             }
-            int response =centerInfoService.addCenter(idA,phoneNumber,centerName);
+            int response =adminService.addCenter(idA,phoneNumber,centerName);
             if(response == 0){
 
             }

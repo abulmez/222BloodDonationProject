@@ -13,7 +13,7 @@ import javafx.util.Callback;
 import model.Adress;
 import model.DonationCenter;
 import org.springframework.context.ApplicationContext;
-import service.CenterInfoService;
+import service.AdminService;
 import utils.AbstractTableController;
 import utils.CommonUtils;
 
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CentreTableAdminController extends AbstractTableController<DonationCenter> {
 
-    CenterInfoService service;
+    AdminService service;
     public static DonationCenter donation;
     ApplicationContext context = CommonUtils.getFactory();
 
@@ -42,7 +42,7 @@ public class CentreTableAdminController extends AbstractTableController<Donation
     @FXML
     public void initialize(){
         table.setEditable(true);
-        service = context.getBean(CenterInfoService.class);
+        service = context.getBean(AdminService.class);
         List<Adress> adressList = service.getAllAdress();
 
         this.obs = FXCollections.observableArrayList(service.getAllDonationCenter());

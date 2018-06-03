@@ -5,8 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.Adress;
 import org.springframework.context.ApplicationContext;
-import service.CenterInfoService;
-import service.HospitalService;
+import service.AdminService;
 import utils.CommonUtils;
 import utils.ServerConnection;
 
@@ -16,8 +15,7 @@ public class AddButtonFromHospitalController {
 
     ApplicationContext context = CommonUtils.getFactory();
     ServerConnection serverConnection;
-    HospitalService hospitalService;
-    CenterInfoService centerInfoService;
+    AdminService adminService;
     @FXML
     TextField nameCentre;
 
@@ -61,22 +59,21 @@ public class AddButtonFromHospitalController {
     @FXML
     public void initialize(){
         serverConnection = context.getBean(ServerConnection.class);
-        hospitalService = new HospitalService(serverConnection);
-        centerInfoService = new CenterInfoService(serverConnection);
+        adminService = new AdminService(serverConnection);
     }
 
     public void addHandle(){
-        centerInfoService.addAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), stairText.getText(), floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText());
+        adminService.addAdress(streetText.getText(), nrStreetText.getText(), blockText.getText(), stairText.getText(), floorText.getText(), flatText.getText(), cityText.getText(), countyText.getText(), countryText.getText());
         String phoneNumber = phoneCentre.getText();
         String centerName = nameCentre.getText();
-        List<Adress> adressList = centerInfoService.getAllAdress();
+        List<Adress> adressList = adminService.getAllAdress();
         Adress a = new Adress(0,streetText.getText(),Integer.parseInt(nrStreetText.getText()),Integer.parseInt(blockText.getText()),stairText.getText(),Integer.parseInt(floorText.getText()),Integer.parseInt(flatText.getText()),cityText.getText(),countyText.getText(),countryText.getText());
         Integer idA = 1;
         for (Adress adress : adressList) {
             if(adress.getFullAdress().equals(a.getFullAdress()))
                 idA=adress.getIdA();
         }
-        int response =hospitalService.addHospital(idA,centerName,phoneNumber);
+        int response =adminService.addHospital(idA,centerName,phoneNumber);
         if(response == 0){
 
         }

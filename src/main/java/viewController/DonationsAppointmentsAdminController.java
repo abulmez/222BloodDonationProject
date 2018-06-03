@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -28,7 +27,6 @@ import model.dto.DonationScheduleStatusDTO;
 import model.Reservation;
 import model.dto.UserIllnessDto;
 import org.springframework.context.ApplicationContext;
-import service.DonationAppointmentsAdminService;
 import service.TCPService;
 import utils.CommonUtils;
 

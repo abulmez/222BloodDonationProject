@@ -10,8 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
-import service.CenterInfoService;
-import service.HospitalService;
+import service.AdminService;
 import utils.CommonUtils;
 import utils.TableType;
 
@@ -19,8 +18,7 @@ import java.io.IOException;
 
 public class DonationsCentreAndHospitalsController {
     ApplicationContext context = CommonUtils.getFactory();
-    CenterInfoService serviceCentre;
-    HospitalService hospitalTableService;
+    AdminService adminService;
     @FXML
     AnchorPane tableAnchorPane;
 
@@ -37,8 +35,7 @@ public class DonationsCentreAndHospitalsController {
 
     @FXML
     public void initialize(){
-        serviceCentre = context.getBean(CenterInfoService.class);
-        hospitalTableService = context.getBean(HospitalService.class);
+        adminService = context.getBean(AdminService.class);
         currentTable = TableType.Centru;
         initDropDownList();
         displayTableCentre();
@@ -128,11 +125,11 @@ public class DonationsCentreAndHospitalsController {
     public void handleDelete(){
         if(currentTable == TableType.Centru){
            System.out.println(CentreTableAdminController.donation);
-           serviceCentre.deleteCentre(CentreTableAdminController.donation.getIdDC());
+           adminService.deleteCentre(CentreTableAdminController.donation.getIdDC());
         }
         else if(currentTable==TableType.Spital){
             System.out.println(HospitalTableAdminController.hospital);
-            hospitalTableService.deleteHospital(HospitalTableAdminController.hospital.getIdH());
+            adminService.deleteHospital(HospitalTableAdminController.hospital.getIdH());
         }
     }
 }

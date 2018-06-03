@@ -1,7 +1,6 @@
 package viewController;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,9 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import model.*;
-import org.joda.time.Days;
 import org.springframework.context.ApplicationContext;
-import service.DonationScheduleService;
 import service.DonorService;
 import service.LoginService;
 import utils.CommonUtils;
