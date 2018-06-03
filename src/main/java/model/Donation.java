@@ -19,7 +19,7 @@ public class Donation {
         this.idD = idD;
         this.idDC = idDC;
         this.idU = idU;
-        this.quantity = quantity;
+        this.cantitate = quantity;
         this.status = status;
         this.receiverName=receiverName;
     }
@@ -46,7 +46,7 @@ public class Donation {
      * 
      */
     @SerializedName("quantity")
-    private Double quantity;
+    private Double cantitate;
 
     /**
      * 
@@ -57,7 +57,7 @@ public class Donation {
     /**
      * 
      */
-    @SerializedName("receiverName")
+    @SerializedName("receivername")
     private String receiverName;
 
     public Integer getIdD() {
@@ -84,12 +84,12 @@ public class Donation {
         this.idU = idU;
     }
 
-    public Double getQuantity() {
-        return quantity;
+    public Double getCantitate() {
+        return cantitate;
     }
 
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
+    public void setCantitate(Double cantitate) {
+        this.cantitate = cantitate;
     }
 
     public String getStatus() {
@@ -102,6 +102,18 @@ public class Donation {
 
     public String getReceiverName() {
         return receiverName;
+    }
+
+    @Override
+    public String toString() {
+        return "Donation{" +
+                "idD=" + idD +
+                ", idDC=" + idDC +
+                ", idU=" + idU +
+                ", cantitate=" + cantitate +
+                ", status='" + status + '\'' +
+                ", receiverName='" + receiverName + '\'' +
+                '}';
     }
 
     public void setReceiverName(String receiverName) {

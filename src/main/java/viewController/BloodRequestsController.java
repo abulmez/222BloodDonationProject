@@ -2,8 +2,6 @@ package viewController;
 
 import errorMessage.ErrorMessage;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,12 +20,11 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.Callback;
-import model.BloodRequest;
-import model.BloodRequestDTO;
-import service.BloodDemandService;
+import model.dto.BloodRequestDTO;
+import service.MedicService;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class BloodRequestsController {
@@ -56,11 +53,11 @@ public class BloodRequestsController {
     private TableColumn<BloodRequestDTO,String> updateColumn;
     @FXML
     private ComboBox comboFiltrare;
-    public BloodDemandService service;
+    public MedicService service;
     public Stage editStage;
     @FXML
     private ObservableList<BloodRequestDTO> model;
-    public void setService(BloodDemandService service,Stage stage) {
+    public void setService(MedicService service, Stage stage) {
         this.service = service;
         this.editStage=stage;
         //this.service.addObserver(this);
@@ -164,7 +161,7 @@ public class BloodRequestsController {
             };
         });
         //addUpdateButtons(updateColumn);
-        ObservableList<String> listCombo1 = FXCollections.observableArrayList("Filtrare","Nefiltrat","Cereri livrate","Cereri plasate/initiate");
+        ObservableList<String> listCombo1 = FXCollections.observableArrayList("Nefiltrat","Cereri livrate","Cereri plasate/initiate");
         comboFiltrare.setItems(listCombo1);
         comboFiltrare.getSelectionModel().selectFirst();
         comboFiltrare.getStyleClass().add("comboBox");
@@ -173,15 +170,18 @@ public class BloodRequestsController {
                 if(t1.equals("Nefiltrat")){
                     List<BloodRequestDTO> list = service.findAllDemands();
                     if(list!=null){
-                        model = FXCollections.observableArrayList(list);
+                        List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
+                        Collections.reverse(shallowCopy);
+                        model = FXCollections.observableArrayList(shallowCopy);
                         tableView.setItems(model);
                     }
                 }
                 else if(t1.equals("Cereri livrate")){
                     List<BloodRequestDTO> list = service.handleFiltrareLivrate();
                     if(list!=null){
-
-                        model = FXCollections.observableArrayList(list);
+                        List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
+                        Collections.reverse(shallowCopy);
+                        model = FXCollections.observableArrayList(shallowCopy);
                         tableView.setItems(model);
                     }
                 }
@@ -190,8 +190,9 @@ public class BloodRequestsController {
 
                 List<BloodRequestDTO> list = service.handleFiltrarePlasate();
                 if(list!=null){
-
-                    model = FXCollections.observableArrayList(list);
+                    List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
+                    Collections.reverse(shallowCopy);
+                    model = FXCollections.observableArrayList(shallowCopy);
                     tableView.setItems(model);
                 }
                 }
@@ -202,10 +203,14 @@ public class BloodRequestsController {
     }
     @FXML
     private void loadDataHandler() {
+
         List<BloodRequestDTO> list = service.findAllDemands();
         if(list!=null){
+        List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
+        Collections.reverse(shallowCopy);
 
-        model = FXCollections.observableArrayList(list);
+
+        model = FXCollections.observableArrayList(shallowCopy);
         tableView.setItems(model);}
     }
 
@@ -234,10 +239,16 @@ public class BloodRequestsController {
 
         if(comboFiltrare.getSelectionModel().getSelectedItem().equals("Cereri livrate")){
             List<BloodRequestDTO> list = service.handleFiltrareLivrate();
-            if(list!=null){
 
-                model = FXCollections.observableArrayList(list);
+            if(list!=null){
+                List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
+                Collections.reverse(shallowCopy);
+                model = FXCollections.observableArrayList(shallowCopy);
                 tableView.setItems(model);
+            }
+            else
+            {
+                tableView.setItems(null);
             }
         }
 
@@ -245,17 +256,26 @@ public class BloodRequestsController {
 
             List<BloodRequestDTO> list = service.handleFiltrarePlasate();
             if(list!=null){
-
-                model = FXCollections.observableArrayList(list);
+                List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
+                Collections.reverse(shallowCopy);
+                model = FXCollections.observableArrayList(shallowCopy);
                 tableView.setItems(model);
+            }
+            else
+            {
+                tableView.setItems(null);
             }
     }
         else{
             List<BloodRequestDTO> list = service.findAllDemands();
             if(list!=null){
-
-                model = FXCollections.observableArrayList(list);
+                List<BloodRequestDTO> shallowCopy = list.subList(0, list.size());
+                Collections.reverse(shallowCopy);
+                model = FXCollections.observableArrayList(shallowCopy);
                 tableView.setItems(model);
+            }
+            else{
+                tableView.setItems(null);
             }
         }
     }

@@ -2,25 +2,39 @@
     -fx-background-color: white;
 }
 .button{
-    -fx-background-color: #400303;
+    -fx-background-color: #510303;
     -fx-text-fill: white;
     -fx-animated: true;
     -fx-font-weight: bold;
+    -fx-background-radius: 15px 15px;
+    -fx-text-alignment: center;
+    -fx-font-size: 13px;
+
 }
 .button:hover{
-    -fx-background-color: #400303;
-    -fx-text-fill: white;
+    -fx-background-color: #2a110e;
     -fx-animated: true;
-    -fx-font-weight:normal;
+    -fx-font-size: 13px;
+    -fx-text-alignment: center;
 }
+.img-view{
+    -fx-background-color: white;
+}
+.img-view:hover{
+    -fx-background-color: #980909;
+}
+
 .menuButton{
     -fx-background-color: white;
     -fx-text-fill: #400303;
     -fx-font-size: 18px;
+    -fx-background-radius: 0;
 }
 .menuButton:hover{
     -fx-background-color: #400303;
     -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-background-radius: 0;
 }
 .text-field{
     -fx-text-inner-color: #740707;
@@ -28,7 +42,35 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-box-border: transparent;
+    -fx-promt-text-size:14px;
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-insets: 0;
+    -fx-padding: 1 3 1 3;
+}
+.text-field:focused {
+    -fx-focus-color: transparent;
+}
 
+.textAreaNoFocus{
+    -fx-text-box-border: transparent;
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-insets: 0;
+    -fx-padding: 1 3 1 3;
+}
+.textAreaNoFocus:focused{
+    -fx-focus-color:transparent;
+}
+
+.textfieldOnWhite{
+    -fx-text-inner-color: #740707;
+    -fx-prompt-text-fill: rgba(116, 7, 7, 0.89);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-box-border: transparent;
+    -fx-border-radius: 10%;
+    -fx-background-color: #dedbd8;
+    -fx-background-radius: 10px 10px;
+    -fx-text-alignment: center;
 }
 
 .menuAnchorPane{

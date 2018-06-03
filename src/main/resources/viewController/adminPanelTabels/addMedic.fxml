@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="609.0" stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.AddMedicController">
+   <children>
+      <ComboBox fx:id="combo" layoutX="200.0" layoutY="307.0" prefHeight="25.0" prefWidth="218.0" />
+      <TextField fx:id="fieldNume" layoutX="218.0" layoutY="106.0" />
+      <TextField fx:id="fieldCnp" layoutX="25.0" layoutY="182.0" />
+      <TextField fx:id="fieldData" layoutX="218.0" layoutY="182.0" promptText="yyyy-mm-dd" />
+      <TextField fx:id="fieldMail" layoutX="412.0" layoutY="182.0" />
+      <TextField fx:id="fieldTelefon" layoutX="25.0" layoutY="255.0" />
+      <TextField fx:id="fieldUser" layoutX="220.0" layoutY="255.0" />
+      <TextField fx:id="fieldParola" layoutX="412.0" layoutY="255.0" />
+      <Button layoutX="274.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="31.0" prefWidth="83.0" text="Adaugă" />
+      <Label layoutX="291.0" layoutY="82.0" text="Nume" />
+      <Label layoutX="101.0" layoutY="157.0" text="CNP" />
+      <Label layoutX="275.0" layoutY="157.0" text="DataNașterii" />
+      <Label layoutX="481.0" layoutY="157.0" text="E-mail" />
+      <Label layoutX="91.0" layoutY="235.0" text="Telefon" />
+      <Label layoutX="285.0" layoutY="235.0" text="Username" />
+      <Label layoutX="481.0" layoutY="235.0" text="Parolă" />
+      <Label layoutX="294.0" layoutY="290.0" text="Spital" />
+      <Label layoutX="217.0" layoutY="7.0" prefHeight="68.0" prefWidth="196.0" text="Adăugare Medic" textFill="#720e0e">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="283.0" layoutY="355.0" text="Adresă" textFill="#800f0f">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldStrada" layoutX="54.0" layoutY="409.0" prefHeight="22.0" prefWidth="327.0" />
+      <TextField fx:id="fieldNr" layoutX="410.0" layoutY="409.0" prefHeight="22.0" prefWidth="99.0" />
+      <TextField fx:id="fieldBloc" layoutX="53.0" layoutY="472.0" prefHeight="22.0" prefWidth="83.0" />
+      <TextField fx:id="fieldScara" layoutX="174.0" layoutY="472.0" prefHeight="22.0" prefWidth="73.0" />
+      <TextField fx:id="fieldEtaj" layoutX="292.0" layoutY="472.0" prefHeight="22.0" prefWidth="73.0" />
+      <TextField fx:id="fieldApart" layoutX="409.0" layoutY="472.0" prefHeight="22.0" prefWidth="122.0" />
+      <Label layoutX="73.0" layoutY="391.0" text="Stradă" />
+      <Label layoutX="426.0" layoutY="391.0" text="Nr. Stradă" />
+      <Label layoutX="69.0" layoutY="453.0" text="Nr. Bloc" />
+      <Label layoutX="186.0" layoutY="453.0" text="Scară" />
+      <Label layoutX="309.0" layoutY="453.0" text="Etaj" />
+      <Label layoutX="421.0" layoutY="453.0" text="Apartament" />
+      <TextField fx:id="fieldOras" layoutX="57.0" layoutY="527.0" prefHeight="22.0" prefWidth="133.0" />
+      <Label layoutX="69.0" layoutY="510.0" text="Oraș" />
+      <TextField fx:id="fieldJudet" layoutX="234.0" layoutY="526.0" prefHeight="22.0" prefWidth="150.0" />
+      <Label layoutX="249.0" layoutY="510.0" text="Județ" />
+      <TextField fx:id="fieldTara" layoutX="410.0" layoutY="525.0" />
+      <Label layoutX="420.0" layoutY="510.0" text="Țară" />
+   </children>
+</AnchorPane>

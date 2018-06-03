@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationCentersMedicController">
+    <children>
+        <TableView fx:id="tableView" layoutX="10.0" layoutY="77.0" prefHeight="511.0" prefWidth="903.0" style="-fx-background-color: lightgrey;">
+            <columns>
+                <TableColumn fx:id="colCenterName" prefWidth="115.0" text="Centru" />
+            <TableColumn fx:id="colPhoneNumber" minWidth="0.0" prefWidth="115.0" text="Numar de telefon" />
+                <TableColumn fx:id="colDistance" minWidth="0.0" prefWidth="66.0" text="Distanta" />
+                <TableColumn fx:id="colIdProduct" minWidth="0.0" prefWidth="66.0" text="Id Produs" />
+            <TableColumn fx:id="colValidUntil" minWidth="0.0" prefWidth="117.0" text="Valabil pana la" />
+                <TableColumn fx:id="colProductType" prefWidth="127.0" text="Tip Produs" />
+                <TableColumn fx:id="colBloodGroup" minWidth="0.0" prefWidth="81.0" text="Grupa sange" />
+                <TableColumn fx:id="colQuantity" prefWidth="81.0" text="Cantitate(ml)" />
+                <TableColumn fx:id="colDonatedFor" minWidth="0.0" prefWidth="134.0" text="Donat pentru" />
+            </columns>
+        </TableView>
+        <Label layoutX="12.0" layoutY="11.0" prefHeight="45.0" prefWidth="440.0" styleClass="title" text="Produse sanguine disponibile">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

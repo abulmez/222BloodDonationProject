@@ -27,12 +27,8 @@ public class MenuController {
     @FXML
     private JFXHamburger menuButton;
 
-    private Stage mainStage;
+    public Stage mainStage;
     private UserType userType;
-
-    public Stage getMainStage() {
-        return mainStage;
-    }
 
     public void exitAction(){mainStage.close();}
     @FXML
@@ -78,7 +74,7 @@ public class MenuController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        MenuMedic medicController = loader.getController();
+        MenuControllerMedic medicController = loader.getController();
         medicController.setStage(this);
         medicController.setMainPane(this.centerMenuPane);
         medicController.initFirstPanel();
@@ -97,7 +93,7 @@ public class MenuController {
         }
 
 
-        MenuDonor menuDonator = loader.getController();
+        MenuControllerDonor menuDonator = loader.getController();
         menuDonator.setStage(this);
         menuDonator.setMainPane(this.centerMenuPane);
         menuDonator.initFirstPanel();
@@ -115,7 +111,7 @@ public class MenuController {
             e.printStackTrace();
         }
 
-        MenuTCP menuPct = loader.getController();
+        MenuControllerTCP menuPct = loader.getController();
         menuPct.setStage(this);
         menuPct.setMainPane(this.centerMenuPane);
         menuPct.initFirstPanel();
@@ -134,16 +130,20 @@ public class MenuController {
             e.printStackTrace();
         }
 
-        MenuAdmin menuAdmin = loader.getController();
+        MenuControllerAdmin menuAdmin = loader.getController();
         menuAdmin.setStage(this);
         menuAdmin.setMainPane(this.centerMenuPane);
         menuAdmin.initFirstPanel();
         menuDrawer.setSidePane(mainPane);
-    }
 
+    }
 
     public void setMainStage(Stage stage) {
         this.mainStage=stage;
+    }
+
+    public Stage getMainStage() {
+        return mainStage;
     }
 
     public void setUserType(UserType userType) {

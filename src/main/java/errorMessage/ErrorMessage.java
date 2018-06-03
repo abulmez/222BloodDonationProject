@@ -1,6 +1,7 @@
 package errorMessage;
 
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
     public class ErrorMessage {
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
             message.setContentText(text);
             message.initOwner(owner);
             message.showAndWait();
+            message.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         }
     }
 

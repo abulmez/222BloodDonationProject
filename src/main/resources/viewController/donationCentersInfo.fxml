@@ -2,41 +2,45 @@
 
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.CentersInfoController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="13.0" prefHeight="40.0" prefWidth="378.0" styleClass="title" text="Informații centru de donații" textAlignment="CENTER" textFill="#1908ff">
+      <Label contentDisplay="CENTER" layoutX="17.0" layoutY="13.0" prefHeight="46.0" prefWidth="439.0" styleClass="title" text="Informații centru de donații" textAlignment="CENTER" textFill="#1908ff">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="centerCombobox" focusColor="#400303" layoutX="432.0" layoutY="13.0" prefHeight="39.0" prefWidth="470.0" promptText="Centru de donatii" styleClass="centerDonCombobox" unFocusColor="#400303" />
-      <WebView fx:id="webView" layoutX="17.0" layoutY="70.0" prefHeight="414.0" prefWidth="886.0">
+      <JFXComboBox fx:id="centerCombobox" focusColor="#400303" layoutX="463.0" layoutY="13.0" prefHeight="39.0" prefWidth="439.0" promptText="Centru de donatii" styleClass="centerDonCombobox" unFocusColor="#400303" />
+      <WebView fx:id="webView" layoutX="17.0" layoutY="70.0" prefHeight="392.0" prefWidth="886.0">
          <effect>
             <DropShadow color="#a7a7a7" />
          </effect>
       </WebView>
-      <AnchorPane layoutX="17.0" layoutY="501.0" prefHeight="93.0" prefWidth="886.0" style="-fx-background-color: white;">
+      <AnchorPane layoutX="17.0" layoutY="475.0" prefHeight="118.0" prefWidth="886.0" style="-fx-background-color: white;">
          <effect>
             <DropShadow color="#a7a7a7" />
          </effect>
          <children>
-            <Label layoutX="7.0" layoutY="7.0" prefHeight="20.0" prefWidth="57.0" text="Adresă : ">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="adressLabel" contentDisplay="TEXT_ONLY" layoutX="7.0" layoutY="26.0" prefHeight="39.0" prefWidth="878.0" wrapText="true" />
-            <Label layoutX="7.0" layoutY="63.0" prefHeight="20.0" prefWidth="64.0" text="Telefon :">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="phoneLabel" layoutX="71.0" layoutY="64.0" prefHeight="18.0" prefWidth="134.0" />
+            <VBox layoutY="-3.0">
+               <children>
+                  <TextArea fx:id="addressLabel" prefHeight="67.0" prefWidth="886.0" styleClass="textAreaNoFocus" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </TextArea>
+                  <TextArea fx:id="phoneLabel" prefHeight="37.0" prefWidth="886.0" styleClass="textAreaNoFocus">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

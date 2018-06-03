@@ -1,18 +1,13 @@
 package viewController;
 
-import errorMessage.ErrorMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import model.BloodRequest;
-import service.BloodDemandService;
+import service.MedicService;
 import service.LoginService;
-
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 public class FormControllerModifica {
     private Integer idBd;
@@ -28,11 +23,11 @@ public class FormControllerModifica {
     public TextField quantity;
     @FXML
     public ComboBox bloodType;
-    private BloodDemandService service;
+    private MedicService service;
     private Stage editStage;
     @FXML
     public Button modifyButton;
-    public void setService(Integer id, BloodDemandService service,String needTyp,String desc,String prior,Double quan,String BT){
+    public void setService(Integer id, MedicService service, String needTyp, String desc, String prior, Double quan, String BT){
         this.idBd=id;
         this.service=service;
 

@@ -5,16 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.GestureEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Donation;
@@ -52,18 +49,19 @@ public class DonationsHistoryController {
         ApplicationContext context = CommonUtils.getFactory();
         donorService = context.getBean(DonorService.class);
         modelDonations= FXCollections.observableArrayList(donorService.getAllDonations(LoginService.getIdU()));
+        System.out.println(modelDonations);
         initTable(modelDonations);
     }
 
     public void initTable(ObservableList<Donation> modelDonations){
 
         tableColumnIdU.setCellValueFactory(new PropertyValueFactory<Donation,String>("IdD"));
-        tableColumnQuantity.setCellValueFactory(new PropertyValueFactory<Donation,String>("Quantity"));
+        tableColumnQuantity.setCellValueFactory(new PropertyValueFactory<Donation,String>("Cantitate"));
         tableColumnStatus.setCellValueFactory(new PropertyValueFactory<Donation,String>("Status"));
         tableViewDonations.setItems(modelDonations);
         tableViewDonations.setOnMouseClicked((MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
-            buttonShowBloodDetails.setDisable(false);
+                buttonShowBloodDetails.setDisable(false);
             }
         });
     }
@@ -75,20 +73,19 @@ public class DonationsHistoryController {
         if(!buttonShowBloodDetails.isDisabled()) {
             don = tableViewDonations.getSelectionModel().getSelectedItem();
             if(donorService.getDonationReport(don.getIdD()).getIdDR()!=null)
-            result  = donorService.getDonationReport(don.getIdD());
+                result  = donorService.getDonationReport(don.getIdD());
             else
                 result  = new DonationReport(1, LocalDate.now(),false,"Nu exista raport de detalii");
 
-
-                        FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/donationsReportDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/viewController/donationsReportDetails.fxml"));
             AnchorPane root = null;
             try {
                 root = loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            DonationsReportDetails donationsReportDetails = loader.getController();
+            DonationsReportDetailsController donationsReportDetails = loader.getController();
             donationsReportDetails.setLabels(result);
             Scene scene = new Scene(root);
 

@@ -15,7 +15,7 @@ public class Adress {
     public Adress() {
     }
 
-    public Adress(Integer idA, String street, Integer streetNumber, Integer blockNumber, Integer entrance, Integer floor, Integer apartmentNumber, String city, String county, String country) {
+    public Adress(Integer idA, String street, Integer streetNumber, Integer blockNumber, String entrance, Integer floor, Integer apartmentNumber, String city, String county, String country) {
         this.idA = idA;
         this.street = street;
         this.streetNumber = streetNumber;
@@ -26,6 +26,26 @@ public class Adress {
         this.city = city;
         this.county = county;
         this.country = country;
+    }
+
+    public String toStringSmall(){
+        return this.country+", "+city+", "+this.county+", "+this.street+", "+this.streetNumber;
+    }
+    private boolean verifyField(Object object){
+        if(object!=null&&!object.equals(""))
+            return true;
+        return false;
+    }
+    public String getFullAdress(){
+        String string= ""+country+", " + city+", "+county+", "+"strada:"+street;
+        if(verifyField(streetNumber)) string+=", nr. stradă: "+streetNumber;
+        if(verifyField(blockNumber)) string+=", nr. bloc: "+blockNumber;
+        if(verifyField(entrance)) string+=", intrare: "+entrance;
+        if(verifyField(floor)) string+=", etaj: "+floor;
+        if(verifyField(apartmentNumber)) string+=", apartament: "+apartmentNumber;
+
+
+        return string;
     }
 
     /**
@@ -55,10 +75,10 @@ public class Adress {
     private Integer blockNumber;
 
     /**
-     * 
+     *
      */
     @SerializedName("entrance")
-    private Integer entrance;
+    private String entrance;
 
     /**
      * 
@@ -122,11 +142,11 @@ public class Adress {
         this.blockNumber = blockNumber;
     }
 
-    public Integer getEntrance() {
+    public String getEntrance() {
         return entrance;
     }
 
-    public void setEntrance(Integer entrance) {
+    public void setEntrance(String entrance) {
         this.entrance = entrance;
     }
 
@@ -168,5 +188,9 @@ public class Adress {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String toString(){
+        return street + " " + streetNumber + ", " + "Nr Bloc " + blockNumber + ", " + "Intrare "+ entrance + ", " + "Etaj " +floor + ", " + "Nr Ap " + apartmentNumber + ", "+ "Oras " + city + ", " + "Judet " + county + ", " + "Tara " + country;
     }
 }

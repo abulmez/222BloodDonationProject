@@ -1,7 +1,5 @@
 package model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.*;
 
 /**
@@ -15,54 +13,44 @@ public class BloodRequest {
     public BloodRequest() {
     }
 
-    public BloodRequest(Integer idBD, Integer idH, String neededType, String description, String priority, Double quantity, String bloodType) {
+    public BloodRequest(Integer idBD, Integer idH, String neededType, String description, String priority, Integer quantity) {
         this.idBD = idBD;
         this.idH = idH;
         NeededType = neededType;
         Description = description;
         Priority = priority;
         Quantity = quantity;
-        BloodProductType = bloodType;
     }
 
     /**
      * 
      */
-    @SerializedName("idbd")
     private Integer idBD;
 
     /**
      * 
      */
-    @SerializedName("idh")
     private Integer idH;
 
     /**
      * 
      */
-    @SerializedName("neededtype")
     private String NeededType;
 
     /**
      * 
      */
-    @SerializedName("description")
     private String Description;
 
     /**
      * 
      */
-    @SerializedName("priority")
     private String Priority;
 
     /**
      * 
      */
-    @SerializedName("quantity")
-    private Double Quantity;
-
-    @SerializedName("bloodproducttype")
-    private String BloodProductType;
+    private Integer Quantity;
 
 
     public Integer getIdBD() {
@@ -105,19 +93,11 @@ public class BloodRequest {
         Priority = priority;
     }
 
-    public Double getQuantity() {
+    public Integer getQuantity() {
         return Quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(Integer quantity) {
         Quantity = quantity;
-    }
-
-    public void setBloodProductType(String bloodType){
-        BloodProductType= bloodType;
-    }
-
-    public String getBloodProductType(){
-        return BloodProductType;
     }
 }

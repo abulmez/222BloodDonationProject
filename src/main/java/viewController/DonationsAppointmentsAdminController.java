@@ -1,131 +1,99 @@
 package viewController;
 
 import com.jfoenix.controls.JFXComboBox;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.DonationCenter;
+import javafx.stage.StageStyle;
 import model.DonationSchedule;
+import model.Illness;
+import model.dto.DonationScheduleStatusDTO;
+import model.Reservation;
+import model.dto.UserIllnessDto;
 import org.springframework.context.ApplicationContext;
-import service.CenterInfoService;
-import service.DonationAppointmentsAdminService;
+import service.TCPService;
 import utils.CommonUtils;
 
+import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DonationsAppointmentsAdminController {
     public DonationsAppointmentsAdminController(){}
 
-    private ObservableList<DonationSchedule> model=FXCollections.observableArrayList();
+    private ObservableList<DonationScheduleStatusDTO> model=FXCollections.observableArrayList();
 
     ApplicationContext context = CommonUtils.getFactory();
 
-    private DonationAppointmentsAdminService service;
+    private TCPService service;
 
     @FXML
-    private TableView<DonationSchedule> paginationTableView;
+    private TableView<DonationScheduleStatusDTO> paginationTableView;
 
     @FXML
-    private TableColumn<DonationSchedule,Integer> NumarRezervare,NumarCentruDonatie,LocuriDisponibile;
+    private TableColumn<DonationScheduleStatusDTO,Integer> NumarRezervare;
 
     @FXML
-    private TableColumn<DonationSchedule,String> Status;
+    private TableColumn<DonationScheduleStatusDTO,String> Status;
 
     @FXML
-    private TableColumn<DonationSchedule,DateCell> DataDonarii;
+    private TableColumn<DonationScheduleStatusDTO,String> NumePacient;
+
+    @FXML
+    private TableColumn<DonationScheduleStatusDTO,DateCell> DataDonarii;
+
+    @FXML
+    TableColumn<DonationScheduleStatusDTO, String> actionColumn;
 
     @FXML
     private JFXComboBox<String> statusComboBox;
 
-    /*public List<TableSetterGetter> getTableData(){
-        List<TableSetterGetter> data =new ArrayList<>();
-
-        return data;
-    }*/
-
-    public void setServices(DonationAppointmentsAdminService service) {
-        this.service = service;
-        service.getAllDonationSchedule().forEach(x->model.add(x));
-        paginationTableView.setItems(model);
-        //this.service=service;
-    }
-
-    /*public void handleFilt(ActionEvent event){
-        try {
-            String tipFilt = statusComboBox.getValue().toString();
-            if (tipFilt == "WAITING") {
-
-            }
-            if (tipFilt == "REFUSED") {
-
-            }
-            if (tipFilt == "ACCEPTED") {
-
-            }
-        }catch(RuntimeException e){
-            showErrorMessage(e.getMessage());
-        }
-    }*/
-
-    static void showErrorMessage(String text){
-        Alert message=new Alert(Alert.AlertType.ERROR);
-        message.setTitle("Mesaj eroare");
-        message.setContentText(text);
-        message.showAndWait();
-    }
+    private Stage currentInfoWindow;
 
     @FXML
     public void handleModificaStatus(ActionEvent actionEvent){
-        DonationSchedule ds = paginationTableView.getSelectionModel().getSelectedItem();
+        DonationScheduleStatusDTO ds = paginationTableView.getSelectionModel().getSelectedItem();
         try {
             String tipFilt = statusComboBox.getValue().toString();
-            /*
-            if (tipFilt == "WAITING") {
-                service.handleStatusUpdate(ds.getIdDS().toString(),ds.getIdDC().toString(),tipFilt);
-            }
-            if (tipFilt == "REFUSED") {
-                service.handleStatusUpdate(ds.getIdDS().toString(),ds.getIdDC().toString(),tipFilt);
-            }
-            if (tipFilt == "ACCEPTED") {
-                System.out.println(ds.getIdDS()+" "+ds.getIdDC());
-                service.handleStatusUpdate(ds.getIdDS().toString(),ds.getIdDC().toString(),tipFilt);
-            }
-            */
-            String response= service.handleStatusUpdate(ds.getIdDS(),ds.getIdDC(),tipFilt);
+
+            String response= service.handleStatusUpdate(ds.getIdDS(),tipFilt);
             if (!response.equals("Success")){
                 Alert alert = new Alert(Alert.AlertType.ERROR,response);
                 alert.show();
             }
-            this.model=FXCollections.observableArrayList(service.getAllDonationSchedule());
+            this.model=FXCollections.observableArrayList(service.getAllDonationStatus());
             paginationTableView.setItems(model);
         }catch(RuntimeException e){
-            showErrorMessage(e.getMessage());
+            showErrorMessage("Nu este selectat nici o programare la donatie");
+            //showErrorMessage(e.getMessage());
         }
     }
 
     @FXML
     public void initialize(){
         int count=0;
-        service = context.getBean(DonationAppointmentsAdminService.class);
+        service = context.getBean(TCPService.class);
+        service = context.getBean(TCPService.class);
         //System.out.println(service.getAllDonationSchedule().size());
-        this.model=FXCollections.observableArrayList(service.getAllDonationSchedule());
-        //service.getAllDonationSchedule().forEach(x->model.add(x));
-        //paginationTableView.setItems(model);
+        //this.model=FXCollections.observableArrayList(service.getAllDonationSchedule());
+
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "WAITING",
@@ -134,20 +102,29 @@ public class DonationsAppointmentsAdminController {
                 );
 
         List<DonationSchedule> centers=service.getAllDonationSchedule();
+        List<Reservation> reservations = service.getAllReservation();
         for(DonationSchedule dc : centers){
             System.out.println(dc.getIdDS());
             System.out.println(dc.getIdDC());
             System.out.println(dc.getDonationDateTime());
             System.out.println(dc.getAvailableSpots());
-           // System.out.println(dc.getStatus());
+            //System.out.println(dc.getStatus());
         }
+
+        for (Reservation res : reservations){
+            System.out.println(res.getStatus());
+        }
+        List<DonationScheduleStatusDTO> bun = new ArrayList<>();
+
+        bun = service.getAllDonationStatus();
+        this.model=FXCollections.observableArrayList(bun);
 
         statusComboBox.setItems(options);
         statusComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if(newValue.equals("WAITING")){
-                    //DonationSchedule ds = paginationTableView.getSelectionModel().getSelectedItem();
+
                 }
                 if(newValue.equals("REFUSED")){
 
@@ -159,36 +136,95 @@ public class DonationsAppointmentsAdminController {
         });
 
 
-        NumarRezervare.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("idDS"));
-        NumarCentruDonatie.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("idDC"));
-        LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationSchedule,Integer>("availableSpots"));
-        DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationSchedule,DateCell>("donationDateTime"));
-        Status.setCellValueFactory(new PropertyValueFactory<DonationSchedule,String>("status"));
+        NumarRezervare.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,Integer>("idDS"));
+        NumePacient.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,String>("name"));
+        //LocuriDisponibile.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,Integer>("availableSpots"));
+        DataDonarii.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,DateCell>("donationDateTime"));
+        Status.setCellValueFactory(new PropertyValueFactory<DonationScheduleStatusDTO,String>("status"));
+        actionColumn.setCellValueFactory(cellData->new ReadOnlyStringWrapper(cellData.getValue().getIdDS().toString()));
+        actionColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                final Button infoButton = new Button("");
+                super.updateItem(item, empty);
+                infoButton.getStyleClass().add("button");
+                //System.out.println("UUUUUUUUUUUUUUUUUUUUUUUUU");
+                infoButton.setGraphic(new ImageView("./images/info.png"));
+                //System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYY");
+                infoButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        /*FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/viewController/smallDonationScheduleInfoWindow.fxml"));*/
+                       // AnchorPane root = null;
+                        try {
+                            //System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                            //--AnchorPane root = FXMLLoader.load(DonationsController.class.getResource("/viewController/boli.fxml"));
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(DonationsAppointmentsAdminController.class.getResource("/viewController/smallDonationScheduleInfoWindow.fxml"));
+                            AnchorPane root = (AnchorPane) loader.load();
+                            Stage dialogStage = new Stage();
+                            dialogStage.setTitle("");
+                            dialogStage.initModality(Modality.WINDOW_MODAL);
+                            Scene scene = new Scene(root);
+                            dialogStage.setScene(scene);
+                            column.getTableView().getSelectionModel().select(getIndex());
+                            DonationScheduleStatusDTO donationScheduleStatusDTO= (DonationScheduleStatusDTO)paginationTableView.getSelectionModel().getSelectedItem();
+                            dialogStage.initStyle(StageStyle.TRANSPARENT);
+                            //System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+
+                            List<Illness> illnessArrayList = service.getIllnessPacient(donationScheduleStatusDTO.getIdU());
+                            System.out.println("ARE ILLNESS");
+                            System.out.println(illnessArrayList.size());
+                            UserIllnessDto userIllnessDto = service.getUserIllness(donationScheduleStatusDTO);
+                            //Illness illness = illnessArrayList.get(0);
+                            //System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
+                            SmallDonationScheduleInfoWindow smallDonationScheduleInfoWindow = loader.getController();
+                            smallDonationScheduleInfoWindow.setEntity(userIllnessDto);
+                            Point mouse = java.awt.MouseInfo.getPointerInfo().getLocation();
+                            dialogStage.setX(mouse.x);
+                            dialogStage.setY(mouse.y);
+
+                            currentInfoWindow = dialogStage;
+
+                            dialogStage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                infoButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        currentInfoWindow.close();
+                    }
+                });
+                if (item != null) {
+                    setGraphic(infoButton);
+                }
+            }
+        });
 
         paginationTableView.setItems(model);
 
         paginationTableView.getSelectionModel().selectedItemProperty().
-                addListener(new ChangeListener<DonationSchedule>() {
+                addListener(new ChangeListener<DonationScheduleStatusDTO>() {
                     @Override
-                    public void changed(ObservableValue<? extends DonationSchedule> observable,
-                                        DonationSchedule oldValue, DonationSchedule newValue) {
+                    public void changed(ObservableValue<? extends DonationScheduleStatusDTO> observable,
+                                        DonationScheduleStatusDTO oldValue, DonationScheduleStatusDTO newValue) {
                         if (newValue!=null){
-                        //    statusComboBox.setValue(newValue.getStatus());
+                            statusComboBox.setValue(newValue.getStatus());
                         }
                     }
                 });
 
+    }
 
-        //paginationTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showStudenti(newValue));
-
-        //OBSERVERLIST
-        /*ObservableList lista=FXCollections.observableList(service.getAllRezervari());
-        paginationTableView.setItems(lista);
-        paginationTableView.refresh();*/
-
-        /*int pageCount = (count / itemPerPage + 1);
-        pagination.setPageCount(pageCount);
-        pagination.setPageFactory(this::createPage);*/
-
+    static void showErrorMessage(String text){
+        Alert message=new Alert(Alert.AlertType.ERROR);
+        message.setTitle("Mesaj eroare");
+        message.setContentText(text);
+        message.showAndWait();
     }
 }

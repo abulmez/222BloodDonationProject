@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" stylesheets="@stylesheet/donationsCSS.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsReportController">
+<AnchorPane prefHeight="450.0" prefWidth="300.0" stylesheets="@stylesheet/donationsCSS.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsReportController">
 
     <children>
         <ImageView fitHeight="82.0" fitWidth="91.0" layoutX="108.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
@@ -27,9 +28,10 @@
             </image>
         </ImageView>
         <Label id="formular" layoutX="115.0" layoutY="23.0" text="Formular" />
-        <Button layoutX="118.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleAdd" text="Adauga" />
+        <Button layoutX="118.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleAdd" text="Adauga" />
       <DatePicker fx:id="datePicker" layoutX="79.0" layoutY="165.0" promptText="Data donarii" />
       <TextArea fx:id="textArea" layoutX="81.0" layoutY="200.0" prefHeight="138.0" prefWidth="185.0" promptText="Descriere..." />
+      <CheckBox fx:id="emailCheckBox" layoutX="46.0" layoutY="347.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" text="Sunt de acord sa primesc acest formular prin e-mail." wrapText="true" />
     </children>
 
 </AnchorPane>

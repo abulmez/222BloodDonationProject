@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.dto.TableSetterGetterDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,13 +24,13 @@ public class DonationCentersInfoController {
     private Pagination pagination;
 
     @FXML
-    private TableView<TableSetterGetter> paginationTableView;
+    private TableView<TableSetterGetterDTO> paginationTableView;
 
     @FXML
-    private TableColumn<TableSetterGetter,Integer> NumarRezervare,NumarCentruDonatie,LocuriDisponibile;
+    private TableColumn<TableSetterGetterDTO,Integer> NumarRezervare,NumarCentruDonatie,LocuriDisponibile;
 
     @FXML
-    private TableColumn<TableSetterGetter,DateCell> DataDonarii;
+    private TableColumn<TableSetterGetterDTO,DateCell> DataDonarii;
 
     int from=0, to=0;
     int itemPerPage = 10;
@@ -41,8 +42,8 @@ public class DonationCentersInfoController {
         return paginationTableView;
     }
 
-    public List<TableSetterGetter> getTableData(){
-        List<TableSetterGetter> data =new ArrayList<>();
+    public List<TableSetterGetterDTO> getTableData(){
+        List<TableSetterGetterDTO> data =new ArrayList<>();
 
         return data;
     }

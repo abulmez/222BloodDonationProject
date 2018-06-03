@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class DonationCenter {
 
@@ -21,26 +21,31 @@ public class DonationCenter {
         this.centerName = centerName;
         this.phoneNumber = phoneNumber;
     }
+    @Override
+    public String toString(){
+        return centerName;
+    }
 
     /**
-     * 
+     *
      */
     @SerializedName("iddc")
     private Integer idDC;
 
     /**
-     * 
+     *
      */
     @SerializedName("ida")
     private Integer idA;
+
     /**
-     * 
+     *
      */
     @SerializedName("centername")
     private String centerName;
 
     /**
-     * 
+     *
      */
     @SerializedName("phonenumber")
     private String phoneNumber;

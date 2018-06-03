@@ -1,149 +1,113 @@
 package viewController;
 
 import com.jfoenix.controls.JFXComboBox;
-
-import com.maxmind.geoip2.DatabaseReader;
-import com.maxmind.geoip2.exception.GeoIp2Exception;
-import com.maxmind.geoip2.model.CityResponse;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 import model.Adress;
 import model.DonationCenter;
 import org.springframework.context.ApplicationContext;
-import service.CenterInfoService;
+import service.DonorService;
+import service.LoginService;
 import utils.CommonUtils;
-
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Enumeration;
 import java.util.List;
 
 public class CentersInfoController {
-    private ObservableList<DonationCenter> model=FXCollections.observableArrayList();
-
-    ApplicationContext context = CommonUtils.getFactory();
 
     @FXML
-    private JFXComboBox<String> centerCombobox;
+    private JFXComboBox<DonationCenter> centerCombobox;
 
     @FXML
     private WebView webView;
 
     @FXML
-    private Label adressLabel;
+    private TextArea addressLabel;
 
     @FXML
-    private Label phoneLabel;
+    private TextArea phoneLabel;
     private Timeline locationUpdateTimeline=null;
-
-    private CenterInfoService service;
+    private WebEngine webEngine;
+    private List<Adress> addresses;
+    private List<DonationCenter> donationCenters;
+    private List<DonationCenter> currentDonationCenter;
 
     @FXML
-    private void initialize() throws IOException, GeoIp2Exception, URISyntaxException {
-        /*ApplicationContext context = CommonUtils.getFactory();
-        service = context.getBean(LoginService.class);*/
+    private void initialize(){
+        initMap();
+        initLists();
+        initComboBox();
+        initTextAreas();
+    }
 
-        //ApplicationContext context = CommonUtils.getFactory();
+    private void initTextAreas() {
+        addressLabel.setEditable(false);
+        phoneLabel.setEditable(false);
+    }
 
-        service = context.getBean(CenterInfoService.class);
-        this.model= FXCollections.observableArrayList(service.getAllDonationCenter());
-        ObservableList<String> options =
-                FXCollections.observableArrayList();
+    private void initLists() {
+        ApplicationContext context = CommonUtils.getFactory();
+        DonorService donorService = context.getBean(DonorService.class);
+        Integer userId = LoginService.getIdU();
+        addresses = donorService.getAllAdressForCenters();
+        donationCenters = donorService.getAllDonationCenter();
+        currentDonationCenter = donorService.getCurrentDonationCenter(userId);
+    }
 
-        List<DonationCenter> centers=service.getAllDonationCenter();
-        //ObservableList<String> centre=null;
-        for(DonationCenter dc : centers){
-            //centre.add(adr.getCenterName());
-            System.out.println(dc.getCenterName());
-            System.out.println(dc.getPhoneNumber());
-            System.out.println(dc.getIdA());
-            System.out.println(dc.getIdDC());
-            options.add(dc.getCenterName());
-        }
-        //centerCombobox.setItems(centre);
-
-        System.out.println("============");
-        for (String s:options) {
-            System.out.println(s);
-        }
-
-        centerCombobox.setItems(options);
-        centerCombobox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue observable, String oldValue, String newValue) {
-                for (DonationCenter donationCenter:centers){
-                    System.out.println(donationCenter.getCenterName()+" "+newValue);
-                    if(newValue.equals(donationCenter.getCenterName())){
-                        System.out.println(donationCenter.getCenterName()+" "+newValue);
-                        adressLabel.setText(donationCenter.getCenterName());
-                        phoneLabel.setText(donationCenter.getPhoneNumber());
-                    }
+    private void addComboBoxListener() {
+        centerCombobox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            Integer idAddress=newValue.getIdA();
+            Adress addressFinal = null;
+            for (Adress adress: addresses) {
+                if(adress.getIdA().equals(idAddress))
+                    addressFinal=adress;
+            }
+            if(addressFinal!=null) {
+                setClientLocation(webEngine, addressFinal.toStringSmall());
+                String address=addressFinal.getFullAdress();
+                if (address != null && address.length() > 0 && address.charAt(address.length() - 1) == ',') {
+                    System.out.println("Multa magiex");
+                    address = address.substring(0, address.length() - 1);
                 }
-                
+                addressLabel.setText("Adresă : " + address);
+                phoneLabel.setText("Telefon : " + newValue.getPhoneNumber());
             }
         });
-
-        initMap();
-
     }
 
-    private String getClientCity() throws IOException, GeoIp2Exception {
-        URL url1 =getClass().getResource( "/viewController/GeoLite2-City.mmdb");
-        String dbLocation = url1.getPath();
-        dbLocation=dbLocation.substring(1);
-        dbLocation=dbLocation.replaceAll("/","//");
-
-
-        File database = new File(dbLocation);
-        DatabaseReader dbReader = new DatabaseReader.Builder(database).build();
-
-        InetAddress ipAddress = InetAddress.getByName(getIpAdress());
-        CityResponse response = dbReader.city(ipAddress);
-        return response.getCity().getName();
+    private void initComboBox() {
+        for (DonationCenter centerInfoService:donationCenters) {
+            centerCombobox.getItems().add(centerInfoService);
+        }
+        addComboBoxListener();
+        if(currentDonationCenter.size()!=0)
+            for(DonationCenter donationCenter1:donationCenters)
+                if(donationCenter1.getIdDC().equals(currentDonationCenter.get(0).getIdDC()))
+                    centerCombobox.getSelectionModel().select(donationCenter1);
     }
-    private void initMap() throws IOException, GeoIp2Exception {
-        WebEngine webEngine = webView.getEngine();
+
+    private void initMap(){
+        webEngine = webView.getEngine();
 
         webEngine.setJavaScriptEnabled(true);
 
         URL url = getClass().getResource("/viewController/googlemaps.html");
         if (url != null)
             webEngine.load(url.toExternalForm());
-        setClientLocation(webEngine);
     }
 
-    private void setClientLocation(WebEngine webEngine) throws IOException, GeoIp2Exception {
-        String cityName = getClientCity();
-
-
+    private void setClientLocation(WebEngine webEngine,String address) {
         if (locationUpdateTimeline!=null) locationUpdateTimeline.stop();
         locationUpdateTimeline = new Timeline();
         locationUpdateTimeline.getKeyFrames().add(
-                new KeyFrame(new javafx.util.Duration(400),
-                        actionEvent -> {
-                            webEngine.executeScript("document.goToLocation(\"" + cityName + "\")");
-                        })
+                new KeyFrame(new javafx.util.Duration(2900),
+                        actionEvent -> webEngine.executeScript("geocodeAddress(\"" + "'"+address+"'"+"\")"))
         );
         locationUpdateTimeline.play();
     }
 
-    private String getIpAdress() throws IOException {
-        URL url1 = new URL("http://checkip.amazonaws.com/");
-        BufferedReader br = new BufferedReader(new InputStreamReader(url1.openStream()));
-        return br.readLine();
-    }
 
 }

@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class LoginService {
 
     private HttpURLConnection con;
-    static int idU;
+    private static int idU;
     private UserType userType;
     private ServerConnection serverConnection;
 
@@ -26,18 +26,15 @@ public class LoginService {
         String urlParameters = String.format("username=%s&password=%s",username,password);
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         try {
-
             con = serverConnection.getServerConnection();
             con.setDoOutput(true);
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/login");
             con.setConnectTimeout(50000);
             con.setReadTimeout(5000);
-
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);
             }
-
             int code = con.getResponseCode();
             if(code == 200){
                 try (BufferedReader in = new BufferedReader(
@@ -46,7 +43,6 @@ public class LoginService {
                     String[] data = response.split("&");
                     idU = Integer.parseInt(data[0].split("=")[1]);
                     userType = UserType.valueOf( data[1].split("=")[1]);
-                    in.close();
                 }
                 return true;
             }
@@ -54,12 +50,11 @@ public class LoginService {
                 return false;
             }
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
 
         } finally {
+
             con.disconnect();
         }
         return false;

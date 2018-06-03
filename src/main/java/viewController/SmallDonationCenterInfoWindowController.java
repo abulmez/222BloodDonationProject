@@ -2,7 +2,7 @@ package viewController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import model.DTO.BloodRequestHospitalDTO;
+import model.dto.BloodRequestHospitalDTO;
 
 
 

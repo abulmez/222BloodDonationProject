@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.CentreTableAdminController">
+    <children>
+        <TableView fx:id="table" onMouseClicked="#handleGet" prefHeight="400.0" prefWidth="800.0">
+            <columns>
+                <TableColumn fx:id="idDCcolumn" prefWidth="69.5999755859375" text="IdDC" />
+                <TableColumn fx:id="idAcolumn" prefWidth="452.0000305175781" text="Adress" />
+                <TableColumn fx:id="donationCentercolumn" prefWidth="159.199951171875" text="Numele centrului" />
+                <TableColumn fx:id="phoneCentercolumn" prefWidth="124.7999267578125" text="Telefon" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
