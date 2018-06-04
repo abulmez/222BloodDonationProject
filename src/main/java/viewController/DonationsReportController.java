@@ -81,10 +81,12 @@ public class DonationsReportController {
                         th.setDaemon(true);
                         mailSender.setOnSucceeded((Event action)->{
                             Alert alert=new Alert(Alert.AlertType.INFORMATION,"E-mailul a fost trimis cu succes!");
+                            alert.setHeaderText("Trimitere e-mail");
                             alert.showAndWait();
                         });
                         mailSender.setOnFailed((Event action) -> {
                             Alert alert=new Alert(Alert.AlertType.ERROR,"Eroare la trimiterea e-mailului.");
+                            alert.setHeaderText("Trimitere e-mail");
                             alert.showAndWait();
                         });
                         th.start();
@@ -95,6 +97,7 @@ public class DonationsReportController {
                     }
                 }
                 Alert alert=new Alert(Alert.AlertType.INFORMATION,"Raportul a fost adaugat cu succes!");
+                alert.setHeaderText("Adaugare raport");
                 alert.showAndWait();
             }
             Stage thisStage=(Stage)textArea.getScene().getWindow();
@@ -102,6 +105,7 @@ public class DonationsReportController {
         }
         else{
             Alert alert=new Alert(Alert.AlertType.ERROR,errors);
+            alert.setHeaderText("Date invalide");
             alert.showAndWait();
         }
 

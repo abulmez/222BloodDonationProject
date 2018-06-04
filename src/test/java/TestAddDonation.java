@@ -18,7 +18,7 @@ public class TestAddDonation extends TestCase {
     }
 
     public void testUp(){
-        assertNotSame("Success",service.handleAddDonation("dasdas","In curs de validare","435.28","This is a test"));
+        assertFalse(service.handleAddDonation("dasdas","In curs de validare","435.28","This is a test").equals("Success"));
         assertEquals(numberOfDonations.intValue(),service.handleGetDonations().size());
         assertEquals("Success",service.handleAddDonation("21321312123","In curs de validare","435.28","This is a test"));
         assertEquals(numberOfDonations+1,service.handleGetDonations().size());

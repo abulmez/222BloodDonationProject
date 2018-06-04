@@ -79,6 +79,7 @@ public class AddDonationsController{
         }
         else{
             Alert alert=new Alert(Alert.AlertType.ERROR,errors);
+            alert.setHeaderText("Date invalide");
             alert.showAndWait();
         }
     }
