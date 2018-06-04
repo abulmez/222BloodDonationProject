@@ -89,6 +89,7 @@ public class DonationsCentreAndHospitalsController {
     public void buttonAddHandle(){
         if(currentTable == TableType.Centru)
         {
+                Stage dialogStage = new Stage();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/viewController/admin-CentreAndHospitalsTables/addButtonFormCentre.fxml"));
 
@@ -96,11 +97,11 @@ public class DonationsCentreAndHospitalsController {
                 try {
                     root1 = (AnchorPane) loader.load();
                     AddButtonFormCentreController a = (AddButtonFormCentreController)loader.getController();
-                    a.setCtrl(this);
+                    a.setCtrl(this,dialogStage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Stage dialogStage = new Stage();
+
                 dialogStage.setTitle("");
                 Scene scene = new Scene(root1);
                 dialogStage.setScene(scene);
@@ -108,17 +109,18 @@ public class DonationsCentreAndHospitalsController {
         }
         else{
             System.out.println(currentTable.toString());
+            Stage dialogStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/viewController/admin-CentreAndHospitalsTables/addButtonFormHospital.fxml"));
             AnchorPane root1 = null;
             try {
                 root1 = (AnchorPane) loader.load();
                 AddButtonFromHospitalController a = (AddButtonFromHospitalController)loader.getController();
-                a.setCtrl(this);
+                a.setCtrl(this,dialogStage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Stage dialogStage = new Stage();
+
             dialogStage.setTitle("");
             Scene scene = new Scene(root1);
             dialogStage.setScene(scene);

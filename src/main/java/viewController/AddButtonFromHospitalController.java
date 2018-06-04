@@ -18,6 +18,7 @@ public class AddButtonFromHospitalController {
     ServerConnection serverConnection;
     AdminService adminService;
     DonationsCentreAndHospitalsController ctrl;
+    Stage thisStage;
     @FXML
     TextField nameCentre;
 
@@ -51,8 +52,9 @@ public class AddButtonFromHospitalController {
         serverConnection = context.getBean(ServerConnection.class);
         adminService = new AdminService(serverConnection);
     }
-    public void setCtrl(DonationsCentreAndHospitalsController ctrl){
+    public void setCtrl(DonationsCentreAndHospitalsController ctrl,Stage stage){
         this.ctrl = ctrl;
+        thisStage = stage;
     }
     public void addHandle(){
         adminService.addAdress(streetText.getText(), nrStreetText.getText(),null,null,null,null, cityText.getText(), countyText.getText(), countryText.getText());
@@ -73,8 +75,7 @@ public class AddButtonFromHospitalController {
             nameCentre.setText("");
             phoneCentre.setText("");
             ctrl.displayTableHospital();
-            Stage stage = (Stage)addButton.getScene().getWindow();
-            stage.hide();
+            thisStage.close();
         }
     }
 

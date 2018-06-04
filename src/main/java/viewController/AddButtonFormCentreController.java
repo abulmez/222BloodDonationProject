@@ -3,6 +3,7 @@ package viewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.Adress;
 import org.springframework.context.ApplicationContext;
 import service.AdminService;
@@ -17,6 +18,7 @@ public class AddButtonFormCentreController {
     ServerConnection serverConnection;
     AdminService adminService;
     DonationsCentreAndHospitalsController ctrl;
+    Stage thisStage;
     @FXML
     private TextField countryText;
 
@@ -48,8 +50,9 @@ public class AddButtonFormCentreController {
         adminService = new AdminService(serverConnection);
     }
 
-    public void setCtrl(DonationsCentreAndHospitalsController ctrl){
+    public void setCtrl(DonationsCentreAndHospitalsController ctrl,Stage stage){
         this.ctrl = ctrl;
+        thisStage = stage;
     }
     public void addHandle(){
         adminService.addAdress(streetText.getText(), nrStreetText.getText(), null, null, null, null, cityText.getText(), countyText.getText(), countryText.getText());
@@ -71,6 +74,7 @@ public class AddButtonFormCentreController {
                 nameCentre.setText("");
                 phoneCentre.setText("");
                 ctrl.displayTableCentre();
+                thisStage.close();
             }
     }
 }
