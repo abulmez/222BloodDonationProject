@@ -23,7 +23,7 @@
             <TableColumn fx:id="bloodGroupColumn" prefWidth="95.20001220703125" text="Grupa Sange" />
             <TableColumn fx:id="quantityColumn" prefWidth="79.99993896484375" text="Cantitate(ml)" />
             <TableColumn fx:id="donatedForColumn" prefWidth="241.60003662109375" text="Donat pentru" />
-            <TableColumn fx:id="actionColumn" maxWidth="200.0" prefWidth="77.60009765625" text="Actiune" />
+            <TableColumn fx:id="actionColumn" maxWidth="200.0" prefWidth="79.2000610351563" text="Actiune" />
         </columns>
       </TableView>
       <Label layoutX="648.0" layoutY="36.0" prefHeight="18.0" prefWidth="76.0" text="Tip Produs" />
