@@ -30,7 +30,7 @@
         <Label id="formular" layoutX="115.0" layoutY="23.0" text="Formular" />
         <Button layoutX="118.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleAdd" text="Adauga" />
       <DatePicker fx:id="datePicker" layoutX="79.0" layoutY="165.0" promptText="Data donarii" />
-      <TextArea fx:id="textArea" layoutX="81.0" layoutY="200.0" prefHeight="138.0" prefWidth="185.0" promptText="Descriere..." />
+      <TextArea fx:id="textArea" layoutX="81.0" layoutY="200.0" prefHeight="138.0" prefWidth="185.0" promptText="Descriere..." wrapText="true" />
       <CheckBox fx:id="emailCheckBox" layoutX="46.0" layoutY="347.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" text="Trimit acest formular donatorului prin e-mail." wrapText="true" />
     </children>
 

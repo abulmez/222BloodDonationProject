@@ -12,7 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.springframework.context.ApplicationContext;
 import service.TCPService;
@@ -106,6 +108,7 @@ public class DonationsController {
                     DonationDTO donation = (DonationDTO) tableView.getSelectionModel().getSelectedItem();
                     if (donation == null) {
                         Alert alert = new Alert(Alert.AlertType.ERROR, "Selectati un rand din tabel apoi modificati statusul!");
+                        alert.setHeaderText("Rand neselectat");
                         alert.showAndWait();
                     } else {
                         if (!newValue.equals(donation.getStatus())) {
@@ -150,6 +153,7 @@ public class DonationsController {
 
     public void handleReadyStatus(String newValue,DonationDTO donation){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Sigur doriti sa continuati?", ButtonType.YES, ButtonType.NO);
+        alert.setHeaderText("Confirmare donatie pregatita");
         alert.showAndWait().ifPresent(dialogResponse -> {
             if (dialogResponse == ButtonType.YES) {
                 System.out.println("aici");
@@ -167,6 +171,7 @@ public class DonationsController {
                         errors += response3 + "\n";
                     if (errors.equals("")) {
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "Operatie reusita!");
+                        alert1.setHeaderText("Succes!");
                         alert1.showAndWait();
                     } else {
                         Alert alert2 = new Alert(Alert.AlertType.ERROR, errors);
@@ -179,11 +184,30 @@ public class DonationsController {
                         alert1.showAndWait();
                     } else {
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "Operatie reusita!");
+                        alert1.setHeaderText("Succes!");
                         alert1.showAndWait();
                     }
-                    showAddReportWindow(newValue, donation);
+                    //showAddReportWindow(newValue, donation);
+                    Stage secondaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/donationsReport.fxml"));
+                    Parent root = null;
+                    try {
+                        root = loader.load();
+                        secondaryStage.setTitle("Adauga raport");
+                        DonationsReportController ctrl = loader.getController();
+                        ctrl.initData(newValue, donation);
+                        secondaryStage.setScene(new Scene(root, 300, 450));
+                        secondaryStage.initModality(Modality.WINDOW_MODAL);
+                        secondaryStage.initStyle(StageStyle.TRANSPARENT);
+                        secondaryStage.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+            else
+                setClosed();
         });
 
     }
