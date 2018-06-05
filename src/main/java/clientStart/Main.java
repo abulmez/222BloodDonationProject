@@ -13,11 +13,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-        Gson gson = new Gson();
-        Donation donation = new Donation(1,1,1,14.1,"dsadsa","dsds");
-        System.out.println(gson.toJson(donation));
-
         LoginCreatorController loginCreatorController = new LoginCreatorController(primaryStage);
         loginCreatorController.show();
     }

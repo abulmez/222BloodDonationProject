@@ -2,9 +2,6 @@ package model.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-
 public class UserPacientDTO {
     public UserPacientDTO() {
     }

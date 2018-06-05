@@ -1,5 +1,4 @@
 import junit.framework.TestCase;
-import model.dto.DonationScheduleStatusDTO;
 import org.springframework.context.ApplicationContext;
 import service.LoginService;
 import service.TCPService;

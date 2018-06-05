@@ -1,9 +1,5 @@
 package model.dto;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.time.LocalDate;
-
 public class UserIllnessDto {
 
     private Integer idU;
