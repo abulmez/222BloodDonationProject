@@ -4,6 +4,9 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
 import model.dto.*;
+import org.springframework.context.ApplicationContext;
+import utils.CommonUtils;
+import utils.MailSender;
 import utils.ServerConnection;
 import utils.customDeserializer.CustomBloodProductDeserializer;
 
@@ -1003,6 +1006,104 @@ public class TCPService {
         }
         return "";
     }
+    public List<BloodRequestDTO> findForAllDemands(){
+        String urlParameters = Integer.toString(LoginService.getIdU());
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        String response="";
+        try {
 
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/findAllBloodDemands");
+            con.setConnectTimeout(505000);
+            con.setReadTimeout(505000);
+
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            if(code == 200){
+                List<BloodRequestDTO> list;
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    Gson g=new Gson();
+                    Type collectionType= new TypeToken<ArrayList<BloodRequestDTO>>(){}.getType();
+                    list=g.fromJson(in.readLine(),collectionType);
+                    return list;
+                }
+
+            }
+            else{
+                return null;
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+
+            con.disconnect();
+        }
+        return null;
+
+    }
+    public List<BloodQuantity> findBloodQuantitys(){
+        String urlParameters = Integer.toString(LoginService.getIdU());
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        try {
+            con = serverConnection.getServerConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/findBloodQuantities");
+            con.setConnectTimeout(50000);
+            con.setReadTimeout(50000);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postData);
+            }
+            int code = con.getResponseCode();
+            if(code == 200){
+                List<BloodQuantity> list;
+
+                try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()))) {
+                    String line = in.readLine();
+                    System.out.println("====="+line);
+                    Gson g=new Gson();
+                    Type collectionType= new TypeToken<ArrayList<BloodQuantity>>(){}.getType();
+                    list=g.fromJson(line,collectionType);
+                    return list;
+                }
+            }
+            else{
+                return null;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+        return null;
+
+    }
+
+    public void sendEmailForNeededType(String neededType) {
+        ApplicationContext context = CommonUtils.getFactory();
+        DonorService service = context.getBean(DonorService.class);
+        List<String> emails = service.getAllDonorsEmailsForBloodType(neededType);
+        String mesaj = "O altă viață este în pericol, un pacient care are aceeași grupă de sânge ca și tine (" + neededType +") " +
+                "are nevoie de ajutor. Te rugăm, să folosești aplicația noastră HID Blood pentru a face o donație " +
+                "la cel mai apropiat centru. Îți mulțumim, ajutorul tău înseamnă enorm! "+
+                "\n\n\nEchipa HID Blood!"+
+                "Te rugăm să nu răspunzi acestui mesaj trimis automat!";
+        for (String email:emails) {
+            MailSender mailSender = new MailSender(email,"Te rugăm să donezi!",mesaj);
+            Thread th = new Thread(mailSender);
+            th.setDaemon(true);
+            th.start();
+        }
+    }
 
 }

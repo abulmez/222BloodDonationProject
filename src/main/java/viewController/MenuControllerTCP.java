@@ -27,6 +27,13 @@ public class MenuControllerTCP extends CenterMenuController {
         mainStage.openMenu();
     }
 
+    @FXML
+    void requestsAction(MouseEvent event) {
+        setPanel(getClass().getResource("/viewController/tcpBloodRequests.fxml"),centerManeuPane);
+        mainStage.openMenu();
+    }
+
+
 
 
 

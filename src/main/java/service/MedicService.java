@@ -69,26 +69,10 @@ public class MedicService {
 
             con.disconnect();
         }
-        sendEmailForNeededType(neededType);
+        //sendEmailForNeededType(neededType);
         return response;
     }
 
-    public void sendEmailForNeededType(String neededType) {
-        ApplicationContext context = CommonUtils.getFactory();
-        DonorService service = context.getBean(DonorService.class);
-        List<String> emails = service.getAllDonorsEmailsForBloodType(neededType);
-        String mesaj = "O altă viață este în pericol, un pacient care are aceeași grupă de sânge ca și tine (" + neededType +") " +
-                "are nevoie de ajutor. Te rugăm, să folosești aplicația noastră HID Blood pentru a face o donație " +
-                "la cel mai apropiat centru. Îți mulțumim, ajutorul tău înseamnă enorm! "+
-                "\n\n\nEchipa HID Blood!"+
-                "Te rugăm să nu răspunzi acestui mesaj trimis automat!";
-        for (String email:emails) {
-            MailSender mailSender = new MailSender(email,"Te rugăm să donezi!",mesaj);
-            Thread th = new Thread(mailSender);
-            th.setDaemon(true);
-            th.start();
-        }
-    }
 
     public String handleRemove(Integer idBd){
         String urlParameters = String.format("IdBd=%s",idBd);

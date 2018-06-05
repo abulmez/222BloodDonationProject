@@ -8,24 +8,24 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color:white" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.BloodProductsInventoryController">
-   <children>
-      <Label layoutX="39.0" layoutY="22.0" prefHeight="46.0" prefWidth="378.0" styleClass="title" stylesheets="@loginTheme.css" text="Inventar produse sanguine">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="productTypeComboBox" layoutX="731.0" layoutY="32.0" prefWidth="150.0" />
-      <TableView fx:id="bloodProductsTable" editable="true" layoutX="39.0" layoutY="88.0" prefHeight="491.0" prefWidth="843.0">
-        <columns>
-          <TableColumn fx:id="productIdColumn" prefWidth="75.0" text="Id Produs" />
-          <TableColumn fx:id="productTypeColumn" prefWidth="153.59996032714844" text="Tip Produs" />
-            <TableColumn fx:id="validityColumn" prefWidth="116.0" text="Valabil pana la" />
-            <TableColumn fx:id="bloodGroupColumn" prefWidth="95.20001220703125" text="Grupa Sange" />
-            <TableColumn fx:id="quantityColumn" prefWidth="79.99993896484375" text="Cantitate(ml)" />
-            <TableColumn fx:id="donatedForColumn" prefWidth="241.60003662109375" text="Donat pentru" />
-            <TableColumn fx:id="actionColumn" maxWidth="200.0" prefWidth="79.2000610351563" text="Actiune" />
-        </columns>
-      </TableView>
-      <Label layoutX="648.0" layoutY="36.0" prefHeight="18.0" prefWidth="76.0" text="Tip Produs" />
-   </children>
+    <children>
+        <Label layoutX="39.0" layoutY="22.0" prefHeight="46.0" prefWidth="378.0" styleClass="title" stylesheets="@loginTheme.css" text="Inventar produse sanguine">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="productTypeComboBox" layoutX="731.0" layoutY="32.0" prefWidth="150.0" />
+        <TableView fx:id="bloodProductsTable" editable="true" layoutX="39.0" layoutY="88.0" prefHeight="491.0" prefWidth="843.0">
+            <columns>
+                <TableColumn fx:id="productIdColumn" prefWidth="75.0" text="Id Produs" />
+                <TableColumn fx:id="productTypeColumn" prefWidth="153.59996032714844" text="Tip Produs" />
+                <TableColumn fx:id="validityColumn" prefWidth="116.0" text="Valabil pana la" />
+                <TableColumn fx:id="bloodGroupColumn" prefWidth="95.20001220703125" text="Grupa Sange" />
+                <TableColumn fx:id="quantityColumn" prefWidth="79.99993896484375" text="Cantitate(ml)" />
+                <TableColumn fx:id="donatedForColumn" prefWidth="241.60003662109375" text="Donat pentru" />
+                <TableColumn fx:id="actionColumn" maxWidth="200.0" prefWidth="77.60009765625" text="Actiune" />
+            </columns>
+        </TableView>
+        <Label layoutX="648.0" layoutY="36.0" prefHeight="18.0" prefWidth="76.0" text="Tip Produs" />
+    </children>
 </AnchorPane>
