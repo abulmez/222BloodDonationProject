@@ -61,8 +61,14 @@ public class AddButtonFormCentreController {
             List<Adress> adressList = adminService.getAllAdress();
             Adress a = new Adress(0,streetText.getText(),Integer.parseInt(nrStreetText.getText()),null,null,null,null,cityText.getText(),countyText.getText(),countryText.getText());
             Integer idA = 1;
+        for (Adress adress : adressList) {
+            if(adress.getIdA()>idA){
+                idA = adress.getIdA();
+            }
+        }
+
             for (Adress adress : adressList) {
-                if(adress.getFullAdress().equals(a.getFullAdress()))
+                if(adress.toStringSmall().equals(a.toStringSmall()))
                     idA=adress.getIdA();
                 System.out.println(idA);
             }
