@@ -815,7 +815,7 @@ public class TCPService {
         UserPacientDTO userPacientDTO = new UserPacientDTO();
         List<UserPacientDTO> userPacientDTOS = getAllUserPacient();
         for(UserPacientDTO u : userPacientDTOS){
-            if (u.getIdU()==donationScheduleStatusDTO.getIdU()){
+            if (u.getIdU().equals(donationScheduleStatusDTO.getIdU())){
                 userPacientDTO = u;
             }
         }
