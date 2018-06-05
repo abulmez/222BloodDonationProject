@@ -901,10 +901,10 @@ public class TCPService {
 
         for(DonationSchedule donationSchedule : donationSchedules){
             for (Reservation reservation : reservations){
-                if(donationSchedule.getIdDS() == reservation.getIdDS() && donationSchedule.getIdDC()==idDC){
+                if(donationSchedule.getIdDS() .equals(reservation.getIdDS()) && donationSchedule.getIdDC().equals(idDC)){
 
                     for(UserPacientDTO userPacientDTO : userPacientDTOS){
-                        if(reservation.getIdU() == userPacientDTO.getIdU()){
+                        if(reservation.getIdU().equals(userPacientDTO.getIdU())){
                             DonationScheduleStatusDTO status = new DonationScheduleStatusDTO(donationSchedule.getIdDS(),donationSchedule.getIdDC(),donationSchedule.getDonationDateTime(null),donationSchedule.getAvailableSpots(),reservation.getStatus(), userPacientDTO.getName(),userPacientDTO.getIdU());
                             bun.add(status);
                         }

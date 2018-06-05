@@ -13,7 +13,7 @@ public class TestViewCenters extends TestCase{
         service = CommonUtils.getFactory().getBean(MedicService.class);
     }
     public void testUp(){
-        assert(!service.handleVizualizare(1014).equals("Eroare la incarcarea livrarilor"));
+        assert(!service.handleVizualizare(1028).equals("Eroare la incarcarea livrarilor"));
         assert(service.handleVizualizare(-1).equals("Eroare la incarcarea livrarilor"));
     }
 }

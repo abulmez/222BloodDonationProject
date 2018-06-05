@@ -1,3 +1,4 @@
+/*
 import junit.framework.TestCase;
 import org.springframework.context.ApplicationContext;
 import service.LoginService;
@@ -26,3 +27,4 @@ public class TestReservationStatus extends TestCase {
 
     }
 }
+*/
