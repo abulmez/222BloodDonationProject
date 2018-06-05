@@ -108,6 +108,10 @@ public class LoginController {
         });
     }
 
+    @FXML
+    void iconAction(MouseEvent event) {
+            mainStage.setIconified(true);
+    }
     private void openMenu(UserType userType) {
         FXMLLoader loader = new FXMLLoader();
         AnchorPane mainPane ;

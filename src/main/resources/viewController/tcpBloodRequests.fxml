@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.tcpBloodRequestsController">
+    <children>
+      <AnchorPane layoutX="19.0" layoutY="58.0" prefHeight="247.0" prefWidth="883.0" style="-fx-background-color: white;">
+         <children>
+              <TableView fx:id="tableView" layoutY="-18.0" prefHeight="246.0" prefWidth="883.0" style="-fx-background-color: lightgrey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <columns>
+                      <TableColumn fx:id="colIdBd" prefWidth="94.39999771118164" text="Id Cerere" />
+                      <TableColumn fx:id="colIdH" minWidth="0.0" prefWidth="113.60000610351562" text="Id Spital" />
+                      <TableColumn fx:id="colNeededType" minWidth="0.0" prefWidth="124.00001525878906" text="Grupa sangvina" />
+                      <TableColumn fx:id="colDescription" prefWidth="102.39996337890625" text="Nume Pacient" />
+                      <TableColumn fx:id="colPriority" minWidth="0.0" prefWidth="112.79998779296875" text="Prioritate" />
+                      <TableColumn fx:id="colQuantity" prefWidth="116.0" text="Cantitate" />
+                      <TableColumn fx:id="colBloodType" minWidth="0.0" prefWidth="143.20001220703125" text="Componenta" />
+                      <TableColumn fx:id="colDelivered" prefWidth="79.199951171875" text="Livrate" />
+                  </columns>
+              </TableView>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+        <Label layoutX="19.0" layoutY="11.0" prefHeight="30.0" prefWidth="282.0" styleClass="title" text="Cereri de sânge">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+      <AnchorPane layoutX="620.0" layoutY="439.0" prefHeight="150.0" prefWidth="282.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="9.0" layoutY="14.0" prefHeight="58.0" prefWidth="264.0" text="Trimite notificări persoanelor apte pentru donat" textAlignment="CENTER" textFill="#400303" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" layoutX="13.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#sendMailsAction" prefHeight="31.0" prefWidth="256.0" text="Cheamă" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <AnchorPane layoutX="19.0" layoutY="318.0" prefHeight="271.0" prefWidth="582.0" style="-fx-background-color: white;">
+         <children>
+            <BarChart fx:id="bloodChart" alternativeRowFillVisible="false" barGap="5.0" cacheShape="false" categoryGap="30.0" centerShape="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="8.0" layoutY="33.0" legendSide="LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="230.0" prefWidth="562.0" scaleShape="false" titleSide="BOTTOM" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <Label layoutX="230.0" text="Stocuri de sânge" textFill="#400303">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <AnchorPane layoutX="620.0" layoutY="341.0" prefHeight="66.0" prefWidth="282.0" style="-fx-background-color: white;">
+         <children>
+            <JFXComboBox fx:id="bloodCombo" focusColor="#400303" labelFloat="true" layoutX="61.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="24.0" prefWidth="172.0" promptText="Grupă de sânge" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+    </children>
+</AnchorPane>

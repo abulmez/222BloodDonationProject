@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="922.0" style="-fx-background-color: white;" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.DonationsAppointmentsAdminController">
    <children>
-      <TableView fx:id="paginationTableView" layoutX="20.0" layoutY="69.0" prefHeight="422.0" prefWidth="884.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="69.0">
+      <TableView fx:id="paginationTableView" layoutX="20.0" layoutY="69.0" prefHeight="454.0" prefWidth="884.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="69.0">
         <columns>
           <TableColumn fx:id="NumarRezervare" prefWidth="114.0" text="Numar Rezervare" />
           <TableColumn fx:id="NumePacient" minWidth="0.0" prefWidth="221.0" text="Nume Pacient" />
@@ -19,7 +19,7 @@
             <TableColumn fx:id="Status" prefWidth="209.0" text="Status" />
         </columns>
       </TableView>
-      <Button layoutX="18.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleModificaStatus" prefHeight="66.0" prefWidth="344.0" text="Modifică status programare">
+      <Button layoutX="217.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleModificaStatus" prefHeight="35.0" prefWidth="270.0" text="Modifică status programare">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
@@ -29,6 +29,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="statusComboBox" focusColor="#400303" layoutX="466.0" layoutY="524.0" prefHeight="47.0" prefWidth="438.0" styleClass="jfx-combo-box" unFocusColor="#7c1515" />
+      <JFXComboBox fx:id="statusComboBox" focusColor="#400303" layoutX="514.0" layoutY="529.0" prefHeight="47.0" prefWidth="389.0" styleClass="jfx-combo-box" unFocusColor="#7c1515" />
    </children>
 </AnchorPane>

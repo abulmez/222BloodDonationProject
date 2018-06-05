@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="604.0" prefWidth="260.0" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.MenuControllerTCP">
     <children>
         <AnchorPane layoutX="241.0" prefHeight="604.0" prefWidth="19.0" styleClass="anchorPane" />
-        <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="176.0" onMouseClicked="#visualizeAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Vizualizare donatii">
+        <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="136.0" onMouseClicked="#visualizeAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Vizualizare donatii">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
@@ -21,12 +21,12 @@
         </font>
     </JFXButton>
         <Line endX="100.0" layoutX="129.0" layoutY="110.0" startX="-100.0" stroke="#740707" />
-        <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="255.0" onMouseClicked="#confirmAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Confirmare programari">
+        <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="215.0" onMouseClicked="#confirmAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Confirmare programari">
         <font>
             <Font name="System Bold" size="24.0" />
         </font>
         </JFXButton>
-        <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="334.0" onMouseClicked="#inventoryAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Inventar">
+        <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="294.0" onMouseClicked="#inventoryAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Inventar">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
@@ -36,5 +36,10 @@
             <Image url="@../images/logolong.png" />
          </image>
       </ImageView>
+      <JFXButton alignment="CENTER" buttonType="RAISED" layoutY="374.0" onMouseClicked="#requestsAction" prefHeight="74.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="menuButton" text="Cereri de sânge">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </JFXButton>
     </children>
 </AnchorPane>
